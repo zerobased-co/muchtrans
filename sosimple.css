@@ -4,10 +4,35 @@
 
 .row {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .column {
   flex: 44%;
   max-width: 640px;
   margin: 0 3%;
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    min-width: 94%;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 0.1em;
+}
+
+li, p, blockquote, q {
+  line-height: 1.8;
+}
+
+blockquote {
+  font-size: 1.2em;
+}
+
+q {
+  font-weight: 700;
+  display: block;
+  text-align: center;
 }
