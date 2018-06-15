@@ -3,11 +3,11 @@
 }
 
 .row {
-	display: flex;
+  display: flex;
 }
 
 .column {
-	flex: 44%;
+  flex: 44%;
   max-width: 640px;
   margin: 0 3%;
 }
