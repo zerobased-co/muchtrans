@@ -1,10 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab:700');
+
 * {
-  font-family: sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  background: #FAFAFA;
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
+  margin: 0 0 2em;
 }
 
 .column {
@@ -20,11 +29,13 @@
 }
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto Slab", serif;
   margin-bottom: 0.1em;
 }
 
 li, p, blockquote, q {
   line-height: 1.8;
+  margin-top: 0.2em;
 }
 
 blockquote {
@@ -35,4 +46,17 @@ q {
   font-weight: 700;
   display: block;
   text-align: center;
+}
+
+.header, .footer {
+  background: #EEE;
+  padding: 1em 3%;
+}
+
+.header p, .footer p {
+  margin: 0;
+}
+
+.appendix {
+  color: #666;
 }
