@@ -24,7 +24,6 @@ for article in articles:
     with open(article['original']) as file:
         original = file.read()
 
-    original_html_filename = os.path.splitext(article['original'])[0] + '.html'
     original_html = mistune.markdown(original)
 
     print('Building {}'.format(article['title']))
@@ -51,7 +50,6 @@ for article in articles:
                 dbuf += d
         if sbuf:
             rows.append((sbuf, dbuf))
-                
 
         rendered = template.render({
             'source_url': article['source_url'],
@@ -60,4 +58,3 @@ for article in articles:
 
         with open(translation_html_filename, "w") as file:
             file.write(rendered)
-
