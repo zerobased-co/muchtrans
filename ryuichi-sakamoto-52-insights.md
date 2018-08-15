@@ -86,7 +86,7 @@ The first thing that comes to my mind is the music of Bach. St Matthew Passion. 
 Well in the music world age doesn’t mean anything. So I can share the same feeling with other generations, young or old. It’s timeless. That’s real happiness to me. I started earlier and I influenced them but we can share the same language and that’s true happiness.
 
 ### Do you listen to modern music?
-Yes, I like [Oneohtrix](https://www.52-insights.com/oneohtrix-point-never-chaos-through-pop-music/) Point Never. We are 30 years apart, but we can talk about the same music. So that’s true happiness for me.
+Yes, I like [Oneohtrix Point Never](https://www.52-insights.com/oneohtrix-point-never-chaos-through-pop-music/). We are 30 years apart, but we can talk about the same music. So that’s true happiness for me.
 
 ### My last question for you is, do you have one quotation that you connect with? Maybe not “I am destroyer of worlds”.
 [laughing] I don’t want to be a destroyer of worlds. But the quote I like is, “less is more”. 
