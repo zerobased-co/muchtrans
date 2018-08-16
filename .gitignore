@@ -46,6 +46,3 @@ venv
 
 # PyCharm
 .idea/*
-
-# Output
-output/*.html
