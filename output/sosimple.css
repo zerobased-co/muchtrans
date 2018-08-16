@@ -1,19 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab:700');
 
-* {
-  font-family: "Roboto", sans-serif;
-}
-
 body, html {
   margin: 0;
   padding: 0;
   background: #FAFAFA;
+  font-family: "Roboto", sans-serif;
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 0 2em;
 }
 
 .column {
@@ -30,16 +26,38 @@ body, html {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto Slab", serif;
-  margin-bottom: 0.1em;
 }
 
-li, p, blockquote, q {
+h1 {
+  margin: 1em 0;
+}
+
+h2 {
+  margin: 2.2em 0 0.5em;
+}
+
+h3, h4, h5, h6 {
+  margin: 1.5em 0 0.3em;
+}
+
+ol, ul {
+}
+
+li {
   line-height: 1.8;
-  margin-top: 0.2em;
+}
+
+p, blockquote, q {
+  line-height: 1.8;
+  margin-bottom: 0.5em;
 }
 
 blockquote {
+  font-family: "Roboto Slab", serif;
   font-size: 1.2em;
+  font-style: italic;
+  margin: 1.5em 0;
+  text-align: center;
 }
 
 q {
