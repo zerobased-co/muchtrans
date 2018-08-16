@@ -1,0 +1,30 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="sosimple.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="header">
+    <p>
+      <a href="./">← Back to index</a>
+    </p>
+  </div>
+  {% for src, dst in rows %}
+  <div class="row">
+    <div class="column original">
+      {{ src }}
+    </div>
+    <div class="column translation">
+      {{ dst }}
+    </div>
+  </div>
+  {% endfor %}
+  <div class="footer">
+    <p>
+      Original contents: 
+        <a href="{{ article.source_url }}">{% if article.source %}{{ article.source }}{% else %}{{ article.source_url }}{% endif %}</a>
+    </p>
+    <p>Fork me on GitHub: <a href="https://github.com/zerobased-co/muchtrans">zerobased-co/muchtrans</a></p>
+  </div>
+</body>
+</html>
