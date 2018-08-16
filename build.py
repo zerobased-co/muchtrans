@@ -89,7 +89,7 @@ for article in articles:
             'rows': rows,
         })
 
-        with open('output/' + translation_html_filename, "w") as file:
+        with open(translation_html_filename, "w") as file:
             file.write(rendered)
 
         translated_articles.append({
@@ -105,5 +105,5 @@ rendered = index_template.render({
     'articles': translated_articles,
 })
 
-with open('output/index.html', "w") as file:
+with open('index.html', "w") as file:
     file.write(rendered)
