@@ -39,6 +39,14 @@ articles = [
             'ko': 'ryuichi-sakamoto-52-insights.ko.md',
         },
     },
+    {
+        'title': 'Python Community Interview With Mariatta Wijaya',
+        'source_url': 'https://realpython.com/interview-mariatta-wijaya/',
+        'original': 'interview-mariatta-wijaya.md',
+        'translations': {
+            'ko': 'interview-mariatta-wijaya.ko.md',
+        },
+    },
 ]
 
 
