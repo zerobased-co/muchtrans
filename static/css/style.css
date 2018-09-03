@@ -10,15 +10,16 @@ body, html {
 .row {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .column {
   flex: 44%;
-  max-width: 640px;
+  max-width: 720px;
   margin: 0 3%;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 720px) {
   .column {
     min-width: 94%;
   }
@@ -48,8 +49,8 @@ li {
 }
 
 p, blockquote, q {
-  line-height: 1.8;
-  margin-bottom: 0.5em;
+  line-height: 2.0;
+  margin-bottom: 1.0em;
 }
 
 blockquote {
