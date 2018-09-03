@@ -1,3 +1,8 @@
+---
+title: Becoming a 10x Developer
+source-url: https://kateheddleston.com/blog/becoming-a-10x-developer
+---
+
 # 10배 뛰어난 개발자 되기
 
 ## 좋은 동료가 되기 위한 10가지 방법

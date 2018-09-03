@@ -1,3 +1,8 @@
+---
+title: Python Community Interview With Mariatta Wijaya
+source-url: https://realpython.com/interview-mariatta-wijaya/
+---
+
 # Python Community Interview With Mariatta Wijaya
 
 For this week’s community interview, I am joined by [Mariatta Wijaya](https://twitter.com/mariatta).

@@ -1,3 +1,8 @@
+---
+title: Becoming a 10x Developer
+source-url: https://kateheddleston.com/blog/becoming-a-10x-developer
+---
+
 # Becoming a 10x Developer
 
 ## 10 Ways to be a Better Teammate
