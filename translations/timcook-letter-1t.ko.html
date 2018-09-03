@@ -1,16 +1,20 @@
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+  <title>애플 시가 총액 1조 달러 도달에 팀 쿡이 사내에 전한 감사 메세지</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
   <div class="header">
     <p>
-      <a href="./">← Back to index</a>
+      <a href="/">← Back to index</a>
+      <span class="pull-right">
+        <input type="checkbox" id="hide-original"/><label for="hide-original">Hide original</label>
+      </span>
     </p>
   </div>
-  <div class="article">
+  <article>
     
     <div class="row">
       <div class="column original">
@@ -30,13 +34,23 @@
       </div>
     </div>
   
-  </div>
+  </article>
   <div class="footer">
     <p>
       Original contents: 
-        <a href="https://9to5mac.com/2018/08/02/apple-tim-cook-email-1-trillion/">Tim Cook thanks employees in memo following record-setting $1 trillion market cap</a>
+        <a href="https://9to5mac.com/2018/08/02/apple-tim-cook-email-1-trillion/">
+          Tim Cook thanks employees in memo following record-setting $1 trillion market cap</a>
     </p>
     <p>Fork me on GitHub: <a href="https://github.com/zerobased-co/muchtrans">zerobased-co/muchtrans</a></p>
   </div>
 </body>
+<script>
+$('#hide-original').click(function () {
+  if (this.checked) {
+    $('.original').hide();
+  } else {
+    $('.original').show();
+  }
+});
+</script>
 </html>

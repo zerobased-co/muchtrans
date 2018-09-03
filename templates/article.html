@@ -1,16 +1,20 @@
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+  <title>{{ translation.title }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
   <div class="header">
     <p>
-      <a href="./">← Back to index</a>
+      <a href="/">← Back to index</a>
+      <span class="pull-right">
+        <input type="checkbox" id="hide-original"/><label for="hide-original">Hide original</label>
+      </span>
     </p>
   </div>
-  <div class="article">
+  <article>
     {% for src, dst in rows %}
     <div class="row">
       <div class="column original">
@@ -21,13 +25,23 @@
       </div>
     </div>
   {% endfor %}
-  </div>
+  </article>
   <div class="footer">
     <p>
       Original contents: 
-        <a href="{{ article.source_url }}">{% if article.source %}{{ article.source }}{% else %}{{ article.source_url }}{% endif %}</a>
+        <a href="{{ original.source }}">
+          {% if original.source_title %}{{ original.source_title }}{% else %}{{ original.source }}{% endif %}</a>
     </p>
     <p>Fork me on GitHub: <a href="https://github.com/zerobased-co/muchtrans">zerobased-co/muchtrans</a></p>
   </div>
 </body>
+<script>
+$('#hide-original').click(function () {
+  if (this.checked) {
+    $('.original').hide();
+  } else {
+    $('.original').show();
+  }
+});
+</script>
 </html>

@@ -1,16 +1,20 @@
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+  <title>10배 뛰어난 개발자 되기</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
   <div class="header">
     <p>
-      <a href="./">← Back to index</a>
+      <a href="/">← Back to index</a>
+      <span class="pull-right">
+        <input type="checkbox" id="hide-original"/><label for="hide-original">Hide original</label>
+      </span>
     </p>
   </div>
-  <div class="article">
+  <article>
     
     <div class="row">
       <div class="column original">
@@ -399,13 +403,23 @@
       </div>
     </div>
   
-  </div>
+  </article>
   <div class="footer">
     <p>
       Original contents: 
-        <a href="https://kateheddleston.com/blog/becoming-a-10x-developer">https://kateheddleston.com/blog/becoming-a-10x-developer</a>
+        <a href="https://kateheddleston.com/blog/becoming-a-10x-developer">
+          https://kateheddleston.com/blog/becoming-a-10x-developer</a>
     </p>
     <p>Fork me on GitHub: <a href="https://github.com/zerobased-co/muchtrans">zerobased-co/muchtrans</a></p>
   </div>
 </body>
+<script>
+$('#hide-original').click(function () {
+  if (this.checked) {
+    $('.original').hide();
+  } else {
+    $('.original').show();
+  }
+});
+</script>
 </html>

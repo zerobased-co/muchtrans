@@ -15,7 +15,7 @@ body, html {
 
 .column {
   flex: 44%;
-  max-width: 720px;
+  max-width: 800px;
   margin: 0 3%;
 }
 
@@ -78,4 +78,8 @@ q {
 
 .appendix {
   color: #666;
+}
+
+.pull-right {
+  float: right;
 }
