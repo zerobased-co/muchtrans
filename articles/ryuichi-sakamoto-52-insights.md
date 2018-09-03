@@ -1,3 +1,8 @@
+---
+title: Ryuichi Sakamoto – “We are destroying the world.”
+source-url: https://www.52-insights.com/ryuichi-sakamoto-we-are-destroying-the-world-interview-music/
+---
+
 # Ryuichi Sakamoto – "We are destroying the world."
 ## There's a scene in the documentary Coda, based on the life of pioneering Japanese musician Ryuichi Sakamoto, where plagued by the weight of his throat cancer, he questions his ability to go on scoring the soundtrack to the Academy Award Nominated film The Revenant. It's a haunting reflection of how art can sometimes mirror one's own life.
 
