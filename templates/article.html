@@ -2,6 +2,7 @@
 <head>
   <link rel="stylesheet" type="text/css" href="static/css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
   <div class="header">
@@ -9,16 +10,18 @@
       <a href="./">← Back to index</a>
     </p>
   </div>
-  {% for src, dst in rows %}
-  <div class="row">
-    <div class="column original">
-      {{ src }}
+  <div class="article">
+    {% for src, dst in rows %}
+    <div class="row">
+      <div class="column original">
+        {{ src }}
+      </div>
+      <div class="column translation">
+        {{ dst }}
+      </div>
     </div>
-    <div class="column translation">
-      {{ dst }}
-    </div>
-  </div>
   {% endfor %}
+  </div>
   <div class="footer">
     <p>
       Original contents: 
