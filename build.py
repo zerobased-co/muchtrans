@@ -57,6 +57,9 @@ for key, article in articles.items():
         translation_html_filename = 'translations/' + os.path.splitext(os.path.basename(filename))[0] + '.html'
         translation_html = mistune.markdown(translation, escape=False, hard_wrap=True).replace('<br>', '</p><p>')
 
+        # Fix for duplicated footnote (will be fixed in renderer level, future)
+        translation_html = translation_html.replace('fn-', 'tfn-').replace('fnref-', 'tfnref-')
+
         # Match original and translated articles in html level
         rows = []
         sbuf = dbuf = ''
