@@ -1,7 +1,5 @@
----
 title: Python Community Interview With Mariatta Wijaya
-source-url: https://realpython.com/interview-mariatta-wijaya/
----
+source: https://realpython.com/interview-mariatta-wijaya/
 
 # Python Community Interview With Mariatta Wijaya
 

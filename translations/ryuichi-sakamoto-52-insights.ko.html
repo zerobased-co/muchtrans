@@ -1,16 +1,20 @@
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+  <title>류이치 사카모토 – “우리는 세상을 파괴하고 있다.”</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
   <div class="header">
     <p>
-      <a href="./">← Back to index</a>
+      <a href="/">← Back to index</a>
+      <span class="pull-right">
+        <input type="checkbox" id="hide-original"/><label for="hide-original">Hide original</label>
+      </span>
     </p>
   </div>
-  <div class="article">
+  <article>
     
     <div class="row">
       <div class="column original">
@@ -507,13 +511,23 @@
       </div>
     </div>
   
-  </div>
+  </article>
   <div class="footer">
     <p>
       Original contents: 
-        <a href="https://www.52-insights.com/ryuichi-sakamoto-we-are-destroying-the-world-interview-music/">https://www.52-insights.com/ryuichi-sakamoto-we-are-destroying-the-world-interview-music/</a>
+        <a href="https://www.52-insights.com/ryuichi-sakamoto-we-are-destroying-the-world-interview-music/">
+          https://www.52-insights.com/ryuichi-sakamoto-we-are-destroying-the-world-interview-music/</a>
     </p>
     <p>Fork me on GitHub: <a href="https://github.com/zerobased-co/muchtrans">zerobased-co/muchtrans</a></p>
   </div>
 </body>
+<script>
+$('#hide-original').click(function () {
+  if (this.checked) {
+    $('.original').hide();
+  } else {
+    $('.original').show();
+  }
+});
+</script>
 </html>

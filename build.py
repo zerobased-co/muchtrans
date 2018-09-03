@@ -1,4 +1,7 @@
+from collections import defaultdict
 from jinja2 import Template
+from mistune_contrib.meta import parse as md_parse
+import glob
 import mistune
 import os
 import re
@@ -13,63 +16,48 @@ SPLITTER_RE = '^({})'.format('|'.join(['\<{}'.format(_) for _ in SPLITTER]))
 IGNORE = ['div', ]
 IGNORE_RE = '^({})'.format('|'.join(['\<{} |\</{}>'.format(_, _) for _ in IGNORE]))
 
-articles = [
-    {
-        'title': 'Becoming a 10x Developer',
-        'source_url': 'https://kateheddleston.com/blog/becoming-a-10x-developer',
-        'original': '10xdeveloper.md',
-        'translations': {
-            'ko': '10xdeveloper.ko.md',
-        },
-    },
-    {
-        'title': 'Tim Cook\'s memo at AAPL hits $1 trillion market cap',
-        'source': 'Tim Cook thanks employees in memo following record-setting $1 trillion market cap',
-        'source_url': 'https://9to5mac.com/2018/08/02/apple-tim-cook-email-1-trillion/',
-        'original': 'timcook-letter-1t.md',
-        'translations': {
-            'ko': 'timcook-letter-1t.ko.md',
-        },
-    },
-    {
-        'title': 'Ryuichi Sakamoto – “We are destroying the world.”',
-        'source_url': 'https://www.52-insights.com/ryuichi-sakamoto-we-are-destroying-the-world-interview-music/',
-        'original': 'ryuichi-sakamoto-52-insights.md',
-        'translations': {
-            'ko': 'ryuichi-sakamoto-52-insights.ko.md',
-        },
-    },
-    {
-        'title': 'Python Community Interview With Mariatta Wijaya',
-        'source_url': 'https://realpython.com/interview-mariatta-wijaya/',
-        'original': 'interview-mariatta-wijaya.md',
-        'translations': {
-            'ko': 'interview-mariatta-wijaya.ko.md',
-        },
-    },
-]
+# Get articles
+articles = defaultdict(lambda: {
+    'original': None,
+    'translations': {},
+})
+for filename in glob.glob("articles/*.md"):
+    # Original articles do not have any locale/language information in filename
+    ORIGINAL_RE = '^([^\.]+)\.md$'
+    TRANSLATION_RE = '^([^\.]+)\.([^\.]+)\.md$'
+    key = os.path.basename(filename).split('.')[0]
 
+    if re.search(ORIGINAL_RE, filename):
+        articles[key]['original'] = filename
+    else:
+        result = re.search(TRANSLATION_RE, filename)
+        if result:
+            articles[key]['translations'][result[2]] = filename
 
-# Create articles
-translated_articles = []
-
+# Prepare a template for articles
 with open('templates/article.html') as file:
     article_template = Template(file.read())
 
-for article in articles:
-    with open('articles/' + article['original']) as file:
+# Create translated articles
+translated_articles = []
+for key, article in articles.items():
+    with open(article['original']) as file:
         original = file.read()
 
+    original_metadata, original = md_parse(original)
+    article['metadata'] = original_metadata
     original_html = mistune.markdown(original, escape=False, hard_wrap=True).replace('<br>', '</p><p>')
-    print('Building: {}'.format(article['title']))
+    print('Building: {}'.format(article['metadata'].get('title', key)))
 
     for locale, filename in article['translations'].items():
-        with open('articles/' + filename) as file:
+        with open(filename) as file:
             translation = file.read()
 
-        translation_html_filename = os.path.splitext(filename)[0] + '.html'
+        translation_metadata, translation = md_parse(translation)
+        translation_html_filename = 'translations/' + os.path.splitext(os.path.basename(filename))[0] + '.html'
         translation_html = mistune.markdown(translation, escape=False, hard_wrap=True).replace('<br>', '</p><p>')
 
+        # Match original and translated articles in html level
         rows = []
         sbuf = dbuf = ''
 
@@ -92,20 +80,24 @@ for article in articles:
         if sbuf:
             rows.append((sbuf, dbuf))
 
+        # Render and save translated article
         rendered = article_template.render({
-            'article': article,
             'rows': rows,
+
+            'original': original_metadata,
+            'translation': translation_metadata,
         })
 
         with open(translation_html_filename, "w") as file:
             file.write(rendered)
 
+        # Add to the index
         translated_articles.append({
-            'title': article['title'],
+            'title': article['metadata']['title'],
             'url': translation_html_filename,
         })
 
-# Create index
+# Render and save index
 with open('templates/index.html') as file:
     index_template = Template(file.read())
 

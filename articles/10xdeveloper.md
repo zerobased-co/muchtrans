@@ -1,7 +1,5 @@
----
 title: Becoming a 10x Developer
-source-url: https://kateheddleston.com/blog/becoming-a-10x-developer
----
+source: https://kateheddleston.com/blog/becoming-a-10x-developer
 
 # Becoming a 10x Developer
 

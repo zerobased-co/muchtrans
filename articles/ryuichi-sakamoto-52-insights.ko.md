@@ -1,7 +1,5 @@
----
-title: Ryuichi Sakamoto – “We are destroying the world.”
-source-url: https://www.52-insights.com/ryuichi-sakamoto-we-are-destroying-the-world-interview-music/
----
+title: 류이치 사카모토 – “우리는 세상을 파괴하고 있다.”
+source: https://www.52-insights.com/ryuichi-sakamoto-we-are-destroying-the-world-interview-music/
 
 # 류이치 사카모토 – "우리는 세상을 파괴하고 있다."
 ## 선구적인 일본 음악가 류이치 사카모토를 다룬 다큐멘터리 Coda에서 그는 후두암으로 고생하며, 아카데미상 후보에 오른 레버넌트의 사운드트랙 작업을 하며 스스로의 작곡 능력에 의문을 품는 장면이 나옵니다. 예술이 어떻게 인생을 반영할 수 있는가에 대한 잊혀지지 않는 잔영으로 남습니다.

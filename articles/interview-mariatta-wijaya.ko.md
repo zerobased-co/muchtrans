@@ -1,7 +1,5 @@
----
-title: Python Community Interview With Mariatta Wijaya
-source-url: https://realpython.com/interview-mariatta-wijaya/
----
+title: 마리아타 위자야와 함께한 파이썬 커뮤니티 인터뷰
+source: https://realpython.com/interview-mariatta-wijaya/
 
 # 마리아타 위자야와 함께한 파이썬 커뮤니티 인터뷰
 

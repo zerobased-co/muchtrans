@@ -1,7 +1,5 @@
----
-title: Becoming a 10x Developer
-source-url: https://kateheddleston.com/blog/becoming-a-10x-developer
----
+title: 10배 뛰어난 개발자 되기
+source: https://kateheddleston.com/blog/becoming-a-10x-developer
 
 # 10배 뛰어난 개발자 되기
 
