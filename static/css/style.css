@@ -33,8 +33,22 @@ h1 {
   margin: 1em 0;
 }
 
-h2 {
+h2, h3 {
   margin: 2.2em 0 0.5em;
+}
+
+h2 a,
+h3 a {
+  visibility: hidden;
+}
+
+h2:hover a,
+h3:hover a {
+  visibility: visible;
+}
+
+a.pilcrow {
+  margin-left: 10px
 }
 
 h3, h4, h5, h6 {
