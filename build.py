@@ -1,10 +1,12 @@
 from collections import defaultdict
+from git import Repo
 from jinja2 import Template
 from mistune_contrib.meta import parse as md_parse
 import glob
 import mistune
 import os
 import re
+import requests
 
 
 SINGLE = ['blockquote', 'h1', 'h2', 'h3', 'hr', ]
@@ -15,6 +17,42 @@ SPLITTER_RE = '^({})'.format('|'.join(['\<{}'.format(_) for _ in SPLITTER]))
 
 IGNORE = ['div', ]
 IGNORE_RE = '^({})'.format('|'.join(['\<{} |\</{}>'.format(_, _) for _ in IGNORE]))
+
+repo = Repo('.')
+
+_github_users = {}
+def get_github_user(email):
+    if email in _github_users:
+        return _github_users[email]
+
+    headers = {
+        'Authorization': 'token {}'.format(os.environ['GITHUB_ACCESS_TOKEN']),
+    }
+    r = requests.get('https://api.github.com/search/users?q={}+in:email'.format(email), headers=headers).json()
+
+    try:
+        if r['total_count'] >= 1:
+            _github_users[email] = r['items'][0]
+            return r['items'][0]
+    except:
+        pass
+
+    return {}
+
+def get_authors(repo, filepath):
+    commits = repo.iter_commits('--all', paths=filepath)
+
+    authors = {}
+    for commit in commits:
+        email = commit.author.email
+
+        authors[email] = {
+            'name': commit.author.name,
+            'github': get_github_user(email),
+        }
+
+    return authors
+
 
 # Get articles
 articles = defaultdict(lambda: {
@@ -86,6 +124,7 @@ for key, article in articles.items():
         # Render and save translated article
         rendered = article_template.render({
             'rows': rows,
+            'translators': get_authors(repo, filename).items(),
 
             'original': original_metadata,
             'translation': translation_metadata,

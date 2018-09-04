@@ -3,7 +3,7 @@
 body, html {
   margin: 0;
   padding: 0;
-  background: #FAFAFA;
+  background: #F8F8FA;
   font-family: "Roboto", sans-serif;
 }
 
@@ -68,7 +68,7 @@ q {
 }
 
 .header, .footer {
-  background: #EEE;
+  background: #EAEAEF;
   padding: 1em 3%;
 }
 
@@ -82,4 +82,21 @@ q {
 
 .pull-right {
   float: right;
+}
+
+.translators {
+  display: flex;
+  margin-bottom: 25px;
+}
+
+.translator {
+  display: flex;
+  align-items:center;
+}
+
+.translator img {
+  width: 40px;
+  height: auto;
+  border-radius: 50%;
+  margin: 5px 10px;
 }
