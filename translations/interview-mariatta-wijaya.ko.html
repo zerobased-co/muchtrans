@@ -3,7 +3,6 @@
   <link rel="stylesheet" type="text/css" href="/static/css/style.css">
   <title>마리아타 위자야와 함께한 파이썬 커뮤니티 인터뷰</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
   <div class="header">
@@ -167,7 +166,7 @@
       <div class="column original">
       </div>
       <div class="column translation">
-        <h3>Translators</h3>
+        <h3 id="translators">Translators</h3>
         <div class="translators">
           
           <span class="translator">
@@ -200,12 +199,26 @@
   </div>
 </body>
 <script>
-$('#hide-original').click(function () {
-  if (this.checked) {
-    $('.original').hide();
-  } else {
-    $('.original').show();
+window.addEventListener('load', function () {
+  var checkbox = document.getElementById('hide-original');
+  checkbox.onclick = function () {
+    document.querySelectorAll('.original').forEach(function(node) {
+      node.style.display = checkbox.checked ? 'none' : 'inherit';
+    });
   }
+
+  var id_seq = 1;
+  document.querySelectorAll('h2, h3').forEach(function(node) {
+    var anchor = document.createElement("a");
+    anchor.className = "pilcrow";
+    anchor.text = "\xb6";
+    if (node.id === '') {
+      node.id = id_seq;
+      id_seq += 1;
+    }
+    anchor.href = "#" + node.id;
+    node.appendChild(anchor);
+  });
 });
 </script>
 </html>
