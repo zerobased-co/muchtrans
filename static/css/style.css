@@ -114,3 +114,7 @@ q {
   border-radius: 50%;
   margin: 5px 10px;
 }
+
+.hidden {
+  display: none;
+}

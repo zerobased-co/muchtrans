@@ -436,7 +436,11 @@ window.addEventListener('load', function () {
   var checkbox = document.getElementById('hide-original');
   checkbox.onclick = function () {
     document.querySelectorAll('.original').forEach(function(node) {
-      node.style.display = checkbox.checked ? 'none' : 'inherit';
+      if (checkbox.checked) {
+        node.classList.add('hidden');
+      } else {
+        node.classList.remove('hidden');
+      }
     });
   }
 
