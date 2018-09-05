@@ -10,7 +10,6 @@ Over time, I gained an understanding of the root causes of my mistakes and event
 
 I'd like to share my mistakes and what I have learned in the hope that others may benefit.
 
-
 ## 1: I believed my technical ability entitled me to lead
 In my first tech lead role, I had hired a talented young graduate. We worked really well together and pushed each other forward into new ideas and skills. Within a few months, I realized that despite their inexperience, they were more technically able than me. As the tech lead, I felt that I had to prove myself as the most technically capable; I’d feel insecure every time they demonstrated their ability to others (especially my managers), concerned that they’d view them as more suitable for my role than I was. What was originally a great working relationship suffered from my feelings of competitiveness and mistrust. Rather than seeing them as a collaborator (or even as a potential successor), I was seeing them as a threat.
 

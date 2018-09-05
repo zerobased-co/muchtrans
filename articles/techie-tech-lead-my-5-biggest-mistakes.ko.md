@@ -1,24 +1,23 @@
-title: Techie to tech lead: My five biggest mistakes
+title: 개발자에서 개발팀장이 되기까지 겪은 다섯가지 큰 실수
 source: https://www.thoughtworks.com/insights/blog/techie-tech-lead-my-5-biggest-mistakes 
 
-# Techie to tech lead: My five biggest mistakes
-Peter Gillard-Moss
+# 개발자에서 개발팀장이 되기까지 겪은 다섯가지 큰 실수
+피터 길라드–모스
 
-As a young, ambitious developer with a strong sense of my own talent, I was eager to become a tech lead, and it took less than four years for me to achieve this goal. But over the next two years, the experience and reality of leading a team put me off leadership completely. For several years after, I retreated into the security of the technology, shunning any opportunity to take on more responsibility.
+젋었을 때는 스스로의 재능에 대한 확신을 가진 야심찬 프로그래머로서, 팀장이 되기를 늘 꿈꿨습니다. 그리고 그렇게 되기까지 4년이 채 걸리지 않았죠. 하지만 2년간 팀을 이끌며 느낀 현실은 제게서 리더쉽이라는 것을 완전히 앗아가버렸습니다. 그 이후로 몇 년 동안 저는 기술의 깊숙한 곳으로 숨어, 더 큰 책임을 요구하는 일에서 도망쳐왔습니다. <sup>(역주: Leader를 팀장으로 의역하였습니다)</sup>
 
-Over time, I gained an understanding of the root causes of my mistakes and eventually regained the confidence to accept new leadership opportunities and grow as a leader, and with the right support over the last two years, I've grown as a Head of Technology inside ThoughtWorks. As I have coached and mentored other leads, I’ve learned that some of my mistakes weren't unique to me but are common among technologists who move into leadership.
+시간이 지남에 따라, 제가 저지른 실수들의 근본적인 원인에 대해 이해하게 되었고,  다시 리더가 되는 기회를 잡아 팀장으로 성장할 수 있었고, 지난 2년간 올바른 지원을 받으며 ThoughtWorks 의 기술 책임자를 맡을 수 있을 정도로 성장하였습니다.
 
-I'd like to share my mistakes and what I have learned in the hope that others may benefit.
+다른 분들에게 도움이 되기를 바라며 제 실수와 실수로부터 배운 것들을 공유해봅니다.
 
+## 1: 기술적인 능력이 리더쉽으로 이어질 줄 알았다
+기술 리더 역할을 처음 맡으면서, 젊고 재능있는 졸업생들을 고용했습니다. 우리는 새로운 아이디어와 능력으로 서로 밀어주고 당겨주며 열심히 일했습니다. 고작 몇 달 만에 이 친구들이 경험은 부족할지 몰라도 저보다 기술적으로 더 뛰어날 수 있다는 것을 깨달았습니다. 기술 리더로서 다른 그 누구보다 기술적으로 뛰어남을 증명해야겠다는 생각이 들었습니다. 그들이 다른 사람에게 – 특히 제 보스에게 – 가능성을 보여줄 때마다 저는 불안해져서, 그들이 저보다 제 역할에 더 어울려보이지 않을까 안절부절했습니다. 좋은 동료였던 관계가 제 경쟁심과 불신으로 휩싸였습니다. 그들을 공동 작업자(또는 최소한 잠재적인 후임자)로 여기지 못하고 위협적인 존재로만 여겼습니다.
 
-## 1: I believed my technical ability entitled me to lead
-In my first tech lead role, I had hired a talented young graduate. We worked really well together and pushed each other forward into new ideas and skills. Within a few months, I realized that despite their inexperience, they were more technically able than me. As the tech lead, I felt that I had to prove myself as the most technically capable; I’d feel insecure every time they demonstrated their ability to others (especially my managers), concerned that they’d view them as more suitable for my role than I was. What was originally a great working relationship suffered from my feelings of competitiveness and mistrust. Rather than seeing them as a collaborator (or even as a potential successor), I was seeing them as a threat.
+기술적인 능력이 리더를 선택하는데 있어 가장 큰 요인으로 주로 사용되곤 합니다. 가장 명확하게 보이는 요인이기도 하고요. 이게 제 첫번째 실수였습니다. 기술적으로 뛰어난 사람이 리더로의 능력도 클 것으로 착각했죠.
 
-Someone's technical ability is often one of the biggest factors when choosing them as leaders. It’s also certainly the most visible factor. And here began my first mistake: conflating that ability with the entitlement to lead.
+제 경우에는 이 착각이 별 도움도 안되는 경쟁적인 행동들로 이어졌습니다. 주변 환경과 자격지심 때문에 제 불안은 커져갔습니다. 제 아무리 겸손하고 능력있는 사람이라도 이런 실수는 가면 현상을 강화시켜, 팀의 다른 사람들이 훨씬 가치있다는 생각에 빠지게 만듭니다. 팀웍을 과소평가하거나 스스로의 존재 가치에 대해 의문을 가지게 되기도 합니다. 이런 경우에, 리더는 스스로의 역할을 믿지 못해 우유부단해지고 필요한 순간에 결정을 내리지 못하게 됩니다.
 
-In my example, this conflation led to unhelpful competitive behaviours. A lot of my insecurity came from my environment and my mistaken sense of entitlement. But even in the most modest and deserving of people, this mistake can aggravate imposter syndrome, and the lead may perceive other members of the team as more worthy; they may underestimate their teamworkcontributions and struggle to understand their own worth. When this happens, leads can become indecisive and avoid making decisions, rather than trusting those they know to be capable.
-
-This mistake prevents good people from putting themselves forward for lead roles, as they believe the most technically competent individual should be the lead.
+기술이 뛰어난 사람이 리더가 되어야 한다는 이 잘못된 생각 때문에, 능력있는 사람들이 스스로 리더 역할을 꺼려하게 됩니다.
 
 
 ## 2: I focused on tech when I should have broadened my capabilities
