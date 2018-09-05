@@ -1,10 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab:700');
 
+* {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
 body, html {
   margin: 0;
   padding: 0;
   background: #F8F8FA;
   font-family: "Roboto", sans-serif;
+  color: #303037;
 }
 
 .row {
@@ -53,6 +59,16 @@ a.pilcrow {
   margin-left: 10px
 }
 
+a:link, a:visited {
+  text-decoration: none;
+  border-bottom: 1px solid #B8B8FF;
+}
+
+a:hover {
+  text-decoration: none;
+  border-bottom: 1px solid #303037;
+}
+
 h3, h4, h5, h6 {
   margin: 1.5em 0 0.3em;
 }
@@ -75,6 +91,7 @@ blockquote {
   font-style: italic;
   margin: 1.5em 0;
   text-align: center;
+  word-break: keep-all;
 }
 
 q {
