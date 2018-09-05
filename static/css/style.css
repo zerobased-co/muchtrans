@@ -88,7 +88,12 @@ q {
   padding: 1em 3%;
 }
 
-.header p, .footer p {
+.notification {
+  background: #CDCDD6;
+  padding: 1em 3%;
+}
+
+.header p, .footer p, .notification p {
   margin: 0;
 }
 

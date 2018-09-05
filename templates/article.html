@@ -13,6 +13,14 @@
       </span>
     </p>
   </div>
+  {% if not finished %}
+  <div class="notification">
+    <p>
+      This document needs to be translated. Let's do it together on 
+      <a href="https://github.com/zerobased-co/muchtrans/blob/master/{{ filename }}">GitHub</a>.
+    </p>
+  </div>
+  {% endif %}
   <article>
     {% for src, dst in rows %}
     <div class="row">

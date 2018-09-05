@@ -105,7 +105,13 @@ for key, article in articles.items():
         rows = []
         sbuf = dbuf = ''
 
+        # Mark for untranslated
+        untranslated = False
+
         for s, d in zip(original_html.split('\n'), translation_html.split('\n')):
+            if len(s) > 40 and s == d:  # TBD: Too naive approache
+                untranslated = True
+
             if re.search(SINGLE_RE, s):
                 if sbuf:
                     rows.append((sbuf, dbuf))
@@ -129,8 +135,11 @@ for key, article in articles.items():
             'rows': rows,
             'translators': get_authors(repo, filename).items(),
 
+            'filename': filename,
             'original': original_metadata,
             'translation': translation_metadata,
+
+            'finished': not untranslated,
         })
 
         with open(translation_html_filename, "w") as file:
