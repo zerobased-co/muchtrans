@@ -12,7 +12,7 @@ import requests
 SINGLE = ['blockquote', 'h1', 'h2', 'h3', 'hr', ]
 SINGLE_RE = '^({})'.format('|'.join(['\<{}>'.format(_) for _ in SINGLE]))
 
-SPLITTER = ['ol', 'ul', 'div', ]
+SPLITTER = ['p', 'ol', 'ul', 'div', ]
 SPLITTER_RE = '^({})'.format('|'.join(['\<{}'.format(_) for _ in SPLITTER]))
 
 IGNORE = ['div', ]
@@ -22,6 +22,9 @@ repo = Repo('.')
 
 _github_users = {}
 def get_github_user(email):
+    if not os.environ.get('PRODUCTION', False):
+        return {}
+
     if email in _github_users:
         return _github_users[email]
 
