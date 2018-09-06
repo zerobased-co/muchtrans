@@ -1,29 +1,27 @@
-<html>
-<head>
-  <title>Very first of muchtrans</title>
-  <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-  <div class="header">
-    <h1>muchtrans.com</h1>
+{% extends "templates/base.html" %}
+{% block header %}
+<div class="header">
+  <h1>muchtrans.com</h1>
+</div>
+{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="column">
+    <h1>List of translations</h1>
   </div>
-  <div class="row">
-    <div class="column">
-      <h1>List of translations</h1>
-    </div>
-    <div class="column">
-      <ul>
-      {% for article in articles %}
-        <li><a href="./{{ article.url }}">{{ article.title }}</a></li>
-      {% endfor %}
-      </ul>
-    </div>
+  <div class="column">
+    <ul>
+    {% for article in articles %}
+      <li><a href="./{{ article.url }}">{{ article.title }}</a></li>
+    {% endfor %}
+    </ul>
   </div>
-  <div class="footer">
-    <p>The name of <code>muchtrans.com</code> was designated by <a href="https://github.com/youknowone">youknowone</a></p>
-    <p>Fork me on <a href="https://github.com/zerobased-co/muchtrans/">GitHub</a></p>
-    <p>Brought to you by <a href="http://zerobased.co/">zerobased.co</a></p>
-  </div>
-</body>
-</html>
+</div>
+{% endblock %}
+{% block footer %}
+<div class="footer">
+  <p>The name of <code>muchtrans.com</code> was designated by <a href="https://github.com/youknowone">youknowone</a></p>
+  <p>Fork me on <a href="https://github.com/zerobased-co/muchtrans/">GitHub</a></p>
+  <p>Brought to you by <a href="http://zerobased.co/">zerobased.co</a></p>
+</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 from collections import defaultdict
 from git import Repo
-from jinja2 import Template
+from jinja2 import Template, Environment, FileSystemLoader
 from mistune_contrib.meta import parse as md_parse
 import glob
 import mistune
@@ -19,6 +19,8 @@ IGNORE = ['div', ]
 IGNORE_RE = '^({})'.format('|'.join(['\<{} |\</{}>'.format(_, _) for _ in IGNORE]))
 
 repo = Repo('.')
+
+env = Environment(loader=FileSystemLoader('.'))
 
 _github_users = {}
 def get_github_user(email):
@@ -76,8 +78,7 @@ for filename in glob.glob("articles/*.md"):
             articles[key]['translations'][result[2]] = filename
 
 # Prepare a template for articles
-with open('templates/article.html') as file:
-    article_template = Template(file.read())
+article_template = env.get_template('templates/article.html')
 
 # Create translated articles
 translated_articles = []
@@ -152,8 +153,7 @@ for key, article in articles.items():
         })
 
 # Render and save index
-with open('templates/index.html') as file:
-    index_template = Template(file.read())
+index_template = env.get_template('templates/index.html')
 
 rendered = index_template.render({
     'articles': translated_articles,

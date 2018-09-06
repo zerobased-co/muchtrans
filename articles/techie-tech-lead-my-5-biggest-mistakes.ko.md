@@ -49,24 +49,24 @@ source: https://www.thoughtworks.com/insights/blog/techie-tech-lead-my-5-biggest
 
 개발자에서 개발팀장이 된다는 것은 더 이상 생산자의 역할이 아니라 전체적인 영향을 극대화하는 역할로 바뀐다는 것입니다. 물론, 장애물과 방해자들을 제거하는 일도 포함해서요.
 
-이런 것들을 잘 이해하지 못한다면 다른 개발자들과 같이 코딩하는데 시간을 쓸 수 없는 현실에 정말 큰 스트레스를 받게 됩니다. 너무 많은 모임에 좌절하거나 특정 시간에만 미팅을 하려고 하기도 하죠. (코어 코딩/페어링 시간 등으로) 극단적인 경우에는 기술과 관련 없는 모든 활동을 거부하는 행위를 보이기도 합니다. (투자자를 만나야 한다거나 하는) 이런 일련의 행동은 개발 리더가 다른 사람의 가치를 극대화 하는 사람이 아니라 직접 개발을 해야한다는 인식에 기인합니다.
+이런 것들을 잘 이해하지 못한다면 다른 개발자들과 같이 코딩하는데 시간을 쓸 수 없는 현실에 정말 큰 스트레스를 받게 됩니다. 너무 많은 모임에 좌절하거나 특정 시간에만 미팅을 하려고 하기도 하죠(코어 코딩/페어링 시간 등으로). 극단적인 경우에는 기술과 관련 없는 모든 활동을 거부하는 행위를 보이기도 합니다(투자자를 만나야 한다거나 하는). 이런 일련의 행동은 개발 리더가 다른 사람의 가치를 극대화 하는 사람이 아니라 직접 개발을 해야한다는 인식에 기인합니다.
 
 제 경우에는, 저 자신을 팀의 핵심적인, 대체할 수 없는 역할로 여기기까지 했습니다. 다른 사람들도 이렇게 하는 것을 많이 봤는데요, 팀장과 팀원 사이의 역할이 큰 작은 규모의 팀에서 특히 심했습니다. 개발을 해야한다는 압박감에 다른 책임감까지 더해져 짓눌리는 상황에서 기술 리더들은 자신이 직접 개발하지 않으면 팀의 생산성이 떨어진다고 여기게 됩니다.
 
 
-## 4: I wanted to know, and control, everything when I needed to empower others
-One day, I was in a meeting when a manager asked about a bug. Having never worked in that area of the application I struggled to answer the question, and the more I tried, the less convincing I became. In the end, for fear of exposing my ignorance, I made an educated guess. It turned out that other teams started making changes in their applications to accommodate my guess and, after wasting a load of effort, they discovered I'd been wrong. I attributed my failure to ignorance and tried to prevent it happening again by reading the commit log at the start of every day.
+## 4: 다른 이를 위해 모든 것을 알고 싶어했다
+어느 날, 회의에서 다른 팀장에 저에게 버그에 대해 물었습니다. 제가 해본 적이 없는 분야였기 때문에 답하기가 어려웠고, 노력하면 할 수록 제 말의 설득력은 떨어졌습니다. 모른다는 것을 인정하기가 어려워 경험에 의거해 적당히 답을 해버렸습니다. 다른 팀이 제 추측에 따라 애플리케이션을 변경하기 시작했고, 엄청난 시간을 낭비하고 나서야 제 추측이 틀렸음을 밝혀냈습니다. 저는 이런 실수가 무지에서 비롯되었다고 여기고, 아침마다 모든 커밋 로그를 읽기 시작했습니다.
 
-When reading the commits, I noticed a piece of code that looked rather procedural and I felt could have been more object-oriented. I sat down with the developer and discussed trying a different approach. I decided to pair with them and became absorbed in this small area of the code for several days. At the same time, another pair were working on a significant architectural change. When they released, it caused a bug due to a simple incorrect assumption which I should have picked up.
+커밋을 읽으면서, 절차적으로 작성된 코드의 특정 부분이 객체 지향적으로 바꾸면 좋겠다는 생각이 들었습니다. 다른 개발자 옆에 앉아서 다른 방법을 시도해보자고 얘기했고, 며칠 동안이나 코드의 작은 부분을 고치는 일에 빠져 있었습니다. 그러는 와중에 다른 팀원들은 큰 틀에서 설계를 변경하고 있었습니다. 그 변경 사항이 배포되고 나서 제가 눈치채지 못한 잘못된 가정 때문에 엄청난 버그를 일으키고 말았습니다.
 
-I was honest with my manager about what had happened; I'd been focusing on getting this code right and missed what the other pair were doing. But I struggled with the feedback that I was worrying about things that weren't important. Surely making sure we were doing OOP code was important? Their response? I needed to pick my battles.
+저는 제 상관에게 어떤 일이 있었는지 솔직히 얘기했습니다. 제가 맡은 코드를 제대로 만드는데 집중하느라 다른 부분에 신경쓰지 못했다고요. 하지만 중요하지 않은 일에 신경쓰고 있다는 질책을 이겨내기 어려웠습니다. 객체 지향적으로 코드를 작성하는게 정말 중요했을까요? 그들의 반응은? 저는 선택을 해야 했습니다.
 
-Both these situations had one thing in common: that I couldn't be involved in everything that was happening. It wasn’t humanly possible. As a tech lead, I had to trust others with responsibilities and focus on the most important things. Sometimes that would mean ignorance and other times it would mean that things weren't done exactly the way I would choose to do them, or even that they were done in a less than ideal way.  Saying "I don't know, I need to check with the team" was OK but accidentally spreading misinformation was harmful. And having little things that weren't quite perfect, like a bit of procedural code, was OK. But taking on large architectural change without my oversight was not acceptable. 
+이런 일에는 공통점이 하나 있습니다. 모든 일에 개입할 수는 없다는 것입니다. 인간적으로 불가능합니다. 개발 리더로서 저는 책임감을 가지고 다른 사람들을 믿고 중요한 것들에 더 집중해야 했습니다. 때로는 모른체 해야할 수도 있고, 제가 원하는 방식이나 이상적인 방법으로 진행되지 않아도 어쩔 수 없습니다. “나는 잘 모르겠고, 팀과 확인해봐야겠다.”고 얘기하는게 잘못된 정보를 퍼트리는 것보다는 낫습니다. 절차적인 코드가 좀 있으면 어떻습니까. 오히려 제가 눈치채지 못한 큰 설계의 변경은 있을 수 없는 일입니다.
 
-I also realized that there are other tools, such as mentoring and running code reviews as a team, which are far more effective in improving the code base over the longer term than trying to fix every small issue, as and when it arose. 
+장기적인 관점에서 코드 수준을 높이기 위해서는, 문제가 생길 때마다 작은 문제를 고치는데 노력을 기울이지 말고 멘토링과 코드 리뷰를 운영하는 것이 훨씬 효율적인 것임을 깨달았습니다.
 
 
-## 5: I didn’t recognize that the signals changed
+## 5: 신호가 바뀐걸 몰랐다
 I'd attend project meetings, suggest improvements, but my frustrations grew as I felt nothing was changing. My contributions didn't seem to turn into anything concrete. We'd discuss having the test teamwork with the developers on each story; we'd try it once and then we'd go back to queuing everything up for pre-prod. People would agree that the developers should own the database, but we'd still wait for the DBAs to build stored procedures. I'd coach developers on TDD but one iteration in, everyone had given up on it. Everything felt like a talking shop where nothing got done, and I felt increasingly frustrated and despondent.
 
 When technology is your every minute of every day, you become attuned to the feedback loops and signals put in place. We’re part of the story wall: our brains release endorphins every time a build passes or story goes to production, and cortisol, when the build breaks or we detect a story, is stuck ‘in development’. But when you move into a leadership role, the signals come from other places.  

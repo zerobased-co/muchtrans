@@ -1,57 +1,57 @@
-<html>
-<head>
-  <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-  <title>{{ translation.title }}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-  <div class="header">
-    <p>
-      <a href="/">← Back to index</a>
-      <span class="pull-right">
-        <input type="checkbox" id="hide-original"/><label for="hide-original">Hide original</label>
-      </span>
-    </p>
-  </div>
-  {% if not finished %}
-  <div class="notification">
-    <p>
-      This document needs to be translated. Let's do it together on 
-      <a href="https://github.com/zerobased-co/muchtrans/blob/master/{{ filename }}">GitHub</a>.
-    </p>
-  </div>
-  {% endif %}
-  <article>
-    {% for src, dst in rows %}
-    <div class="row">
-      <div class="column original">
-        {{ src }}
-      </div>
-      <div class="column translation">
-        {{ dst }}
-      </div>
+{% extends "templates/base.html" %}
+{% block title %}{{ translation.title }}{% endblock %}
+{% block header %}
+<div class="header">
+  <p>
+    <a href="/">← Back to index</a>
+    <span class="pull-right">
+      <input type="checkbox" id="hide-original"/><label for="hide-original">Hide original</label>
+    </span>
+  </p>
+</div>
+{% if not finished %}
+<div class="notification">
+  <p>
+    This document needs to be translated. Let's do it together on 
+    <a href="https://github.com/zerobased-co/muchtrans/blob/master/{{ filename }}">GitHub</a>.
+  </p>
+</div>
+{% endif %}
+{% endblock %}
+{% block content %}
+<article>
+  {% for src, dst in rows %}
+  <div class="row">
+    <div class="column original">
+      {{ src }}
     </div>
-  {% endfor %}
-  </article>
-  {% if translators|length > 0  %}
-  <div>
-    <div class="row">
-      <div class="column original">
-      </div>
-      <div class="column translation">
-        <h3 id="translators">Translators</h3>
-        <div class="translators">
-          {% for email, translator in translators %}
-          <span class="translator">
-            <img src="{{ translator.github.avatar_url }}">
-            <a href="{{ translator.github.html_url }}">{{ translator.name }}</a>
-          </span>
-          {% endfor %}
-        </div>
+    <div class="column translation">
+      {{ dst }}
+    </div>
+  </div>
+{% endfor %}
+</article>
+{% if translators|length > 0  %}
+<div>
+  <div class="row">
+    <div class="column original">
+    </div>
+    <div class="column translation">
+      <h3 id="translators">Translators</h3>
+      <div class="translators">
+        {% for email, translator in translators %}
+        <span class="translator">
+          <img src="{{ translator.github.avatar_url }}">
+          <a href="{{ translator.github.html_url }}">{{ translator.name }}</a>
+        </span>
+        {% endfor %}
       </div>
     </div>
   </div>
-  {% endif %}
+</div>
+{% endif %}
+{% endblock %}
+{% block footer %}
   <div class="footer">
     <p>
       Original contents: 
@@ -60,7 +60,8 @@
     </p>
     <p>Let's translate together on GitHub: <a href="https://github.com/zerobased-co/muchtrans">zerobased-co/muchtrans</a></p>
   </div>
-</body>
+{% endblock %}
+{% block script %}
 <script>
 window.addEventListener('load', function () {
   var checkbox = document.getElementById('hide-original');
@@ -88,4 +89,4 @@ window.addEventListener('load', function () {
   });
 });
 </script>
-</html>
+{% endblock %}
