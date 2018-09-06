@@ -4,42 +4,42 @@ source: https://www.thoughtworks.com/insights/blog/techie-tech-lead-my-5-biggest
 # 개발자에서 개발팀장이 되기까지 겪은 다섯가지 큰 실수
 피터 길라드–모스
 
-젋었을 때는 스스로의 재능에 대한 확신을 가진 야심찬 프로그래머로서, 팀장이 되기를 늘 꿈꿨습니다. 그리고 그렇게 되기까지 4년이 채 걸리지 않았죠. 하지만 2년간 팀을 이끌며 느낀 현실은 제게서 리더쉽이라는 것을 완전히 앗아가버렸습니다. 그 이후로 몇 년 동안 저는 기술의 깊숙한 곳으로 숨어, 더 큰 책임을 요구하는 일에서 도망쳐왔습니다. <sup>(역주: Leader를 팀장으로 의역하였습니다)</sup>
+젋었을 때는 스스로의 재능에 확신을 가진 야심찬 프로그래머로서, 팀장이 되기를 늘 꿈꿨습니다. 그리고 그렇게 되기까지 4년이 채 걸리지 않았죠. 하지만 2년간 팀을 이끌며 느낀 현실은 제게서 리더쉽이라는 것을 완전히 앗아가버렸습니다. 그 이후로 몇 년 동안 저는 기술의 깊숙한 곳으로 숨어, 더 큰 책임을 요구하는 일에서 도망쳐왔습니다. <sup>(역주: Leader를 팀장으로 의역하였습니다)</sup>
 
-시간이 지남에 따라, 제가 저지른 실수들의 근본적인 원인에 대해 이해하게 되었고,  다시 리더가 되는 기회를 잡아 팀장으로 성장할 수 있었고, 지난 2년간 제대로 된 지원을 받으며 ThoughtWorks의 기술 책임자를 맡을 수 있을 정도로 성장하였습니다.
+시간이 지남에 따라, 제가 저지른 실수들의 근본적인 원인에 대해 이해하여 다시 리더가 되는 기회를 잡아 팀장으로 성장할 수 있었고, 지난 2년간 제대로 된 지원을 받으며 ThoughtWorks의 기술 책임자를 맡을 수 있을 정도로 성장하였습니다.
 
-다른 분들에게 도움이 되기를 바라며 제 실수와 실수로부터 배운 것들을 공유해봅니다.
+다른 분들에게 도움이 되기를 바라며 제 실수와 그로부터 배운 것들을 공유해봅니다.
 
 ## 1: 기술적인 능력이 리더쉽으로 이어질 줄 알았다
-기술 리더 역할을 처음 맡으면서, 젊고 재능있는 졸업생들을 고용했습니다. 우리는 새로운 아이디어와 능력으로 서로 밀어주고 당겨주며 열심히 일했습니다. 고작 몇 달 만에 이 친구들이 경험은 부족할지 몰라도 저보다 기술적으로 더 뛰어날 수 있다는 것을 깨달았습니다. 기술 리더로서 다른 그 누구보다 기술적으로 뛰어남을 증명해야겠다는 생각이 들었습니다. 그들이 다른 사람에게 – 특히 제 보스에게 – 가능성을 보여줄 때마다 저는 불안해져서, 그들이 저보다 제 역할에 더 어울려보이지 않을까 안절부절했습니다. 좋은 동료였던 관계가 제 경쟁심과 불신으로 휩싸였습니다. 그들을 공동 작업자(또는 최소한 잠재적인 후임자)로 여기지 못하고 위협적인 존재로만 여겼습니다.
+기술 리더 역할을 처음 맡으면서, 젊고 재능있는 졸업생들을 고용했습니다. 우리는 새로운 아이디어와 능력으로 서로 밀어주고 당겨주며 열심히 일했습니다. 고작 몇 달 만에 이 친구들이 경험은 부족할지 몰라도, 저보다 기술적으로 더 뛰어날 수 있다는 것을 깨달았습니다. 기술 리더로서 다른 그 누구보다 기술적으로 뛰어남을 증명해야겠다는 생각이 들었습니다. 그들이 다른 사람에게 – 특히 제 상관에게 – 가능성을 보여줄 때마다 저는 불안해져서, 그들이 저보다 제 역할에 더 어울려보이지 않을까 안절부절했습니다. 좋은 동료였던 관계가 제 경쟁심과 불신으로 휩싸였습니다. 그들을 공동 작업자(또는 최소한 잠재적인 후임자)로 여기지 못하고 위협적인 존재로만 여겼습니다.
 
 기술적인 능력이 리더를 선택하는데 있어 가장 큰 요인으로 주로 사용되곤 합니다. 가장 명확하게 보이는 요인이기도 하고요. 이게 제 첫번째 실수였습니다. 기술적으로 뛰어난 사람이 리더로의 능력도 클 것으로 착각했죠.
 
-제 경우에는 이 착각이 별 도움도 안되는 경쟁적인 행동들로 이어졌습니다. 주변 환경과 자격지심 때문에 제 불안은 커져갔습니다. 제 아무리 겸손하고 능력있는 사람이라도 이런 실수는 가면 현상을 강화시켜, 팀의 다른 사람들이 훨씬 가치있다는 생각에 빠지게 만듭니다. 팀웍을 과소평가하거나 스스로의 존재 가치에 대해 의문을 가지게 되기도 합니다. 이런 경우에, 리더는 스스로의 역할을 믿지 못해 우유부단해지고 필요한 순간에 결정을 내리지 못하게 됩니다.
+제 경우에는 이 착각이 별 도움도 안되는 경쟁적인 행동들로 이어졌습니다. 주변 환경과 자격지심 때문에 제 불안은 커져갔습니다. 제 아무리 겸손하고 능력있는 사람이라도 이런 실수는 가면 증후군을 강화시켜, 팀의 다른 사람들이 훨씬 가치있다는 생각에 빠지게 만듭니다. 팀웍을 과소평가하거나 스스로의 존재 가치에 대해 의문을 가지게 되기도 합니다. 이런 경우에, 리더는 스스로의 역할을 믿지 못해 우유부단해지고 필요한 순간에 결정을 내리지 못하게 됩니다. 
 
-기술이 뛰어난 사람이 리더가 되어야 한다는 이 잘못된 생각 때문에, 능력있는 사람들이 스스로 리더 역할을 꺼려하게 됩니다.
+기술이 뛰어난 사람이 리더가 되어야 한다는 잘못된 생각 때문에, 능력있는 사람들이 스스로 리더 역할을 꺼려하게 됩니다.
 
 
-## 2: I focused on tech when I should have broadened my capabilities
-I was very excited about my first lead role. It was a brand new team with a greenfield project. I introduced new technologies and practices: unit testing, ORM, continuous integration, pairing, optimistic source control, nant build files. If I read a blog post about an exciting new idea, I incorporated it into our processes and tools.
+## 2: 능력을 넓혀야 할 때 기술에만 집착하고 있었다
+처음 팀장을 맡았을 때 정말 좋았습니다. 완전한 새 프로젝트에 새로운 팀이었으니까요. 유닛 테스팅, ORM, 지속적 통합(CI), 페어 코딩, 더 나은 소스 관리 도구, 빌드 시스템 등 신기술과 방법론들을 도입했습니다. 힙스터의 새로운 블로그 글을 읽으면 바로 회사 프로세스와 도구에 도입해보았습니다.
 
-Choosing tools and technologies was iteration 0 work. Now came the day-to-day stuff. The managing, dealing with stakeholders, representing my team in meetings, performance reviews, recruitment, budgets, etc. And while I knew enough to select svn, nunit, CruiseControl, and C#, I had no idea about all that other stuff.
+도구와 기술을 선택하는 것은 처음에만 해당하는 일이었습니다. 이제 날마다 해야하는 일의 차례였습니다. 관리하고, 관계자들을 설득하고, 팀 회의를 진행하고, 실적 리뷰를 하고, 사람을 뽑고, 예산을 관리하는 일 같은 것들요. SVN, nunit, CruiseControl, C# 같은 건 고를 줄 알았지만 다른 일들은 완전히 처음이었습니다.
 
-I began to resent the activities I didn't understand and found difficult. Rather than address my gaps, I focused more on the things I felt I could control: technology. This only aggravated my imposter syndrome, especially if I was in a meeting with other managers who’d confidently talk about growing their teams by bringing in training or making business cases for investment or new team members or disaster recovery plans, etc.
+제가 이해하지 못하고 어렵다고 생각하는 것들에 점점 화만 쌓여갔습니다. 문제의 원인을 알아보려 하지 않고, 저는 제가 그나마 할 수 있는 것에만 집중했습니다. 바로 기술이죠. 이는 제 가면 증후군을 더 악화시키기만 했는데, 팀 성장에 자신있어 하는 다른 팀장을 만날 때, 투자를 위한 비즈니스 미팅, 새로운 팀 멤버들이나 장애 복구 계획 등을 얘기할 때 특별히 더 심했습니다.
 
-As previously mentioned, technical ability isn’t the only basis for suitability for a leadership role. Alongside technical prowess are many other strengths: from influencing and persuading, to coaching, to understanding processes, to being a trusted advisor, to dealing with complexity, to strategic thinking (and many more). These competencies are much less visible and are probably needed in more nuanced ways throughout the working day and week.
+앞서도 말했지만, 기술적인 역량은 리더의 역할에 얼마나 적합한지를 알려주는 유일한 지표가 아닙니다. 기술적으로 탁월한 것은 여러 부분 중 하나일 뿐입니다. 동료에게 영향을 주고 설득하며 코칭하는 능력, 프로세스에 대한 이해, 신뢰받는 조언, 복잡도를 다루는 능력, 전략적 사고 등 이루 말할 수 없이 많습니다. 이러한 것들은 눈에 잘 띄진 않지만 업무 중에 계속해서 섬세하게 요구되는 역량입니다.
 
-It's important for new leads to understand the significance of these other competencies and the need to build themselves out in breadth across many areas. Otherwise, they risk turning towards their most visible strength — technology — and focus on building depth.
+새롭게 리더 역할을 맡게되면 이런 역량들의 중요성을 이해하고 폭 넓은 분야에서 자기 계발을 하는 것이 필요합니다. 그렇지 않으면 가장 눈에 띄는 역량인 ‘기술’에만 불나방처럼 빠져들어 문제를 악화시키게 됩니다.
 
-Another trap is that it’s relatively easy for a technologist to build up new technical competencies. We're used to acquiring technical skills; we know the formulas, the blog pages, the StackOverflow posts, the thought leaders to follow, the conferences to attend, the books to read. Given a half decent 'Hello World' example and a few spikes later we're well on our way to picking up a new technology.
+또 다른 함정은, 개발자들이 새로운 기술 역량을 익히기가 상대적으로 쉽다는 것입니다. 우리는 새로운 기술을 습득하는데 꽤 익숙합니다. 수식을 이해하고, 블로그를 읽으며, 스택오버플로우를 찾아보고, 좋은 리더를 알고 있으며, 컨퍼런스에 참석하며, 책을 봅니다. 적당한 ‘Hello World’ 예제와 몇 번의 시도를 하고 나면 새로운 기술에 이미 익숙해져 있습니다.
 
-But other competencies don't work this way.
+하지만 다른 역량은 이렇게 익힐 수 없습니다.
  
-> There isn't an obvious 'Hello World' for coaching or time management or influencing or persuading or articulating business value.  
+> 코칭이나 시간 관리, 비즈니스 가치에 영향을 주거나 설득하는 방법에 대해서는 명확한 ‘Hello World’가 없습니다.
 
-We don't know who to follow on Twitter to get the 'right way' to communicate decisions or organize teams or manage stakeholders.
+우리는 의사 결정을 내리거나 팀을 조직하고 주주를 이해시키는 ‘올바른 방법’을 듣기 위해 트위터에서 누굴 팔로우 해야할 지 모릅니다.
 
-This makes moving into the new domains required for leadership expensive. As many of these domains are relatively new, the lead is left feeling lost and intimidated. They may also mistakenly prioritize developing new technical competencies which are quick and easy to pick up and have obvious value over alien competencies, which are hard to get into without clear value.
+리더쉽을 필요로 하는 새로운 역할을 맡을 때는 걸맞는 댓가를 치뤄야 합니다. 이러한 것들 중 대부분은 새롭기 때문에 신임 팀장들은 갈팡질팡하게 됩니다. 익숙하지 않은 역량들은 익혀서 어떤 가치를 줄 지 알 수 없기 때문에, 눈에 보여 쉽게 익힐 수 있을 것 같은 기술적 역량을 익히는데 치중하기가 쉽습니다.
 
 
 ## 3: I continued to see myself as an individual producer
