@@ -6,7 +6,7 @@ source: https://www.thoughtworks.com/insights/blog/techie-tech-lead-my-5-biggest
 
 젋었을 때는 스스로의 재능에 확신을 가진 야심찬 프로그래머로서, 팀장이 되기를 늘 꿈꿨습니다. 그리고 그렇게 되기까지 4년이 채 걸리지 않았죠. 하지만 2년간 팀을 이끌며 느낀 현실은 제게서 리더쉽이라는 것을 완전히 앗아가버렸습니다. 그 이후로 몇 년 동안 저는 기술의 깊숙한 곳으로 숨어, 더 큰 책임을 요구하는 일에서 도망쳐왔습니다. <sup>(역주: Leader를 팀장으로 의역하였습니다)</sup>
 
-시간이 지남에 따라, 제가 저지른 실수들의 근본적인 원인에 대해 이해하여 다시 리더가 되는 기회를 잡아 팀장으로 성장할 수 있었고, 지난 2년간 제대로 된 지원을 받으며 ThoughtWorks의 기술 책임자를 맡을 수 있을 정도로 성장하였습니다.
+시간이 지남에 따라, 제가 저지른 실수들의 근본적인 원인에 대해 이해하여 다시 리더가 되는 기회를 잡아 팀장으로 성장할 수 있었고, 지난 2년간 제대로 된 지원을 받으며 ThoughtWorks의 기술 부문장을 맡을 정도로 성장하였습니다.
 
 다른 분들에게 도움이 되기를 바라며 제 실수와 그로부터 배운 것들을 공유해봅니다.
 
@@ -37,21 +37,21 @@ source: https://www.thoughtworks.com/insights/blog/techie-tech-lead-my-5-biggest
  
 > 코칭이나 시간 관리, 비즈니스 가치에 영향을 주거나 설득하는 방법에 대해서는 명확한 ‘Hello World’가 없습니다.
 
-우리는 의사 결정을 내리거나 팀을 조직하고 주주를 이해시키는 ‘올바른 방법’을 듣기 위해 트위터에서 누굴 팔로우 해야할 지 모릅니다.
+우리는 의사 결정을 내리거나 팀을 조직하고 투자자를 이해시키는 ‘올바른 방법’을 듣기 위해 트위터에서 누굴 팔로우 해야할 지 모릅니다.
 
 리더쉽을 필요로 하는 새로운 역할을 맡을 때는 걸맞는 댓가를 치뤄야 합니다. 이러한 것들 중 대부분은 새롭기 때문에 신임 팀장들은 갈팡질팡하게 됩니다. 익숙하지 않은 역량들은 익혀서 어떤 가치를 줄 지 알 수 없기 때문에, 눈에 보여 쉽게 익힐 수 있을 것 같은 기술적 역량을 익히는데 치중하기가 쉽습니다.
 
 
-## 3: I continued to see myself as an individual producer
-After a few months into my first tech lead role, I was becoming increasingly anxious. It seemed like I needed to do a lot of things that didn't feel productive. Less and less of my time was spent pairing and writing code as I was busy in meetings, replying to emails, answering questions from stakeholders, etc. I felt as if every story with my name on it wasn't progressing. My response was to sacrifice my personal time to make up for what I'd missed due to these distractions (as I perceived them). I quickly became overworked.
+## 3: 계속해서 개발자로 일하려고 했다
+팀장이 되고 나서 처음 몇 달간은 근심이 깊어갔습니다. 개발과는 무관한 일들만 잔뜩 해야하는 것 같았습니다. 코드를 작성하는 시간은 점점 줄어만 가고, 회의와 이메일, 투자자들을 상대하는 일들로 바빴습니다. 제 이름이 걸린 일들은 진전이 없게 느껴졌고요. 이런 일들을 하느라 못했던 것들을 제 개인 시간을 희생해서라도 하려고 했습니다. 당연히 야근으로 이어졌습니다.
 
-What I hadn't realized when I moved from a techie to tech lead, was how my responsibilities and metrics for success, in terms of being a producer, had changed. If you look at any delivery team, you can see the main goal is to maximize the amount of 'value' produced. In this light, there are two main activities in the team: those that directly produce value, and those that work to maximize the impact of what is produced. One of the simplest (but by no means the only) ways to do this is to ensure that the producers (in this case the developers) have the maximum time to focus on productive activities (i.e., producing code). The rest of the team, from PM to XD to BA to QA are working to ensure that the flow of work is as correct and smooth as possible and doesn't get blocked or create failure demand (due to bugs, etc.). Simple version: to keep developers productive, the team around them work to remove any obstacles or distractions so developers can focus on writing the right code to deliver value.
+개발자에서 개발팀장이 되면서 깨닫지 못한게 있다면, 프로듀서라는 관점에서 제 책임과 성공의 척도가 바뀌었다는 것입니다. 전달하는 조직에서는 주된 목표가 생산된 ‘가치’를 극대화 하는데 있습니다. 이런 관점에서 팀에는 두 가지 주된 활동이 있습니다. 하나는 직접적으로 가치를 창출하는 일과, 다른 하나는 생산된 가치를 극대화 하는 일입니다. 이 일을 하기 위한 유일한 방법은 아니지만, 가장 단순한 방법은 생산자(개발자)가 생산 활동(코드를 작성하는 것)에 집중하는 시간을 극대화 하는 것입니다. PM부터 XD, BA, QA 까지 이르는 다른 팀은 업무 과정이 최대한 정확하고 물처럼 흘러 일이 막히거나 실패 요인(버그 같은 것)을 만들지 않도록 노력해야 합니다. 간단하게 말하자면, 개발자들의 생산성을 높이기 위해서는 주변 팀에서 장애나 산만함을 제거해서 개발자가 제대로 된 코드를 작성해 가치를 창출하는데 집중할 수 있어야 한다는 것입니다.
 
-When someone moves from techie to tech lead, they’re shifting from being one of the producers to being part of the team whose goal is to maximize overall impact (which includes removing obstacles and blockers).
+개발자에서 개발팀장이 된다는 것은 더 이상 생산자의 역할이 아니라 전체적인 영향을 극대화하는 역할로 바뀐다는 것입니다. 물론, 장애물과 방해자들을 제거하는 일도 포함해서요.
 
-This misunderstanding places a lot of stress on the new tech lead, especially around time management, specifically a feeling of not having enough time to code or pair with others.  Sometimes this is expressed in frustrations of too many meetings or a desire to have meetings only at certain times (core coding/pairing hours etc.). In some extreme cases, I've seen this manifest as a complete rejection of any activities which were not considered technical (talking to stakeholders for example).  All of these originate from the tech lead's perception of being a direct producer rather than as someone who is maximizing the impact of others.
+이런 것들을 잘 이해하지 못한다면 다른 개발자들과 같이 코딩하는데 시간을 쓸 수 없는 현실에 정말 큰 스트레스를 받게 됩니다. 너무 많은 모임에 좌절하거나 특정 시간에만 미팅을 하려고 하기도 하죠. (코어 코딩/페어링 시간 등으로) 극단적인 경우에는 기술과 관련 없는 모든 활동을 거부하는 행위를 보이기도 합니다. (투자자를 만나야 한다거나 하는) 이런 일련의 행동은 개발 리더가 다른 사람의 가치를 극대화 하는 사람이 아니라 직접 개발을 해야한다는 인식에 기인합니다.
 
-In my case, it even led to me perceiving myself as the main, and an indispensable, contributor to the team. I've seen this happen a lot with others too, especially in smaller teams where there is a large skills gap between the lead and the other members. Under the combined pressure from additional responsibility along with normal delivery pressures, the tech lead can feel that if they shift away from writing code, the productivity of the team will significantly suffer.
+제 경우에는, 저 자신을 팀의 핵심적인, 대체할 수 없는 역할로 여기기까지 했습니다. 다른 사람들도 이렇게 하는 것을 많이 봤는데요, 팀장과 팀원 사이의 역할이 큰 작은 규모의 팀에서 특히 심했습니다. 개발을 해야한다는 압박감에 다른 책임감까지 더해져 짓눌리는 상황에서 기술 리더들은 자신이 직접 개발하지 않으면 팀의 생산성이 떨어진다고 여기게 됩니다.
 
 
 ## 4: I wanted to know, and control, everything when I needed to empower others
