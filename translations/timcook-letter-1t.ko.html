@@ -32,10 +32,10 @@
   
   <div class="row">
     <div class="column original">
-      <h1>Tim Cook's memo at AAPL hits $1 trillion market cap</h1>
+      <h1 id="1">Tim Cook's memo at AAPL hits $1 trillion market cap</h1>
     </div>
     <div class="column translation">
-      <h1>애플 시가 총액 1조 달러 도달에 팀 쿡이 사내에 전한 감사 메세지</h1>
+      <h1 id="1">애플 시가 총액 1조 달러 도달에 팀 쿡이 사내에 전한 감사 메세지</h1>
     </div>
   </div>
 
@@ -113,8 +113,8 @@
       <div class="translators">
         
         <span class="translator">
-          <img src="https://avatars1.githubusercontent.com/u/579366?v=4">
-          <a href="https://github.com/lqez">Park Hyunwoo</a>
+          <img src="">
+          <a href="">Park Hyunwoo</a>
         </span>
         
       </div>
@@ -148,15 +148,10 @@ window.addEventListener('load', function () {
     });
   }
 
-  var id_seq = 1;
-  document.querySelectorAll('h2, h3').forEach(function(node) {
+  document.querySelectorAll('h2[id], h3[id]').forEach(function(node) {
     var anchor = document.createElement("a");
     anchor.className = "pilcrow";
     anchor.text = "\xb6";
-    if (node.id === '') {
-      node.id = id_seq;
-      id_seq += 1;
-    }
     anchor.href = "#" + node.id;
     node.appendChild(anchor);
   });
