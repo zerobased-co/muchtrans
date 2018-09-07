@@ -81,6 +81,7 @@ And they also have to be treated with caution: they may not always be caused by 
 
 The really good leaders seem to be highly attuned to all these signals and understand how to interpret and respond to them. Although it can look like a dark art, akin to reading the tea leaves or animal entrails, there are real rational approaches which, while not as deterministic and certain as technology, are learnable.
 
+## Growing from my technical roots
 One thing you may have noticed is that a lot of these mistakes relate to each other. For example, it’s hard to stop seeing yourself as a producer when you believe your technical ability is your reason for leading. That makes it harder to develop other skills. The way these mistakes fed into each other is what put my leadership journey into a death spiral.
 
 Taking a leadership role is a big change and can be very daunting, and when we, as humans, struggle, we turn to our strengths. And while technical ability needs to form the roots of leadership, we need to grow from our other strengths as well. Whether those are our abilities to work with people, to communicate, convince and persuade others or are technical skills which are transferable such as an ability to learn fast, pick up new things, reason about complex matters or reframe problems in more understandable terms by building abstractions. Once I felt confident in my strengths, I began to see the opportunities to grow new skills and branch out into new exciting areas of learning and development. 
