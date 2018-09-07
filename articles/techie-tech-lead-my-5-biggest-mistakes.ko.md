@@ -37,19 +37,19 @@ source: https://www.thoughtworks.com/insights/blog/techie-tech-lead-my-5-biggest
  
 > 코칭이나 시간 관리, 비즈니스 가치에 영향을 주거나 설득하는 방법에 대해서는 명확한 ‘Hello World’가 없습니다.
 
-우리는 의사 결정을 내리거나 팀을 조직하고 투자자를 이해시키는 ‘올바른 방법’을 듣기 위해 트위터에서 누굴 팔로우 해야할 지 모릅니다.
+우리는 의사 결정을 내리거나 팀을 조직하고 이해 관계자를 이해시키는 ‘올바른 방법’을 듣기 위해 트위터에서 누굴 팔로우 해야할 지 모릅니다.
 
 리더쉽을 필요로 하는 새로운 역할을 맡을 때는 걸맞는 댓가를 치뤄야 합니다. 이러한 것들 중 대부분은 새롭기 때문에 신임 팀장들은 갈팡질팡하게 됩니다. 익숙하지 않은 역량들은 익혀서 어떤 가치를 줄 지 알 수 없기 때문에, 눈에 보여 쉽게 익힐 수 있을 것 같은 기술적 역량을 익히는데 치중하기가 쉽습니다.
 
 
 ## 3: 계속해서 개발자로 일하려고 했다
-팀장이 되고 나서 처음 몇 달간은 근심이 깊어갔습니다. 개발과는 무관한 일들만 잔뜩 해야하는 것 같았습니다. 코드를 작성하는 시간은 점점 줄어만 가고, 회의와 이메일, 투자자들을 상대하는 일들로 바빴습니다. 제 이름이 걸린 일들은 진전이 없게 느껴졌고요. 이런 일들을 하느라 못했던 것들을 제 개인 시간을 희생해서라도 하려고 했습니다. 당연히 야근으로 이어졌습니다.
+팀장이 되고 나서 처음 몇 달간은 근심이 깊어갔습니다. 개발과는 무관한 일들만 잔뜩 해야하는 것 같았습니다. 코드를 작성하는 시간은 점점 줄어만 가고, 회의와 이메일, 이해 관계자들을 상대하는 일들로 바빴습니다. 제 이름이 걸린 일들은 진전이 없게 느껴졌고요. 이런 일들을 하느라 못했던 것들을 제 개인 시간을 희생해서라도 하려고 했습니다. 당연히 야근으로 이어졌습니다.
 
 개발자에서 개발팀장이 되면서 깨닫지 못한게 있다면, ‘생산자’라는 관점에서 제 책임과 성공의 척도가 바뀌었다는 것입니다. 전달하는 조직에서는 주된 목표가 생산된 ‘가치’를 극대화 하는데 있습니다. 이런 관점에서 팀에는 두 가지 주된 활동이 있습니다. 하나는 직접적으로 가치를 창출하는 일과, 다른 하나는 생산된 가치를 극대화 하는 일입니다. 이 일을 하기 위한 유일한 방법은 아니지만, 가장 단순한 방법은 생산자(개발자)가 생산 활동(코드를 작성하는 것)에 집중하는 시간을 극대화 하는 것입니다. PM부터 XD, BA, QA 까지 이르는 다른 팀은 업무 과정이 최대한 정확하고 물처럼 흘러 일이 막히거나 실패 요인(버그 같은 것)을 만들지 않도록 노력해야 합니다. 간단하게 말하자면, 개발자들의 생산성을 높이기 위해서는 주변 팀에서 장애나 산만함을 제거해서 개발자가 제대로 된 코드를 작성해 가치를 창출하는데 집중할 수 있어야 한다는 것입니다.
 
 개발자에서 개발팀장이 된다는 것은 더 이상 생산자의 역할이 아니라 전체적인 영향을 극대화하는 역할로 바뀐다는 것입니다. 물론, 장애물과 방해자들을 제거하는 일도 포함해서요.
 
-이런 것들을 잘 이해하지 못한다면 다른 개발자들과 같이 코딩하는데 시간을 쓸 수 없는 현실에 정말 큰 스트레스를 받게 됩니다. 너무 많은 회의에 좌절하거나 특정 시간에만 미팅을 하려고 하기도 하죠(코어 코딩/페어링 시간을 정해서). 극단적인 경우에는 기술과 관련 없는 모든 활동을 거부하는 행위를 보이기도 합니다(투자자를 만나야 한다거나 하는). 이런 일련의 행동은 개발 리더가 다른 사람의 가치를 극대화 하는 사람이 아니라 직접 개발을 해야한다는 인식에 기인합니다.
+이런 것들을 잘 이해하지 못한다면 다른 개발자들과 같이 코딩하는데 시간을 쓸 수 없는 현실에 정말 큰 스트레스를 받게 됩니다. 너무 많은 회의에 좌절하거나 특정 시간에만 미팅을 하려고 하기도 하죠(코어 코딩/페어링 시간을 정해서). 극단적인 경우에는 기술과 관련 없는 모든 활동을 거부하는 행위를 보이기도 합니다(이해 관계자를 만나야 한다거나 하는). 이런 일련의 행동은 개발 리더가 다른 사람의 가치를 극대화 하는 사람이 아니라 직접 개발을 해야한다는 인식에 기인합니다.
 
 제 경우에는, 저 자신을 팀의 핵심적인, 대체할 수 없는 역할로 여기기까지 했습니다. 다른 사람들도 이렇게 하는 것을 많이 봤는데요, 팀장과 팀원 사이의 역할이 큰 작은 규모의 팀에서 특히 심했습니다. 개발을 해야한다는 압박감에 다른 책임감까지 더해져 짓눌리는 상황에서 기술 리더들은 자신이 직접 개발하지 않으면 팀의 생산성이 떨어진다고 여기게 됩니다.
 
@@ -69,24 +69,25 @@ source: https://www.thoughtworks.com/insights/blog/techie-tech-lead-my-5-biggest
 ## 5: 신호가 바뀐걸 몰랐다
 프로젝트 회의에 참석하고, 개선을 제안해도 무언가 바뀌는 것이 없다고 생각되니 두려워지기 시작했습니다. 구체적인 제 성과가 보이지 않았습니다. 모든 단계에서 개발자들과 팀웍을 재고하는 방법들을 논의했습니다. 하지만 한 번 하고 난 다음에는 번번히 원래대로 돌아가기 일쑤였습니다. 다른 사람들은 개발자가 직접 데이터베이스를 다뤄야 한다고 생각하겠지만, 우리는 DBA가 스토어드 프로시져를 작성해줄 때까지 기다렸습니다. 개발자들에게 TDD를 하자고 해봤지만 한 번 하고 나서는 다들 손을 들었습니다. 말만 하고 아무 것도 되질 않으니 겁이나고 위축되었습니다.
 
-When technology is your every minute of every day, you become attuned to the feedback loops and signals put in place. We’re part of the story wall: our brains release endorphins every time a build passes or story goes to production, and cortisol, when the build breaks or we detect a story, is stuck ‘in development’. But when you move into a leadership role, the signals come from other places.  
+매일 매일 기술만 생각하고 있다면, 당신은 피드백 과정과 일상적인 신호에 적응하게 됩니다. 우리는 일감 스토리보드의 일부로, 빌드가 통과되거나 프로덕션으로 릴리즈 될 때에 엔도르핀을 방출합니다. 그리고 빌드가 깨지거나 새로운 스토리(이슈)가 생기면 코르티솔이 분비되어 ‘개발중’ 상태에 빠집니다. 하지만 리더쉽을 요구하는 역할에서의 신호는 다른 곳에서 옵니다.
 
-It's hard for techies to detect this shift especially as the concerns of each day are mainly the same: stories still need to be picked up and delivered, the code still needs to be written. So the signals a new lead receives still look technical.  
+개발자가 신경 쓰는 것은 매일 매일 비슷하기 때문에 이러한 변화를 알아차리기가 어렵습니다. 스토리는 계속해서 만들어지고 전달되어야하고 코드는 계속 작성되어야 합니다. 기술 팀장이 받는 신호는 여전히 기술적으로 여겨집니다.
 
-When moving into leadership roles, we need to look out for and learn the other signals. If we want to change direction, we must influence others. We must learn to see the signals that tell us who understands our ideas and whether they’re convinced and supportive or skeptical.  There are also other signals, for instance team members struggling with the workload and needing support; or if they’re missing the tools to develop new skills or disciplines; or there are gaps in communication structures leaving the team ignorant of what it’s supposed to achieve. Often these signals are hard to detect because they come from people — who often hide or mask or highlight other things.
+리더쉽이 필요한 역할을 맡는다면 다른 신호들도 배우고 유심히 지켜봐야 합니다. 방향을 튼다면, 다른 사람에게 끼치는 영향이 있을겁니다. 누가 아이디어를 이해했는지, 그리고 어떤 사람은 납득하고 누구는 납득하지 못했는지, 아니면 협조적인지 회의적인지에 대한 신호를 반드시 배워야 합니다. 다른 신호들도 많이 있는데, 이를테면 팀원이 업무에 지쳐 도움이 필요로 한다던가, 새로운 기술을 배우는데 적합한 도구가 없는 경우, 팀이 무엇을 목표로 해야하는지 모르고 의사소통하는 문제들에 대해서요. 이런 신호들은 무언가 숨기거나, 다른 것을 강조하기도 하는 ‘사람’에게서 오기 때문에 알아차리기가 쉽지 않습니다.
  
-> Detecting these signals is almost a sixth sense which you develop with experience, and when you are not attuned to them, you don't even realize they exist.
+> 이런 신호를 알아차리기 일은 경험에 의거한 육감에 가깝습니다. 이런 일에 익숙하지 않다면 전혀 모를 일이죠.
 
-And they also have to be treated with caution: they may not always be caused by what you think.
+그리고 이런 일들은 주의 깊게 다뤄져야 합니다. 항상 당신이 생각한 일 때문에 일어나는 것은 아니라서요.
 
-The really good leaders seem to be highly attuned to all these signals and understand how to interpret and respond to them. Although it can look like a dark art, akin to reading the tea leaves or animal entrails, there are real rational approaches which, while not as deterministic and certain as technology, are learnable.
+정말 좋은 리더가 되려거든 이런 모든 신호에 귀기울이고 그것들을 어떻게 이해하고 답을 줄지 고민해야 합니다. 찻잎이나 동물 내장을 통해 짐작하는 흑마법을 쓰는 주술사처럼 보일 수도 있겠지만, 기술만큼 확실하지는 않지만 합리적으로 접근하여 배울 수 있는 일입니다.
 
-One thing you may have noticed is that a lot of these mistakes relate to each other. For example, it’s hard to stop seeing yourself as a producer when you believe your technical ability is your reason for leading. That makes it harder to develop other skills. The way these mistakes fed into each other is what put my leadership journey into a death spiral.
+## 개발자 출신으로 성장하기
+이미 눈치채셨겠지만, 각 실수들은 서로 연관되어 있습니다. 예를 들어, 자신이 리더인 이유가 기술적인 면이 뛰어나서라고 생각한다면, 자기 자신을 생산자로 여기는 것을 피할 수 없을겁니다. 그러다보니 새로운 기술을 배우기가 더 어렵죠. 이런 실수들이 서로 꼬이고 꼬인 제 첫 팀장 경험은 완전히 망해버렸습니다.
 
-Taking a leadership role is a big change and can be very daunting, and when we, as humans, struggle, we turn to our strengths. And while technical ability needs to form the roots of leadership, we need to grow from our other strengths as well. Whether those are our abilities to work with people, to communicate, convince and persuade others or are technical skills which are transferable such as an ability to learn fast, pick up new things, reason about complex matters or reframe problems in more understandable terms by building abstractions. Once I felt confident in my strengths, I began to see the opportunities to grow new skills and branch out into new exciting areas of learning and development. 
+리더쉽 역할을 맡게 된다는건 큰 변화이고 벅찰 수 있습니다. 하지만 인간으로서, 고생한 만큼 새로운 능력을 발견할 수도 있습니다. 기술은 리더쉽의 근간이 되어야 하지만, 다른 부분에서 능력을 성장시켜야만 합니다. 이런 능력들이 사람과 함께 일하고, 의사소통하고, 납득시키고 설명하는 능력이든, 아니면 빠르게 습득하고, 새로운 걸 발견하고, 복잡한 문제의 원인을 찾거나 추상화 능력을 발전시켜 문제를 이해하기 쉽게 재구성하는 기술적인 능력이든 간에 말이죠. 제 능력에 자신감이 붙고 나서는 새로운 기술을 배울 수 있는 기회를 찾아, 흥미진진한 새로운 영역을 배우고 개발하는 것으로 뻗어나갈 수 있었습니다.
 
-It’s also crucial to understand that the leadership journey isn’t linear.
+리더쉽이 선형적으로 발전하는게 아니라는 것을 이해하는 것이 중요합니다.
  
-> It’s fine to play a leadership role and move back to pure tech. It will only make you a better technologist. And likewise, leadership is not exclusive to those who carry the label ‘lead’.
+> 팀장을 맡았다가 다시 순수한 개발자로 돌아가도 좋습니다. 더 나은 개발자로 만들어줄 기회가 될 것입니다. 뻔한 얘기지만, 리더쉽은 ‘팀장’ 딱지를 달아야만 생기는 건 아니니까요.
 
-Teams should create smaller opportunities for development, without taking a lead role and find ways for others to practice developing the other skills in safer environments.
+팀은 자기계발을 위한 작은 기회들을 마련해서, 리더 역할을 맡지 않더라도 더 나은, 안전한 환경에서 다른 능력을 연습하고 배울수 있는 방법을 찾아야만 합니다.
