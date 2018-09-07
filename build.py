@@ -1,6 +1,6 @@
 from collections import defaultdict
 from git import Repo
-from jinja2 import Template, Environment, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader
 from mistune_contrib.meta import parse as md_parse
 import glob
 import mistune
@@ -10,7 +10,7 @@ import requests
 
 
 SINGLE = ['blockquote', 'h1', 'h2', 'h3', 'hr', ]
-SINGLE_RE = '^({})'.format('|'.join(['\<{}>'.format(_) for _ in SINGLE]))
+SINGLE_RE = '^({})'.format('|'.join(['\<{} '.format(_) for _ in SINGLE]))
 
 SPLITTER = ['p', 'ol', 'ul', 'div', ]
 SPLITTER_RE = '^({})'.format('|'.join(['\<{}'.format(_) for _ in SPLITTER]))
@@ -21,6 +21,23 @@ IGNORE_RE = '^({})'.format('|'.join(['\<{} |\</{}>'.format(_, _) for _ in IGNORE
 repo = Repo('.')
 
 env = Environment(loader=FileSystemLoader('.'))
+
+class HLabelMixin(object):
+    """
+    Mixin for adding id for each heading tag
+    """
+    id_count = 0
+
+    def header(self, text, level, raw=None):
+        self.id_count += 1
+        rv = '<h%d id="%d">%s</h%d>\n' % (
+            level, self.id_count, text, level
+        )
+        return rv
+
+class HLabelRenderer(HLabelMixin, mistune.Renderer):
+    pass
+
 
 _github_users = {}
 def get_github_user(email):
@@ -39,10 +56,11 @@ def get_github_user(email):
         if r['total_count'] >= 1:
             _github_users[email] = r['items'][0]
             return r['items'][0]
-    except:
+    except KeyError:
         pass
 
     return {}
+
 
 def get_authors(repo, filepath):
     commits = repo.iter_commits('--all', paths=filepath)
@@ -88,7 +106,7 @@ for key, article in articles.items():
 
     original_metadata, original = md_parse(original)
     article['metadata'] = original_metadata
-    original_html = mistune.markdown(original, escape=False, hard_wrap=True).replace('<br>', '</p><p>')
+    original_html = mistune.Markdown(renderer=HLabelRenderer(escape=False, hard_wrap=True))(original).replace('<br>', '</p><p>')
     print('Building: {}'.format(article['metadata'].get('title', key)))
 
     for locale, filename in article['translations'].items():
@@ -97,7 +115,7 @@ for key, article in articles.items():
 
         translation_metadata, translation = md_parse(translation)
         translation_html_filename = 'translations/' + os.path.splitext(os.path.basename(filename))[0] + '.html'
-        translation_html = mistune.markdown(translation, escape=False, hard_wrap=True).replace('<br>', '</p><p>')
+        translation_html = mistune.Markdown(renderer=HLabelRenderer(escape=False, hard_wrap=True))(translation).replace('<br>', '</p><p>')
 
         # Fix for duplicated footnote (will be fixed in renderer level, future)
         translation_html = translation_html.replace('fn-', 'tfn-').replace('fnref-', 'tfnref-')

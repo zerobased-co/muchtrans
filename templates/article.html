@@ -75,15 +75,10 @@ window.addEventListener('load', function () {
     });
   }
 
-  var id_seq = 1;
-  document.querySelectorAll('h2, h3').forEach(function(node) {
+  document.querySelectorAll('h2[id], h3[id]').forEach(function(node) {
     var anchor = document.createElement("a");
     anchor.className = "pilcrow";
     anchor.text = "\xb6";
-    if (node.id === '') {
-      node.id = id_seq;
-      id_seq += 1;
-    }
     anchor.href = "#" + node.id;
     node.appendChild(anchor);
   });
