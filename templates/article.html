@@ -39,10 +39,15 @@
     <div class="column translation">
       <h3 id="translators">Translators</h3>
       <div class="translators">
-        {% for email, translator in translators %}
+        {% for translator in translators %}
         <span class="translator">
+          {% if translator.github %}
           <img src="{{ translator.github.avatar_url }}">
           <a href="{{ translator.github.html_url }}">{{ translator.name }}</a>
+          {% else %}
+          <img src="/static/images/avatar.png">
+          <a href="mailto:{{ translator.email }}">{{ translator.name }}</a>
+          {% endif %}
         </span>
         {% endfor %}
       </div>
