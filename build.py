@@ -7,6 +7,7 @@ import mistune
 import os
 import re
 import requests
+import time
 
 
 SINGLE = ['blockquote', 'h1', 'h2', 'h3', 'hr', ]
@@ -79,7 +80,12 @@ def get_authors(repo, filepath):
                 'count': 1,
             }
 
-    return sorted(authors.values(), key=lambda x: x['count'])
+    return sorted(authors.values(), key=lambda x: x['count'], reverse=True)
+
+
+def get_latest_updated(repo, filepath):
+    commit = list(repo.iter_commits('--all', paths=filepath, max_count=1))[0]
+    return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(commit.authored_date))
 
 
 # Get articles
@@ -157,7 +163,9 @@ for key, article in articles.items():
         # Render and save translated article
         rendered = article_template.render({
             'rows': rows,
+
             'translators': get_authors(repo, filename),
+            'latest_update': get_latest_updated(repo, filename),
 
             'filename': filename,
             'original': original_metadata,
