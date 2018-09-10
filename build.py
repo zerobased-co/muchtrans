@@ -59,7 +59,7 @@ def get_github_user(email):
     except KeyError:
         pass
 
-    return {}
+    return None
 
 
 def get_authors(repo, filepath):
@@ -69,12 +69,17 @@ def get_authors(repo, filepath):
     for commit in commits:
         email = commit.author.email
 
-        authors[email] = {
-            'name': commit.author.name,
-            'github': get_github_user(email),
-        }
+        if authors.get(email):
+            authors[email]['count'] += 1
+        else:
+            authors[email] = {
+                'name': commit.author.name,
+                'email': email,
+                'github': get_github_user(email),
+                'count': 1,
+            }
 
-    return authors
+    return sorted(authors.values(), key=lambda x: x['count'])
 
 
 # Get articles
@@ -152,7 +157,7 @@ for key, article in articles.items():
         # Render and save translated article
         rendered = article_template.render({
             'rows': rows,
-            'translators': get_authors(repo, filename).items(),
+            'translators': get_authors(repo, filename),
 
             'filename': filename,
             'original': original_metadata,

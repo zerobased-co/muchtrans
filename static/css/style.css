@@ -83,6 +83,7 @@ li {
 p, blockquote, q {
   line-height: 2.0;
   margin: 0 0 1.0em;
+  word-wrap: break-word;
 }
 
 blockquote {
@@ -129,7 +130,7 @@ q {
 
 .translator {
   display: flex;
-  align-items:center;
+  align-items: center;
 }
 
 .translator img {
