@@ -126,6 +126,8 @@ q {
 .translators {
   display: flex;
   margin-bottom: 25px;
+  flex-wrap: wrap;
+  align-content: stretch;
 }
 
 .translator {

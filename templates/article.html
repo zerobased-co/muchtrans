@@ -4,9 +4,13 @@
 <div class="header">
   <p>
     <a href="/">← Back to index</a>
+    /
+    <a href="{{ original.source }}" target="_blank">Visit original ↗</a>
     <span class="pull-right">
       <input type="checkbox" id="hide-original"/><label for="hide-original">Hide original</label>
     </span>
+  </p>
+  <p>
   </p>
 </div>
 {% if not finished %}
@@ -38,6 +42,9 @@
     </div>
     <div class="column translation">
       <h3 id="translators">Translators</h3>
+      <p>
+        <a href="https://github.com/zerobased-co/muchtrans/commits/master/{{ filename }}">Latest update</a> at {{ latest_update }}
+      </p>
       <div class="translators">
         {% for translator in translators %}
         <span class="translator">
@@ -60,7 +67,7 @@
   <div class="footer">
     <p>
       Original contents: 
-        <a href="{{ original.source }}">
+        <a href="{{ original.source }}" target="_blank">
           {% if original.source_title %}{{ original.source_title }}{% else %}{{ original.source }}{% endif %}</a>
     </p>
     <p>Let's translate together on GitHub: <a href="https://github.com/zerobased-co/muchtrans">zerobased-co/muchtrans</a></p>
