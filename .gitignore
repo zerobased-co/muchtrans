@@ -46,3 +46,5 @@ venv
 
 # PyCharm
 .idea/*
+
+.DS_Store
