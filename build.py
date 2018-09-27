@@ -124,6 +124,13 @@ for key, article in articles.items():
     original_html = mistune.Markdown(renderer=HLabelRenderer(escape=False, hard_wrap=True))(original).replace('<br>', '</p><p>')
     print('Building: {}'.format(article['metadata'].get('title', key)))
 
+    # Find dedicated css file
+    css_filename = 'static/css/{}.css'.format(os.path.splitext(os.path.basename(article['original']))[0])
+    if os.path.isfile(css_filename):
+        css = css_filename
+    else:
+        css = None
+
     for locale, filename in article['translations'].items():
         with open(filename) as file:
             translation = file.read()
@@ -166,6 +173,7 @@ for key, article in articles.items():
 
         # Render and save translated article
         rendered = article_template.render({
+            'css': css,
             'rows': rows,
 
             'translators': get_authors(repo, filename),
