@@ -76,6 +76,10 @@ h3, h4, h5, h6 {
 ol, ul {
 }
 
+img {
+  max-width: 100%;
+}
+
 li {
   line-height: 1.8;
 }
