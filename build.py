@@ -84,8 +84,12 @@ def get_authors(repo, filepath):
 
 
 def get_latest_updated(repo, filepath):
-    commit = list(repo.iter_commits('--all', paths=filepath, max_count=1))[0]
-    return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(commit.authored_date))
+    commit = list(repo.iter_commits('--all', paths=filepath, max_count=1))
+
+    if commit:
+        return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(commit[0].authored_date))
+
+    return ''
 
 
 # Get articles
