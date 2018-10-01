@@ -184,6 +184,8 @@ for key, article in articles.items():
             'translation': translation_metadata,
 
             'finished': not untranslated,
+            
+            'utterances': os.environ.get('PRODUCTION', False),
         })
 
         with open(translation_html_filename, "w") as file:
