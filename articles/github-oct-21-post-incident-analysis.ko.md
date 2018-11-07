@@ -65,7 +65,6 @@ source: https://blog.github.com/2018-10-30-oct21-post-incident-analysis/
 
 몇몇 클러스터들은 동부 해안 데이터센터에서의 복원을 완료하고 서부 해안쪽에서의 새로운 데이터를 복제하기 시작했습니다. 대륙간 링크를 통해 쓰기 작업이 시작되느라 페이지 표시가 느려지기 시작했습니다. 대신 이 데이터베이스 클러스터에 속한 페이지를 읽을 때는 새롭게 복제된 곳에서 요청을 받아 최신의 데이터를 표시할 수 있게 되었습니다. 더 큰 데이터베이스 클러스터들은 여전히 복원중이었습니다.
 
-Our teams had identified ways to restore directly from the West Coast to overcome throughput restrictions caused by downloading from off-site storage and were increasingly confident that restoration was imminent, and the time left to establishing a healthy replication topology was dependent on how long it would take replication to catch up. This estimate was linearly interpolated from the replication telemetry we had available and the status page was [updated] to set an expectation of two hours as our estimated time of recovery.
 팀은 서부 해안 쪽에서 직접 복원할 수 있는 방법을 찾아내어, 원격 저장소에서 다운로드 받아 복원하느라 오래 걸리던 문제를 해결하고 곧 복원을 완료할 수 있다고 확신했습니다. 구성을 정상화시키는데는 이제 복제 과정이 얼마나 오래 걸리느냐에 달려있었습니다. 원격에서 복원하던 것에 비해 선형적으로 추정할 수 있게 되었으며, 상태 페이지를 복구까지 약 2시간 정도 남은 것으로 예상한다고 [갱신](https://twitter.com/githubstatus/status/1054264047250608130)할 수 있었습니다.
 
 ### 2018년 10월 22일 07:46 UTC
