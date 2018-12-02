@@ -5,13 +5,13 @@ source: https://blog.github.com/2018-10-30-oct21-post-incident-analysis/
 
 지난 주, 깃헙(GitHub)에 [문제가 발생](https://blog.github.com/2018-10-21-october21-incident-report/)해 24시간 11분 동안 제한된 서비스만 제공할 수 있었습니다. 일부 플랫폼은 영향 밖에 있었지만, 많은 내부 시스템이 영향을 받아 일관되지 않고 부정확한 정보를 표시하는 문제가 있었습니다. 최종적으로 어떠한 사용자 데이터도 잃어버리진 않았습니다. 하지만 데이터베이스 쓰기 작업에 대한 수 초간의 수동 조작은 아직 진행중입니다. 대부분의 문제는 웹훅 이벤트를 제공하지 못하거나 깃헙 페이지 사이트를 만들고 퍼블리싱하지 못하는 것이었습니다.
 
-깃헙 구성원 모두는 이 사건이 일어난 것에 대해 여러분 한 분 한 분에게 진심으로 사과의 말씀을 드립니다. 깃헙에 대한 여러분의 신뢰를 잘 이해하고 고가용성 플랫폼을 구축하는 우리의 탄력적 시스템 구축 기술에 자부심도 가지고 있습니다. 이번 사건으로 여러분에게 실망을 드려 대단히 죄송합니다. 깃헙 플랫폼을 사용할 수 없었던 긴 시간동안 이로 인해 발생한 문제들을 저희가 되돌릴 수는 없겠지만, 문제의 원인과 이번 사고를 통해 저희가 배운 것들, 그리고 이런 일이 다시는 일어나지 않도록 회사 입장에서 취할 수 있는 조치에 대해 설명드리고 싶습니다.
+깃헙 구성원 모두는 이 사건이 일어난 것에 대해 여러분 한 분 한 분에게 진심으로 사과의 말씀을 드립니다. 깃헙에 대한 여러분의 신뢰를 잘 이해하고 고가용성 플랫폼을 구축하는 저희의 탄력적 시스템 구축 기술에 자부심도 가지고 있습니다. 이번 사건으로 여러분에게 실망을 드려 대단히 죄송합니다. 깃헙 플랫폼을 사용할 수 없었던 긴 시간동안 이로 인해 발생한 문제들을 저희가 되돌릴 수는 없겠지만, 문제의 원인과 이번 사고를 통해 저희가 배운 것들, 그리고 이런 일이 다시는 일어나지 않도록 회사 입장에서 취할 수 있는 조치에 대해 설명드리고 싶습니다.
 
 ## 사건 배경
 
 사용자에게 노출되는 깃헙 서비스의 대부분은 저희의 자체 [데이터 센터](https://githubengineering.com/evolution-of-our-data-centers/)에서 동작하고 있습니다. 데이터 센터의 구성은 연산과 저장을 수행하는 여러 지역의 데이터 센터의 앞단에서 견고하고 유연한 엣지 네트워크를 제공하도록 설계되어 있습니다. 이렇게 설계된 물리적이며 논리적인 컴포넌트 위에 여러 층으로 구성된 견고함에도 불구하고, 여전히 일정 시간 동안 사이트가 서로 통신할 수 없을 수도 있습니다.
 
-10월 21일 22:52 UTC에 망가진 100G 광통신 장비를 교체하는 정기 보수 작업으로 인해 미 동부 해안 네트워크 허브와 우리의 주 데이터 센터인 미 동부 데이터 센터간의 연결이 끊겼습니다. 양측의 연결은 43초만에 복구되었습니다만, 이 짧은 끊김으로 인해 24시간 11분간의 서비스 장애가 이어졌습니다.
+10월 21일 22:52 UTC에 망가진 100G 광통신 장비를 교체하는 정기 보수 작업으로 인해 미 동부 해안 네트워크 허브와 주 데이터 센터인 미 동부 데이터 센터간의 연결이 끊겼습니다. 양측의 연결은 43초만에 복구되었습니다만, 이 짧은 끊김으로 인해 24시간 11분간의 서비스 장애가 이어졌습니다.
 
 ![2개의 물리적 데이터 센터와 3개의 팝, 다양한 지역에 위치한 클라우드 사이의 직접 연결을 포함한 깃헙 네트워크의 개괄적 묘사](https://blog.github.com/assets/img/2018-10-25-oct21-post-incident-analysis/network-architecture.png)
 
@@ -31,7 +31,7 @@ source: https://blog.github.com/2018-10-30-oct21-post-incident-analysis/
 
 ### 2018년 10월 21일 22:54 UTC
 
-내부 모니터링 시스템이 우리의 시스템에 여러 문제가 발생했다고 알리기 시작했습니다. 이 때부터 많은 엔지니어들이 몰려 들어오는 알림을 분류하고 응답하기 시작했습니다. 23:02 UTC에 최초 대응팀의 엔지니어들은 데이터베이스 클러스터가 예상하지 않은 상태로 구성되어 있다고 판단했습니다. Orchestrator API의 쿼리 결과는 서부 해안 데이터센터의 서버들만 표시하고 있었습니다.
+내부 모니터링 시스템이 깃헙 시스템에 여러 문제가 발생했다고 알리기 시작했습니다. 이 때부터 많은 엔지니어들이 몰려 들어오는 알림을 분류하고 응답하기 시작했습니다. 23:02 UTC에 최초 대응팀의 엔지니어들은 데이터베이스 클러스터가 예상하지 않은 상태로 구성되어 있다고 판단했습니다. Orchestrator API의 쿼리 결과는 서부 해안 데이터센터의 서버들만 표시하고 있었습니다.
 
 ### 2018년 10월 21일 23:07 UTC
 
@@ -87,7 +87,7 @@ source: https://blog.github.com/2018-10-30-oct21-post-incident-analysis/
 
 ### 2018년 10월 22일 16:45 UTC
 
-이 복구 단계에서는 백로그에 의해 증가하는 부하를 다루는 것과 우리 생태계의 파트너들에 보내는 알림(notification)들, 그리고 서비스를 최대한 빠르게 100% 복원하는 것 사이에서 균형을 잡아야 했습니다. 500만개 이상의 훅 이벤트와 8만 개 이상의 페이지 생성 작업이 기다리고 있었습니다.
+이 복구 단계에서는 백로그에 의해 증가하는 부하를 다루는 것과 깃헙 생태계의 파트너들에 보내는 알림(notification)들, 그리고 서비스를 최대한 빠르게 100% 복원하는 것 사이에서 균형을 잡아야 했습니다. 500만개 이상의 훅 이벤트와 8만 개 이상의 페이지 생성 작업이 기다리고 있었습니다.
 
 이 데이터 처리를 다시 시작하면서 내부적으로 설정된 제한시간(TTL)을 초과하여 취소된 20만개에 가까운 웹훅 요청을 처리하였습니다. 이를 알게되어 처리를 일단 중단하고 임시로 제한시간을 늘려 다시 작업을 진행하도록 했습니다.
 
@@ -101,28 +101,28 @@ source: https://blog.github.com/2018-10-30-oct21-post-incident-analysis/
 
 ### 데이터 부정합 해결
 
-복구 과정에서 주 사이트에서 서부 해안 사이트로 복제되지 않은 쓰기 작업을 담고 있는 MySQL 바이너리 로그(binlog)를 영향을 받은 클러스터로부터 캡춰했습니다. 서부로 복제되지 않은 총 쓰기 작업은 상대적으로 적었습니다. 가장 바쁜 클러스터에서도 영향을 받은 윈도우에 954개의 쓰기 작업이 있을 뿐이었습니다. 저희는 이러한 로그에 대한 분석을 진행하고 있으며, determining which writes can be automatically reconciled and which will require outreach to users. We have multiple teams engaged in this effort, and our analysis has already determined a category of writes that have since been repeated by the user and successfully persisted. As stated in this analysis, our primary goal is preserving the integrity and accuracy of the data you store on GitHub.
+복구 과정에서 주 사이트에서 서부 해안 사이트로 복제되지 않은 쓰기 작업을 담고 있는 MySQL 바이너리 로그(binlog)를 영향을 받은 클러스터로부터 캡춰했습니다. 서부로 복제되지 않은 총 쓰기 작업은 상대적으로 적었습니다. 가장 바쁜 클러스터에서도 영향을 받은 윈도우에 954개의 쓰기 작업이 있을 뿐이었습니다. 저희는 이러한 로그에 대한 분석을 진행하고 있으며, 자동적으로 조정될 쓰기 작업과 그렇지 않은 사용자의 개입이 필요한 것들을 분류하고 있습니다. 이 작업을 위해 여러 팀이 노력하고 있으며, 사용자가 반복하여 수행해 성공적으로 쓰여진 작업에 대한 분석은 이미 완료되었습니다. 이 글에서 앞서 언급했던 대로 저희의 최우선 목표는 사용자의 데이터 무결성과 정합성을 유지하는 것입니다.
 
 ### 커뮤니케이션
 
-In our desire to communicate meaningful information to you during the incident, we made several public estimates on time to repair based on the rate of processing of the backlog of data. In retrospect, our estimates did not factor in all variables. We are sorry for the confusion this caused and will strive to provide more accurate information in the future.
+사건이 진행되는 동안에 저희는 의미있는 정보를 전달하고자, 데이터 백로그 처리율에 근거하여 복원에 필요한 추정 시간을 여러 번 발표했었습니다. 돌이켜보면, 저희의 예상은 모든 변수를 고려하지 못했습니다. 이로 인해 혼란을 야기했던 점에 대해 죄송스러운 마음을 전하며, 앞으로는 더 정확한 정보를 제공하기 위해 노력하겠습니다.
 
 ### 기술적 개선안
 
-There are a number of technical initiatives that have been identified during this analysis. As we continue to work through an extensive post-incident analysis process internally, we expect to identify even more work that needs to happen.
+분석을 진행하며 확인된 여러 기술적 개선안들이 있습니다. 더 넓은 사후 분석 작업을 통해 앞으로 일어날 수 있는 더 많은 일을 확인할 수 있을 것으로 기대합니다.
 
-  1. Adjust the configuration of Orchestrator to prevent the promotion of database primaries across regional boundaries. Orchestrator’s actions behaved as configured, despite our application tier being unable to support this topology change. Leader-election within a region is generally safe, but the sudden introduction of cross-country latency was a major contributing factor during this incident. This was emergent behavior of the system given that we hadn’t previously seen an internal network partition of this magnitude.
+  1. Orchestrator의 설정을 조정하여 지역 경계를 넘는 주 데이터베이스 승격 작업을 방지할 예정니다. Orchestrator는 애플리케이션 쪽에서 변경된 구성을 받아들일 수 없는 상황임에도 불구하고 설정된 대로 동작했습니다. 지역 내에서의 승격 작업은 일반적으로 안전하지만, 대륙간 지연 시간이 갑자기 발생한 것이 이번 사고의 주요 원인이 되었습니다. 내부 네트워크가 단절되는 수준에서는 발견하지 못했던 시스템의 돌발 상황이었습니다.
 
-  2. We have accelerated our migration to a new status reporting mechanism that will provide a richer forum for us to talk about active incidents in crisper and clearer language. While many portions of GitHub were available throughout the incident, we were only able to set our status to green, yellow, and red. We recognize that this doesn’t give you an accurate picture of what is working and what is not, and in the future will be displaying the different components of the platform so you know the status of each service.
+  2. 새로운 상태 보고 체계로의 전환을 더 가속화 하여 의견을 나눌 수 있는 소통 창구의 제공과 현재 상황에 대한 더 명확한 전달이 가능하도록 할 예정입니다. 사고가 발생한 상황에서도 깃헙의 대부분이 가용했음에도 불구하고, 상태를 초록, 노랑 그리고 빨강으로 표현할 수 밖에 없었습니다. 이것으로는 어떤 것들이 동작하는지에 대한 정확한 상황을 전달할 수 없음을 깨닫고, 앞으로는 플랫폼의 서로 다른 부분에 대해 각각의 상태를 표시할 수 있도록 하겠습니다.
 
-  3. In the weeks prior to this incident, we had started a company-wide engineering initiative to support serving GitHub traffic from multiple data centers in an active/active/active design. This project has the goal of supporting N+1 redundancy at the facility level. The goal of that work is to tolerate the full failure of a single data center failure without user impact. This is a major effort and will take some time, but we believe that multiple well-connected sites in a geography provides a good set of trade-offs. This incident has added urgency to the initiative.
+  3. 이 사건이 발생하기 몇 주 전에, 여러 데이터센터에서 active/active/active 상태로 깃헙 트래픽을 처리할 수 있도록 하는 전사적인 엔지니어링 개선 작업을 시작했습니다. 이 프로젝트의 목표는 저수준에서의 N+1 이중화를 지원하는데 있습니다. 하나의 데이터센터가 완전히 동작하지 않는 상황에서도 사용자에게 영향을 미치지 않는 수준을 목표로 합니다. 많은 노력과 시간이 소요되겠지만, 지리적으로 잘 연결된 여러 사이트가 구성될 수 있을 것입니다. 이번 사건을 통해 우선순위를 높여 작업하게 되었습니다.
 
-  4. We will take a more proactive stance in testing our assumptions. GitHub is a fast growing company and has built up its fair share of complexity over the last decade. As we continue to grow, it becomes increasingly difficult to capture and transfer the historical context of trade-offs and decisions made to newer generations of Hubbers.
+  4. 보다 적극적으로 상황을 가정하여 테스트할 예정입니다. 깃헙은 지난 10년간 빠르게 성장하고 있으며 그만큼 복잡도도 빠르게 증가하였습니다. 깃헙이 계속 성장함에 따라 새로운 세대의 깃허버(Hubbers)들에게 트레이드 오프와 의사 결정에 대한 역사적인 맥락을 전달하기가 어려워지고 있습니다.
 
 ### 조직적 개선안
 
-This incident has led to a shift in our mindset around site reliability. We have learned that tighter operational controls or improved response times are insufficient safeguards for site reliability within a system of services as complicated as ours. To bolster those efforts, we will also begin a systemic practice of validating failure scenarios before they have a chance to affect you. This work will involve future investment in fault injection and chaos engineering tooling at GitHub.
+이 사고를 계기로 사이트 가용성에 대한 사고 방식 자체가 달라졌습니다. 깃헙과 같이 복잡한 서비스 시스템에서는 엄격한 운영 제어나 개선된 응답 시간만으로는 가용성을 유지하기에 충분치 않음을 알게 되었습니다. 이러한 노력에 더해, 사용자에게 문제가 될만한 장애 시나리오를 검증하는 체계적인 연습을 시작할 예정입니다. 이 작업에는 깃헙의 카오스 엔지니어링 툴링과 결함 주입(fault injection)에 대한 투자가 포함됩니다.
 
 ## 결론
 
-We know how much you rely on GitHub for your projects and businesses to succeed. No one is more passionate about the availability of our services and the correctness of your data. We will continue to analyze this event for opportunities to serve you better and earn the trust you place in us.
+여러분의 프로젝트와 사업의 성공에 깃헙이 얼마나 큰 책임을 지고 있는지 잘 알고 있습니다. 그 누구도 저희 만큼 서비스의 가용성과 데이터의 정합성에 대해 열정을 가지고 있지 않습니다. 더 나은 서비스와 신뢰를 얻기 위해 이번 사건에 대한 분석을 계속해나갈 예정입니다.
