@@ -1,0 +1,7 @@
+blockquote {
+  border-left: 2px solid black;
+  font-size: 1em;
+  font-style: normal;
+  padding-left: 1em;
+  text-align: left;
+}
