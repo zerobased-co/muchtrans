@@ -13,7 +13,7 @@ import time
 SINGLE = ['blockquote', 'h1', 'h2', 'h3', 'hr', ]
 SINGLE_RE = '^({})'.format('|'.join(['\<{} '.format(_) for _ in SINGLE]))
 
-SPLITTER = ['p', 'ol', 'ul', 'div', ]
+SPLITTER = ['p', 'ol', 'ul', 'div', 'img', 'object']
 SPLITTER_RE = '^({})'.format('|'.join(['\<{}'.format(_) for _ in SPLITTER]))
 
 IGNORE = ['div', ]
@@ -165,8 +165,8 @@ for key, article in articles.items():
                     if sbuf:
                         rows.append((sbuf, dbuf))
                         sbuf = dbuf = ''
-                sbuf += s
-                dbuf += d
+                sbuf += s + '\n'
+                dbuf += d + '\n'
 
         if sbuf:
             rows.append((sbuf, dbuf))

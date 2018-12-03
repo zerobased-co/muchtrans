@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Notes on structured concurrency, or: Go statement considered harmful</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:image" content="/static/images/muchtrans.png"/>
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" sizes="32x32" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125422075-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-125422075-1');
+</script>
+  
+  <link rel="stylesheet" type="text/css" href="/static/css/notes-on-structured-concurrency-or-go-statement-considered-harmful.css">
+  
+</head>
+<body>
+  
+<div class="header">
+  <p>
+    <a href="/">← Back to index</a>
+    /
+    <a href="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/" target="_blank">Visit original ↗</a>
+    <span class="pull-right">
+      <input type="checkbox" id="hide-original"/><label for="hide-original">Hide original</label>
+    </span>
+  </p>
+  <p>
+  </p>
+</div>
+
+<div class="notification">
+  <p>
+    This document needs to be translated. Let's do it together on 
+    <a href="https://github.com/zerobased-co/muchtrans/blob/master/articles/notes-on-structured-concurrency-or-go-statement-considered-harmful.ko.md">GitHub</a>.
+  </p>
+</div>
+
+
+  
+<article>
+  
+  <div class="row">
+    <div class="column original">
+      <h1 id="1">Notes on structured concurrency, or: Go statement considered harmful</h1>
+    </div>
+    <div class="column translation">
+      <h1 id="1">구조적 동시성에 대한 소고, 또는 Go 구문의 해로움</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Every concurrency API needs a way to run code concurrently. Here's some examples of what that looks like using different APIs:</p>
+
+    </div>
+    <div class="column translation">
+      <p>모든 동시성 API는 코드를 동시에 실행할 수 있는 방법을 필요로 하죠. 서로 다른 API 들이 어떻게 생겼는지 한 번 볼까요.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <pre><code>go myfunc();                                // Golang
+pthread_create(&amp;thread_id, NULL, &amp;myfunc);  /* C with POSIX threads */
+spawn(modulename, myfuncname, [])           % Erlang
+threading.Thread(target=myfunc).start()     # Python with threads
+asyncio.create_task(myfunc())               # Python with asyncio
+</code></pre>
+
+    </div>
+    <div class="column translation">
+      <pre><code>go myfunc();                                // Golang
+pthread_create(&amp;thread_id, NULL, &amp;myfunc);  /* C with POSIX threads */
+spawn(modulename, myfuncname, [])           % Erlang
+threading.Thread(target=myfunc).start()     # Python with threads
+asyncio.create_task(myfunc())               # Python with asyncio
+</code></pre>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>There are lots of variations in the notation and terminology, but the semantics are the same: these all arrange for <code>myfunc</code> to start running concurrently to the rest of the program, and then return immediately so that the parent can do other things.</p>
+
+    </div>
+    <div class="column translation">
+      <p>다양한 표기법와 서로 다른 용어가 있겠지만, 문법적으로는 모두 같습니다. 모두 <code>myfunc</code>를 프로그램의 나머지 부분과 동시에 실행하려는 것이며, 즉시 돌아와 부모가 나머지 부분을 실행할 수 있도록 하는 것이죠.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Another option is to use callbacks:</p>
+
+    </div>
+    <div class="column translation">
+      <p>다른 방법으로는 콜백을 사용하는 것도 있겠습니다.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <pre><code>QObject::connect(&amp;emitter, SIGNAL(event()),        // C++ with Qt
+                 &amp;receiver, SLOT(myfunc()))
+g_signal_connect(emitter, "event", myfunc, NULL)   /* C with GObject */
+document.getElementById("myid").onclick = myfunc;  // Javascript
+promise.then(myfunc, errorhandler)                 // Javascript with Promises
+deferred.addCallback(myfunc)                       # Python with Twisted
+future.add_done_callback(myfunc)                   # Python with asyncio
+</code></pre>
+
+    </div>
+    <div class="column translation">
+      <pre><code>QObject::connect(&amp;emitter, SIGNAL(event()),        // C++ with Qt
+                 &amp;receiver, SLOT(myfunc()))
+g_signal_connect(emitter, "event", myfunc, NULL)   /* C with GObject */
+document.getElementById("myid").onclick = myfunc;  // Javascript
+promise.then(myfunc, errorhandler)                 // Javascript with Promises
+deferred.addCallback(myfunc)                       # Python with Twisted
+future.add_done_callback(myfunc)                   # Python with asyncio
+</code></pre>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Again, the notation varies, but these all accomplish the same thing: they arrange that from now on, if and when a certain event occurs, then <code>myfunc</code> will run. Then once they've set that up, they immediately return so the caller can do other things. (Sometimes callbacks get dressed up with fancy helpers like <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all">promise</a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race">combinators</a>, or <a href="https://twistedmatrix.com/documents/current/core/howto/servers.html">Twisted-style protocols/transports</a>, but the core idea is the same.)</p>
+
+    </div>
+    <div class="column translation">
+      <p>다시 한 번, 표현만 다를 뿐 같은 일을 수행합니다. 지금부터 어떤 이벤트가 발생하면 <code>myfunc</code>를 실행하라는 것입니다. 한 번 설정되고 나면 즉시 되돌아와 부른 쪽에서 다른 일을 할 수 있게 되죠. (콜백이 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all">promise</a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race">combinators</a>, 또는 <a href="https://twistedmatrix.com/documents/current/core/howto/servers.html">Twisted-style protocols/transports</a>와 같이 그럴싸해 보이는 형태로도 제공됩니다만, 결국 근간은 같습니다.)</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>And... that's it. Take any real-world, general-purpose concurrency API, and you'll probably find that it falls into one or the other of those buckets (or sometimes both, like asyncio).</p>
+
+    </div>
+    <div class="column translation">
+      <p>그리고... 그렇죠. 실제로 사용되는 일반적인 동시성 API를 생각해보더라도 아마 둘중 한 쪽에 속할 겁니다 (가끔 asyncio와 같이 양쪽에 속하는 경우도 있죠).</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>But my new library <a href="https://trio.readthedocs.io">Trio</a> is weird. It doesn't use either approach. Instead, if we want to run <code>myfunc</code> and <code>anotherfunc</code> concurrently, we write something like:</p>
+
+    </div>
+    <div class="column translation">
+      <p>하지만 제가 만든 새 라이브러리인 <a href="https://trio.readthedocs.io">Trio</a>는 좀 다릅니다. 어느 쪽에도 해당되지 않죠. 대신, <code>myfunc</code>와 <code>anotherfunc</code>를 동시에 실행하고 싶다면, 아래와 같이 하면 됩니다.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <pre><code>async with trio.open_nursery() as nursery:
+    nursery.start_soon(myfunc)
+    nursery.start_soon(anotherfunc)
+</code></pre>
+
+    </div>
+    <div class="column translation">
+      <pre><code>async with trio.open_nursery() as nursery:
+    nursery.start_soon(myfunc)
+    nursery.start_soon(anotherfunc)
+</code></pre>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>When people first encounter this "nursery" construct, they tend to find it confusing. Why is there an indented block? What's this <code>nursery</code> object, and why do I need one before I can spawn a task? Then they realize that it prevents them from using patterns they've gotten used to in other frameworks, and they get really annoyed. It feels quirky and idiosyncratic and too high-level to be a basic primitive. These are understandable reactions! But bear with me.</p>
+
+    </div>
+    <div class="column translation">
+      <p>"nursery" 구조를 처음 본 사람이라면 이게 뭔가 싶을껍니다. 왠 들여쓰기가 있나? <code>nursery</code> 객체는 또 뭐고, 태스크를 실행하기 위해 왜 이런걸하나? 싶으실 겁니다. 그리고 나서는 다른 프레임워크에서 익숙하게 썼던 패턴을 사용하지 못해 짜증이 나겠죠. 기본 요소라기엔 기이하고 특이하며 너무 상위 수준(high-level)처럼 느껴질 겁니다. 뭐 예상되는 반응입니다! 하지만 좀 참아보세요.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p><strong>In this post, I want to convince you that nurseries aren't quirky or idiosyncratic at all, but rather a new control flow primitive that's just as fundamental as for loops or function calls. And furthermore, the other approaches we saw above – thread spawning and callback registration – should be removed entirely and replaced with nurseries.</strong></p>
+
+    </div>
+    <div class="column translation">
+      <p><strong>이 포스트를 통해, 저는 nurseries가 기이하지도 이상하지도 않으며, 반복문이나 함수 호출과 같은 근본적인 새로운 흐름 제어 방식임을 알리고자 합니다. 그리고, 위에서 봤던 기존의 방법 – 쓰레드 복제나 콜백 등록 – 들은 nurseries로 완전히 대체되어야 한다고 봅니다.</strong></p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Sound unlikely? Something similar has actually happened before: the <code>goto</code> statement was once the king of control flow. Now it's a <a href="https://xkcd.com/292/">punchline</a>. A few languages still have something they call <code>goto</code>, but it's different and far weaker than the original <code>goto</code>. And most languages don't even have that. What happened? This was so long ago that most people aren't familiar with the story anymore, but it turns out to be surprisingly relevant. So we'll start by reminding ourselves what a <code>goto</code> was, exactly, and then see what it can teach us about concurrency APIs.</p>
+
+    </div>
+    <div class="column translation">
+      <p>이상하게 들리나요? 비슷한 일이 예전에도 있었습니다: 바로 <code>goto</code>가 흐름 제어의 시작과 끝이던 시절이 있었지만, 이젠 <a href="https://xkcd.com/292/">다 흘러간 얘기</a>가 된 것 처럼요. 몇몇 언어들이 아직 <code>goto</code>라 불리는 것을 가지고 있지만 예전에 <code>goto</code>라 불리던 것과 비교하면 다르고 기능이 제한되어 있습니다. 게다가 대부분의 언어에는 아예 없고요. 무슨 일이 있었냐고요? 옛날 옛적 일이라 아는 사람이 별로 없는 이야기지만 놀랄정도로 유사한 이야기입니다. 그럼 이제 <code>goto</code>가 어떤 것이었는지 알아보는 걸로 시작해서 그 이야기가 왜 동시성 API에 대한 얘기로 이어지는지 알아봅시다.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p><strong>Contents:</strong></p>
+
+    </div>
+    <div class="column translation">
+      <p><strong>목차:</strong></p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <ul>
+<li>What is a <code>goto</code> statement anyway?</li>
+<li>What is a <code>go</code> statement anyway?</li>
+<li>What happened to <code>goto</code>?<ul>
+<li><code>goto</code>: the destroyer of abstraction</li>
+<li>A surprise benefit: removing <code>goto</code> statements enables new features</li>
+<li><code>goto</code> statements: not even once</li>
+</ul>
+</li>
+<li><code>go</code> statement considered harmful<ul>
+<li><code>go</code> statements: not even once</li>
+</ul>
+</li>
+<li>Nurseries: a structured replacement for <code>go</code> statements<ul>
+<li>Nurseries preserve the function abstraction.</li>
+<li>Nurseries support dynamic task spawning.</li>
+<li>There is an escape.</li>
+<li>You can define new types that quack like a nursery.</li>
+<li>No, really, nurseries <em>always</em> wait for the tasks inside to exit.</li>
+<li>Automatic resource cleanup works.</li>
+<li>Automated error propagation works.</li>
+<li>A surprise benefit: removing <code>go</code> statements enables new features</li>
+</ul>
+</li>
+<li>Nurseries in practice</li>
+<li>Conclusion</li>
+<li>Acknowledgments</li>
+<li>Footnotes</li>
+</ul>
+
+    </div>
+    <div class="column translation">
+      <ul>
+<li>What is a <code>goto</code> statement anyway?</li>
+<li>What is a <code>go</code> statement anyway?</li>
+<li>What happened to <code>goto</code>?<ul>
+<li><code>goto</code>: the destroyer of abstraction</li>
+<li>A surprise benefit: removing <code>goto</code> statements enables new features</li>
+<li><code>goto</code> statements: not even once</li>
+</ul>
+</li>
+<li><code>go</code> statement considered harmful<ul>
+<li><code>go</code> statements: not even once</li>
+</ul>
+</li>
+<li>Nurseries: a structured replacement for <code>go</code> statements<ul>
+<li>Nurseries preserve the function abstraction.</li>
+<li>Nurseries support dynamic task spawning.</li>
+<li>There is an escape.</li>
+<li>You can define new types that quack like a nursery.</li>
+<li>No, really, nurseries <em>always</em> wait for the tasks inside to exit.</li>
+<li>Automatic resource cleanup works.</li>
+<li>Automated error propagation works.</li>
+<li>A surprise benefit: removing <code>go</code> statements enables new features</li>
+</ul>
+</li>
+<li>Nurseries in practice</li>
+<li>Conclusion</li>
+<li>Acknowledgments</li>
+<li>Footnotes</li>
+</ul>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h2 id="2">What is a <code>goto</code> statement anyway?</h2>
+    </div>
+    <div class="column translation">
+      <h2 id="2">도대체 <code>goto</code> 구문이 뭐길래?</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Let's review some history: Early computers were programmed using <a href="https://en.wikipedia.org/wiki/Assembly_language">assembly language</a>, or other even more primitive mechanisms. This kinda sucked. So in the 1950s, people like <a href="https://en.wikipedia.org/wiki/John_Backus">John Backus</a> at IBM and <a href="https://en.wikipedia.org/wiki/Grace_Hopper">Grace Hopper</a> at Remington Rand started to develop languages like <a href="https://en.wikipedia.org/wiki/Fortran">FORTRAN</a> and <a href="https://en.wikipedia.org/wiki/FLOW-MATIC">FLOW-MATIC</a> (better known for its direct successor <a href="https://en.wikipedia.org/wiki/COBOL">COBOL</a>).</p>
+
+    </div>
+    <div class="column translation">
+      <p>자, 역사를 살펴봅시다. 초기의 컴퓨터는 <a href="https://en.wikipedia.org/wiki/Assembly_language">어셈블리 언어</a>나, 그보다 더 기초적인 수단으로 동작했습니다. 아주 거지같았죠. 1950년대가 되서야 IBM의 <a href="https://en.wikipedia.org/wiki/John_Backus">존 배커스</a> 나 Remington Rand의 <a href="https://en.wikipedia.org/wiki/Grace_Hopper">그레이스 호퍼</a> 같은 사람들이 <a href="https://en.wikipedia.org/wiki/Fortran">FORTRAN</a>과 <a href="https://en.wikipedia.org/wiki/FLOW-MATIC">FLOW-MATIC</a> (그 후속작인 <a href="https://en.wikipedia.org/wiki/COBOL">COBOL</a>이 유명하죠)같은 언어를 개발하기 시작했습니다.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>FLOW-MATIC was very ambitious for its time. You can think of it as Python's great-great-great-...-grandparent: the first language that was designed for humans first, and computers second. Here's some FLOW-MATIC code to give you a taste of what it looked like:</p>
+
+    </div>
+    <div class="column translation">
+      <p>이 시기의 FLOW-MATIC은 상당히 비범했습니다. 컴퓨터보다는 사람을 중시한 첫번째 프로그래밍 언어로 파이썬의 할머니의 할아버지의 할머니 정도로 여겨도 됩니다. FLOW-MATIC 코드 맛좀 볼까요.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <object data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/flow-matic-1.svg" style="width: 440px;" type="image/svg+xml"> </object><p>You'll notice that unlike modern languages, there's no <code>if</code> blocks, loop blocks, or function calls here – in fact there's no block delimiters or indentation at all. It's just a flat list of statements. That's not because this program happens to be too short to use fancier control syntax – it's because block syntax wasn't invented yet!</p>
+
+    </div>
+    <div class="column translation">
+      <object data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/flow-matic-1.svg" style="width: 440px;" type="image/svg+xml"> </object><p>현대적인 언어와는 다르게 <code>if</code>도 없고 반복문이나 함수 호출도 없군요. 알고 보면 블록 구분자와 들여쓰기조차 없습니다. 연속된 구문의 목록일 뿐입니다. 이 프로그램이 단지 짧거나 그럴싸한 제어 문법이 없어서가 아니라, 이 시절엔 아예 블록이라는게 발명되지도 않았기 때문이죠!</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <object data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/sequential-and-go-to-schematic.svg" style="width: 400px;" type="image/svg+xml"> Sequential flow represented as a vertical arrow pointing down, and goto flow represented as an arrow that starts pointing down and then leaps off to the side.</object><p>Instead, FLOW-MATIC had two options for flow control. Normally, it was sequential, just like you'd expect: start at the top and move downwards, one statement at a time. But if you execute a special statement like <code>JUMP TO</code>, then it could directly transfer control somewhere else. For example, statement (13) jumps back to statement (2):</p>
+
+    </div>
+    <div class="column translation">
+      <object data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/sequential-and-go-to-schematic.svg" style="width: 400px;" type="image/svg+xml"> Sequential flow represented as a vertical arrow pointing down, and goto flow represented as an arrow that starts pointing down and then leaps off to the side.</object><p>대신 FLOW-MATIC에는 두 가지 제어 방식이 있습니다. 보통은 예상한 대로 위에서 아래로 한 구문씩 순차적으로 실행됩니다. 하지만 <code>JUMP TO</code>같은 특별한 구문을 만나면 다른 곳으로 옮겨탑니다. 예를 들어, 구문(13)은 구문(2)로 점프합니다.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <object data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/flow-matic-2.svg" style="width: 440px;" type="image/svg+xml"> </object><p>Just like for our concurrency primitives at the beginning, there was some disagreement about what to call this "do a one-way jump" operation. Here it's <code>JUMP TO</code>, but the name that stuck was <code>goto</code> (like "go to", get it?), so that's what I'll use here.</p>
+
+    </div>
+    <div class="column translation">
+      <object data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/flow-matic-2.svg" style="width: 440px;" type="image/svg+xml"> </object><p>제가 만든 동시성 기초 요소(역주: nursery)와 마찬가지로, 이 "단방향 점프"를 뭘로 불러야 하는지 논란이 있었습니다. 여기서는 <code>JUMP TO</code>라고 했지만, 그 이름은 <code>goto</code>로 굳어지게 됩니다. ("go to" 같은거죠) 여기서는 이렇게 부르겠습니다.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Here's the complete set of <code>goto</code> jumps in this little program:</p>
+
+    </div>
+    <div class="column translation">
+      <p>자, 이제 이 작은 프로그램의 완전한 <code>goto</code> 점프 구성을 봅시다.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <object data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/flow-matic-4.svg" style="width: 440px;" type="image/svg+xml"> </object><p>If you think this looks confusing, you're not alone! This style of jump-based programming is something that FLOW-MATIC inherited pretty much directly from assembly language. It's powerful, and a good fit to how computer hardware actually works, but it's super confusing to work with directly. That tangle of arrows is why the term "spaghetti code" was invented. Clearly, we needed something better.</p>
+
+    </div>
+    <div class="column translation">
+      <object data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/flow-matic-4.svg" style="width: 440px;" type="image/svg+xml"> </object><p>여러분만 이게 혼돈의 카오스로 보이는건 아닙니다. 이런 식의 점프 기반 프로그래밍은 FLOW-MATIC이 어셈블리 언어로부터 직접적인 영향을 받은 것입니다. 강력하며, 컴퓨터 하드웨어가 동작하는 방식에 딱 맞지만, 직접적으로 사용하기에는 혼란스럽죠. 이 화살표 더미로부터 "스파게티 코드"라는 명칭도 나왔습니다. 더 나은게 반드시 필요합니다.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>But... what is it about <code>goto</code> that causes all these problems? Why are some control structures OK, and some not? How do we pick the good ones? At the time, this was really unclear, and it's hard to fix a problem if you don't understand it.</p>
+
+    </div>
+    <div class="column translation">
+      <p>흠... 이 모든 문제를 일으키는 <code>goto</code>란 무엇일까요? 왜 어떤 제어 구문은 괜찮고 어떤건 안될까요? 어떻게 좋은걸 고르죠? 당시에는 이게 명확하지 않기도 해서, 이해하지 못한다면 문제 해결이 정말 어려울 겁니다.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h2 id="3">What is a <code>go</code> statement anyway?</h2>
+    </div>
+    <div class="column translation">
+      <h2 id="3"><code>go</code> 구문은?</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>But let's hit pause on the history for a moment – everyone knows <code>goto</code> was bad. What does this have to do with concurrency? Well, consider Golang's famous <code>go</code> statement, used to spawn a new "goroutine" (lightweight thread):</p>
+
+    </div>
+    <div class="column translation">
+      <p>하지만 잠깐, 모두가 <code>goto</code>가 나쁘다고 외치는 역사의 한 순간에 멈춰볼까요? 이 얘기가 동시성과 관련이 있냐고요? 뭐, Golang의 유명한 <code>go</code> 구문을 생각해봅시다. 새로운 "goroutine"(경량 쓰레드)을 만들어 보죠.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <pre><code>// Golang
+go myfunc();
+</code></pre>
+
+    </div>
+    <div class="column translation">
+      <pre><code>// Golang
+go myfunc();
+</code></pre>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Can we draw a diagram of its control flow? Well, it's a little different from either of the ones we saw above, because control actually splits. We might draw it like:</p>
+
+    </div>
+    <div class="column translation">
+      <p>이 흐름을 다이어그램으로 그려볼까요? 음, 위에서 봤던 것과 좀 다릅니다. 흐름이 갈라지니까요. 그림으로 그려보면요,</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <object class="align-center" data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/go-schematic-unlabeled.svg" style="width: 395px;" type="image/svg+xml"> "Go" flow represented as two arrows: a green arrow pointing down, and a lavender arrow that starts pointing down and then leaps off to the side.</object><p>Here the colors are intended to indicate that <em>both</em> paths are taken. From the perspective of the parent goroutine (green line), control flows sequentially: it comes in the top, and then immediately comes out the bottom. Meanwhile, from the perspective of the child (lavender line), control comes in the top, and then jumps over to the body of <code>myfunc</code>. Unlike a regular function call, this jump is one-way: when running <code>myfunc</code> we switch to a whole new stack, and the runtime immediately forgets where we came from.</p>
+
+    </div>
+    <div class="column translation">
+      <object class="align-center" data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/go-schematic-unlabeled.svg" style="width: 395px;" type="image/svg+xml"> "Go" flow represented as two arrows: a green arrow pointing down, and a lavender arrow that starts pointing down and then leaps off to the side.</object><p>일부러 <em>양쪽</em> 선의 색상을 다르게 했습니다. 순차적으로 실행될 부모 goroutine(초록선)은 위에서 시작해서 즉시 아래로 진행합니다. 그 동안 자식(라벤더색)은 위에서 시작해서 <code>myfunc</code> 본체로 점프합니다. 일반적인 함수 호출과 다르게, 이 점프는 단방향입니다. <code>myfunc</code>의 실행은 완전히 새로운 스택에서 이뤄지고, 런타임은 이 실행이 어디에서 시작되었는지도 모릅니다.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>But this doesn't just apply to Golang. This is the flow control diagram for <em>all</em> of the primitives we listed at the beginning of this post:</p>
+
+    </div>
+    <div class="column translation">
+      <p>이건 Golang에만 해당되는 것은 아닙니다. 이 흐름은 글의 시작에 열거했던 <em>모든</em> 기초 요소에 적용됩니다.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <ul>
+<li>Threading libraries usually provide some sort of handle object that lets you <code>join</code> the thread later – but this is an independent operation that the language doesn't know anything about. The actual thread spawning primitive has the control flow shown above.</li>
+<li>Registering a callback is semantically equivalent to starting a background thread that (a) blocks until some event occurs, and then (b) runs the callback. (Though obviously the implementation is different.) So in terms of high-level control flow, registering a callback is essentially a <code>go</code> statement.</li>
+<li>Futures and promises are the same too: when you call a function and it returns a promise, that means it's scheduled the work to happen in the background, and then given you a handle object to join the work later (if you want). In terms of control flow semantics, this is just like spawning a thread. Then you register callbacks on the promise, so see the previous bullet point.</li>
+</ul>
+
+    </div>
+    <div class="column translation">
+      <ul>
+<li>쓰레딩 라이브러리는 일반적으로 나중에 쓰레드를 <code>join</code> 할 수 있는 객체를 제공합니다. 하지만 언어 차원에서는 알 수 없는 독립적인 작업입니다. 실제 쓰레드 복제 요소는 위와 같은 제어 흐름을 가집니다.</li>
+<li>콜백을 등록하는 것도 문법적으로는 다음과 같은 백그라운드 쓰레드를 시작하는 것과 같습니다. (a) 어떤 일이 발생할 때까지 멈춰있다가, (2) 콜백을 호출합니다. (구현은 완전히 다르게 되겠지만요.) 상위 수준의 흐름 제어로 보자면, 콜백 등록도 <code>go</code> 구문과 동일합니다.</li>
+<li>Future와 promise도 마찬가지입니다. promise를 돌려주는 함수를 호출하는 것은 백그라운드로 일어날 일을 예약한다는 것과 같습니다. 그리고 나중에 join할 객체를 – 원한다면 – 돌려줍니다. 흐름 제어 측면에서 보면, 쓰레드를 생성하는 방식과 같죠. 그리고 promise에 콜백을 등록하는 것이니 두 번 말할 것도 없습니다.</li>
+</ul>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>This same exact pattern shows up in many, many forms: the key similarity is that in all these cases, control flow splits, with one side doing a one-way jump and the other side returning to the caller. Once you know what to look for, you'll start seeing it all over the place – it's a fun game! <sup class="footnote-ref" id="fnref-1"><a href="#fn-1">1</a></sup></p>
+
+    </div>
+    <div class="column translation">
+      <p>이 같은 패턴이 다양한 형태로 나타납니다. 이 다양한 형태의 핵심은 제어 흐름이 갈라지고, 한 쪽은 단방향으로 점프하고 다른 한 쪽은 호출했던 쪽으로 돌아간다는 것입니다. 뭘 봐야할 지 알게 되면, 같은 것을 여러 곳에서 찾아볼 수 있을겁니다 – 정말 즐거운 일이죠! <sup class="footnote-ref" id="tfnref-1"><a href="#tfn-1">1</a></sup></p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Annoyingly, though, there is no standard name for this category of control flow constructs. So just like "<code>goto</code> statement" became the umbrella term for all the different <code>goto</code>-like constructs, I'm going to use "<code>go</code> statement" as a umbrella term for these. Why <code>go</code>? One reason is that Golang gives us a particularly pure example of the form. And the other is... well, you've probably guessed where I'm going with all this. Look at these two diagrams. Notice any similarities?</p>
+
+    </div>
+    <div class="column translation">
+      <p>그런데, 이러한 흐름 제어를 부르는 공통된 이름이 없습니다. "<code>goto</code> 구문"이 다른 <code>goto</code> 같은 구문을 통칭하는 이름이 된 것과 같이, 저도 이런 형태를 모두 "<code>go</code> 구문"이라고 부르려고 합니다. 하필 왜 "go" 라고 묻는다면... Golang이 이러한 형태에 대한 명백한 예제가 있달까요. 어쨌든 이제 제가 이걸 가지고 뭘 하려는지 알 것 같은데요. 이 두 다이어그램을 보세요. 비슷하지 않나요?</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <object class="align-center" data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/go-schematic-and-go-to-schematic.svg" style="width: 400px;" type="image/svg+xml"> Repeat of earlier diagrams: goto flow represented as an arrow that starts pointing down and then leaps off to the side, and "go" flow represented as two arrows: a green arrow pointing down, and a lavender arrow that starts pointing down and then leaps off to the side.</object><p>That's right: <strong>go statements are a form of goto statement.</strong></p>
+
+    </div>
+    <div class="column translation">
+      <object class="align-center" data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/go-schematic-and-go-to-schematic.svg" style="width: 400px;" type="image/svg+xml"> Repeat of earlier diagrams: goto flow represented as an arrow that starts pointing down and then leaps off to the side, and "go" flow represented as two arrows: a green arrow pointing down, and a lavender arrow that starts pointing down and then leaps off to the side.</object><p>맞아요. <strong>go 구문은 goto 구문과 형태가 같습니다.</strong></p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Concurrent programs are notoriously difficult to write and reason about. So are <code>goto</code>-based programs. Is it possible that this might be for some of the same reasons? In modern languages, the problems caused by <code>goto</code> are largely solved. If we study how they fixed <code>goto</code>, will it teach us how to make more usable concurrency APIs? Let's find out.</p>
+
+    </div>
+    <div class="column translation">
+      <p>동시성 프로그래밍은 작성하고 동작을 추론하기가 어려운 것으로 악명이 높죠. 마치 <code>goto</code>-기반 프로그램이 그러했던 것처럼요. 같은 이유로 그렇진 않을까요? 현대 언어들에서는 <code>goto</code> 문제가 상당수 해결되었습니다. 우리가 <code>goto</code>를 해결한 것과 마찬가지로 이를 통해 사용하기 용이한 동시성 API를 만들어낼 수 있을까요? 한 번 알아봅시다.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h2 id="4">What happened to <code>goto</code>?</h2>
+    </div>
+    <div class="column translation">
+      <h2 id="4"><code>goto</code>에 무슨 일이 있었던거야?</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>So what is it about <code>goto</code> that makes it cause so many problems? In the late 1960s, <a href="https://en.wikipedia.org/wiki/Edsger_W._Dijkstra">Edsger W. Dijkstra</a> wrote a pair of now-famous papers that helped make this much clearer: <a href="https://scholar.google.com/scholar?cluster=15335993203437612903&amp;hl=en&amp;as_sdt=0,5">Go to statement considered harmful</a>, and <a href="https://www.cs.utexas.edu/~EWD/ewd02xx/EWD249.PDF">Notes on structured programming</a> (PDF).</p>
+
+    </div>
+    <div class="column translation">
+      <p>당췌 <code>goto</code>가 뭐길래 이렇게 많은 문제를 낳았을까요? 1960년대 후반에 <a href="https://en.wikipedia.org/wiki/Edsger_W._Dijkstra">에츠허르 데이크스트라</a>는 <a href="https://scholar.google.com/scholar?cluster=15335993203437612903&amp;hl=en&amp;as_sdt=0,5">Go to의 해로움</a>와 <a href="https://www.cs.utexas.edu/~EWD/ewd02xx/EWD249.PDF">구조적 프로그래밍에 대한 소고</a> (PDF)와 같은, 이 문제를 명확하게 설명하는 요즘 매우 유명해진 글을 남겼습니다.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h3 id="5"><code>goto</code>: the destroyer of abstraction</h3>
+    </div>
+    <div class="column translation">
+      <h3 id="5"><code>goto</code>: 추상화의 파괴자</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>In these papers, Dijkstra was worried about the problem of how you write non-trivial software and get it correct. I can't give them due justice here; there's all kinds of fascinating insights. For example, you may have heard this quote:</p>
+
+    </div>
+    <div class="column translation">
+      <p>그 문서들에서 데이크스트라는 비순차적 소프트웨어를 작성하고 잘 동작하게 만드는 문제에 대해 우려했습니다. 제가 이러한 통찰에 대해 감히 여기서 평가할 정도가 아니죠. 예를 들자면, 이런 얘기를 들어보셨을 겁니다.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p><img src="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/testing.png" alt="Testing can be used to show the presence of bugs, but never to show their absence!"></p>
+
+    </div>
+    <div class="column translation">
+      <p><img src="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/testing.png" alt="Testing can be used to show the presence of bugs, but never to show their absence!"></p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Yep, that's from <em>Notes on structured programming</em>. But his major concern was <em>abstraction</em>. He wanted to write programs that are too big to hold in your head all at once. To do this, you need to treat parts of the program like a black box – like when you see a Python program do:</p>
+
+    </div>
+    <div class="column translation">
+      <p>이건 <em>구조적 프로그래밍에 대한 소고</em> 에서 발췌한 것입니다. 하지만 그는 주로 <em>추상화</em> 에 대해 신경을 썼습니다. 그는 머릿속에 다 담을 수 없을 정도로 거대한 프로그램을 만들고 싶어했습니다. 이를 위해 프로그램의 각 부분을 블랙박스처럼 다룰 필요가 있죠. 파이썬 프로그램을 예로 들어보겠습니다.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <pre><code> print("Hello world!")
+</code></pre>
+
+    </div>
+    <div class="column translation">
+      <pre><code> print("Hello world!")
+</code></pre>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>then you don't need to know all the details of how <code>print</code> is implemented (string formatting, buffering, cross-platform differences, ...). You just need to know that it will somehow print the text you give it, and then you can spend your energy thinking about whether that's what you want to have happen at this point in your code. Dijkstra wanted languages to support this kind of abstraction.</p>
+
+    </div>
+    <div class="column translation">
+      <p>문자열 포매팅, 버퍼 관리, 크로스플랫폼 이슈 등... <code>print</code>가 어떻게 구현되어 있는지 알 필요는 없습니다. 그저 당신이 입력한 문자열이 표시될 것이라는 것만 알면 코드의 다른 부분을 작성하는데만 전념할 수 있습니다.  데이크스트라는 이러한 추상화가 프로그래밍 언어 수준에서 제공되길 원했습니다.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>By this point, block syntax had been invented, and languages like ALGOL had accumulated ~5 distinct types of control structure: they still had sequential flow and <code>goto</code>:</p>
+
+    </div>
+    <div class="column translation">
+      <p>이것을 위해, 블록 문법이 발명되었고, ALGOL과 같은 언어에는 5가지 정도의 서로 다른 흐름 제어 구문이 있게 되었습니다. 여전히 순차적으로 실행되고 <code>goto</code>도 있었지만요.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Same picture of sequential flow and goto flow as before.</p>
+
+    </div>
+    <div class="column translation">
+      <p>앞서 나왔던 순차 진행과 goto 진행을 봅시다.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <object data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/sequential-and-go-to-schematic.svg" style="width: 400px;" type="image/svg+xml"> Same picture of sequential flow and goto flow as before.</object><p>And had also acquired variants on if/else, loops, and function calls:</p>
+
+    </div>
+    <div class="column translation">
+      <object data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/sequential-and-go-to-schematic.svg" style="width: 400px;" type="image/svg+xml"> Same picture of sequential flow and goto flow as before.</object><p>그리고 비교문, 반복문, 함수 호출 등이 생겨났죠.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <object class="align-center" data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/control-schematics.svg" style="width: 500px;" type="image/svg+xml"> Diagrams with arrows showing the flow control for if statements, loops, and function calls.</object><p>You can implement these higher-level constructs using <code>goto</code>, and early on, that's how people thought of them: as a convenient shorthand. But what Dijkstra pointed out is that if you look at these diagrams, there's a big difference between <code>goto</code> and the rest. For everything except <code>goto</code>, flow control comes in the top → [stuff happens] → flow control comes out the bottom. We might call this the "black box rule": if a control structure has this shape, then in contexts where you don't care about the details of what happens internally, you can ignore the [stuff happens] part, and treat the whole thing as regular sequential flow. And even better, this is also true of any code that's <em>composed</em> out of those pieces. When I look at this code:</p>
+
+    </div>
+    <div class="column translation">
+      <object class="align-center" data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/control-schematics.svg" style="width: 500px;" type="image/svg+xml"> Diagrams with arrows showing the flow control for if statements, loops, and function calls.</object><p>You can implement these higher-level constructs using <code>goto</code>, and early on, that's how people thought of them: as a convenient shorthand. But what Dijkstra pointed out is that if you look at these diagrams, there's a big difference between <code>goto</code> and the rest. For everything except <code>goto</code>, flow control comes in the top → [stuff happens] → flow control comes out the bottom. We might call this the "black box rule": if a control structure has this shape, then in contexts where you don't care about the details of what happens internally, you can ignore the [stuff happens] part, and treat the whole thing as regular sequential flow. And even better, this is also true of any code that's <em>composed</em> out of those pieces. When I look at this code:</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <pre><code> print("Hello world!")
+</code></pre>
+
+    </div>
+    <div class="column translation">
+      <pre><code> print("Hello world!")
+</code></pre>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>I don't have to go read the definition of <code>print</code> and all its transitive dependencies just to figure out how the control flow works. Maybe inside <code>print</code> there's a loop, and inside the loop there's an if/else, and inside the if/else there's another function call... or maybe it's something else. It doesn't really matter: I know control will flow into <code>print</code>, the function will do its thing, and then eventually control will come back to the code I'm reading.</p>
+
+    </div>
+    <div class="column translation">
+      <p>I don't have to go read the definition of <code>print</code> and all its transitive dependencies just to figure out how the control flow works. Maybe inside <code>print</code> there's a loop, and inside the loop there's an if/else, and inside the if/else there's another function call... or maybe it's something else. It doesn't really matter: I know control will flow into <code>print</code>, the function will do its thing, and then eventually control will come back to the code I'm reading.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>It may seem like this is obvious, but if you have a language with <code>goto</code> – a language where functions and everything else are built on top of <code>goto</code>, and <code>goto</code> can jump anywhere, at any time – then these control structures aren't black boxes at all! If you have a function, and inside the function there's a loop, and inside the loop there's an if/else, and inside the if/else there's a <code>goto</code>... then that <code>goto</code> could send the control anywhere it wants. Maybe control will suddenly return from another function entirely, one you haven't even called yet. You don't know!</p>
+
+    </div>
+    <div class="column translation">
+      <p>It may seem like this is obvious, but if you have a language with <code>goto</code> – a language where functions and everything else are built on top of <code>goto</code>, and <code>goto</code> can jump anywhere, at any time – then these control structures aren't black boxes at all! If you have a function, and inside the function there's a loop, and inside the loop there's an if/else, and inside the if/else there's a <code>goto</code>... then that <code>goto</code> could send the control anywhere it wants. Maybe control will suddenly return from another function entirely, one you haven't even called yet. You don't know!</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>And this breaks abstraction: it means that <em>every function call is potentially a</em> <code>goto</code> <em>statement in disguise, and the only way to know is to keep the entire source code of your system in your head at once.</em> As soon as <code>goto</code> is in your language, you stop being able do local reasoning about flow control. That's <em>why</em> <code>goto</code> leads to spaghetti code.</p>
+
+    </div>
+    <div class="column translation">
+      <p>And this breaks abstraction: it means that <em>every function call is potentially a</em> <code>goto</code> <em>statement in disguise, and the only way to know is to keep the entire source code of your system in your head at once.</em> As soon as <code>goto</code> is in your language, you stop being able do local reasoning about flow control. That's <em>why</em> <code>goto</code> leads to spaghetti code.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>And now that Dijkstra understood the problem, he was able to solve it. Here's his revolutionary proposal: we should stop thinking of if/loops/function calls as shorthands for <code>goto</code>, but rather as fundamental primitives in their own rights – and we should remove <code>goto</code> entirely from our languages.</p>
+
+    </div>
+    <div class="column translation">
+      <p>And now that Dijkstra understood the problem, he was able to solve it. Here's his revolutionary proposal: we should stop thinking of if/loops/function calls as shorthands for <code>goto</code>, but rather as fundamental primitives in their own rights – and we should remove <code>goto</code> entirely from our languages.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>From here in 2018, this seems obvious enough. But have you seen how programmers react when you try to take away their toys because they're not smart enough to use them safely? Yeah, some things never change. In 1969, this proposal was <em>incredibly controversial</em>. <a href="https://en.wikipedia.org/wiki/Donald_Knuth">Donald Knuth</a> <a href="https://scholar.google.com/scholar?cluster=17147143327681396418&amp;hl=en&amp;as_sdt=0,5">defended</a> <code>goto</code>. People who had become experts on writing code with <code>goto</code> quite reasonably resented having to basically learn how to program again in order to express their ideas using the newer, more constraining constructs. And of course it required building a whole new set of languages.</p>
+
+    </div>
+    <div class="column translation">
+      <p>From here in 2018, this seems obvious enough. But have you seen how programmers react when you try to take away their toys because they're not smart enough to use them safely? Yeah, some things never change. In 1969, this proposal was <em>incredibly controversial</em>. <a href="https://en.wikipedia.org/wiki/Donald_Knuth">Donald Knuth</a> <a href="https://scholar.google.com/scholar?cluster=17147143327681396418&amp;hl=en&amp;as_sdt=0,5">defended</a> <code>goto</code>. People who had become experts on writing code with <code>goto</code> quite reasonably resented having to basically learn how to program again in order to express their ideas using the newer, more constraining constructs. And of course it required building a whole new set of languages.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p><img src="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/wolf-and-bulldog.jpg" alt="On the left, a photo of a snarling wolf. On the right, a photo of a grumpy bulldog."></p>
+
+    </div>
+    <div class="column translation">
+      <p><img src="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/wolf-and-bulldog.jpg" alt="On the left, a photo of a snarling wolf. On the right, a photo of a grumpy bulldog."></p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Left: A traditional <code>goto</code>. Right: A domesticated <code>goto</code>, as seen in C, C#, Golang, etc. The inability to cross function boundaries means it can still pee on your shoes, but it probably won't rip your face off.</p>
+
+    </div>
+    <div class="column translation">
+      <p>Left: A traditional <code>goto</code>. Right: A domesticated <code>goto</code>, as seen in C, C#, Golang, etc. The inability to cross function boundaries means it can still pee on your shoes, but it probably won't rip your face off.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>In the end, modern languages are a bit less strict about this than Dijkstra's original formulation. They'll let you break out of multiple nested structures at once using constructs like <code>break</code>, <code>continue</code>, or <code>return</code>. But fundamentally, they're all designed around Dijkstra's idea; even these constructs that push the boundaries do so only in strictly limited ways. In particular, functions – which are the fundamental tool for wrapping up control flow inside a black box – are considered inviolate. You can't <code>break</code> out of one function and into another, and a <code>return</code> can take you out of the current function, but no further. Whatever control flow shenanigans a function gets up to internally, other functions don't have to care.</p>
+
+    </div>
+    <div class="column translation">
+      <p>In the end, modern languages are a bit less strict about this than Dijkstra's original formulation. They'll let you break out of multiple nested structures at once using constructs like <code>break</code>, <code>continue</code>, or <code>return</code>. But fundamentally, they're all designed around Dijkstra's idea; even these constructs that push the boundaries do so only in strictly limited ways. In particular, functions – which are the fundamental tool for wrapping up control flow inside a black box – are considered inviolate. You can't <code>break</code> out of one function and into another, and a <code>return</code> can take you out of the current function, but no further. Whatever control flow shenanigans a function gets up to internally, other functions don't have to care.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>This even extends to <code>goto</code> itself. You'll find a few languages that still have something they call <code>goto</code>, like C, C#, Golang, ... but they've added heavy restrictions. At the very least, they won't let you jump out of one function body and into another. Unless you're working in assembly <sup class="footnote-ref" id="fnref-2"><a href="#fn-2">2</a></sup>, the classic, unrestricted <code>goto</code> is gone. Dijkstra won.</p>
+
+    </div>
+    <div class="column translation">
+      <p>This even extends to <code>goto</code> itself. You'll find a few languages that still have something they call <code>goto</code>, like C, C#, Golang, ... but they've added heavy restrictions. At the very least, they won't let you jump out of one function body and into another. Unless you're working in assembly <sup class="footnote-ref" id="tfnref-2"><a href="#tfn-2">2</a></sup>, the classic, unrestricted <code>goto</code> is gone. Dijkstra won.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h3 id="6">A surprise benefit: removing <code>goto</code> statements enables new features</h3>
+    </div>
+    <div class="column translation">
+      <h3 id="6">A surprise benefit: removing <code>goto</code> statements enables new features</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>And once <code>goto</code> disappeared, something interesting happened: language designers were able to start adding features that depend on control flow being structured.</p>
+
+    </div>
+    <div class="column translation">
+      <p>And once <code>goto</code> disappeared, something interesting happened: language designers were able to start adding features that depend on control flow being structured.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>For example, Python has some nice syntax for resource cleanup: the <code>with</code> statement. You can write things like:</p>
+
+    </div>
+    <div class="column translation">
+      <p>For example, Python has some nice syntax for resource cleanup: the <code>with</code> statement. You can write things like:</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <pre><code># Python
+with open("my-file") as file_handle:
+    ...
+</code></pre>
+
+    </div>
+    <div class="column translation">
+      <pre><code># Python
+with open("my-file") as file_handle:
+    ...
+</code></pre>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>and it guarantees that the file will be open during the <code>...</code> code, but then closed immediately afterward. Most modern languages have some equivalent (RAII, <code>using</code>, try-with-resource, <code>defer</code>, ...). And they all assume that control flows in an orderly, structured way. If we used <code>goto</code> to jump into the middle of our <code>with</code> block... what would that even do? Is the file open or not? What if we jumped out again, instead of exiting normally? Would the file get closed? This feature just doesn't work in any coherent way if your language has <code>goto</code> in it.</p>
+
+    </div>
+    <div class="column translation">
+      <p>and it guarantees that the file will be open during the <code>...</code> code, but then closed immediately afterward. Most modern languages have some equivalent (RAII, <code>using</code>, try-with-resource, <code>defer</code>, ...). And they all assume that control flows in an orderly, structured way. If we used <code>goto</code> to jump into the middle of our <code>with</code> block... what would that even do? Is the file open or not? What if we jumped out again, instead of exiting normally? Would the file get closed? This feature just doesn't work in any coherent way if your language has <code>goto</code> in it.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Error handling has a similar problem: when something goes wrong, what should your code do? Often the answer is to pass the buck up the stack to your code's caller, let them figure out how to deal with it. Modern languages have constructs specifically to make this easier, like exceptions, or other forms of <a href="https://doc.rust-lang.org/std/result/index.html#the-question-mark-operator-">automatic error propagation</a>. But your language can only provide this help if it <em>has</em> a stack, and a reliable concept of  "caller". Look again at the control-flow spaghetti in our FLOW-MATIC program and imagine that in the middle of that it tried to raise an exception. Where would it even go?</p>
+
+    </div>
+    <div class="column translation">
+      <p>Error handling has a similar problem: when something goes wrong, what should your code do? Often the answer is to pass the buck up the stack to your code's caller, let them figure out how to deal with it. Modern languages have constructs specifically to make this easier, like exceptions, or other forms of <a href="https://doc.rust-lang.org/std/result/index.html#the-question-mark-operator-">automatic error propagation</a>. But your language can only provide this help if it <em>has</em> a stack, and a reliable concept of  "caller". Look again at the control-flow spaghetti in our FLOW-MATIC program and imagine that in the middle of that it tried to raise an exception. Where would it even go?</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h3 id="7"><code>goto</code> statements: not even once</h3>
+    </div>
+    <div class="column translation">
+      <h3 id="7"><code>goto</code> statements: not even once</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>So <code>goto</code> – the traditional kind that ignores function boundaries – isn't just the regular kind of bad feature, the kind that's hard to use correctly. If it were, it might have survived – lots of bad features have. But it's much worse.</p>
+<blockquote><p>Even if you don't use <code>goto</code> yourself, merely having it as an option in your language makes <em>everything</em> harder to use. Whenever you start using a third-party library, you can't treat it as a black box – you have to go read through it all to find out which functions are regular functions, and which ones are idiosyncratic flow control constructs in disguise. This is a serious obstacle to local reasoning. And you lose powerful language features like reliable resource cleanup and automatic error propagation. Better to remove <code>goto</code> entirely, in favor of control flow constructs that follow the "black box" rule.</p>
+</blockquote>
+
+    </div>
+    <div class="column translation">
+      <p>So <code>goto</code> – the traditional kind that ignores function boundaries – isn't just the regular kind of bad feature, the kind that's hard to use correctly. If it were, it might have survived – lots of bad features have. But it's much worse.</p>
+<blockquote><p>Even if you don't use <code>goto</code> yourself, merely having it as an option in your language makes <em>everything</em> harder to use. Whenever you start using a third-party library, you can't treat it as a black box – you have to go read through it all to find out which functions are regular functions, and which ones are idiosyncratic flow control constructs in disguise. This is a serious obstacle to local reasoning. And you lose powerful language features like reliable resource cleanup and automatic error propagation. Better to remove <code>goto</code> entirely, in favor of control flow constructs that follow the "black box" rule.</p>
+</blockquote>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h2 id="8"><code>go</code> statement considered harmful</h2>
+    </div>
+    <div class="column translation">
+      <h2 id="8"><code>go</code> 구문의 해로움</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>So that's the history of <code>goto</code>. Now, how much of this applies to <code>go</code> statements? Well... basically, all of it! The analogy turns out to be shockingly exact.</p>
+
+    </div>
+    <div class="column translation">
+      <p>So that's the history of <code>goto</code>. Now, how much of this applies to <code>go</code> statements? Well... basically, all of it! The analogy turns out to be shockingly exact.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p><strong>Go statements break abstraction.</strong> Remember how we said that if our language allows <code>goto</code>, then any function might be a <code>goto</code> in disguise? In most concurrency frameworks, <code>go</code> statements cause the exact same problem: whenever you call a function, it might or might not spawn some background task. The function seemed to return, but is it still running in the background? There's no way to know without reading all its source code, transitively. When will it finish? Hard to say. If you have <code>go</code> statements, then functions are no longer black boxes with respect to control flow. In my <a href="https://vorpus.org/blog/some-thoughts-on-asynchronous-api-design-in-a-post-asyncawait-world/">first post on concurrency APIs</a>, I called this "violating causality", and found that it was the root cause of many common, real-world issues in programs using asyncio and Twisted, like problems with backpressure, problems with shutting down properly, and so forth.</p>
+
+    </div>
+    <div class="column translation">
+      <p><strong>Go statements break abstraction.</strong> Remember how we said that if our language allows <code>goto</code>, then any function might be a <code>goto</code> in disguise? In most concurrency frameworks, <code>go</code> statements cause the exact same problem: whenever you call a function, it might or might not spawn some background task. The function seemed to return, but is it still running in the background? There's no way to know without reading all its source code, transitively. When will it finish? Hard to say. If you have <code>go</code> statements, then functions are no longer black boxes with respect to control flow. In my <a href="https://vorpus.org/blog/some-thoughts-on-asynchronous-api-design-in-a-post-asyncawait-world/">first post on concurrency APIs</a>, I called this "violating causality", and found that it was the root cause of many common, real-world issues in programs using asyncio and Twisted, like problems with backpressure, problems with shutting down properly, and so forth.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p><strong>Go statements break automatic resource cleanup.</strong> Let's look again at that <code>with</code> statement example:</p>
+
+    </div>
+    <div class="column translation">
+      <p><strong>Go statements break automatic resource cleanup.</strong> Let's look again at that <code>with</code> statement example:</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <pre><code># Python
+with open("my-file") as file_handle:
+    ...
+</code></pre>
+
+    </div>
+    <div class="column translation">
+      <pre><code># Python
+with open("my-file") as file_handle:
+    ...
+</code></pre>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Before, we said that we were "guaranteed" that the file will be open while the <code>...</code> code is running, and then closed afterwards. But what if the <code>...</code> code spawns a background task? Then our guarantee is lost: the operations that <em>look</em> like they're inside the <code>with</code> block might actually keep running <em>after</em> the <code>with</code> block ends, and then crash because the file gets closed while they're still using it. And again, you can't tell from local inspection; to know if this is happening you have to go read the source code to all the functions called inside the <code>...</code> code.</p>
+
+    </div>
+    <div class="column translation">
+      <p>Before, we said that we were "guaranteed" that the file will be open while the <code>...</code> code is running, and then closed afterwards. But what if the <code>...</code> code spawns a background task? Then our guarantee is lost: the operations that <em>look</em> like they're inside the <code>with</code> block might actually keep running <em>after</em> the <code>with</code> block ends, and then crash because the file gets closed while they're still using it. And again, you can't tell from local inspection; to know if this is happening you have to go read the source code to all the functions called inside the <code>...</code> code.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>If we want this code to work properly, we need to somehow keep track of any background tasks, and manually arrange for the file to be closed only when they're finished. It's doable – unless we're using some library that doesn't provide any way to get notified when the task is finished, which is distressingly common (e.g. because it doesn't expose any task handle that you can join on). But even in the best case, the unstructured control flow means the language can't help us. We're back to implementing resource cleanup by hand, like in the bad old days.</p>
+
+    </div>
+    <div class="column translation">
+      <p>If we want this code to work properly, we need to somehow keep track of any background tasks, and manually arrange for the file to be closed only when they're finished. It's doable – unless we're using some library that doesn't provide any way to get notified when the task is finished, which is distressingly common (e.g. because it doesn't expose any task handle that you can join on). But even in the best case, the unstructured control flow means the language can't help us. We're back to implementing resource cleanup by hand, like in the bad old days.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p><strong>Go statements break error handling.</strong> Like we discussed above, modern languages provide powerful tools like exceptions to help us make sure that errors are detected and propagated to the right place. But these tools depend on having a reliable concept of  "the current code's caller". As soon as you spawn a task or register a callback, that concept is broken. As a result, every mainstream concurrency framework I know of simply gives up. If an error occurs in a background task, and you don't handle it manually, then the runtime just... drops it on the floor and crosses its fingers that it wasn't too important. If you're lucky it might print something on the console. (The only other software I've used that thinks "print something and keep going" is a good error handling strategy is grotty old Fortran libraries, but here we are.) Even Rust – the language voted Most Obsessed With Threading Correctness by its high school class – is guilty of this. If a background thread panics, Rust <a href="https://doc.rust-lang.org/std/thread/">discards the error and hopes for the best</a>.</p>
+
+    </div>
+    <div class="column translation">
+      <p><strong>Go statements break error handling.</strong> Like we discussed above, modern languages provide powerful tools like exceptions to help us make sure that errors are detected and propagated to the right place. But these tools depend on having a reliable concept of  "the current code's caller". As soon as you spawn a task or register a callback, that concept is broken. As a result, every mainstream concurrency framework I know of simply gives up. If an error occurs in a background task, and you don't handle it manually, then the runtime just... drops it on the floor and crosses its fingers that it wasn't too important. If you're lucky it might print something on the console. (The only other software I've used that thinks "print something and keep going" is a good error handling strategy is grotty old Fortran libraries, but here we are.) Even Rust – the language voted Most Obsessed With Threading Correctness by its high school class – is guilty of this. If a background thread panics, Rust <a href="https://doc.rust-lang.org/std/thread/">discards the error and hopes for the best</a>.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Of course you <em>can</em> handle errors properly in these systems, by carefully making sure to join every thread, or by building your own error propagation mechanism like <a href="https://twistedmatrix.com/documents/current/core/howto/defer.html#visual-explanation">errbacks in Twisted</a> or <a href="https://hackernoon.com/promises-and-error-handling-4a11af37cb0e">Promise.catch in Javascript</a>. But now you're writing an ad-hoc, fragile reimplementation of the features your language already has. You've lost useful stuff like "tracebacks" and "debuggers". All it takes is forgetting to call <code>Promise.catch</code> once and suddenly you're dropping serious errors on the floor without even realizing. And even if you do somehow solve all these problems, you'll still end up with two redundant systems for doing the same thing.</p>
+
+    </div>
+    <div class="column translation">
+      <p>Of course you <em>can</em> handle errors properly in these systems, by carefully making sure to join every thread, or by building your own error propagation mechanism like <a href="https://twistedmatrix.com/documents/current/core/howto/defer.html#visual-explanation">errbacks in Twisted</a> or <a href="https://hackernoon.com/promises-and-error-handling-4a11af37cb0e">Promise.catch in Javascript</a>. But now you're writing an ad-hoc, fragile reimplementation of the features your language already has. You've lost useful stuff like "tracebacks" and "debuggers". All it takes is forgetting to call <code>Promise.catch</code> once and suddenly you're dropping serious errors on the floor without even realizing. And even if you do somehow solve all these problems, you'll still end up with two redundant systems for doing the same thing.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h3 id="9"><code>go</code> statements: not even once</h3>
+    </div>
+    <div class="column translation">
+      <h3 id="9"><code>go</code> statements: not even once</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Just like <code>goto</code> was the obvious primitive for the first practical high-level languages, <code>go</code> was the obvious primitive for the first practical concurrency frameworks: it matches how the underlying schedulers actually work, and it's powerful enough to implement any other concurrent flow pattern. But again like <code>goto</code>, it breaks control flow abstractions, so that merely having it as an option in your language makes everything harder to use.</p>
+
+    </div>
+    <div class="column translation">
+      <p>Just like <code>goto</code> was the obvious primitive for the first practical high-level languages, <code>go</code> was the obvious primitive for the first practical concurrency frameworks: it matches how the underlying schedulers actually work, and it's powerful enough to implement any other concurrent flow pattern. But again like <code>goto</code>, it breaks control flow abstractions, so that merely having it as an option in your language makes everything harder to use.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>The good news, though, is that these problems can all be solved: Dijkstra showed us how! We need to:</p>
+
+    </div>
+    <div class="column translation">
+      <p>The good news, though, is that these problems can all be solved: Dijkstra showed us how! We need to:</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <ul>
+<li>Find a replacement for <code>go</code> statements that has similar power, but follows the "black box rule",</li>
+<li>Build that new construct into our concurrency framework as a primitive, and don't include any form of <code>go</code> statement.</li>
+</ul>
+
+    </div>
+    <div class="column translation">
+      <ul>
+<li>Find a replacement for <code>go</code> statements that has similar power, but follows the "black box rule",</li>
+<li>Build that new construct into our concurrency framework as a primitive, and don't include any form of <code>go</code> statement.</li>
+</ul>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>And that's what Trio did.</p>
+
+    </div>
+    <div class="column translation">
+      <p>And that's what Trio did.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h2 id="10">Nurseries: a structured replacement for <code>go</code> statements</h2>
+    </div>
+    <div class="column translation">
+      <h2 id="10">Nurseries: <code>go</code>를 대체하는 구조적 용법</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Here's the core idea: every time our control splits into multiple concurrent paths, we want to make sure that they join up again. So for example, if we want to do three things at the same time, our control flow should look something like this:</p>
+
+    </div>
+    <div class="column translation">
+      <p>Here's the core idea: every time our control splits into multiple concurrent paths, we want to make sure that they join up again. So for example, if we want to do three things at the same time, our control flow should look something like this:</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <object class="align-center" data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/nursery-schematic-unlabeled.svg" style="width: 250px;" type="image/svg+xml"> </object><p>Notice that this has just one arrow going in the top and one coming out the bottom, so it follows Dijkstra's black box rule. Now, how can we turn this sketch into a concrete language construct? There are some existing constructs that meet this constraint, but (a) my proposal is slightly different than all the ones I'm aware of and has advantages over them (especially in the context of wanting to make this a standalone primitive), and (b) the concurrency literature is vast and complicated, and trying to pick apart all the history and tradeoffs would totally derail the argument, so I'm going to defer that to a separate post. Here, I'll just focus on explaining my solution. But please be aware that I'm not claiming to have like, invented the idea of concurrency or something, this draws inspiration from many sources, I'm standing on the shoulders of giants, etc. <sup class="footnote-ref" id="fnref-3"><a href="#fn-3">3</a></sup></p>
+
+    </div>
+    <div class="column translation">
+      <object class="align-center" data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/nursery-schematic-unlabeled.svg" style="width: 250px;" type="image/svg+xml"> </object><p>Notice that this has just one arrow going in the top and one coming out the bottom, so it follows Dijkstra's black box rule. Now, how can we turn this sketch into a concrete language construct? There are some existing constructs that meet this constraint, but (a) my proposal is slightly different than all the ones I'm aware of and has advantages over them (especially in the context of wanting to make this a standalone primitive), and (b) the concurrency literature is vast and complicated, and trying to pick apart all the history and tradeoffs would totally derail the argument, so I'm going to defer that to a separate post. Here, I'll just focus on explaining my solution. But please be aware that I'm not claiming to have like, invented the idea of concurrency or something, this draws inspiration from many sources, I'm standing on the shoulders of giants, etc. <sup class="footnote-ref" id="tfnref-3"><a href="#tfn-3">3</a></sup></p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Anyway, here's how we're going to do it: first, we declare that a parent task cannot start any child tasks unless it first creates a place for the children to live: a <em>nursery</em>. It does this by opening a <em>nursery block</em> ; in Trio, we do this using Python's <code>async with</code> syntax:</p>
+
+    </div>
+    <div class="column translation">
+      <p>Anyway, here's how we're going to do it: first, we declare that a parent task cannot start any child tasks unless it first creates a place for the children to live: a <em>nursery</em>. It does this by opening a <em>nursery block</em> ; in Trio, we do this using Python's <code>async with</code> syntax:</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <object class="align-center" data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/nursery-1-pathified.svg" style="width: 350px;" type="image/svg+xml"> </object><p>Opening a nursery block automatically creates an object representing this nursery, and the <code>as nursery</code> syntax assigns this object to the variable named <code>nursery</code>. Then we can use the nursery object's <code>start_soon</code> method to start concurrent tasks: in this case, one task calling the function <code>myfunc</code>, and another calling the function <code>anotherfunc</code>. Conceptually, these tasks execute <em>inside</em> the nursery block. In fact, it's often convenient to think of the code written inside the nursery block as being an initial task that's automatically started when the block is created.</p>
+
+    </div>
+    <div class="column translation">
+      <object class="align-center" data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/nursery-1-pathified.svg" style="width: 350px;" type="image/svg+xml"> </object><p>Opening a nursery block automatically creates an object representing this nursery, and the <code>as nursery</code> syntax assigns this object to the variable named <code>nursery</code>. Then we can use the nursery object's <code>start_soon</code> method to start concurrent tasks: in this case, one task calling the function <code>myfunc</code>, and another calling the function <code>anotherfunc</code>. Conceptually, these tasks execute <em>inside</em> the nursery block. In fact, it's often convenient to think of the code written inside the nursery block as being an initial task that's automatically started when the block is created.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <object class="align-center" data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/nursery-2-pathified.svg" style="width: 500px;" type="image/svg+xml"></object><p>Crucially, the nursery block doesn't exit until all the tasks inside it have exited – if the parent task reaches the end of the block before all the children are finished, then it pauses there and waits for them. The nursery automatically expands to hold the children.</p>
+
+    </div>
+    <div class="column translation">
+      <object class="align-center" data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/nursery-2-pathified.svg" style="width: 500px;" type="image/svg+xml"></object><p>Crucially, the nursery block doesn't exit until all the tasks inside it have exited – if the parent task reaches the end of the block before all the children are finished, then it pauses there and waits for them. The nursery automatically expands to hold the children.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Here's the control flow: you can see how it matches the basic pattern we showed at the beginning of this section:</p>
+
+    </div>
+    <div class="column translation">
+      <p>Here's the control flow: you can see how it matches the basic pattern we showed at the beginning of this section:</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <object class="align-center" data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/nursery-3-pathified.svg" style="width: 600px;" type="image/svg+xml"> </object><p>This design has a number of consequences, not all of which are obvious. Let's think through some of them.</p>
+
+    </div>
+    <div class="column translation">
+      <object class="align-center" data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/nursery-3-pathified.svg" style="width: 600px;" type="image/svg+xml"> </object><p>This design has a number of consequences, not all of which are obvious. Let's think through some of them.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h3 id="11">Nurseries preserve the function abstraction.</h3>
+    </div>
+    <div class="column translation">
+      <h3 id="11">Nurseries preserve the function abstraction.</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>The fundamental problem with <code>go</code> statements is that when you call a function, you don't know whether it's going to spawn some background task that keeps running after it's finished. With nurseries, you don't have to worry about this: any function can open a nursery and run multiple concurrent tasks, but the function can't return until they've all finished. So when a function does return, you know it's really done.</p>
+
+    </div>
+    <div class="column translation">
+      <p>The fundamental problem with <code>go</code> statements is that when you call a function, you don't know whether it's going to spawn some background task that keeps running after it's finished. With nurseries, you don't have to worry about this: any function can open a nursery and run multiple concurrent tasks, but the function can't return until they've all finished. So when a function does return, you know it's really done.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h3 id="12">Nurseries support dynamic task spawning.</h3>
+    </div>
+    <div class="column translation">
+      <h3 id="12">Nurseries support dynamic task spawning.</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Here's a simpler primitive that would also satisfy our flow control diagram above. It takes a list of thunks, and runs them all concurrently:</p>
+
+    </div>
+    <div class="column translation">
+      <p>Here's a simpler primitive that would also satisfy our flow control diagram above. It takes a list of thunks, and runs them all concurrently:</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <pre><code>run_concurrently([myfunc, anotherfunc])
+</code></pre>
+
+    </div>
+    <div class="column translation">
+      <pre><code>run_concurrently([myfunc, anotherfunc])
+</code></pre>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>But the problem with this is that you have to know up front the complete list of tasks you're going to run, which isn't always true. For example, server programs generally have <code>accept</code> loops, that take incoming connections and start a new task to handle each of them. Here's a minimal <code>accept</code> loop in Trio:</p>
+
+    </div>
+    <div class="column translation">
+      <p>But the problem with this is that you have to know up front the complete list of tasks you're going to run, which isn't always true. For example, server programs generally have <code>accept</code> loops, that take incoming connections and start a new task to handle each of them. Here's a minimal <code>accept</code> loop in Trio:</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <pre><code>async with trio.open_nursery() as nursery:
+    while True:
+        incoming_connection = await server_socket.accept()
+        nursery.start_soon(connection_handler, incoming_connection)
+</code></pre>
+
+    </div>
+    <div class="column translation">
+      <pre><code>async with trio.open_nursery() as nursery:
+    while True:
+        incoming_connection = await server_socket.accept()
+        nursery.start_soon(connection_handler, incoming_connection)
+</code></pre>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>With nurseries, this is trivial, but implementing it using <code>run_concurrently</code> would be <em>much</em> more awkward. And if you wanted to, it would be easy to implement <code>run_concurrently</code> on top of nurseries – but it's not really necessary, since in the simple cases <code>run_concurrently</code> can handle, the nursery notation is just as readable.</p>
+
+    </div>
+    <div class="column translation">
+      <p>With nurseries, this is trivial, but implementing it using <code>run_concurrently</code> would be <em>much</em> more awkward. And if you wanted to, it would be easy to implement <code>run_concurrently</code> on top of nurseries – but it's not really necessary, since in the simple cases <code>run_concurrently</code> can handle, the nursery notation is just as readable.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h3 id="13">There is an escape.</h3>
+    </div>
+    <div class="column translation">
+      <h3 id="13">There is an escape.</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>The nursery object also gives us an escape hatch. What if you really do need to write a function that spawns a background task, where the background task outlives the function itself? Easy: pass the function a nursery object. There's no rule that only the code directly inside the <code>async with open_nursery()</code> block can call <code>nursery.start_soon</code> – so long as the nursery block remains open <sup class="footnote-ref" id="fnref-4"><a href="#fn-4">4</a></sup>, then anyone who acquires a reference to the nursery object gets the capability of spawning tasks into that nursery. You can pass it in as a function argument, send it through a queue, whatever.</p>
+
+    </div>
+    <div class="column translation">
+      <p>The nursery object also gives us an escape hatch. What if you really do need to write a function that spawns a background task, where the background task outlives the function itself? Easy: pass the function a nursery object. There's no rule that only the code directly inside the <code>async with open_nursery()</code> block can call <code>nursery.start_soon</code> – so long as the nursery block remains open <sup class="footnote-ref" id="tfnref-4"><a href="#tfn-4">4</a></sup>, then anyone who acquires a reference to the nursery object gets the capability of spawning tasks into that nursery. You can pass it in as a function argument, send it through a queue, whatever.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>In practice, this means that you can write functions that "break the rules", but within limits:</p>
+
+    </div>
+    <div class="column translation">
+      <p>In practice, this means that you can write functions that "break the rules", but within limits:</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <ul>
+<li>Since nursery objects have to be passed around explicitly, you can immediately identify which functions violate normal flow control by looking at their call sites, so local reasoning is still possible.</li>
+<li>Any tasks the function spawns are still bound by the lifetime of the nursery that was passed in.</li>
+<li>And the calling code can only pass in nursery objects that it itself has access to.</li>
+</ul>
+
+    </div>
+    <div class="column translation">
+      <ul>
+<li>Since nursery objects have to be passed around explicitly, you can immediately identify which functions violate normal flow control by looking at their call sites, so local reasoning is still possible.</li>
+<li>Any tasks the function spawns are still bound by the lifetime of the nursery that was passed in.</li>
+<li>And the calling code can only pass in nursery objects that it itself has access to.</li>
+</ul>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>So this is still very different from the traditional model where any code can at any moment spawn a background task with unbounded lifetime.</p>
+
+    </div>
+    <div class="column translation">
+      <p>So this is still very different from the traditional model where any code can at any moment spawn a background task with unbounded lifetime.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>One place this is useful is in the proof that nurseries have equivalent expressive power to <code>go</code> statements, but this post is already long enough so I'll leave that for another day.</p>
+
+    </div>
+    <div class="column translation">
+      <p>One place this is useful is in the proof that nurseries have equivalent expressive power to <code>go</code> statements, but this post is already long enough so I'll leave that for another day.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h3 id="14">You can define new types that quack like a nursery.</h3>
+    </div>
+    <div class="column translation">
+      <h3 id="14">You can define new types that quack like a nursery.</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>The standard nursery semantics provide a solid foundation, but sometimes you want something different. Perhaps you're envious of Erlang and its supervisors, and want to define a nursery-like class that handles exceptions by restarting the child task. That's totally possible, and to your users, it'll look just like a regular nursery:</p>
+
+    </div>
+    <div class="column translation">
+      <p>The standard nursery semantics provide a solid foundation, but sometimes you want something different. Perhaps you're envious of Erlang and its supervisors, and want to define a nursery-like class that handles exceptions by restarting the child task. That's totally possible, and to your users, it'll look just like a regular nursery:</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <pre><code>async with my_supervisor_library.open_supervisor() as nursery_alike:
+    nursery_alike.start_soon(...)
+</code></pre>
+
+    </div>
+    <div class="column translation">
+      <pre><code>async with my_supervisor_library.open_supervisor() as nursery_alike:
+    nursery_alike.start_soon(...)
+</code></pre>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>If you have a function that takes a nursery as an argument, then you can pass it one of these instead to control the error-handling policy for the tasks it spawns. Pretty nifty. But there is one subtlety here that pushes Trio towards different conventions than asyncio or some other libraries: it means that <code>start_soon</code> has to take a function, not a coroutine object or a <code>Future</code>. (You can call a function multiple times, but there's no way to restart a coroutine object or a <code>Future</code>.) I think this is the better convention anyway for a number of reasons (especially since Trio doesn't even have <code>Future</code>s!), but still, worth mentioning.</p>
+
+    </div>
+    <div class="column translation">
+      <p>If you have a function that takes a nursery as an argument, then you can pass it one of these instead to control the error-handling policy for the tasks it spawns. Pretty nifty. But there is one subtlety here that pushes Trio towards different conventions than asyncio or some other libraries: it means that <code>start_soon</code> has to take a function, not a coroutine object or a <code>Future</code>. (You can call a function multiple times, but there's no way to restart a coroutine object or a <code>Future</code>.) I think this is the better convention anyway for a number of reasons (especially since Trio doesn't even have <code>Future</code>s!), but still, worth mentioning.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h3 id="15">No, really, nurseries <em>always</em> wait for the tasks inside to exit.</h3>
+    </div>
+    <div class="column translation">
+      <h3 id="15">No, really, nurseries <em>always</em> wait for the tasks inside to exit.</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>It's also worth talking about how task cancellation and task joining interact, since there are some subtleties here that could – if handled incorrectly – break the nursery invariants.</p>
+
+    </div>
+    <div class="column translation">
+      <p>It's also worth talking about how task cancellation and task joining interact, since there are some subtleties here that could – if handled incorrectly – break the nursery invariants.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>In Trio, it's possible for code to receive a cancellation request at any time. After a cancellation is requested, then the next time the code executes a "checkpoint" operation (<a href="https://trio.readthedocs.io/en/latest/reference-core.html#checkpoints">details</a>), a <code>Cancelled</code> exception is raised. This means that there's a gap between when a cancellation is <em>requested</em> and when it actually <em>happens</em> – it might be a while before the task executes a checkpoint, and then after that the exception has to unwind the stack, run cleanup handlers, etc. When this happens, the nursery always waits for the full cleanup to happen. We <em>never</em> terminate a task without giving it a chance to run cleanup handlers, and we <em>never</em> leave a task to run unsupervised outside of the nursery, even if it's in the process of being cancelled.</p>
+
+    </div>
+    <div class="column translation">
+      <p>In Trio, it's possible for code to receive a cancellation request at any time. After a cancellation is requested, then the next time the code executes a "checkpoint" operation (<a href="https://trio.readthedocs.io/en/latest/reference-core.html#checkpoints">details</a>), a <code>Cancelled</code> exception is raised. This means that there's a gap between when a cancellation is <em>requested</em> and when it actually <em>happens</em> – it might be a while before the task executes a checkpoint, and then after that the exception has to unwind the stack, run cleanup handlers, etc. When this happens, the nursery always waits for the full cleanup to happen. We <em>never</em> terminate a task without giving it a chance to run cleanup handlers, and we <em>never</em> leave a task to run unsupervised outside of the nursery, even if it's in the process of being cancelled.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h3 id="16">Automatic resource cleanup works.</h3>
+    </div>
+    <div class="column translation">
+      <h3 id="16">Automatic resource cleanup works.</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Because nurseries follow the black box rule, they make <code>with</code> blocks work again. There's no chance that, say, closing a file at the end of a <code>with</code> block will accidentally break a background task that's still using that file.</p>
+
+    </div>
+    <div class="column translation">
+      <p>Because nurseries follow the black box rule, they make <code>with</code> blocks work again. There's no chance that, say, closing a file at the end of a <code>with</code> block will accidentally break a background task that's still using that file.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h3 id="17">Automated error propagation works.</h3>
+    </div>
+    <div class="column translation">
+      <h3 id="17">Automated error propagation works.</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>As noted above, in most concurrency systems, unhandled errors in background tasks are simply discarded. There's literally nothing else to do with them.</p>
+
+    </div>
+    <div class="column translation">
+      <p>As noted above, in most concurrency systems, unhandled errors in background tasks are simply discarded. There's literally nothing else to do with them.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>In Trio, since every task lives inside a nursery, and every nursery is part of a parent task, and parent tasks are required to wait for the tasks inside the nursery... we <em>do</em> have something we can do with unhandled errors. If a background task terminates with an exception, we can rethrow it in the parent task. The intuition here is that a nursery is something like a  "concurrent call" primitive: we can think of our example above as calling <code>myfunc</code> and <code>anotherfunc</code> at the same time, so our call stack has become a tree. And exceptions propagate up this call tree towards the root, just like they propagate up a regular call stack.</p>
+
+    </div>
+    <div class="column translation">
+      <p>In Trio, since every task lives inside a nursery, and every nursery is part of a parent task, and parent tasks are required to wait for the tasks inside the nursery... we <em>do</em> have something we can do with unhandled errors. If a background task terminates with an exception, we can rethrow it in the parent task. The intuition here is that a nursery is something like a  "concurrent call" primitive: we can think of our example above as calling <code>myfunc</code> and <code>anotherfunc</code> at the same time, so our call stack has become a tree. And exceptions propagate up this call tree towards the root, just like they propagate up a regular call stack.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>There is one subtlety here though: when we re-raise an exception in the parent task, it will start propagating in the parent task. Generally, that means that the parent task will exit the nursery block. But we've already said that the parent task cannot leave the nursery block while there are still child tasks running. So what do we do?</p>
+
+    </div>
+    <div class="column translation">
+      <p>There is one subtlety here though: when we re-raise an exception in the parent task, it will start propagating in the parent task. Generally, that means that the parent task will exit the nursery block. But we've already said that the parent task cannot leave the nursery block while there are still child tasks running. So what do we do?</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>The answer is that when an unhandled exception occurs in a child, Trio immediately cancels all the other tasks in the same nursery, and then waits for them to finish before re-raising the exception. The intuition here is that exceptions cause the stack to unwind, and if we want to unwind past a branch point in our stack tree, we need to unwind the other branches, by cancelling them.</p>
+
+    </div>
+    <div class="column translation">
+      <p>The answer is that when an unhandled exception occurs in a child, Trio immediately cancels all the other tasks in the same nursery, and then waits for them to finish before re-raising the exception. The intuition here is that exceptions cause the stack to unwind, and if we want to unwind past a branch point in our stack tree, we need to unwind the other branches, by cancelling them.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>This does mean though that if you want to implement nurseries in your language, you may need some kind of integration between the nursery code and your cancellation system. This might be tricky if you're using a language like C# or Golang where cancellation is usually managed through manual object passing and convention, or (even worse) one that doesn't have a generic cancellation mechanism.</p>
+
+    </div>
+    <div class="column translation">
+      <p>This does mean though that if you want to implement nurseries in your language, you may need some kind of integration between the nursery code and your cancellation system. This might be tricky if you're using a language like C# or Golang where cancellation is usually managed through manual object passing and convention, or (even worse) one that doesn't have a generic cancellation mechanism.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h3 id="18">A surprise benefit: removing <code>go</code> statements enables new features</h3>
+    </div>
+    <div class="column translation">
+      <h3 id="18">A surprise benefit: removing <code>go</code> statements enables new features</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Eliminating <code>goto</code> allowed previous language designers to make stronger assumptions about the structure of programs, which enabled new features like <code>with</code> blocks and exceptions; eliminating <code>go</code> statements has a similar effect. For example:</p>
+
+    </div>
+    <div class="column translation">
+      <p>Eliminating <code>goto</code> allowed previous language designers to make stronger assumptions about the structure of programs, which enabled new features like <code>with</code> blocks and exceptions; eliminating <code>go</code> statements has a similar effect. For example:</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <ul>
+<li>Trio's cancellation system is easier to use and more reliable than competitors, because it can assume that tasks are nested in a regular tree structure; see <a href="https://vorpus.org/blog/timeouts-and-cancellation-for-humans/">Timeouts and cancellation for humans</a> for a full discussion.</li>
+<li>Trio is the only Python concurrency library where control-C works the way Python developers expect (<a href="https://vorpus.org/blog/control-c-handling-in-python-and-trio/">details</a>). This would be impossible without nurseries providing a reliable mechanism for propagating exceptions.</li>
+</ul>
+
+    </div>
+    <div class="column translation">
+      <ul>
+<li>Trio's cancellation system is easier to use and more reliable than competitors, because it can assume that tasks are nested in a regular tree structure; see <a href="https://vorpus.org/blog/timeouts-and-cancellation-for-humans/">Timeouts and cancellation for humans</a> for a full discussion.</li>
+<li>Trio is the only Python concurrency library where control-C works the way Python developers expect (<a href="https://vorpus.org/blog/control-c-handling-in-python-and-trio/">details</a>). This would be impossible without nurseries providing a reliable mechanism for propagating exceptions.</li>
+</ul>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h2 id="19">Nurseries in practice</h2>
+    </div>
+    <div class="column translation">
+      <h2 id="19">Nurseries를 써보자</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>So that's the theory. How's it work in practice?</p>
+
+    </div>
+    <div class="column translation">
+      <p>So that's the theory. How's it work in practice?</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Well... that's an empirical question: you should try it and find out! But seriously, we just won't know for sure until lots of people have pounded on it. At this point I'm pretty confident that the foundation is sound, but maybe we'll realize we need to make some tweaks, like how the early structured programming advocates eventually backed off from eliminating <code>break</code> and <code>continue</code>.</p>
+
+    </div>
+    <div class="column translation">
+      <p>Well... that's an empirical question: you should try it and find out! But seriously, we just won't know for sure until lots of people have pounded on it. At this point I'm pretty confident that the foundation is sound, but maybe we'll realize we need to make some tweaks, like how the early structured programming advocates eventually backed off from eliminating <code>break</code> and <code>continue</code>.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>And if you're an experienced concurrent programmer who's just learning Trio, then you should expect to find it a bit rocky at times. You'll have to <a href="https://stackoverflow.com/questions/48282841/in-trio-how-can-i-have-a-background-task-that-lives-as-long-as-my-object-does">learn new ways to do things</a> – just like programmers in the 1970s found it challenging to learn how to write code without <code>goto</code>.</p>
+
+    </div>
+    <div class="column translation">
+      <p>And if you're an experienced concurrent programmer who's just learning Trio, then you should expect to find it a bit rocky at times. You'll have to <a href="https://stackoverflow.com/questions/48282841/in-trio-how-can-i-have-a-background-task-that-lives-as-long-as-my-object-does">learn new ways to do things</a> – just like programmers in the 1970s found it challenging to learn how to write code without <code>goto</code>.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>But of course, that's the point. As Knuth wrote (<a href="https://scholar.google.com/scholar?cluster=17147143327681396418&amp;hl=en&amp;as_sdt=0,5">Knuth, 1974</a>, p. 275):</p>
+<blockquote><p>Probably the worst mistake any one can make with respect to the subject of <strong>go to</strong> statements is to assume that  "structured programming" is achieved by writing programs as we always have and then eliminating the <strong>go to</strong> 's. Most <strong>go to</strong> 's shouldn't be there in the first place! What we really want is to conceive of our program in such a way that we rarely even <em>think</em> about <strong>go to</strong> statements, because the real need for them hardly ever arises. The language in which we express our ideas has a strong influence on our thought processes. Therefore, Dijkstra asks for more new language features – structures which encourage clear thinking – in order to avoid the <strong>go to</strong> 's temptations towards complications.</p>
+</blockquote>
+
+    </div>
+    <div class="column translation">
+      <p>But of course, that's the point. As Knuth wrote (<a href="https://scholar.google.com/scholar?cluster=17147143327681396418&amp;hl=en&amp;as_sdt=0,5">Knuth, 1974</a>, p. 275):</p>
+<blockquote><p>Probably the worst mistake any one can make with respect to the subject of <strong>go to</strong> statements is to assume that  "structured programming" is achieved by writing programs as we always have and then eliminating the <strong>go to</strong> 's. Most <strong>go to</strong> 's shouldn't be there in the first place! What we really want is to conceive of our program in such a way that we rarely even <em>think</em> about <strong>go to</strong> statements, because the real need for them hardly ever arises. The language in which we express our ideas has a strong influence on our thought processes. Therefore, Dijkstra asks for more new language features – structures which encourage clear thinking – in order to avoid the <strong>go to</strong> 's temptations towards complications.</p>
+</blockquote>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>And so far, that's been my experience with using nurseries: they encourage clear thinking. They lead to designs that are more robust, easier to use, and just better all around. And the limitations actually make it easier to solve problems, because you spend less time being tempted towards unnecessary complications. Using Trio has, in a very real sense, taught me to be a better programmer.</p>
+
+    </div>
+    <div class="column translation">
+      <p>And so far, that's been my experience with using nurseries: they encourage clear thinking. They lead to designs that are more robust, easier to use, and just better all around. And the limitations actually make it easier to solve problems, because you spend less time being tempted towards unnecessary complications. Using Trio has, in a very real sense, taught me to be a better programmer.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>For example, consider the Happy Eyeballs algorithm (<a href="https://tools.ietf.org/html/rfc8305">RFC 8305</a>), which is a simple concurrent algorithm for speeding up the establishment of TCP connections. Conceptually, the algorithm isn't complicated – you race several connection attempts against each other, with a staggered start to avoid overloading the network. But if you look at <a href="https://github.com/twisted/twisted/compare/trunk...glyph:statemachine-hostnameendpoint">Twisted's best implementation</a>, it's almost 600 lines of Python, and still has <a href="https://twistedmatrix.com/trac/ticket/9345">at least one logic bug</a>. The equivalent in Trio is more than <strong>15x</strong> shorter. More importantly, using Trio I was able to write it in minutes instead of months, and I got the logic correct on my first try. I never could have done this in any other framework, even ones where I have much more experience. For more details, you can <a href="https://www.youtube.com/watch?v=i-R704I8ySE">watch my talk at Pyninsula last month</a>. Is this typical? Time will tell. But it's certainly promising.</p>
+
+    </div>
+    <div class="column translation">
+      <p>For example, consider the Happy Eyeballs algorithm (<a href="https://tools.ietf.org/html/rfc8305">RFC 8305</a>), which is a simple concurrent algorithm for speeding up the establishment of TCP connections. Conceptually, the algorithm isn't complicated – you race several connection attempts against each other, with a staggered start to avoid overloading the network. But if you look at <a href="https://github.com/twisted/twisted/compare/trunk...glyph:statemachine-hostnameendpoint">Twisted's best implementation</a>, it's almost 600 lines of Python, and still has <a href="https://twistedmatrix.com/trac/ticket/9345">at least one logic bug</a>. The equivalent in Trio is more than <strong>15x</strong> shorter. More importantly, using Trio I was able to write it in minutes instead of months, and I got the logic correct on my first try. I never could have done this in any other framework, even ones where I have much more experience. For more details, you can <a href="https://www.youtube.com/watch?v=i-R704I8ySE">watch my talk at Pyninsula last month</a>. Is this typical? Time will tell. But it's certainly promising.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h2 id="20">Conclusion</h2>
+    </div>
+    <div class="column translation">
+      <h2 id="20">결론</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>The popular concurrency primitives – <code>go</code> statements, thread spawning functions, callbacks, futures, promises, ... they're all variants on <code>goto</code>, in theory and in practice. And not even the modern domesticated <code>goto</code>, but the old-testament fire-and-brimstone <code>goto</code>, that could leap across function boundaries. These primitives are dangerous even if we don't use them directly, because they undermine our ability to reason about control flow and compose complex systems out of abstract modular parts, and they interfere with useful language features like automatic resource cleanup and error propagation. Therefore, like <code>goto</code>, they have no place in a modern high-level language.</p>
+
+    </div>
+    <div class="column translation">
+      <p>The popular concurrency primitives – <code>go</code> statements, thread spawning functions, callbacks, futures, promises, ... they're all variants on <code>goto</code>, in theory and in practice. And not even the modern domesticated <code>goto</code>, but the old-testament fire-and-brimstone <code>goto</code>, that could leap across function boundaries. These primitives are dangerous even if we don't use them directly, because they undermine our ability to reason about control flow and compose complex systems out of abstract modular parts, and they interfere with useful language features like automatic resource cleanup and error propagation. Therefore, like <code>goto</code>, they have no place in a modern high-level language.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Nurseries provide a safe and convenient alternative that preserves the full power of your language, enables powerful new features (as demonstrated by Trio's cancellation scopes and control-C handling), and can produce dramatic improvements in readability, productivity, and correctness.</p>
+
+    </div>
+    <div class="column translation">
+      <p>Nurseries provide a safe and convenient alternative that preserves the full power of your language, enables powerful new features (as demonstrated by Trio's cancellation scopes and control-C handling), and can produce dramatic improvements in readability, productivity, and correctness.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Unfortunately, to fully capture these benefits, we do need to remove the old primitives entirely, and this probably requires building new concurrency frameworks from scratch – just like eliminating <code>goto</code> required designing new languages. But as impressive as FLOW-MATIC was for its time, most of us are glad that we've upgraded to something better. I don't think we'll regret switching to nurseries either, and Trio demonstrates that this is a viable design for practical, general-purpose concurrency frameworks.</p>
+
+    </div>
+    <div class="column translation">
+      <p>Unfortunately, to fully capture these benefits, we do need to remove the old primitives entirely, and this probably requires building new concurrency frameworks from scratch – just like eliminating <code>goto</code> required designing new languages. But as impressive as FLOW-MATIC was for its time, most of us are glad that we've upgraded to something better. I don't think we'll regret switching to nurseries either, and Trio demonstrates that this is a viable design for practical, general-purpose concurrency frameworks.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h2 id="21">Acknowledgments</h2>
+    </div>
+    <div class="column translation">
+      <h2 id="21">붙임</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Many thanks to Graydon Hoare, Quentin Pradet, and Hynek Schlawack for comments on drafts of this post. Any remaining errors, of course, are all my fault.</p>
+
+    </div>
+    <div class="column translation">
+      <p>Many thanks to Graydon Hoare, Quentin Pradet, and Hynek Schlawack for comments on drafts of this post. Any remaining errors, of course, are all my fault.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <p>Credits: Sample FLOW-MATIC code from <a href="http://archive.computerhistory.org/resources/text/Remington_Rand/Univac.Flowmatic.1957.102646140.pdf">this brochure</a> (PDF), as <a href="http://www.computerhistory.org/collections/catalog/102646140">preserved by the Computer History Museum</a>. <a href="https://www.flickr.com/photos/iam_photo/478178221">Wolves in Action</a>, by i:am. photography / Martin Pannier, licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">CC-BY-SA 2.0</a>, cropped. <a href="https://pixabay.com/en/french-bulldog-pet-dog-funny-2427629/">French Bulldog Pet Dog</a> by Daniel Borker, released under the <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 public domain dedication</a>.</p>
+
+    </div>
+    <div class="column translation">
+      <p>Credits: Sample FLOW-MATIC code from <a href="http://archive.computerhistory.org/resources/text/Remington_Rand/Univac.Flowmatic.1957.102646140.pdf">this brochure</a> (PDF), as <a href="http://www.computerhistory.org/collections/catalog/102646140">preserved by the Computer History Museum</a>. <a href="https://www.flickr.com/photos/iam_photo/478178221">Wolves in Action</a>, by i:am. photography / Martin Pannier, licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">CC-BY-SA 2.0</a>, cropped. <a href="https://pixabay.com/en/french-bulldog-pet-dog-funny-2427629/">French Bulldog Pet Dog</a> by Daniel Borker, released under the <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 public domain dedication</a>.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <h2 id="22">Footnotes</h2>
+    </div>
+    <div class="column translation">
+      <h2 id="22">각주</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <hr>
+
+    </div>
+    <div class="column translation">
+      <hr>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column original">
+      <ol><li id="fn-1"><p>At least for a certain kind of person.<a href="#fnref-1" class="footnote">&#8617;</a></p></li>
+<li id="fn-2"><p>And WebAssembly even demonstrates that it's possible and at least somewhat desirable have a low-level assembly language without <code>goto</code>: <a href="https://www.w3.org/TR/wasm-core-1/#control-instructions%E2%91%A0">reference</a>, <a href="https://github.com/WebAssembly/design/blob/master/Rationale.md#control-flow">rationale</a><a href="#fnref-2" class="footnote">&#8617;</a></p></li>
+<li id="fn-3"><p>For those who can't possibly pay attention to the text without first knowing whether I'm aware of their favorite paper, my current list of topics to include in my review are: the "parallel composition" operator in Cooperating/Communicating Sequential Processes and Occam, the fork/join model, Erlang supervisors, Martin Sústrik's article on <a href="http://250bpm.com/blog:71">Structured concurrency</a> and work on <a href="https://github.com/sustrik/libdill">libdill</a>, and <a href="https://docs.rs/crossbeam/0.3.2/crossbeam/struct.Scope.html">crossbeam::scope</a> / <a href="https://docs.rs/rayon/1.0.1/rayon/fn.scope.html">rayon::scope</a> in Rust. Edit: I've also been pointed to the highly relevant <a href="https://godoc.org/golang.org/x/sync/errgroup">golang.org/x/sync/errgroup</a> and <a href="https://godoc.org/github.com/oklog/run">github.com/oklog/run</a> in Golang. If I'm missing anything important, <a href="mailto:njs@pobox.com">let me know</a>.<a href="#fnref-3" class="footnote">&#8617;</a></p></li>
+<li id="fn-4"><p>If you call <code>start_soon</code> <em>after</em> the nursery block has exited, then <code>start_soon</code> raises an error, and conversely, if it doesn't raise an error, then the nursery block is guaranteed to remain open until the task finishes. If you're implementing your own nursery system then you'll want to handle synchronization carefully here.<a href="#fnref-4" class="footnote">&#8617;</a></p></li>
+</ol>
+
+
+    </div>
+    <div class="column translation">
+      <ol><li id="tfn-1"><p>At least for a certain kind of person.<a href="#tfnref-1" class="footnote">&#8617;</a></p></li>
+<li id="tfn-2"><p>And WebAssembly even demonstrates that it's possible and at least somewhat desirable have a low-level assembly language without <code>goto</code>: <a href="https://www.w3.org/TR/wasm-core-1/#control-instructions%E2%91%A0">reference</a>, <a href="https://github.com/WebAssembly/design/blob/master/Rationale.md#control-flow">rationale</a><a href="#tfnref-2" class="footnote">&#8617;</a></p></li>
+<li id="tfn-3"><p>For those who can't possibly pay attention to the text without first knowing whether I'm aware of their favorite paper, my current list of topics to include in my review are: the "parallel composition" operator in Cooperating/Communicating Sequential Processes and Occam, the fork/join model, Erlang supervisors, Martin Sústrik's article on <a href="http://250bpm.com/blog:71">Structured concurrency</a> and work on <a href="https://github.com/sustrik/libdill">libdill</a>, and <a href="https://docs.rs/crossbeam/0.3.2/crossbeam/struct.Scope.html">crossbeam::scope</a> / <a href="https://docs.rs/rayon/1.0.1/rayon/fn.scope.html">rayon::scope</a> in Rust. Edit: I've also been pointed to the highly relevant <a href="https://godoc.org/golang.org/x/sync/errgroup">golang.org/x/sync/errgroup</a> and <a href="https://godoc.org/github.com/oklog/run">github.com/oklog/run</a> in Golang. If I'm missing anything important, <a href="mailto:njs@pobox.com">let me know</a>.<a href="#tfnref-3" class="footnote">&#8617;</a></p></li>
+<li id="tfn-4"><p>If you call <code>start_soon</code> <em>after</em> the nursery block has exited, then <code>start_soon</code> raises an error, and conversely, if it doesn't raise an error, then the nursery block is guaranteed to remain open until the task finishes. If you're implementing your own nursery system then you'll want to handle synchronization carefully here.<a href="#tfnref-4" class="footnote">&#8617;</a></p></li>
+</ol>
+
+
+    </div>
+  </div>
+
+</article>
+
+<div>
+  <div class="row">
+    <div class="column original">
+    </div>
+    <div class="column translation">
+      <h3 id="translators">Translators</h3>
+      <p>
+        <a href="https://github.com/zerobased-co/muchtrans/commits/master/articles/notes-on-structured-concurrency-or-go-statement-considered-harmful.ko.md">Latest update</a> at 2018-12-03 18:02:44
+      </p>
+      <div class="translators">
+        
+        <span class="translator">
+          
+          <img src="https://avatars1.githubusercontent.com/u/579366?v=4">
+          <a href="https://github.com/lqez">Park Hyunwoo</a>
+          
+        </span>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div>
+  <div class="row">
+<script src="https://utteranc.es/client.js"
+        repo="zerobased-co/muchtrans"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+  </div>
+</div>
+
+
+  
+  <div class="footer">
+    <p>
+      Original contents: 
+        <a href="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/" target="_blank">
+          https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/</a>
+    </p>
+    <p>Let's translate together on GitHub: <a href="https://github.com/zerobased-co/muchtrans">zerobased-co/muchtrans</a></p>
+  </div>
+
+</body>
+
+<script>
+window.addEventListener('load', function () {
+  var checkbox = document.getElementById('hide-original');
+  checkbox.onclick = function () {
+    document.querySelectorAll('.original').forEach(function(node) {
+      if (checkbox.checked) {
+        node.classList.add('hidden');
+      } else {
+        node.classList.remove('hidden');
+      }
+    });
+  }
+
+  document.querySelectorAll('h2[id], h3[id]').forEach(function(node) {
+    var anchor = document.createElement("a");
+    anchor.className = "pilcrow";
+    anchor.text = "\xb6";
+    anchor.href = "#" + node.id;
+    node.appendChild(anchor);
+  });
+});
+</script>
+
+</html>
