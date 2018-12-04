@@ -675,7 +675,7 @@ window.addEventListener('load', function () {
   });
 
   const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('hide-original') !== undefined) {
+  if (urlParams.get('hide-original') == 'true') {
     checkbox.checked = true;
     toggleOriginal(true);
   }
