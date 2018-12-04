@@ -177,15 +177,19 @@
 
 <script>
 window.addEventListener('load', function () {
-  var checkbox = document.getElementById('hide-original');
-  checkbox.onclick = function () {
+  function toggleOriginal(hide) {
     document.querySelectorAll('.original').forEach(function(node) {
-      if (checkbox.checked) {
+      if (hide) {
         node.classList.add('hidden');
       } else {
         node.classList.remove('hidden');
       }
     });
+  }
+
+  var checkbox = document.getElementById('hide-original');
+  checkbox.onclick = function () {
+    toggleOriginal(checkbox.checked);
   }
 
   document.querySelectorAll('h2[id], h3[id]').forEach(function(node) {
@@ -195,6 +199,18 @@ window.addEventListener('load', function () {
     anchor.href = "#" + node.id;
     node.appendChild(anchor);
   });
+
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('hide-original') !== undefined) {
+    checkbox.checked = true;
+    toggleOriginal(true);
+  }
+
+  var article = document.getElementsByTagName('article')[0];
+  article.style.visibility = 'visible';
+
+  var loading = document.getElementsByClassName('loading')[0];
+  loading.style.display = 'none';
 });
 </script>
 
