@@ -20,7 +20,8 @@ body, html {
 }
 
 .column {
-  flex: 44%;
+  flex: 1;
+  width: 44%;
   max-width: 800px;
   margin: 0 3%;
 }
