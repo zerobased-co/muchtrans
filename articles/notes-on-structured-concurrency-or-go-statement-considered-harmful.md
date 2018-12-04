@@ -46,32 +46,6 @@ When people first encounter this "nursery" construct, they tend to find it confu
 
 Sound unlikely? Something similar has actually happened before: the `goto` statement was once the king of control flow. Now it's a [punchline](https://xkcd.com/292/). A few languages still have something they call `goto`, but it's different and far weaker than the original `goto`. And most languages don't even have that. What happened? This was so long ago that most people aren't familiar with the story anymore, but it turns out to be surprisingly relevant. So we'll start by reminding ourselves what a `goto` was, exactly, and then see what it can teach us about concurrency APIs.
 
-**Contents:**
-
-  * What is a ` goto` statement anyway?
-  * What is a `go` statement anyway?
-  * What happened to `goto`?
-    * `goto`: the destroyer of abstraction
-    * A surprise benefit: removing `goto` statements enables new features
-    * `goto` statements: not even once
-  * `go` statement considered harmful
-    * `go` statements: not even once
-  * Nurseries: a structured replacement for `go` statements
-    * Nurseries preserve the function abstraction.
-    * Nurseries support dynamic task spawning.
-    * There is an escape.
-    * You can define new types that quack like a nursery.
-    * No, really, nurseries _always_ wait for the tasks inside to exit.
-    * Automatic resource cleanup works.
-    * Automated error propagation works.
-    * A surprise benefit: removing ` go` statements enables new features
-  * Nurseries in practice
-  * Conclusion
-  * Acknowledgments
-  * Footnotes
-
-
-
 ## What is a `goto` statement anyway?
 
 Let's review some history: Early computers were programmed using [assembly language](https://en.wikipedia.org/wiki/Assembly_language), or other even more primitive mechanisms. This kinda sucked. So in the 1950s, people like [John Backus](https://en.wikipedia.org/wiki/John_Backus) at IBM and [Grace Hopper](https://en.wikipedia.org/wiki/Grace_Hopper) at Remington Rand started to develop languages like [FORTRAN](https://en.wikipedia.org/wiki/Fortran) and [FLOW-MATIC](https://en.wikipedia.org/wiki/FLOW-MATIC) (better known for its direct successor [COBOL](https://en.wikipedia.org/wiki/COBOL)).
@@ -234,8 +208,6 @@ The good news, though, is that these problems can all be solved: Dijkstra showed
   * Find a replacement for `go` statements that has similar power, but follows the "black box rule",
   * Build that new construct into our concurrency framework as a primitive, and don't include any form of `go` statement.
 
-
-
 And that's what Trio did.
 
 ## Nurseries: a structured replacement for `go` statements
@@ -294,8 +266,6 @@ In practice, this means that you can write functions that "break the rules", but
   * Since nursery objects have to be passed around explicitly, you can immediately identify which functions violate normal flow control by looking at their call sites, so local reasoning is still possible.
   * Any tasks the function spawns are still bound by the lifetime of the nursery that was passed in.
   * And the calling code can only pass in nursery objects that it itself has access to.
-
-
 
 So this is still very different from the traditional model where any code can at any moment spawn a background task with unbounded lifetime.
 
