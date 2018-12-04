@@ -122,6 +122,10 @@ h1 code, h2 code, h3 code, p code, li code {
   border-radius: 3px;
 }
 
+article {
+  visibility: hidden;
+}
+
 .header, .footer {
   background: #EAEAEF;
   padding: 1em 3%;
@@ -130,6 +134,11 @@ h1 code, h2 code, h3 code, p code, li code {
 .notification {
   background: #CDCDD6;
   padding: 1em 3%;
+}
+
+.loading {
+  padding: 1em 3%;
+  text-align: center;
 }
 
 .header p, .footer p, .notification p {
