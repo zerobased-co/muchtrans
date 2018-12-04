@@ -77,7 +77,7 @@ h3, h4, h5, h6 {
 ol, ul {
 }
 
-img {
+img, object {
   max-width: 100%;
 }
 
@@ -112,6 +112,7 @@ pre {
   border: 1px solid #CDCDD6;
   border-radius: 3px;
   margin-top: 0;
+  overflow: scroll;
 }
 
 h1 code, h2 code, h3 code, p code, li code {
