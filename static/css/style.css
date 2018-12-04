@@ -139,6 +139,8 @@ article {
 .loading {
   padding: 1em 3%;
   text-align: center;
+  z-index: 1000;
+  position: absolute;
 }
 
 .header p, .footer p, .notification p {
