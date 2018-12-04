@@ -712,7 +712,7 @@ go myfunc();
 
     </div>
     <div class="column translation">
-      <p>예를 들면, 파이썬은 자원을 비우기 위한 <code>with</code>라는 멋진 문법을 가지고 있습니다. 이렇게 쓸 수 있죠.</p>
+      <p>예를 들면, 파이썬은 자원을 정리하기 위한 <code>with</code>라는 멋진 문법을 가지고 있습니다. 이렇게 쓸 수 있죠.</p>
 
     </div>
   </div>
@@ -1266,7 +1266,7 @@ with open("my-file") as file_handle:
 
     </div>
     <div class="column translation">
-      <p>Trio에서 코드는 언제든지 취소 요청을 받을 수 있습니다. 취소가 요청되면, 코드는 그 후에 "체크포인트" 작업을 수행하고, <code>Cancelled</code> 예외를 발생시킵니다. 즉, 취소가 <em>요청된</em> 시점과 실제로 취소가 <em>수행된</em> 시점에 차이가 있다는 것입니다. 작업이 체크포인트를 실행하기까지 시간이 걸리고, 그 이후에 예외가 스택을 따라 돌아가 청소하는 작업을 수행하거나 합니다. 이러한 일이 생겨도, nursery는 청소 작업이 항상 완전히 수행될 때까지 기다립니다. 청소할 기회조차 주지 않고 작업을 종료해 버리거나 완전히 취소되지 않은 상태로 남겨지는 일은 <em>절대로</em> 일어나지 않습니다.</p>
+      <p>Trio에서 코드는 언제든지 취소 요청을 받을 수 있습니다. 취소가 요청되면, 코드는 그 후에 "체크포인트" 작업을 수행하고, <code>Cancelled</code> 예외를 발생시킵니다. 즉, 취소가 <em>요청된</em> 시점과 실제로 취소가 <em>수행된</em> 시점에 차이가 있다는 것입니다. 작업이 체크포인트를 실행하기까지 시간이 걸리고, 그 이후에 예외가 스택을 따라 돌아가 정리하는 작업을 수행하거나 합니다. 이러한 일이 생겨도, nursery는 정리 작업이 항상 완전히 수행될 때까지 기다립니다. 정리할 기회조차 주지 않고 작업을 종료해 버리거나 완전히 취소되지 않은 상태로 남겨지는 일은 <em>절대로</em> 일어나지 않습니다.</p>
 
     </div>
   </div>
@@ -1276,7 +1276,7 @@ with open("my-file") as file_handle:
       <h3 id="16">Automatic resource cleanup works.</h3>
     </div>
     <div class="column translation">
-      <h3 id="16">자동으로 자원을 비웁니다.</h3>
+      <h3 id="16">자동으로 자원을 정리합니다.</h3>
     </div>
   </div>
 
@@ -1594,7 +1594,7 @@ with open("my-file") as file_handle:
     <div class="column translation">
       <h3 id="translators">Translators</h3>
       <p>
-        <a href="https://github.com/zerobased-co/muchtrans/commits/master/articles/notes-on-structured-concurrency-or-go-statement-considered-harmful.ko.md">Latest update</a> at 2018-12-05 02:18:37
+        <a href="https://github.com/zerobased-co/muchtrans/commits/master/articles/notes-on-structured-concurrency-or-go-statement-considered-harmful.ko.md">Latest update</a> at 2018-12-05 02:32:49
       </p>
       <div class="translators">
         
