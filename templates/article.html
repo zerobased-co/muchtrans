@@ -73,21 +73,21 @@
         issue-term="pathname"
         theme="github-light"
         crossorigin="anonymous"
-        async>
+        defer>
 </script>
   </div>
 </div>
 {% endif %}
 {% endblock %}
 {% block footer %}
-  <div class="footer">
-    <p>
-      Original contents: 
-        <a href="{{ original.source }}" target="_blank">
-          {% if original.source_title %}{{ original.source_title }}{% else %}{{ original.source }}{% endif %}</a>
-    </p>
-    <p>Let's translate together on GitHub: <a href="https://github.com/zerobased-co/muchtrans">zerobased-co/muchtrans</a></p>
-  </div>
+<div class="footer">
+  <p>
+    Original contents:
+      <a href="{{ original.source }}" target="_blank">
+        {% if original.source_title %}{{ original.source_title }}{% else %}{{ original.source }}{% endif %}</a>
+  </p>
+  <p>Let's translate together on GitHub: <a href="https://github.com/zerobased-co/muchtrans">zerobased-co/muchtrans</a></p>
+</div>
 {% endblock %}
 {% block script %}
 <script>

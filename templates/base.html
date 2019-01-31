@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:image" content="{% block og_image %}/static/images/muchtrans.png{% endblock %}"/>
   <link rel="icon" type="image/png" href="/static/images/favicon.png" sizes="32x32" />
-  {% include "templates/gtag.html" %}
   {% if css %}
   <link rel="stylesheet" type="text/css" href="/{{ css }}">
   {% endif %}
@@ -15,6 +14,7 @@
   {% block header %}{% endblock %}
   {% block content %}{% endblock %}
   {% block footer %}{% endblock %}
+  {% include "templates/gtag.html" %}
 </body>
 {% block script %}{% endblock %}
 </html>
