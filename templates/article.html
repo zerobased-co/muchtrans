@@ -68,13 +68,7 @@
 {% if utterances %}
 <div>
   <div class="row">
-<script src="https://utteranc.es/client.js"
-        repo="zerobased-co/muchtrans"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        defer>
-</script>
+  {% include "templates/utterances.html" %}
   </div>
 </div>
 {% endif %}
