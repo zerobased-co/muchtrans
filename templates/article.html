@@ -109,10 +109,12 @@ window.addEventListener('load', function () {
     node.appendChild(anchor);
   });
 
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('hide-original') == 'true') {
-    checkbox.checked = true;
-    toggleOriginal(true);
+  if (typeof URLSearchParams !== undefined) {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('hide-original') == 'true') {
+      checkbox.checked = true;
+      toggleOriginal(true);
+    }
   }
 
   var article = document.getElementsByTagName('article')[0];
