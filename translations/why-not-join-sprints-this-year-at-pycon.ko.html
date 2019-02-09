@@ -281,7 +281,7 @@
 
 <div>
   <div class="row">
-<script src="https://utteranc.es/client.js"
+  <script src="https://utteranc.es/client.js"
         repo="zerobased-co/muchtrans"
         issue-term="pathname"
         theme="github-light"
@@ -295,7 +295,7 @@
   
 <div class="footer">
   <p>
-    Original contents: 
+    Original contents:
       <a href="https://pycon.blogspot.com/2016/03/why-not-join-sprints-this-year-at-pycon.html" target="_blank">
         https://pycon.blogspot.com/2016/03/why-not-join-sprints-this-year-at-pycon.html</a>
   </p>
@@ -315,6 +315,27 @@
 
 <script>
 window.addEventListener('load', function () {
+  function toggleQueryParameter(key, value) {
+    if (typeof URLSearchParams === 'undefined' || typeof history.replaceState === 'undefined') {
+      return;
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    if (value === false) {
+      urlParams.delete(key);
+    } else {
+      urlParams.set(key, value);
+    }
+
+    const queryString = urlParams.toString();
+    if (queryString.length > 0) {
+      history.replaceState({}, 'toggle' + key, '?' + queryString);
+    } else {
+      const path = [location.protocol, '//', location.host, location.pathname].join('');
+      history.replaceState({}, 'toggle' + key, path);
+    }
+  }
+
   function toggleOriginal(hide) {
     document.querySelectorAll('.original').forEach(function(node) {
       if (hide) {
@@ -325,29 +346,32 @@ window.addEventListener('load', function () {
     });
   }
 
-  var checkbox = document.getElementById('hide-original');
+  const checkbox = document.getElementById('hide-original');
   checkbox.onclick = function () {
     toggleOriginal(checkbox.checked);
+    toggleQueryParameter('hide-original', checkbox.checked);
   }
 
   document.querySelectorAll('h2[id], h3[id]').forEach(function(node) {
-    var anchor = document.createElement("a");
+    const anchor = document.createElement("a");
     anchor.className = "pilcrow";
     anchor.text = "\xb6";
     anchor.href = "#" + node.id;
     node.appendChild(anchor);
   });
 
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('hide-original') == 'true') {
-    checkbox.checked = true;
-    toggleOriginal(true);
+  if (typeof URLSearchParams !== undefined) {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('hide-original') == 'true') {
+      checkbox.checked = true;
+      toggleOriginal(true);
+    }
   }
 
-  var article = document.getElementsByTagName('article')[0];
+  const article = document.getElementsByTagName('article')[0];
   article.style.visibility = 'visible';
 
-  var loading = document.getElementsByClassName('loading')[0];
+  const loading = document.getElementsByClassName('loading')[0];
   loading.style.display = 'none';
 });
 </script>
