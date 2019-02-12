@@ -11,6 +11,7 @@ import re
 import requests
 import time
 
+OUTPUT = '_build'
 
 SINGLE = ['blockquote', 'h1', 'h2', 'h3', 'hr', ]
 SINGLE_RE = '^({})'.format('|'.join(['\<{} '.format(_) for _ in SINGLE]))
@@ -132,7 +133,7 @@ for key, article in articles.items():
     print('Building: {}'.format(article['metadata'].get('title', key)))
 
     # Find dedicated css file
-    css_filename = 'static/css/{}.css'.format(os.path.splitext(os.path.basename(article['original']))[0])
+    css_filename = OUTPUT + '/static/css/{}.css'.format(os.path.splitext(os.path.basename(article['original']))[0])
     if os.path.isfile(css_filename):
         css = css_filename
     else:
@@ -143,7 +144,7 @@ for key, article in articles.items():
             translation = file.read()
 
         translation_metadata, translation = md_parse(translation)
-        translation_html_filename = 'translations/' + os.path.splitext(os.path.basename(filename))[0] + '.html'
+        translation_html_filename = OUTPUT + '/translations/' + os.path.splitext(os.path.basename(filename))[0] + '.html'
         translation_html = mistune.Markdown(renderer=HLabelRenderer(escape=False, hard_wrap=True))(translation).replace('<br>', '</p><p>')
 
         # TBD: Fix for duplicated footnote (will be fixed in renderer level, future)
@@ -233,7 +234,7 @@ for language, articles in translated_articles_by_language.items():
     })
 
     print('\t RSS feed in {}'.format(language))
-    filename = 'feeds/{}.xml'.format(language)
+    filename = OUTPUT + '/feeds/{}.xml'.format(language)
     with open(filename, "w") as file:
         file.write(rendered)
 
@@ -251,5 +252,5 @@ rendered = index_template.render({
     'feed_list': feed_list,
 })
 
-with open('index.html', "w") as file:
+with open(OUTPUT + '/index.html', "w") as file:
     file.write(rendered)
