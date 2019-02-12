@@ -219,6 +219,7 @@ for key, article in articles.items():
 # RSS Feed
 print('Building RSS feeds')
 rss_template = env.get_template('templates/feed.xml')
+feed_list = []
 for language, articles in translated_articles_by_language.items():
     article_list = sorted(
         articles,
@@ -232,8 +233,11 @@ for language, articles in translated_articles_by_language.items():
     })
 
     print('\t RSS feed in {}'.format(language))
-    with open('feeds/{}.xml'.format(language), "w") as file:
+    filename = 'feeds/{}.xml'.format(language)
+    with open(filename, "w") as file:
         file.write(rendered)
+
+    feed_list.append((language, filename))
 
 # Render and save index
 index_template = env.get_template('templates/index.html')
@@ -244,6 +248,7 @@ article_list = sorted(
 )
 rendered = index_template.render({
     'article_list': article_list,
+    'feed_list': feed_list,
 })
 
 with open('index.html', "w") as file:
