@@ -9,6 +9,7 @@
   {% if css %}
   <link rel="stylesheet" type="text/css" href="/{{ css }}">
   {% endif %}
+  {% block head %}{% endblock %}
 </head>
 <body>
   {% block header %}{% endblock %}
