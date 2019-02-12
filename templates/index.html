@@ -1,7 +1,12 @@
 {% extends "templates/base.html" %}
+{% block head %}
+<!-- TBD: Serve rss feed in Korean only -->
+<link rel="alternate" type="application/rss+xml" title="muchtrans.com feed" href="/feeds/ko.xml"/>
+{% endblock %}
 {% block header %}
 <div class="header">
   <h1>muchtrans.com</h1>
+  <p>There are too much cool text to be translated in this world.</p>
 </div>
 {% endblock %}
 {% block content %}
@@ -10,11 +15,14 @@
     <h1>List of translations</h1>
   </div>
   <div class="column">
+  {% for month, articles in article_list %}
+    <h3>{{ month }}</h3>
     <ul>
     {% for article in articles %}
       <li><a href="./{{ article.url }}">{{ article.title }}</a></li>
     {% endfor %}
     </ul>
+  {% endfor %}
   </div>
 </div>
 {% endblock %}

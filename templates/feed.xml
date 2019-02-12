@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>muchtrans</title>
+  <link>https://muchtrans.com</link>
+  <description>There are too much cool text to be translated in this world.</description>
+  <pubDate>{{ pubDate }}</pubDate>
+  <language>{{ language }}</language>
+  {% for article in articles %}
+  <item>
+    <title>{{ article.title }}</title>
+    <link>https://muchtrans.com/{{ article.url }}</link>
+    <description><![CDATA[{{ article.description }}]]></description>
+    <pubDate>{{ article.pubDate }}</pubDate>
+    {% for translator in article.translators %}
+    <author>{{ translator.email }} ({{ translator.name }})</author>
+    {% endfor %}
+  </item>
+  {% endfor %}
+</channel>
+</rss>

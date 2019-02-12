@@ -1,10 +1,12 @@
 from collections import defaultdict
+from datetime import datetime
 from git import Repo
 from jinja2 import Environment, FileSystemLoader
 from mistune_contrib.meta import parse as md_parse
 import glob
 import mistune
 import os
+import pytz
 import re
 import requests
 import time
@@ -63,9 +65,7 @@ def get_github_user(email):
     return None
 
 
-def get_authors(repo, filepath):
-    commits = repo.iter_commits('--all', paths=filepath)
-
+def get_authors_from_commits(commits):
     authors = {}
     for commit in commits:
         email = commit.author.email
@@ -83,14 +83,19 @@ def get_authors(repo, filepath):
     return sorted(authors.values(), key=lambda x: x['count'], reverse=True)
 
 
-def get_latest_updated(repo, filepath):
-    commit = list(repo.iter_commits('--all', paths=filepath, max_count=1))
+def get_commits(repo, filepath):
+    commits = list(repo.iter_commits('--all', paths=filepath))
+    return commits
 
-    if commit:
-        return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(commit[0].authored_date))
 
-    return ''
+def get_time_from_commit(commit):
+    return datetime.fromtimestamp(commit.authored_date + commit.author_tz_offset).replace(tzinfo=pytz.utc)
 
+def get_UTC(datetime):
+    return datetime.strftime('%Y-%m-%dT%H:%M:%SZ')
+
+def get_RFC822(datetime):
+    return datetime.strftime("%a, %d %b %Y %H:%M:%S +0000")
 
 # Get articles
 articles = defaultdict(lambda: {
@@ -114,7 +119,9 @@ for filename in glob.glob("articles/*.md"):
 article_template = env.get_template('templates/article.html')
 
 # Create translated articles
-translated_articles = []
+translated_articles_by_language = defaultdict(list)
+translated_articles_in_month = defaultdict(list)
+
 for key, article in articles.items():
     with open(article['original']) as file:
         original = file.read()
@@ -131,7 +138,7 @@ for key, article in articles.items():
     else:
         css = None
 
-    for locale, filename in article['translations'].items():
+    for language, filename in article['translations'].items():
         with open(filename) as file:
             translation = file.read()
 
@@ -139,7 +146,7 @@ for key, article in articles.items():
         translation_html_filename = 'translations/' + os.path.splitext(os.path.basename(filename))[0] + '.html'
         translation_html = mistune.Markdown(renderer=HLabelRenderer(escape=False, hard_wrap=True))(translation).replace('<br>', '</p><p>')
 
-        # Fix for duplicated footnote (will be fixed in renderer level, future)
+        # TBD: Fix for duplicated footnote (will be fixed in renderer level, future)
         translation_html = translation_html.replace('fn-', 'tfn-').replace('fnref-', 'tfnref-')
 
         # Match original and translated articles in html level
@@ -150,8 +157,8 @@ for key, article in articles.items():
         untranslated = False
 
         for s, d in zip(original_html.split('\n'), translation_html.split('\n')):
-            if len(s) > 40 and s == d:  # TBD: Too naive approache
-                untranslated = True
+#            if len(s) > 40 and s == d:  # TBD: Too naive approache
+#                untranslated = True
 
             if re.search(SINGLE_RE, s):
                 if sbuf:
@@ -171,20 +178,23 @@ for key, article in articles.items():
         if sbuf:
             rows.append((sbuf, dbuf))
 
+        commits = get_commits(repo, filename)
+        if not commits:
+            continue
+
         # Render and save translated article
         rendered = article_template.render({
             'css': css,
             'rows': rows,
 
-            'translators': get_authors(repo, filename),
-            'latest_update': get_latest_updated(repo, filename),
+            'translators': get_authors_from_commits(commits),
+            'latest_update': get_UTC(get_time_from_commit(commits[0])),
 
             'filename': filename,
             'original': original_metadata,
             'translation': translation_metadata,
 
             'finished': not untranslated,
-            
             'utterances': os.environ.get('PRODUCTION', False),
         })
 
@@ -192,16 +202,48 @@ for key, article in articles.items():
             file.write(rendered)
 
         # Add to the index
-        translated_articles.append({
+        created_month = get_time_from_commit(commits[-1]).strftime('%Y-%m')
+        translated_articles_in_month[created_month].append({
             'title': article['metadata']['title'],
             'url': translation_html_filename,
         })
 
+        translated_articles_by_language[language].append({
+            'pubDate': get_RFC822(get_time_from_commit(commits[-1])),
+            'translators':  get_authors_from_commits(commits),
+            'title': article['metadata']['title'],
+            'url': translation_html_filename,
+            'description': translation_html,
+        })
+
+# RSS Feed
+print('Building RSS feeds')
+rss_template = env.get_template('templates/feed.xml')
+for language, articles in translated_articles_by_language.items():
+    article_list = sorted(
+        articles,
+        key=lambda x: x['pubDate'],
+        reverse=True
+    )[:10]
+    rendered = rss_template.render({
+        'pubDate': get_RFC822(datetime.utcnow()),
+        'language': language,
+        'articles': article_list,
+    })
+
+    print('\t RSS feed in {}'.format(language))
+    with open('feeds/{}.xml'.format(language), "w") as file:
+        file.write(rendered)
+
 # Render and save index
 index_template = env.get_template('templates/index.html')
-
+article_list = sorted(
+    translated_articles_in_month.items(),
+    key=lambda x: x[0],
+    reverse=True
+)
 rendered = index_template.render({
-    'articles': translated_articles,
+    'article_list': article_list,
 })
 
 with open('index.html', "w") as file:
