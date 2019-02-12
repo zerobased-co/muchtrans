@@ -1,7 +1,7 @@
 {% extends "templates/base.html" %}
 {% block head %}
 {% for language, feed in feed_list %}
-<link rel="alternate" type="application/rss+xml" title="muchtrans.com" hreflang="{{ language }}" href="/{{ feed }}"/>
+<link rel="alternate" type="application/rss+xml" title="muchtrans.com" hreflang="{{ language }}" href="{{ feed }}"/>
 {% endfor %}
 {% endblock %}
 {% block header %}
@@ -31,7 +31,7 @@
 <div class="footer">
   <p class="feed">RSS feed: 
     {% for language, feed in feed_list %}
-    <span><a href="./{{ feed }}">{{ language }}</a></span>
+    <span><a href="{{ feed }}">{{ language }}</a></span>
     {% endfor %}
   </p>
   <p>The name of <code>muchtrans.com</code> was designated by <a href="https://github.com/youknowone">youknowone</a></p>
