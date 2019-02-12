@@ -133,8 +133,8 @@ for key, article in articles.items():
     print('Building: {}'.format(article['metadata'].get('title', key)))
 
     # Find dedicated css file
-    css_filename = OUTPUT + '/static/css/{}.css'.format(os.path.splitext(os.path.basename(article['original']))[0])
-    if os.path.isfile(css_filename):
+    css_filename = '/static/css/{}.css'.format(os.path.splitext(os.path.basename(article['original']))[0])
+    if os.path.isfile(OUTPUT + css_filename):
         css = css_filename
     else:
         css = None
@@ -144,7 +144,7 @@ for key, article in articles.items():
             translation = file.read()
 
         translation_metadata, translation = md_parse(translation)
-        translation_html_filename = OUTPUT + '/translations/' + os.path.splitext(os.path.basename(filename))[0] + '.html'
+        translation_html_filename = '/translations/' + os.path.splitext(os.path.basename(filename))[0] + '.html'
         translation_html = mistune.Markdown(renderer=HLabelRenderer(escape=False, hard_wrap=True))(translation).replace('<br>', '</p><p>')
 
         # TBD: Fix for duplicated footnote (will be fixed in renderer level, future)
@@ -199,7 +199,7 @@ for key, article in articles.items():
             'utterances': os.environ.get('PRODUCTION', False),
         })
 
-        with open(translation_html_filename, "w") as file:
+        with open(OUTPUT + translation_html_filename, "w") as file:
             file.write(rendered)
 
         # Add to the index
@@ -234,8 +234,8 @@ for language, articles in translated_articles_by_language.items():
     })
 
     print('\t RSS feed in {}'.format(language))
-    filename = OUTPUT + '/feeds/{}.xml'.format(language)
-    with open(filename, "w") as file:
+    filename = '/feeds/{}.xml'.format(language)
+    with open(OUTPUT + filename, "w") as file:
         file.write(rendered)
 
     feed_list.append((language, filename))
