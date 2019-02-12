@@ -1,7 +1,8 @@
 {% extends "templates/base.html" %}
 {% block head %}
-<!-- TBD: Serve rss feed in Korean only -->
-<link rel="alternate" type="application/rss+xml" title="muchtrans.com feed" href="/feeds/ko.xml"/>
+{% for language, feed in feed_list %}
+<link rel="alternate" type="application/rss+xml" title="muchtrans.com" hreflang="{{ language }}" href="/{{ feed }}"/>
+{% endfor %}
 {% endblock %}
 {% block header %}
 <div class="header">
@@ -28,6 +29,11 @@
 {% endblock %}
 {% block footer %}
 <div class="footer">
+  <p class="feed">RSS feed: 
+    {% for language, feed in feed_list %}
+    <span><a href="./{{ feed }}">{{ language }}</a></span>
+    {% endfor %}
+  </p>
   <p>The name of <code>muchtrans.com</code> was designated by <a href="https://github.com/youknowone">youknowone</a></p>
   <p>Fork me on <a href="https://github.com/zerobased-co/muchtrans/">GitHub</a></p>
   <p>Brought to you by <a href="http://zerobased.co/">zerobased.co</a></p>
