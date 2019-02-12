@@ -48,3 +48,8 @@ venv
 .idea/*
 
 .DS_Store
+
+# Build result
+_build/translations
+_build/feeds
+_build/index.html
