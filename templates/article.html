@@ -137,7 +137,7 @@ window.addEventListener('load', function () {
     node.appendChild(anchor);
   };
 
-  if (typeof URLSearchParams !== undefined) {
+  if (typeof URLSearchParams !== 'undefined') {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('hide-original') == 'true') {
       checkbox.checked = true;
