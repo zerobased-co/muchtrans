@@ -27,8 +27,11 @@ body, html {
 }
 
 @media screen and (max-width: 720px) {
+  .row {
+    display: block;
+  }
   .column {
-    min-width: 94%;
+    width: 94%;
   }
 }
 
