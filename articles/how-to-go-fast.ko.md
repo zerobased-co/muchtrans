@@ -1,224 +1,218 @@
 title: 어떻게 빨리 갈 수 있을까
 source: https://quii.dev/How_to_go_fast
 
-#  How to go fast 
+#  어떻게 빨리 갈 수 있을까
 
-[ ![quii profile image](https://res.cloudinary.com/practicaldev/image/fetch/s--I4Bh1XF---/c_fill,f_auto,fl_progressive,h_50,q_auto,w_50/https://thepracticaldev.s3.amazonaws.com/uploads/user/profile_image/61881/0c870cae-d5c4-4603-ac34-8d6eb02ab1fa.png) Chris James ](https://dev.to/quii)
+[ ![quii profile image](https://res.cloudinary.com/practicaldev/image/fetch/s--I4Bh1XF---/c_fill,f_auto,fl_progressive,h_50,q_auto,w_50/https://thepracticaldev.s3.amazonaws.com/uploads/user/profile_image/61881/0c870cae-d5c4-4603-ac34-8d6eb02ab1fa.png) 크리스 제임스 ](https://dev.to/quii)
 
-This article is for anyone who works in software and wants to keep life simple, less stressful but still keep their employer happy. You'll see how by making simple choices and sticking to well-understood, proven principles you can ship software and not burn everyone out along the way.
+이 문서는 소프트웨어를 만들며, 단순하고 스트레스 없는 삶을 추구하며 동시에 동료들을 행복하게 하고 싶은 분들을 위해 작성했습니다. 선택을 단순화 하고 잘 알려지고 증명된 원리 원칙에 기대어 번아웃에 빠지지 않고 소프트웨어를 출시하는 방법을 알아봅시다.
 
-The business have arbitrarily given your team a year to make _a website thing_ and they've got many grandiose ideas. Don't be tempted to spend lots of time planning up front imagining big architectures and backlogs around all this ambition. This is the path to failure, premature optimisation and broken promises. 
+웹 사이트 같은 물건을 만드는데 당신의 팀에 임의로 1년이라는 시간을 주었을 뿐인데 해야할 일은 장황하고 많다고 칩시다. 이 모든 야심찬 계획을 둘러싼 거대한 구조와 일감을 상상해서 계획하는 일에 빠져들지 마세요. 이건 실패, 섣부른 최적화, 그리고 망가진 약속으로 이르는 길에 불과합니다.
 
-The only promise you'll make is you will showcase what you've done every 2 weeks and accept steering from the business on _actual problems_ and not feature decisions. 
+당신이 만들어야하는 유일한 약속은 2주 마다 무엇을 했는지 보여주는 자리와 비즈니스의 _실제 문제_를 받아들이는 것이지, 기능에 대한 약속을 해서는 안됩니다.
 
-We know going fast is important but so is the quality of the system we're making and the mental health of our team. **We will go really fast but we will always be doing it in a sustainable way.**
+빨리 가는 것이 중요한 만큼 우리가 만들고 있는 시스템의 품질과 팀의 정신 건강도 중요합니다. **우린 정말 빨리 가면서도, 지속 가능한 방법으로 하려고 합니다.**
 
-We don't want to be stressed out about big-bang releases, having to do big scary refactors or obsessing over irrelevant estimates for work that we may not ever actually do.
+한 번에 크게 빵 하고 출시하느라 스트레스를 받고 싶지 않으며, 거대하고 무시무시한 리팩토링이나 실제로는 할 리도 없는 일에 대한 무의미한 측정으로 시간 낭비하고 싶지 않습니다.
 
-##  Iterate 
+##  반복
 
-Start with hello world, fully deployed with continuous delivery. 
+가장 단순한 프로그램을, 지속적인 배포로 완전하게 시작해봅니다.
 
-**We always want a small and focused vision for the team to be working on.** Developing small things is easy and likely to succeed.
+**우리는 항상 우리가 하는 일에 있어 팀을 위한 작지만 명확한 비전을 원합니다.** 작은 것을 개발하는 것은 쉽고 성공하기도 용이합니다.
 
-Thinking about delivering tons of features causes teams to over-complicate and makes decision making difficult. 
+수천개도 넘는 기능을 출시하려는 생각은 팀을 불필요하게 복잡하게 만들뿐 아니라 결정도 어렵게 합니다.
 
-With lots of features up in the air there's the temptation to expand the team and this also slows things down. [See: The Mythical Man-Month](https://en.wikipedia.org/wiki/The_Mythical_Man-Month)
+당장 필요하지도 않은 기능 목록들을 보다보면 팀을 확장하려는 유혹에 빠지고, 이 때문에 팀은 느려집니다.[맨-먼스 미신을 보세요](https://en.wikipedia.org/wiki/The_Mythical_Man-Month)
 
-Instead we work on the next most important thing, based on business expertise, research, developer know-how and feedback from our users. 
+대신, 당장 가장 중요한 것에 집중해서 일합니다. 이는 비즈니스 전문가, 리서치, 개발자의 노하우와 사용자로부터의 피드백을 통해 알 수 있습니다.
 
-We will carry on continuously delivering small features iteratively indefinitely. 
+우리는 계속해서 작은 기능들을 출시해 나갈겁니다. 끝없이, 반복적으로.
 
-##  Rules and principles 
+##  규칙과 원칙
 
-###  1 Small co-located team 
+###  하나의 작지만 함께하는 팀
 
-Small teams deliver quicker than big teams because the lines of communication are small and the amount of work being done at once has to be small. Large teams working on lots of things breeds confusion and complexity.
+작은 팀은 의사 소통 비용이 적고 한 번에 수행할 일을 작게 가져갈 수 있어 큰 팀보다 출시할 수 있습니다. 많은 일을 수행하는 큰 팀은 혼동과 복잡성을 불러오게 됩니다.
 
-Having multiple small teams working on clearly separated things _can_ work but requires good coordination. It's a lot easier to define those teams on architectural lines once you have a mature product. I think it's a mistake to take a _new_ project with lots of unknowns and try and divide it amongst many teams because the architecture needs to be very flexible at this point and therefore the teams _wont be able to work independently, they will be coupled_.
+작게 나뉜 여러 팀이 명확하게 구분된 일을 하면 _확실히_ 좋겠지만, 조정을 잘해야 하는 부담이 따라옵니다. 충분히 성숙된 제품을 만든 다음에는 설계에 따라 팀을 구분하기가 훨씬 쉽습니다. 여러 시도가 필요한 미지의 _새_ 프로젝트를 시작할 때 여러 팀으로 나누는 것은 실수라고 생각합니다. 이 시점에는 설계가 유연해야 하는데, 나눠진 팀들이 서로 엮여 독립적으로 일할 수 없게 됩니다.
 
-In my experience being able to very easily talk to someone is important. The informal chats you have by just turning to your colleague is invaluable in breaking down the barriers of sharing ideas and building relationships. To me this is why I prefer to work in a co-located team because it minimises friction in communication.
+제 경험으로는 다른 사람에게 쉽게 말할 수 있는 것이 중요하다고 봅니다. 격식 없는 대화는 이루 말할 수 없이 중요한데, 이를 통해 아이디어를 공유하고 신뢰를 구축하는 일이 가능합니다. 저는 팀이 같은 공간에서 근무하는 것을 선호하는데, 이를 통해 의사소통에 있어 마찰을 최소화 할 수 있기 때문입니다. 
 
-###  Pair programming most of the time 
+###  페어 프로그래밍을 생활화
 
-Pairing helps you to write better software and helps cross-pollinate skills, ideas and domain knowledge. It will help grow your team and will improve relationships which will in general make everyone happier! 
+같이 작업하는 것은 더 나은 소프트웨어를 만들고 기술과 아이디어, 그리고 도메인 지식을 서로 나누는데 도움이 됩니다. 결과적으로 팀의 성장을 돕고 관계를 개선해 모두가 행복해지는 길로 이르게 됩니다.
 
-Don't mandate it from 9-5 though as it becomes very tiring very quickly. People need time and space to think. 
+하지만 아침부터 저녁까지 계속 강요하진 마세요. 굉장히 지치는 일입니다. 사람은 각자 생각할 시간과 공간이 필요합니다.
 
-###  No branches and no pull requests 
+###  브랜치와 풀 리퀘스트를 없애기
 
-You have a small team that are pairing. You _should_ be talking to each other all the time so you don't need pull requests to check code is OK. You're better off shipping it and getting feedback. You should be able to trust two people to get things right most of the time. 
+함께 일하는 작은 팀에 있다고 생각해보세요. 항상 서로 얘기하고 있음이 _분명하므로_ 코드가 괜찮은 지 확인하는 풀 리퀘스트는 필요하지 않을 겁니다. 일단 출시하고 피드백을 받는 편이 낫습니다. 대부분 일이 제대로 돌아가고 있는지 두 사람은 믿을 수 있을 겁니다.
 
-Pull requests are great for open source projects where you don't have implicit trust in every contributor. In a small team you don't need it and you need to take advantage of very tight feedback loops by reducing ceremony in writing software. 
+풀 리퀘스트는 기여자들이 서로 충분히 신뢰할 수 없는 오픈소스 프로젝트에서는 훌륭히 동작합니다. 작은 팀에서는 소프트웨어 작성에 대한 세리머니를 하느니 밀착된 피드백의 장점을 얻는 것이 좋습니다.
 
-A big theme of these rules is removing barriers to feedback loops and this means we can change software easily. Someone shipping code that isn't ideal **is not the end of the world, just fix it and move on - don't introduce complicated processes that slows everything down**
+이런 규칙의 큰 주제는 피드백 루프를 제거하는데 있는데, 이는 소프트웨어를 쉽게 바꿀 수 있음을 의미합니다. 누가 이상적이 않은 코드를 내보냈다고 해도 세상에 종말이 찾아오는게 아니니, 고치고 나아가면 될 일인데, 이를 위해 복잡한 프로세스를 만들어 느려터지게 만들지 맙시다.
 
-###  Have a minimal deployment pipeline 
+###  최소화된 배포 파이프라인을 가지기
 
-Maintaining pipelines and various non-live environments can become burdensome. At least at the start of the project all you really need is:
+파이프라인을 관리하고 다양한 테스트 환경을 구축하는 것은 참으로 귀찮은 일입니다. 프로젝트를 시작하기 위해 필요한 최소한의 요건은 이렇습니다:
 
-  1. Run tests
-  2. Deploy to live
-  3. Run smoke tests
+  1. 테스트를 돌린다
+  2. 배포한다
+  3. 망가졌는지 확인해본다(스모크 테스트를 수행)
 
+여러분이 스스로 테스트 환경을 정당화 하려고 하는지 스스로에게 물어보세요.
 
+  * 로컬이나 실제 환경에서 테스트할 수 없는게 뭔가요? 왤까요?
+  * 특정 환경에서만 테스트할 수 있는 것의 비용과 파급 효과는 무엇인가요?
+  * 이로 인해 실제 서비스로 배포하는데 어떤 지연이 발생하나요?
 
-If you find yourself trying to justify a non-live environment ask yourself
+대부분의 경우엔 이런 질문에 대해 그럴싸한 답을 내기가 어려울 겁니다.
 
-  * What is it that I cant test locally or in production? Why?
-  * What are the costs and ramifications of being only able to test a thing in a particular environment?
-  * What delays does this cause to shipping to production?
+###  빌드가 성공하면 항상 서비스를 배포하기
 
+이를 통해서:
 
+  * 빠른 피드백
+  * 자동화된 테스트를 강제
+  * 실제 사용될 코드만 작성을 강제
+  * 좋은 모니터링을 강제
+  * 배포에 대한 스트레스를 줄이고 거창한 일이 되지 않게 하기
 
-Most of the time you probably wont have good answer to these questions.
-
-###  Continuously deliver to live on green builds. 
-
-This gives you: 
-
-  * Fast feedback
-  * Force you to automate tests
-  * Force you to write actually shippable code
-  * Forces you to have good monitoring
-  * Makes releases a stress-free, non-event
-
-
-
-[This has been written about a lot](http://www.quii.co.uk/Why_you_should_deploy_on_Friday_afternoon). 
+[이에 대해서는 예전에도 썼었습니다](http://www.quii.co.uk/Why_you_should_deploy_on_Friday_afternoon).
 
 [![Accelerate book cover](https://res.cloudinary.com/practicaldev/image/fetch/s--5XfPWV0j--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://images-na.ssl-images-amazon.com/images/I/41TLwbsl8eL._SX329_BO1%2C204%2C203%2C200_.jpg)](https://res.cloudinary.com/practicaldev/image/fetch/s--5XfPWV0j--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://images-na.ssl-images-amazon.com/images/I/41TLwbsl8eL._SX329_BO1%2C204%2C203%2C200_.jpg)
 
-[And is proven to be how high-performing teams work](https://www.amazon.co.uk/Accelerate-Software-Performing-Technology-Organizations/dp/1942788339)
+[높은 효율을 내는 팀은 어떻게 일하는 지 증명하기도 했죠.](https://www.amazon.co.uk/Accelerate-Software-Performing-Technology-Organizations/dp/1942788339)
 
-Manually shipping a week or two weeks worth of work takes time and is risky; releasing small things constantly is easy and less risky. 
+주 단위로 수동 배포하면 시간도 많이 걸리고 위험합니다. 작은 기능을 항상 배포하는 것은 쉽고 덜 위험하죠.
 
-###  Write tests 
+###  테스트 작성하기
 
-They enable you to iterate quickly with confidence. Cant do continuous delivery without them and you cant go fast if you have to manually check things all the time.
+그래야 자신감 있고 빠르게 반복할 수 있습니다. 테스트 없이는 지속적인 배포가 불가능하고 항상 체크해야 하므로 빨리 갈 수가 없습니다.
 
-###  Monolith, not microservices 
+###  마이크로서비스로 쪼개지 말기
 
-Writing distributed systems is a pain in the arse and I'd rather avoid that pain until I actually need to distribute my system. YAGNI in other words. 
+분산 시스템을 작성하는 것은 정말 골치아픈 일이라 정말 시스템에서 그걸 필요로 할 때까지는 가능하면 미루는 편입니다. 달리 말하면 하지도 않을 일을 사서 고민하는 꼴(YAGNI)이죠.
 
-Refactoring in-process method calls is far easier than changing API calls. Deploying one application is much easier to deploy than orchestrating many system deployments etc etc.
+프로세스 내에서의 함수 호출을 리팩토링 하는게 API 호출을 변경하는 것보다 쉽습니다. 하나의 애플리케이션으로 배포하는게 여러 시스템 배포 같은 것들을 지휘하는 일보단 훨씬 쉽고요.
 
-I've worked on microservice projects in the past but my last project was a monolith and we moved so much faster because we cut out a huge number of issues to contend with.
+예전에 마이크로서비스 프로젝트로도 작업해봤지만, 제 지난 프로젝트는 모놀리식(monolith)이었고, 대처해야 할 일을 많이 쳐낸 덕분에 훨씬 더 빠르게 작업할 수 있었습니다.
 
-In order to do microservices you have to think _how_ you will break your system up into small components which leads nicely to...
+마이크로서비스를 하기 위해서는 일단 _어떻게_ 시스템을 작은 컴포넌트로 나눠야할 지 생각해야 하고, 그리고 ... 
 
-###  Don't design up front 
+###  앞서서 계획하지 말기
 
-Just ship some code, if you make something useful and keep refactoring and iterating a design will emerge from _reality_ rather than developers arguing over a whiteboard.
+뭔가 쓸만한 것을 만들어 일단 코드를 배포한 다음, 계속해서 리팩토링하고 현실 세계를 반영하며 디자인을 반복적으로 개선하는 쪽이 화이트보드 앞에서 논쟁만 하는 개발자보다 나을 겁니다.
 
-###  Refactor continuously 
+###  지속적으로 리팩토링하기
 
-Bad code makes you go slow. Bad code tends to get worse. So refactor continuously, don't have a refactor sprint or something dumb. Don't ask for permission, if it's bad just fix it. 
+나쁜 코드는 당신을 느리게 만듭니다. 나쁜 코드는 계속해서 나빠지는 경향이 있죠. 그러므로 항상 리팩토링 해야 합니다. 리팩토링 스프린트 같은 멍청한 것을 하지 말고요. 해도 되는지 물어볼 필요 없이 나쁜건 그냥 고치세요.
 
-Half the perceived problems of monoliths come from people writing bad code. If you maintain the quality of the code _real_ abstractions based on _real usage_ will emerge and then if you need to break up your monolith there will be obvious ways to do. 
+모놀리식의 문제로 알려진 것들의 절반은 사람들이 나쁜 코드를 작성하는데서 옵니다. 코드의 품질을 제대로 관리하고 있다면 _실제_ 사용에 기반한 _실제적인 추상화_가 이뤄질 것이고, 그렇다면 모놀리식 코드를 나눠야 할 때 어떻게 해야할 지 명확하게 알 수 있을 겁니다.
 
-###  Avoid writing an SPA, embrace progressive enhancement 
+###  SPA를 작성하지 말고, 점진적인 향상을 받아들이기
 
-SPAs bring a mountain of complexity that most projects don't need. You're probably not building Gmail so stop pretending you _need_ to write an SPA. You can get React on your CV at 10% time.
+SPA는 대부분의 프로젝트에는 필요하지도 않을 크고 거대한 복잡함을 동반합니다. 당신이 Gmail을 만들고 있는게 아니라면 SPA를 작성하기를 멈추는 편이 낫습니다. 개인 프로젝트에 React를 쓰고 이력서에 넣으세요.
 
-Instead prefer to use progressive enhancement techniques by writing semantic HTML, decorated with CSS and a sprinkle of JavaScript to enhance the experience a little when necessary. Even better, don't write _any_ client-side JavaScript if you can.
+대신 점진적으로 향상되는 기술을 사용하는게 좋습니다. 시맨틱한 HTML을 작성하고, CSS로 장식한 다음, 사용자 경험이 향상될 수 있는 꼭 필요한 부분에만 JavaScript를 최소한으로 첨가하세요. 할 수만 있다면 사용자 단에서 동작하는 JavaScript를 _아예_ 작성하지 않는 편이 더 좋습니다.
 
-###  Don't obsess over pixel-perfect design 
+###  1픽셀까지 완벽한 디자인에 집착하지 않기
 
-Writing HTML and CSS can be challenging and very time-consuming if you have a designer being overly precious about their design looking pixel perfect in every browser.
+모든 브라우저에서 자신으 디자인이 한 픽셀까지 완벽하게 일치하게 나오는데 집착하는 디자이너와 함께 일한다면 HTML과 CSS를 작성하기가 어렵고 시간 까먹는 일이 됩니다.
 
-We are writing code for _users_ not designers and most of the time they wont care if it looks a bit different in Firefox compared to Chrome. 
+우리는 디자이너가 아니라 _사용자_를 위해서 코드를 작성해야 하고, 사용자들은 파이어폭스랑 크롬에서 조금 다르게 나온다 한들 신경 쓰지 않습니다.
 
-Save time, effort and stress by challenging what is good enough for your users. 
+사용자에게 충분한 수준을 잘 이해하고 시간과 노력, 스트레스를 줄이세요.
 
-**Simple designs are simple to implement, elaborate designs are complicated to implement**. If your designer is giving you difficult to implement web pages, remind them we're trying to go fast.
+**단순한 디자인은 구현하기에 단순하고, 정교한 디자인은 구현하기가 어렵습니다**. 디자이너가 구현하기에 어려운 웹페이지를 줬다면, 우리는 빨리 가기 위해 노력하고 있다고 다시 알려주세요.
 
-###  Ship the first 80%, polish it later 
+###  80% 까지만 만들어 출시하고, 나중에 다듬기
 
-Related to the above it is a total waste of time to really perfect a certain feature in respect to design and UX if it turns out that it is a feature that isn't needed. 
+앞서 말한 것과 연관되는데, 어떤 기능이 나중에 필요하지 않은 것으로 밝혀진다면, 디자인과 UX 측면에서 해당 기능을 완벽하게 구현하느라 들인 시간은 완전히 낭비가 됩니다.
 
-I have seen a team spend weeks polishing a search feature on a website in respect to its design and its JavaScript only for it to be thrown away a few months later because the fundamental idea was wrong in the first place. 
+저는 한 웹사이트에서 검색 기능의 디자인적인 측면과 자바스크립트를 다듬는데 몇 주나 소진한 팀이, 몇 달 뒤에 근본적인 아이디어가 잘못되어 완전히 날려버린 경우도 보았습니다.
 
-_Ship enough to get feedback and prove the idea_ , once you've done that you can then spend time polishing it. 
+_아이디어를 확인하고 피드백을 받을 수 있는 수준에서 일단 출시하세요_, 그러고 나면 그걸 다듬는데 시간을 써도 됩니다.
 
-###  The people who write the software are the ones that are on support for it 
+###  소프트웨어를 작성한 사람이 유지보수의 책임지기
 
-This responsibility must be coupled with the empowerment to make the system maintainable. 
+책임과 권한이 함께할 때 시스템은 지속가능해집니다.
 
-If the people creating the system are the ones who have the threat of getting called at 3am because it is down they are more likely to ship more robust code.
+자신이 만든 시스템의 문제로 새벽 3시에 전화를 받아야 한다는 것을 명확히 한다면, 사람들은 보다 나은 코드를 작성하게 될겁니다.
 
-###  Use mature, proven tools 
+###  성숙하고 증명된 도구 쓰기
 
-It doesn't matter if you go fast with _shiny thing_ if you then leave and no one can build or understand your code anymore. 
+당신이 떠난 뒤 아무도 이해하지 못하고 사용할 수 없는 코드는 아무리 _새로운 것_으로 빨리 만들어 봤자 의미 없습니다.
 
-Get a consensus in your team of what you'd all enjoy writing with that is appropriate for the task at hand. Don't pick up a new programming language that is unfamiliar to everyone - remember we're trying to go fast.
+당면 과제에 적합하며 당신이 즐겨 쓸 수 있는 도구에 대해 팀이 공감할 수 있도록 하세요. 모두 익숙하지 않을 새로운 프로그래밍 언어를 집어들지 마세요. 우리는 빨리 가려고 노력하고 있음을 상기하세요.
 
-###  It must be simple to build the software 
+###  소프트웨어 빌드는 단순해야
 
-There should be a minimal amount of setup required to run and test the project. It is totally unacceptable to be unable to build a project just because it hasn't been touched for a few months or a key person has left. If it takes an individual more than an hour to setup the project you have failed hard.
+프로젝트를 실행하고 테스트하는데 필요한 설정은 최소화되어야 합니다. 몇 달 동안 건드리지 않았거나 중요한 사람이 떠난 뒤에 프로젝트를 빌드할 수 없는 건 받아들일 수 없는 일입니다. 어떤 사람이 프로젝트를 빌드하는 데 한 시간 이상이 걸린다면 완전히 실패한 것입니다.
 
-With technologies like Docker it is trivial to configure a project so it has all it's 3rd party dependencies such as databases available locally.
+Docker와 같은 기술을 이용하면 로컬에서 동작하는 데이터베이스와 같이 써드파티 의존성을 가지는 프로젝트를 설정하기가 쉬워집니다.
 
-It should not be reliant on a particular setup of a computer (beyond installing a few key things such as the JVM, Go or whatever). It must not be reliant on a 3rd party system for it to run & test locally.
+컴퓨터의 특별한 설정에 의존해서는 안됩니다(JVM이나 Go 같은 필수적인 것을 제외하고요). 실행하고 테스트하는데 있어 써드파티 시스템에 의존적이어선 안됩니다.
 
-To help enforce this, configure whatever CI tool you are using to automatically build the software every morning; even if no one has committed to it. 
+이걸 강제하는데 있어 매일 아침 소프트웨어를 자동으로 빌드하는 CI 도구를 설정해두면 도움이 됩니다. 아무도 그 일에 신경쓰고 있지 않아도 되고요.
 
-###  If the build is red, stop 
+###  빌드가 깨지면, 멈추세요
 
-The tests must always be passing. If you have unreliable tests, stop and fix them. Flaky tests have cost me many hours of my time in the past.
+테스트는 항상 통과해야 합니다. 신뢰할 수 없는 테스트는 당장 멈추고 수정하세요. 저는 과거에 비정상적인 테스트 때문에 많은 시간을 낭비했습니다.
 
-###  Actually sit with users and watch them work 
+###  사용자와 나란히 앉아 어떻게 사용하는지 관찰하기
 
-What _the business_ thinks the users needs vs what the user _actually_ needs is often very different. I have been lucky enough to witness this first hand where we saved ourselves a ton of work by actually watching a user at work and we were able to identify a very cheap and simple solution that they actually want vs the extremely costly solution the business proposed. 
+_비즈니스_에서 생각하는 사용자가 필요로 하는 기능과 _실제_ 사용자가 원하는 것은 다를 때가 많습니다. 저는 운좋게도 이걸 직접 목격할 수 있었는데, 사용자가 실제로 쓰는 것을 관찰한 덕분에 엄청난 일을 줄일 수 있었습니다. 그리고 사용자가 진짜 필요로 했던 구현이 쉽고 단순한 해결 방법과 비즈니스에서 제안했던 엄청나게 비싼 해결 방법을 구별할 수 있었습니다.
 
-###  User stories are a conversation starter 
+###  사용자 이야기는 대화의 시작점이 된다
 
-If a user story prescribes exactly what software to write, who made that decision? Why? How did they know they were correct? 
+만약 사용자 이야기(User story)가 어떤 소프트웨어를 작성해야 하는지 얘기해주는 도구라면, 누가 그런 결정을 내렸을까요? 왜죠? 그들은 어떻게 그들이 옳다는 것을 알았을까요?
 
-This kind of approach of a "tech lead" or whatever deciding how to write the software creates disillusioned developer robots who have no sense of ownership and stories that are "blocked" because they have not been blessed by some over-controlling leader.
+이러한 "기술 선도" 접근 방식이나 어떻게 소프트웨어를 작성해야 하는지를 결정하는 것들에 대한 얘기들이 환멸을 느끼는 개발자 로봇들을 양산합니다. 그들은 주인 의식이 없을 뿐 아니라, 과한 지배욕을 가진 리더 때문에 이야기로 부터 "차단" 되어 있습니다.
 
-User stories should describe a user problem and when it is picked up the team figures out a way to do it and then they execute that plan, simple as that. This has a higher chance of success because more people are thinking about the problem and makes people feel involved.
+사용자 이야기는 사용자의 문제를 기술하는데 있어 팀이 어떻게 해야할 지 바로 알아내고 계획을 실행할 수 있을 만큼 단순해야 합니다. 그래야 더 많은 사람이 그 문제에 대해 생각할 수 있게 되고, 참여감을 가지게 되어 성공할 확률을 높일 수 있습니다.
 
-Each ticket have some kind of measure of success that should be validated when enough data/research is gathered.
+각각의 티켓은 충분한 데이터와 연구가 수집될 때 검증할 수 있는 성공의 척도를 가지고 있어야 합니다. 
 
-###  Understand that _we are all software developers_
+###  _우리는 모두 소프트웨어 개발자_ 라는 것을 이해하기
 
-In my imaginary company if you consider yourself a "backend" developer and consequently get blocked because the "frontend" developer is sick consider yourself fired. Same if the UX designer is away and you don't want to take a punt at how a particular interaction should pan out. 
+제 상상 속의 회사에서는 "백엔드" 개발자가 "프론트엔드" 개발자가 아프기 때문에 결과적으로 막혀버렸다면 해고를 당할 겁니다. 마찬가지로 UX 디자이너가 자리에 없고 특정 상호작용이 어떻게 펼쳐져야할 지 고민하고 싶지 않은 경우에도 마찬가지입니다.
 
-You should have an appreciation of all aspects of software development. That's not to say you have to be an expert in everything but being blocked because a particular person is away is unacceptable. 
+우리는 소프트웨어 개발의 모든 측면을 인식해야 합니다. 모든 것에 통달하라는 얘기가 아니라, 누군가가 자리를 비웠다는 이유로 멈추는 것은 용납되지 않는다는 의미입니다.
 
-You should feel empowered enough to give whatever task a try. It doesn't matter if it's not perfect because it's better to ship something that is 70% good and then when the expert returns you can then **iterate** on the software to make it better.
+뭐든 시도해볼 수 있다는 충분한 자신감을 가지세요. 완벽하지 않아도 상관 없습니다. 70% 정도 좋은 것을 일단 내보내는 편이 낫고, 전문가가 돌아왔을 때 **반복해서** 소프트웨어를 개선해나갈 수 있습니다.
 
-When I said pairing earlier I didn't just mean "backend developers" or whatever. Everyone should be involved. If a UX designer is interviewing users it is their responsibility to bring along someone else to get experience of this skill and learn about the users. This kind of knowledge sharing is _vital_ to make individuals that feel invested in the project and the team. 
+제가 앞서 페어링을 얘기했을 때 "백엔드 개발자"로만 한정지어 얘기한 것이 아닙니다. 모두가 참여해야 합니다. UX 디자이너가 사용자를 인터뷰할 때, 이런 기술에 대해 경험을 얻고 사용자로부터 배우기 위해 다른 누군가와 함께할 책임이 있습니다. 이런 종류의 지식 공유는 각각의 개인을 프로젝트와 팀에 참여감을 주는데 있어 _필수적_입니다.
 
-###  Have 10/20% time 
+###  10/20%의 시간 갖기
 
-Allocate time for everyone to work on whatever they want and be strict about it. 
+모두 각자 원하는 시간을 정해 일하도록 하고, 엄격하게 지켜야 합니다.
 
-We work in a creative profession and we need some space to breathe, learn things and try out different ideas. 
+우리는 창조적인 전문가로 일하기 때문에 숨을 돌리고 배우며 다른 아이디어에 도전하는 시간이 필요합니다.
 
-This is a great perk for the team, can help avoid burnout and can help bring new ideas that can bring great improvements to your systems down the line. 
+이것이 팀에게 가장 큰 특권이며, 번아웃을 피할 수 있으며, 새로운 아이디어를 창출하여 시스템에 큰 진전을 가져오는데 도움이 됩니다.
 
-###  Don't plan extensively beyond 6 weeks 
+###  6주가 넘는 광대한 계획은 금물
 
-Having a vision of the future is fun, but keep it a vague and aspirational. Remember a team focused on one or two features is far more productive than one which is worrying about 10 imaginary requirements.
+미래에 대한 비전을 가지는 일은 재미있긴 하지만, 애매하고 열망하는 것으로 유지하세요. 하나 또는 두 개의 기능에 집중하는 팀은 10개의 상상속 요구 사항을 걱정하는 팀보다 훨씬 더 생산적이라는 사실을 기억하세요.
 
-###  No Jira, no estimates, no timekeeping, no burn-up charts 
+###  Jira 금지, 예상 금지, 시간 엄수 금지, 번-업 차트 금지
 
-All a massive waste of time, causes friction and I haven't seen a single burn-up chart in my career deliver any kind of _actual useful information_. 
+모두 다 엄청난 시간의 낭비이고, 마찰을 일으키는 것들입니다. 저는 제 경력에서_실제로 유용한 정보_를 가져다주는 단 하나의 번-업 차트도 본 적이 없습니다.
 
-Remember we have committed to showing _**real working software**_ frequently, **not imaginary charts** which are at best educated guesses. Finger in the air guesses are fine, adding up story points for tickets that have no hope of being actually looked at in the next 3 months is worthless.
+우리는 똑똑이들이 예상하는 **상상 속의 차트**가 아니라 _**실제로 동작하는 소프트웨어**_를 자주 보여주기로 약속했던 것을 기억하시나요? 허공에 손짓을 하는 예상은 괜찮지만, 앞으로 3개월 동안 볼 일도 없는 티켓에 스토리 포인트를 더하는 일은 정말 의미 없습니다.
 
-> [Individuals and interactions over processes and tools](https://agilemanifesto.org/)
+> [프로세스와 도구에 대한 개개인과 상호 작용](https://agilemanifesto.org/)
 
-By all means have a simple, physical wall with the columns of ready for dev, in dev & done but much more than that it just becomes silly.
+부디 최대한 단순하게 실제 벽에 개발할 준비가 된 것, 개발 중인 것과 끝난 것으로 정리하면 좋겠습니다. 그 이상은 우스꽝스럽게 될 뿐입니다.
 
-##  Wrapping up 
+##  정리
 
-The way to move fast is not imagine the perfect product, architecture, design a backlog and then execute it. 
+빠르게 움직이는 방법은 완벽한 제품, 설계, 백로그의 설정과 실행을 상상하는 것이 아닙니다.
 
-The way you move fast is by iterating quickly with low-effort, proven methodologies and communicating with each other as you learn through your iterations. 
+빠르게 움직이는 방법은 적은 노력과 검증된 방법을 통해 빠르게 반복하는 것이며, 반복에서 배운 것을 서로 의사소통 하는 것입니다.
 
-Optimise your processes so that your team can fearlessly and quickly change software. This way you will be able to build a good product guided by constant feedback loops.
+팀이 두려움 없이 빠르게 소프트웨어를 개선할 수 있도록 프로세스를 최적화하세요. 이 방법을 통해 일정한 피드백 루프를 기반으로 좋은 제품을 만들 수 있게 됩니다.
 
-There is no one true way to create great teams who can ship great products but in my experience so far these principles seem to stand up well. Your way might be different and that's fine but ask yourself if your team is as good as it could be. Retrospection is always important to help your team adapt to new conditions. 
+근사한 제품을 출시할 수 있는 위대한 팀을 만드는데 왕도가 있을리 없습니다. 하지만 지금까지 경험한 바에 따르면 이러한 원칙은 아직 유효해 보입니다. 여러분의 방식이 다르다고 해도 무방합니다. 다만, 여러분의 팀이 최선인지 되물어 보세요. 회고를 통해 팀을 새로운 환경에 적응하게 하는 일은 항상 중요하니까요.
