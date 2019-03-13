@@ -8,8 +8,9 @@
 body, html {
   margin: 0;
   padding: 0;
-  background: #F8F8FA;
+  background: #F8F8F8;
   font-family: "Roboto", sans-serif;
+  font-size: 1.04em;
   color: #303037;
 }
 
@@ -40,13 +41,22 @@ h1, h2, h3, h4, h5, h6 {
   word-break: keep-all;
 }
 
-.header h1 {
-  font-size: 36px;
-  margin: 0.5em 0;
+h1 {
+  font-size: 2em;
+  margin: 0.75em 0 0.5em;
 }
 
-h2, h3 {
-  margin: 2.2em 0 1.5em;
+h2 {
+  font-size: 1.6em;
+  margin: 2.5em 0 1.0em;
+}
+
+h3 {
+  font-size: 1.4em;
+}
+
+h3, h4, h5, h6 {
+  margin: 1.8em 0 0.75em;
 }
 
 h2 a.pilcrow,
@@ -73,8 +83,8 @@ a:hover {
   border-bottom: 1px solid #303037;
 }
 
-h3, h4, h5, h6 {
-  margin: 1.5em 0 0.3em;
+em {
+  padding: 0 0.15em;
 }
 
 ol, ul {
@@ -89,7 +99,7 @@ li {
 }
 
 p, blockquote, q {
-  line-height: 1.825;
+  line-height: 1.865;
   margin: 0 0 1.0em;
   word-wrap: break-word;
 }
