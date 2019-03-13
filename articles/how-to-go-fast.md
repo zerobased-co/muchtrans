@@ -61,15 +61,11 @@ Maintaining pipelines and various non-live environments can become burdensome. A
   2. Deploy to live
   3. Run smoke tests
 
-
-
 If you find yourself trying to justify a non-live environment ask yourself
 
   * What is it that I cant test locally or in production? Why?
   * What are the costs and ramifications of being only able to test a thing in a particular environment?
   * What delays does this cause to shipping to production?
-
-
 
 Most of the time you probably wont have good answer to these questions.
 
@@ -82,8 +78,6 @@ This gives you:
   * Force you to write actually shippable code
   * Forces you to have good monitoring
   * Makes releases a stress-free, non-event
-
-
 
 [This has been written about a lot](http://www.quii.co.uk/Why_you_should_deploy_on_Friday_afternoon). 
 
