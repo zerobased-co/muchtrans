@@ -8,7 +8,7 @@ Muchtrans is yet another translation platform, under heavy developement.
 ## Why muchtrans? / 왜 muchtrans 인가요?
 
 I've translated English articles into Korean for years. During translation processes, I found the importance of showing original contents with translated paragraphs. It helps readers to find out wrong translations and makes them work together for better translations. By reading original contents side-by-side, you can improve your language skills at the same time either.
-<br>지난 몇 년간 영어 문서를 한국어로 번역해왔습니다. 번역화는 과정에서 원본 콘텐츠를 번역된 것과 함께 보여주는 것의 중요성을 파악했습니다. 이를 통해 독자가 잘못된 번역을 쉽게 찾을 수 있도록 하고 함께 더 나은 번역을 가능하게 합니다. 원본 콘텐츠를 함께 읽으므로 외국어 실력도 동시에 향상시킬 수 있습니다.
+<br>지난 몇 년간 영어 문서를 한국어로 번역해왔습니다. 번역하는 과정에서 원본 콘텐츠를 번역된 것과 함께 보여주는 것의 중요성을 파악했습니다. 이를 통해 독자가 잘못된 번역을 쉽게 찾을 수 있도록 하고 함께 더 나은 번역을 가능하게 합니다. 원본 콘텐츠를 함께 읽으므로 외국어 실력도 동시에 향상시킬 수 있습니다.
 
 So, I made it like this.
 <br>그래서 이렇게 만들었습니다.
