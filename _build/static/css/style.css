@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab:400,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Roboto+Slab:400,700');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,700|Noto+Serif+KR:400,700');
 
 * {
   text-rendering: optimizeLegibility;
@@ -9,9 +10,9 @@ body, html {
   margin: 0;
   padding: 0;
   background: #F8F8F8;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.04em;
-  color: #303037;
+  font-family: "Roboto", "Noto Sans KR", sans-serif;
+  font-size: 1.028em;
+  color: #303030;
 }
 
 .row {
@@ -37,7 +38,7 @@ body, html {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Roboto Slab", serif;
+  font-family: "Roboto Slab", "Noto Serif KR", serif;
   word-break: keep-all;
 }
 
@@ -80,7 +81,7 @@ a:link, a:visited {
 
 a:hover {
   text-decoration: none;
-  border-bottom: 1px solid #303037;
+  border-bottom: 1px solid #303030;
 }
 
 em {
@@ -105,7 +106,7 @@ p, blockquote, q {
 }
 
 blockquote {
-  font-family: "Roboto Slab", serif;
+  font-family: "Roboto Slab", "Noto Serif KR", serif;
   font-size: 1.2em;
   font-style: italic;
   margin: 1.5em 0;
@@ -120,7 +121,7 @@ q {
 }
 
 pre {
-  background: #EAEAEF;
+  background: #EAEAEA;
   padding: 15px;
   border: 1px solid #CDCDD6;
   border-radius: 3px;
@@ -129,7 +130,7 @@ pre {
 }
 
 h1 code, h2 code, h3 code, p code, li code {
-  background: #EAEAEF;
+  background: #EAEAEA;
   padding: 1px 3px;
   border: 1px solid #CDCDD6;
   border-radius: 3px;
@@ -140,12 +141,12 @@ article {
 }
 
 .header, .footer {
-  background: #EAEAEF;
+  background: #EAEAEA;
   padding: 1em 3%;
 }
 
 .notification {
-  background: #CDCDD6;
+  background: #CDCDCD;
   padding: 1em 3%;
 }
 
