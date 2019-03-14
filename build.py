@@ -210,6 +210,7 @@ for key, article in articles.items():
         })
 
         translated_articles_by_language[language].append({
+            'datetime': get_UTC(get_time_from_commit(commits[-1])),
             'pubDate': get_RFC822(get_time_from_commit(commits[-1])),
             'translators':  get_authors_from_commits(commits),
             'title': article['metadata']['title'],
@@ -224,7 +225,7 @@ feed_list = []
 for language, articles in translated_articles_by_language.items():
     article_list = sorted(
         articles,
-        key=lambda x: x['pubDate'],
+        key=lambda x: x['datetime'],
         reverse=True
     )[:10]
     rendered = rss_template.render({
