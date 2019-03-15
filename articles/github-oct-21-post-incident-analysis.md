@@ -13,13 +13,13 @@ The majority of user-facing GitHub services are run within our own [data center 
 
 At 22:52 UTC on October 21, routine maintenance work to replace failing 100G optical equipment resulted in the loss of connectivity between our US East Coast network hub and our primary US East Coast data center. Connectivity between these locations was restored in 43 seconds, but this brief outage triggered a chain of events that led to 24 hours and 11 minutes of service degradation.
 
-![A high-level depiction of GitHub's network architecture, including two physical datacenters, 3 POPS, and cloud capacity in multiple regions connected via peering.](https://blog.github.com/assets/img/2018-10-25-oct21-post-incident-analysis/network-architecture.png)
+![A high-level depiction of GitHub's network architecture, including two physical datacenters, 3 POPS, and cloud capacity in multiple regions connected via peering.](https://github.blog/wp-content/uploads/2018/10/network-architecture.png)
 
 In the past, we’ve discussed how we use [MySQL to store GitHub metadata](https://githubengineering.com/orchestrator-github) as well as our approach to [MySQL High Availability](https://githubengineering.com/mysql-high-availability-at-github). GitHub operates multiple MySQL clusters varying in size from hundreds of gigabytes to nearly five terabytes, each with up to dozens of read replicas per cluster to store non-Git metadata, so our applications can provide pull requests and issues, manage authentication, coordinate background processing, and serve additional functionality beyond raw Git object storage. Different data across different parts of the application is stored on various clusters through functional sharding.
 
 To improve performance at scale, our applications will direct writes to the relevant primary for each cluster, but delegate read requests to a subset of replica servers in the vast majority of cases. We use [Orchestrator](https://github.com/github/orchestrator) to manage our MySQL cluster topologies and handle automated failover. Orchestrator considers a number of variables during this process and is built on top of [Raft](https://raft.github.io/) for consensus. It’s possible for Orchestrator to implement topologies that applications are unable to support, therefore care must be taken to align Orchestrator’s configuration with application-level expectations.
 
-![In the normal topology, all apps perform reads locally with low latency.](https://blog.github.com/assets/img/2018-10-25-oct21-post-incident-analysis/normal-topology.png)
+![In the normal topology, all apps perform reads locally with low latency.](https://github.blog/wp-content/uploads/2018/10/normal-topology.png)
 
 ## Incident timeline
 
@@ -43,7 +43,7 @@ It was understood at this time that the problem affected multiple database clust
 
 Guarding the confidentiality and integrity of user data is GitHub’s highest priority. In an effort to preserve this data, we decided that the 30+ minutes of data written to the US West Coast data center prevented us from considering options other than failing-forward in order to keep user data safe. However, applications running in the East Coast that depend on writing information to a West Coast MySQL cluster are currently unable to cope with the additional latency introduced by a cross-country round trip for the majority of their database calls. This decision would result in our service being unusable for many users. We believe that the extended degradation of service was worth ensuring the consistency of our users’ data.
 
-![In the invalid topology, replication from US West to US East is broken and apps are unable to read from current replicas as they depend on low latency to maintain transaction performance.](https://blog.github.com/assets/img/2018-10-25-oct21-post-incident-analysis/invalid-topology.png)
+![In the invalid topology, replication from US West to US East is broken and apps are unable to read from current replicas as they depend on low latency to maintain transaction performance.](https://github.blog/wp-content/uploads/2018/10/invalid-topology.png)
 
 ### 2018 October 21 23:19 UTC
 
@@ -53,7 +53,7 @@ It was clear through querying the state of the database clusters that we needed 
 
 Engineers involved in the incident response team began developing a plan to resolve data inconsistencies and implement our failover procedures for MySQL. Our plan was to restore from backups, synchronize the replicas in both sites, fall back to a stable serving topology, and then resume processing queued jobs. We [updated our status](https://twitter.com/githubstatus/status/1054161818652946433) to inform users that we were going to be executing a controlled failover of an internal data storage system.
 
-![Overview of recovery plan was to fail forward, synchronize, fall back, then churn through backlogs before returning to green.](https://blog.github.com/assets/img/2018-10-25-oct21-post-incident-analysis/recovery-flow.png)
+![Overview of recovery plan was to fail forward, synchronize, fall back, then churn through backlogs before returning to green.](https://github.blog/wp-content/uploads/2018/10/recovery-flow.png)
 
 While MySQL data backups occur every four hours and are retained for many years, the backups are stored remotely in a public cloud blob storage service. The time required to restore multiple terabytes of backup data caused the process to take hours. A significant portion of the time was consumed transferring the data from the remote backup service. The process to decompress, checksum, prepare, and load large backup files onto newly provisioned MySQL servers took the majority of time. This procedure is tested daily at minimum, so the recovery time frame was well understood, however until this incident we have never needed to fully rebuild an entire cluster from backup and had instead been able to rely on other strategies such as delayed replicas.
 

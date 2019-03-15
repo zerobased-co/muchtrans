@@ -13,13 +13,13 @@ source: https://blog.github.com/2018-10-30-oct21-post-incident-analysis/
 
 10월 21일 22:52 UTC에 망가진 100G 광통신 장비를 교체하는 정기 보수 작업으로 인해 미 동부 해안 네트워크 허브와 주 데이터 센터인 미 동부 데이터 센터간의 연결이 끊겼습니다. 양측의 연결은 43초만에 복구되었습니다만, 이 짧은 끊김으로 인해 24시간 11분간의 서비스 장애가 이어졌습니다.
 
-![2개의 물리적 데이터 센터와 3개의 팝, 다양한 지역에 위치한 클라우드 사이의 직접 연결을 포함한 깃헙 네트워크의 개괄적 묘사](https://blog.github.com/assets/img/2018-10-25-oct21-post-incident-analysis/network-architecture.png)
+![2개의 물리적 데이터 센터와 3개의 팝, 다양한 지역에 위치한 클라우드 사이의 직접 연결을 포함한 깃헙 네트워크의 개괄적 묘사](https://github.blog/wp-content/uploads/2018/10/network-architecture.png)
 
 예전에 저희가 어떻게 [MySQL으로 깃헙 메타데이터 저장하는지](https://githubengineering.com/orchestrator-github)와 [고가용성 MySQL 운영](https://githubengineering.com/mysql-high-availability-at-github)에 대해 논한 적이 있습니다. 깃헙은 수백 기가바이트에서 5 테라바이트에 이르는 다양한 크기의 여러 MySQL 클러스터를 여러 개의 읽기 복제본과 함께 운영하여 깃과 무관한 메타데이터를 저장하고 있습니다. 깃 오브젝트 저장소 외에 풀 리퀘스트와 이슈, 인증 관리, 백그라운드 작업 조율 외 다양한 기능들이 이에 해당합니다. 응용 프로그램의 여러 부분의 서로 다른 데이터들은 기능별 샤딩을 통해 나뉘어 여러 클러스터에 저장됩니다.
 
 대규모 서비스에서의 성능 향상을 위해 응용 프로그램은 클러스터내 연관된 주 저장소(primary)에 직접 쓰지만, 대부분의 읽기 요청은 읽기 복제본에 위임하는 편입니다. MySQL 클러스터 구성 관리와 자동 복구를 위해 [Orchestrator](https://github.com/github/orchestrator)를 쓰고 있습니다. Orchestrator는 이 과정에서 여러 변수를 고려하여 동작하며, 합의를 위해 [Raft](https://raft.github.io/)를 기반으로 만들어졌습니다. Orchestrator는 응용 프로그램이 지원하지 못하는 수준의 구성이 가능하므로 Orchestrator의 설정을 응용 프로그램의 수준에 맞춰 운영하기 위해서는 주의가 필요합니다.
 
-![일반적인 구성에서, 모든 응용 프로그램이 짧은 지연 시간으로 읽기를 수행하는 모습.](https://blog.github.com/assets/img/2018-10-25-oct21-post-incident-analysis/normal-topology.png)
+![일반적인 구성에서, 모든 응용 프로그램이 짧은 지연 시간으로 읽기를 수행하는 모습.](https://github.blog/wp-content/uploads/2018/10/normal-topology.png)
 
 ## 사건 타임라인
 
@@ -43,7 +43,7 @@ source: https://blog.github.com/2018-10-30-oct21-post-incident-analysis/
 
 사용자 데이터의 기밀성과 무결성 유지는 깃헙의 최우선 과제입니다. 서부 해안에만 30분 이상 기록된 사용자 데이터를 안전하게 보존하기 위해 장애 조치를 내리는 것 외에는 다른 선택이 없었습니다. 하지만 동부 해안에서 실행되는 응용 프로그램들 중 서부 해안의 MySQL 클러스터에 쓰기에 의존하는 것들은 대부분의 데이터베이스 호출에 대륙을 왕복하는 지연 시간으로 인해 제대로 대처할 수 없는 상황이었습니다. 이로 인해 많은 사용자가 서비스를 이용할 수 없게 되었습니다. 하지만 서비스 장애 상황을 확대시켜서라도 데이터 일관성을 유지하는 것이 중요하다고 믿습니다.
 
-![잘못된 구성에서, 서부에서 동부로의 복제가 중단되고 응용 프로그램들이 트랜잭션 성능 유지를 위해 짧은 대기 시간을 기준으로 선택한 복제본에서 읽을 수 없는 상황.](https://blog.github.com/assets/img/2018-10-25-oct21-post-incident-analysis/invalid-topology.png)
+![잘못된 구성에서, 서부에서 동부로의 복제가 중단되고 응용 프로그램들이 트랜잭션 성능 유지를 위해 짧은 대기 시간을 기준으로 선택한 복제본에서 읽을 수 없는 상황.](https://github.blog/wp-content/uploads/2018/10/invalid-topology.png)
 
 ### 2018년 10월 21일 23:19 UTC
 
@@ -53,7 +53,7 @@ source: https://blog.github.com/2018-10-30-oct21-post-incident-analysis/
 
 사고 대응팀에 속한 엔지니어들은 데이터 불일치를 해결하기 위한 계획 수립과 더불어 MySQL 복원 프로시져를 구현하기 시작했습니다. 우선 백업으로부터 복원한 다음 양쪽 사이트에 있는 복제본을 동기화한 후, 데이터베이스 구성을 안정화하여 걸려 있는 작업들을 계속해서 수행하는 계획을 세웠습니다. 내부 데이터 저장 시스템을 절차에 따라 복원할 예정임을 [사용자들에게 알렸습니다](https://github.com/summernote/summernote/pull/3004).
 
-![복구 계획의 개요. Fail forward, synchronize, fall back, then churn through backlogs before returning to green.](https://blog.github.com/assets/img/2018-10-25-oct21-post-incident-analysis/recovery-flow.png)
+![복구 계획의 개요. Fail forward, synchronize, fall back, then churn through backlogs before returning to green.](https://github.blog/wp-content/uploads/2018/10/recovery-flow.png)
 
 수 년간 4시간 단위로 MySQL 데이터 백업이 이뤄지고 있었지만, 백업은 원격에 있는 공용 퍼블릭 클라우드의 BLOB 저장 서비스에 보관되어 있었습니다. 수 테라바이트에 이르는 여러 개의 백업 데이터를 복원하느라 많은 시간이 필요했습니다. 특히 원격 백업 서비스로부터 데이터를 전송해오는데 많은 시간이 소요되었습니다. 새로 인증된 MySQL 서버로 큰 백업 파일들을 불러와 압축 해제하고 무결성 검사를 한 후 준비해서 밀어넣는데 대부분의 시간을 썼습니다. 매일 테스트 하던 작업이라 복원하는데 얼마나 시간이 걸릴지는 예상할 수 있었지만, 이 사고가 나기 전까지는 백업으로부터 전체 클러스터를 완전히 새로 구성해본 적이 없었기 때문에 지연된 복제본 등의 다른 전략에 의존하는 수 밖엔 없었습니다.
 
