@@ -8,6 +8,7 @@
     <a href="{{ original.source }}" target="_blank">Visit original ↗</a>
     <span class="pull-right">
       <input type="checkbox" id="hide-original"/><label for="hide-original">Hide original</label>
+      <input type="checkbox" id="hide-updown"/><label for="hide-updown">Hide updown for print</label>
     </span>
   </p>
   <p>
@@ -121,10 +122,38 @@ window.addEventListener('load', function () {
     };
   }
 
+  function toggleUpdown(hide) {
+    var up = document.querySelectorAll('div.header');
+    for(var i = 0; i < up.length; i++) {
+      const node = up[i];
+      if (hide) {
+        node.classList.add('hidden');
+      } else {
+        node.classList.remove('hidden');
+      }
+    };
+    var down = document.querySelectorAll('main.timeline');
+    for(var i = 0; i < down.length; i++) {
+      const node = down[i];
+      if (hide) {
+        node.classList.add('hidden');
+      } else {
+        node.classList.remove('hidden');
+      }
+    };
+
+  }
+
+
   const checkbox = document.getElementById('hide-original');
   checkbox.onclick = function () {
     toggleOriginal(checkbox.checked);
     toggleQueryParameter('hide-original', checkbox.checked);
+  }
+  const updowncheckbox = document.getElementById('hide-updown');
+  updowncheckbox.onclick = function () {
+    toggleUpdown(updowncheckbox.checked);
+    toggleQueryParameter('hide-updown', checkbox.checked);
   }
 
   const headers = document.querySelectorAll('h2[id], h3[id]');
