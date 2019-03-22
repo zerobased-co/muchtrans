@@ -37,6 +37,25 @@ body, html {
   }
 }
 
+@media print {
+  body, html {
+    background: #FFF;
+    font-size: 1.0em;
+    color: #000;
+  }
+
+  a:after {
+    content: " (" attr(href) ") ";
+    font-size: 0.8em;
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .header, .footer, .info {
+    display: none;
+  }
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto Slab", "Noto Serif KR", serif;
   word-break: keep-all;
