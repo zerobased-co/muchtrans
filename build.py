@@ -34,8 +34,10 @@ class HLabelMixin(object):
 
     def header(self, text, level, raw=None):
         self.id_count += 1
-        rv = '<h%d id="%d">%s</h%d>\n' % (
-            level, self.id_count, text, level
+        prefix = self.options.get('heading_prefix', '')
+
+        rv = '<h{} id="{}{}">{}</h{}>\n'.format(
+            level, prefix, self.id_count, text, level
         )
         return rv
 
@@ -145,7 +147,7 @@ for key, article in articles.items():
 
         translation_metadata, translation = md_parse(translation)
         translation_html_filename = '/translations/' + os.path.splitext(os.path.basename(filename))[0] + '.html'
-        translation_html = mistune.Markdown(renderer=HLabelRenderer(escape=False, hard_wrap=True))(translation).replace('<br>', '</p><p>')
+        translation_html = mistune.Markdown(renderer=HLabelRenderer(escape=False, hard_wrap=True, heading_prefix='t_'))(translation).replace('<br>', '</p><p>')
 
         # TBD: Fix for duplicated footnote (will be fixed in renderer level, future)
         translation_html = translation_html.replace('fn-', 'tfn-').replace('fnref-', 'tfnref-')
