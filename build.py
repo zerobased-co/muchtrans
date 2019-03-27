@@ -13,7 +13,7 @@ import time
 
 OUTPUT = '_build'
 
-SINGLE = ['blockquote', 'h1', 'h2', 'h3', 'hr', ]
+SINGLE = ['blockquote', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', ]
 SINGLE_RE = '^({})'.format('|'.join(['\<{} '.format(_) for _ in SINGLE]))
 
 SPLITTER = ['p', 'ol', 'ul', 'div', 'img', 'object']
