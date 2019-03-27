@@ -182,16 +182,11 @@ for key, article in articles.items():
             rows.append((sbuf, dbuf))
 
         commits = get_commits(repo, filename)
-        if not commits:
-            continue
 
         # Render and save translated article
-        rendered = article_template.render({
+        context = {
             'css': css,
             'rows': rows,
-
-            'translators': get_authors_from_commits(commits),
-            'latest_update': get_UTC(get_time_from_commit(commits[0])),
 
             'filename': filename,
             'original': original_metadata,
@@ -199,26 +194,36 @@ for key, article in articles.items():
 
             'finished': not untranslated,
             'utterances': os.environ.get('PRODUCTION', False),
-        })
+        }
+
+        if commits:
+            # Add translation info into context
+            context['translators'] = get_authors_from_commits(commits),
+            context['latest_update'] = get_UTC(get_time_from_commit(commits[0]))
+
+            # Add to the index
+            created_month = get_time_from_commit(commits[-1]).strftime('%Y-%m')
+            translated_articles_in_month[created_month].append({
+                'title': article['metadata']['title'],
+                'url': translation_html_filename,
+            })
+
+            # Prepare list for feed publishing
+            translated_articles_by_language[language].append({
+                'datetime': get_UTC(get_time_from_commit(commits[-1])),
+                'pubDate': get_RFC822(get_time_from_commit(commits[-1])),
+                'translators':  get_authors_from_commits(commits),
+                'title': article['metadata']['title'],
+                'url': translation_html_filename,
+                'description': translation_html,
+            })
+
+
+        # Let's render the final file
+        rendered = article_template.render(context)
 
         with open(OUTPUT + translation_html_filename, "w") as file:
             file.write(rendered)
-
-        # Add to the index
-        created_month = get_time_from_commit(commits[-1]).strftime('%Y-%m')
-        translated_articles_in_month[created_month].append({
-            'title': article['metadata']['title'],
-            'url': translation_html_filename,
-        })
-
-        translated_articles_by_language[language].append({
-            'datetime': get_UTC(get_time_from_commit(commits[-1])),
-            'pubDate': get_RFC822(get_time_from_commit(commits[-1])),
-            'translators':  get_authors_from_commits(commits),
-            'title': article['metadata']['title'],
-            'url': translation_html_filename,
-            'description': translation_html,
-        })
 
 # RSS Feed
 print('Building RSS feeds')
