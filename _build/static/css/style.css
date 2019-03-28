@@ -72,10 +72,12 @@ h2 {
 }
 
 h3 {
-  font-size: 1.4em;
+  font-size: 1.36em;
+  margin: 1.8em 0 0.75em;
 }
 
-h3, h4, h5, h6 {
+h4, h5, h6 {
+  font-size: 1.14em;
   margin: 1.8em 0 0.75em;
 }
 
