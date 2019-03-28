@@ -1,193 +1,183 @@
-title: 실용 행사 안내서
+title: 오프라인 행사 안내서
 source: https://opensourceevents.github.io/ 
 
-# 실용 행사 안내서
+# 오프라인 행사 안내서
 
 ## 자신의 오픈소스 프로젝트에 새로운 기여자를 맞이할 준비하기
 
-요즘은 오픈소스 프로젝트에 새로운 기여자를 초대하기 위한 여러 워크샵, 해커톤, 스프린트 같은 것들이 매일 열리는 것 같습니다. [OpenHatch](http://openhatch.org/)에서도 이런 행사를 많이 열고 있습니다! 이런 행사에서 최대한 잘 이끌어내기 위해서는, 무엇보다 잘 준비하는 것이 중요합니다. 목표를 설명하고, 적절한 작업을 선별하며, 프로젝트 설정을 테스트하는 것 모두 한 발짝 나아가고 좋은 시간을 보내는 데 중요합니다. 이러한 변화 덕분에 더 나은 경험을 제공할 수 있었기 때문에, 이런 일들은 (분명히) 해볼만 한 가치가 있다고 생각합니다.
+요즘은 오픈소스 프로젝트에 새로운 기여자를 초대하기 위한 여러 워크숍, 해커톤, 스프린트 같은 것들이 매일 열리는 것 같습니다. [OpenHatch](http://openhatch.org/)에서도 이런 행사를 많이 열고 있습니다! 이런 행사에서 최대한 잘 이끌어내기 위해서는, 무엇보다 잘 준비하는 것이 중요합니다. 목표를 설명하고, 적절한 작업을 선별하며, 프로젝트 설정을 테스트하는 것 모두 한 발짝 나아가고 좋은 시간을 보내는 데 중요합니다. 이러한 변화 덕분에 더 나은 경험을 제공할 수 있었기 때문에, 이런 일들은 (분명히) 해볼 만 한 가치가 있다고 생각합니다.
 
-그래서 우리는 오픈소스 프로젝트의 행사 개최를 돕기 위한 다음 안내서를 만들었습니다. 아래 예제에서 보듯 저희 프로젝트 - [OpenHatch.org](http://openhatch.org/) 웹 앱 - 에 사용했던 것입니다. 마지막 부분에 체크 리스트도 준비해 두었습니다. 이 안내서에 나온 내용을 요약하고 있어 행사를 준비하며 진행 상황을 점검할 때 활용할 수 있을 겁니다.
+그래서 우리는 오픈소스 프로젝트의 행사 개최를 돕기 위한 다음 안내서를 만들었습니다. 아래에서 예로 든 내용은 저희 프로젝트 - [OpenHatch.org](http://openhatch.org/) 웹 앱 - 에서 사용했던 것입니다. 마지막 부분에 체크 리스트도 준비해 두었습니다. 이 안내서에 나온 내용을 요약하고 있어 행사를 준비하며 진행 상황을 점검할 때 활용할 수 있을 겁니다.
 
 이 안내서 또한 [오픈소스](http://creativecommons.org/licenses/by/3.0/us/) 입니다. 여러 기여자 분들에게 감사드립니다. ([당신도 기여할 수 있습니다!](https://github.com/openhatch/in-person-event-handbook))
 
 ### 목표를 정의하기
 
-You want to be able to state clearly your goals for the event, as this gives your group something to work towards. You can start by asking:
+참가자들이 이 행사에서 무엇을 목표로 작업해야 하는지 명확하게 전달할 필요가 있습니다. 스스로 아래 질문들에 답을 내려보세요.
 
-#### 당신의 프로젝트의 종합적인 목표는 무엇일까요?
+#### 이 프로젝트를 아우르는 목표는 무엇일까요?
 
-You want a short (1 paragraph or less) answer to this question which you can use to entice potential contributors to your project. Details are great, but at this point, you shouldn’t need to be too technical. At many events, such as the PyCon sprints, you'll be asked to give a short summary in front of everyone. Why not be prepared?
+한 문단 또는 더 짧게 이 질문에 답할 수 있으면 좋습니다. 그래야 당신의 프로젝트에 잠재적인 기여자에게 호소할 수 있을 테니까요. 상세한 것도 좋지만, 이 단계에서는 너무 기술적일 필요는 없습니다. 파이콘 스프린트와 같은 행사에서 보면, 많은 사람 앞에서 짧게 정리해서 말해야 할 때도 있습니다. 미리 준비하면 좋겠죠?
 
-> OpenHatch’s goal is to make the free software/open source community more welcoming to newcomers. To do this, we provide curricula and logistical support for running “Intro to Open Source” workshops, a website with open source tools, “training missions” and a volunteer opportunity finder, and several other projects in progress.
+> OpenHatch의 목표는 자유 소프트웨어/오픈소스 커뮤니티가 새로운 기여자들을 더 환영할 수 있도록 하는 것입니다. 이를 위해 우리는 “오픈소스 소개” 워크숍, 오픈소스 도구들 위한 웹사이트, “훈련 임무” 등에 대한 커리큘럼과 실행 계획, 그리고 자원봉사자를 찾는 일 등의 다양한 지원을 제공합니다.
 
 #### 이 행사를 통해 어떤 것을 달성할 수 있을까요?
 
-Think about what, specifically, you’d like to get done at this event. You can break these down by elements of your project, if you have more than one. It should be clear how these event goals contribute to the overall goal of your project. At the same time, these are not “tasks” - it should be necessary to break these goals down further in order to accomplish them.
+이 행사를 통해 어떤 것들을 할 수 있을지 구체적으로 생각해보세요. 여러 프로젝트가 있다면 프로젝트의 요소별로 나눠서 생각할 수 있습니다. 개별 목표는 프로젝트를 아우르는 전체적인 목표에 기여할 수 있는 명확한 내용을 담고 있어야 합니다. 그리고, 이건 “일감” 이 아닙니다. 목표를 달성하기 위해서는 이러한 목표들을 더 세부적으로 나눌 필요가 있습니다.
 
-It’s useful to phrase these in terms of “Base” and “Stretch” goals. Having modest base goals gives you something to celebrate at the end of the event, while adding stretch goals lets you plan for the exciting scenario of having a large and/or effective team that’s able to accomplish a ton.
+“기본”과 “확장” 목표로 나누어 설명할 수 있으면 좋습니다. 무리하지 않게 기본 목표를 잡아야 행사의 마지막에 함께 축하할 일을 만들 수 있고, 확장된 목표를 통해 더 크고 효율적인 팀을 구성해서 큰 목표를 달성할 수 있는 흥미로운 시나리오도 계획할 수 있게 됩니다.
 
-In general, it’s better to have too many goals than too few, but make sure you prioritize them. When you get to the task-breakdown part of this guide, focus on doing a thorough job with each individual goal before moving on to the next one.
+일반적으로 너무 적은 것보다는 많은 목표를 만드는 것이 좋습니다만, 우선순위를 정해주셔야 합니다. 이 안내문의 일감 쪼개기 부분에서 다음으로 넘어가기 전에, 각각의 개별 목표를 철저하게 수행하는 것에 중점을 두세요.
 
-  * Make a new training mission
-    * Base goal: Pick a skill to create a new training mission around, and design what the mission will look like. Create a mock-up of the mission.
-    * Stretch goal: Implement the mock-up, and user test it on volunteers from the event.
-  * Clean out issue tracker
-    * Base goal: Go through tracker and label issues by what type of “cleaning” they need. Does a bug need to be verified? Does a patch need to be tested? Does the feature request need to be attached to a milestone?
-    * Stretch goal: Use the labels as a guide to "clean" each issue. Verify bugs, test patches, etc.
-
-
+>  * 새로운 훈련 임무 만들기
+>    * 기본 목표: 새 훈련 임무를 만들 기수를 하나 선택해서, 어떻게 보일지 디자인 합니다. 해당 임무의 목업(임시 모형)을 만듭니다.
+>    * 확장된 목표: 목업을 실제로 구현하고, 행사에서 지원자들을 통해 실험해봅니다.
+>  * 일감 관리 목록 정리하기
+>    * 기본 목표: 일감 목록을 돌아보며 각각의 이슈에 어떤 종류의 “정리”가 필요한지 라벨을 붙입니다. 확인이 필요한 문제인지, 변경 사항을 테스트해야 하는지, 아니면 마일스톤에 포함될 기능 요청인지 확인합니다.
+>    * 확장 목표: 라벨에 따라 각 일감을 “정리” 합니다. 문제를 확인하고, 변경 사항을 테스트하는 것 등.
 
 ### 프로젝트 설정하기
 
-In our experience, project setup is the single biggest barrier to participation. We’ve seen (and run!) events where participants spent most of their time just getting their development environment set up and becoming acquainted with the project. If your goal is for newcomers to make contributions, estimate how long you think it will take them to set your project up. Then find a friend or two who's not familiar with your project to test and see how long it _really_ takes. You can also find someone to help you do this in [#openhatch](http://openhatch.readthedocs.org/en/latest/contributor/chat_on_irc.html).
+제 경험으로는, 프로젝트 설정이 참여를 가로막는 가장 장벽이었습니다. 우리는 참여자들이 개발 환경을 설정하고 프로젝트에 익숙해지느라 대부분의 시간을 써버린 행사를 봐왔고, 저희가 연 행사에서도 마찬가지였습니다. 새로 온 사람들이 실질적인 기여를 할 수 있게 만드는 것이 목표라면, 프로젝트 설정을 하는 데 얼마나 시간이 걸릴지 미리 예상해두세요. 그리고 프로젝트에 익숙하지 않은 친구 한두명을 통해 *실제로* 얼마나 오래 걸리는 지 확인해보세요. [#openhatch](http://openhatch.readthedocs.org/en/latest/contributor/chat_on_irc.html)에서도 이 일에 도움을 줄 사람을 찾아보세요.
 
-Documenting and improving the process beforehand can save everyone a lot of time and energy. If you know that a part of your project will inevitably be time-consuming, make sure participants know to expect that.
+문서화와 프로세스 개선을 미리 해두면 많은 이의 시간과 에너지를 절약할 수 있습니다. 도저히 시간을 줄일 수 없는 부분이 있다면, 참가자에게 이 부분을 미리 주지시켜 주세요.
 
-All of the information below should be documented in a README at the top level of your source repository. Other places to put the info include a “Want to contribute?” section of your project website, and/or you can include a link to the README in the signature of your mailing list or in the status bar of your IRC channel.
+이런 정보는 프로젝트 최상위 디렉토리의 README에 정리되어 있어야 합니다. 아니면 프로젝트 홈페이지의 “기여하길 원하시나요?” 부분에 넣거나 메일링 리스트의 서명이나 IRC 채널의 주제에 포함시켜 두면 좋습니다.
 
 #### 프로젝트 커뮤니티와 관리자는 어떻게 찾을 수 있을까요?
 
-Contact information should be displayed prominently, as you may have remote contributors, or contributors who want to start before the event. Types of contact information can include:
+행사가 시작되기 전에 기여하려는 사람이나 원격에서 기여하는 사람이 있을 수 있으므로, 연락처 정보는 잘 보이는 곳에 있어야 합니다. 연락처 정보에 포함되는 내용에는 다음 사항들이 있습니다.
 
-  * A link to your mailing list.
-  * Your IRC channel name and server (including link to IRC installation guide and link to webchat version).
-  * Social media accounts such as Identica, Twitter, Facebook, if your project has them.
-  * Maintainers’ personal contact information, if you feel comfortable giving it out.
+  * 메일링 리스트 링크.
+  * IRC 채널 이름과 서버(IRC 설치 방법이나 웹챗 링크를 포함해서).
+  * Identica, 트위터, 페이스북과 같은 소셜 미디어 계정.
+  * 관리자들의 개인 연락처(공유해도 괜찮다면).
 
+그 외에 선호하는 연락처가 있으면 적어두세요.
 
-
-If you have a preferred mode of contact, do specify.
-
-> OpenHatch has two places for contact info, which we try to keep updated and consistent with each other. There’s our [contact info in the documentation](http://openhatch.readthedocs.org/en/latest/community/contact.html), primarily linked to from our source code repository, and our [contact info in the wiki](https://openhatch.org/wiki/Contact), primarily linked to from the website’s main page.
+> OpenHatch에는 연락처 정보를 두 군데에 표시하는데, 이를 상호 갱신하고 일관성을 유지하려고 노력합니다. 소스 코드 저장소에는 [문서에 포함된 연락처 정보](http://openhatch.readthedocs.org/en/latest/community/contact.html)쪽으로 링크가 되어 있고, [위키에 있는 연락처 정보](https://openhatch.org/wiki/Contact)는 웹사이트의 첫 페이지에서 링크를 제공하고 있습니다.
 
 #### 프로젝트의 구조
 
-Describe the basic structure of your project. What are the biggest pieces and where are they located? How do those pieces interact? Then break each piece down. You don’t need to talk about every file or subdirectory of your project, but you don’t want to assume that what a script does, or how the files in a directory interact, or what language a part of your project is in is obvious to a newcomer. Making those assumptions turns getting access to you into the bottleneck resource for working on your project.
+프로젝트의 기본 구조에 대해 설명해주세요. 가장 큰 부분은 어디에서 찾을 수 있을까요? 어떻게 각 부분이 상호 작용하나요? 그러고 나서 세부적으로 적어 내려갑니다. 프로젝트에 포함된 모든 파일이나 하위 디렉토리에 대해 설명할 필요는 없지만, 스크립트가 어떤 작업을 수행하는지, 디렉토리의 파일들은 어떻게 상호 작용하는지, 프로젝트의 프로그래밍 언어는 무엇인지 정도는 새로운 사람들을 위해 명확하게 할 필요가 있습니다. 이런 것들을 명확하게 하지 않으면 프로젝트를 작업하는데 병목 지점이 됩니다.
 
-Depending on the size and complexity of your project, this can be a pretty big undertaking. At OpenHatch, we’re still working on getting the full structure completely documented. We recommend doing a “top level” explanation of your project’s structure - enough detail to fill a half a page to a page. When you have more time, you can go into more detail, starting with the areas that people commonly work on (or are likely to work on at sprints or hackathons.) If you use other frameworks or libraries, you can save yourself some time by linking to their documentation and tutorials.
+프로젝트가 크고 복잡할 수록 이는 쉽지 않은 일이 됩니다. OpenHatch에서는 아직도 전체 구조를 완전히 문서화 작업을 하고 있습니다. 프로젝트 구조의 “최상위 수준”의 설명을 반 페이지에서 한 페이지 정도의 분량으로 기술하는 것을 권장합니다. 여유가 있으면 사람들이 일반적으로 작업하는 부분이나 스프린트/해커톤에서 작업하기를 원하는 부분에 대해 더 자세히 적어보세요. 사용 중인 다른 프레임워크나 라이브러리에 대해서는 해당 프로그램의 문서나 튜토리얼을 링크해서 시간을 절약할 수 있습니다.
 
-> A description of the top-level structure of the OpenHatch project can be found at [Project Overview](http://openhatch.readthedocs.org/en/latest/getting_started/project_overview.html). A description of the structure of OH-Mainline (the repository that runs our website) can be found [here](https://github.com/openhatch/oh-mainline/blob/master/LAYOUT).
+> OpenHatch 프로젝트의 최상위 수준 구조 설명은 [프로젝트 개요](http://openhatch.readthedocs.org/en/latest/getting_started/project_overview.html)에서 찾아볼 수 있습니다. OH-Mainline(저희 웹사이트에서 돌리고 있는 저장소)에 대한 설명은 [여기](https://github.com/openhatch/oh-mainline/blob/master/LAYOUT)에 있습니다.
 
 #### 자신의 작업 환경 설정하기
 
-In order to contribute to your project, people will usually need to set up a local version of the project where they can make and test changes. The more detailed and clearer your installation/development guide, the better.
+프로젝트에 기여하기 위해 일반적으로 각자의 작업 환경에 프로젝트를 받아 변경사항을 만들고 테스트합니다. 상세하고 깔끔한 설치/개발 안내문이 있으면 더 좋습니다.
 
-Here are common elements of setting up a development environment you’ll want your guide to address:
+개발 환경을 설정하는 안내문에서 공통으로 다뤄야 하는 내용은 다음과 같습니다:
 
-  * Preparing their computer
-    * Make sure they’re familiar with their operating system’s tools, such as the terminal/command prompt. You can do this by linking to a tutorial and asking contributors to make sure they understand it. There are usually great tutorials already out there - OpenHatch's command line tutorial can be found [here](https://openhatch.org/wiki/Open_Source_Comes_to_Campus/Curriculum/Laptop_setup#Goal_.232:_practice_navigating_from_the_command_line).
-    * If contributors need to set up a virtual environment, access a virtual machine, or download a specific development kit, give them instructions on how to do so.
-    * List any dependencies needed to run your project, and how to install them. If there are good installation guides for those dependencies, link to them.
-  * Downloading the source
-    * Give detailed instructions on how to download the source of the project, including common missteps or obstacles.
-    * If there are multiple versions of the project, make clear which version they should download.
-  * How to view/test changes
-    * Give instructions on how to view and test the changes they’ve made. This may vary depending on what they’ve changed, but do your best to cover common changes. This can be as simple as viewing an html document in a browser, but may be more complicated.
+  * 각자의 컴퓨터를 준비
+    * 터미널이나 커맨드 프롬프트 등의 운영체제의 도구에 익숙해지도록 합니다. 튜토리얼을 알려주고 참가자에게 숙지할 수 있도록 부탁하세요. 대게 좋은 튜토리얼이 이미 세상에 많이 있습니다. OpenHatch의 커맨드라인 튜토리얼은 [여기](https://openhatch.org/wiki/Open_Source_Comes_to_Campus/Curriculum/Laptop_setup#Goal_.232:_practice_navigating_from_the_command_line)에서 찾아보세요.
+    * 참가자들이 가상 환경을 설정하고 접속하는 일이나 특정 개발 킷이 필요하다면, 미리 어떻게 해야하는 지 알려주세요.
+    * 프로젝트 구동을 위해 필요한 의존성들과 어떻게 설치해야 하는지 정리해 주세요. 좋은 설치 가이드가 있으면 링크해두세요.
+  * 소스 코드를 다운로드
+    * 프로젝트의 소스를 어떻게 다운로드 할 수 있는지, 흔히 하는 실수와 어려운 점들을 포함해서 상세하게 알려주세요.
+    * 프로젝트에 여러 버전이 있으면, 어떤 버전을 받아야 하는지 확실히 해주세요.
+  * 변경 이력을 어떻게 보는지
+    * 이제까지 만들어진 변경 이력을 어떻게 보고 테스트할 수 있는지 안내문을 준비해주세요. 변경 이력마다 다를 수 있겠지만, 일반적인 대부분의 변경 사항을 확인할 수 있게 해주세요. HTML 문서로 만들어 웹브라우저로 볼 수 있으면 좋지만, 더 복잡할 경우도 있겠습니다.
 
+설치 과정은 참가자가 사용하고 있는 운영체제에 따라 달라집니다. 윈도, 맥, 리눅스 사용자에 따라 각기 다른 안내문을 만들어야 할지도 모릅니다. 하나의 운영체제만을 지원한다면, 최상위 문서 수준에서 사용자에게 명확하게 그 사실을 알려주세요.
 
+> OpenHatch의 [설치 가이드](http://openhatch.readthedocs.org/en/latest/getting_started/installation.html)를 확인해보세요. 변경 사항을 테스트하기 위한 일반적인 지침은 [여기](http://openhatch.readthedocs.org/en/latest/getting_started/handling_patches.html#test-your-changes)에 있습니다. 특정 작업은 추가적인 문서가 필요하기도 합니다(예: [문서 변경](http://openhatch.readthedocs.org/en/latest/getting_started/documentation.html).)
 
-Installation will often differ depending on the operating system of the contributor. You will probably need to create separate instructions in various parts of your guide for Windows, Mac and Linux users. If you only want to support development on a single operating system, make sure that is clear to users, ideally in the top-level documentation.
+#### 변경 사항을 제출하고 의견 주고받기
 
-> You can see OpenHatch’s version of this information in our [Installation Guide](http://openhatch.readthedocs.org/en/latest/getting_started/installation.html). General instructions for testing changes can be found [here](http://openhatch.readthedocs.org/en/latest/getting_started/handling_patches.html#test-your-changes). Specific tasks may have additional documentation (for instance, [documentation changes](http://openhatch.readthedocs.org/en/latest/getting_started/documentation.html).)
+참가자들이 각자의 변경사항을 프로젝트에 어떻게 적용하게 되나요? GitHub에서 풀 리퀘스트를 작성하나요? 패치를 만들고 이슈 관리자에 이슈를 생성하고 첨부하나요? 이 내용을 명쾌하게 제공해주세요.
 
-#### 변경 사항을 제출하고 의견 주고 받기
+> OpenHatch의 변경 사항 제출에 대한 문서는 [여기](http://openhatch.readthedocs.org/en/latest/getting_started/handling_patches.html)에 있습니다.
 
-How do contributors contribute their changes to the project? Do they submit a pull request via Github? Do they generate a patch and attach it to an issue in an issue tracker? Make sure this information is explicitly provided.
+프로젝트에 피드백이나 버그를 제보하려면 어떻게 해야 하는지 알려주는 것도 좋습니다. 이슈 관리자가 없다면 하나 만드는 것을 고려해보세요. GitHub에서는 모든 저장소에 이슈 관리자가 제공됩니다(*설정*과 *기능*에 가서 활성화해야 할 수도 있습니다.) 아니면 다른 [이슈 관리 시스템](http://en.wikipedia.org/wiki/Comparison_of_issue_tracking_systems)도 알아보세요.
 
-> OpenHatch’s guide to submitting changes can be found [here](http://openhatch.readthedocs.org/en/latest/getting_started/handling_patches.html).
+프로젝트가 작다면 이슈 관리 시스템이 필요 없거나 원하지 않을 경우도 있습니다. 괜찮습니다. 중요한 것은 기여자들이 피드백을 어떻게 주고받을 수 있는지 알게 하는 것이니까요.
 
-It’s also useful for people to know how they can give feedback/report bugs to the project. If your project doesn’t have an issue tracker, consider creating one. On Github, all repositories come with issue trackers (though you may need to enable it by going to _Settings_ and then _Features_.) There are many other [issue tracking systems](http://en.wikipedia.org/wiki/Comparison_of_issue_tracking_systems).
+> Open Source Comes to Campus 프로젝트와 관련된 문제는 [여기](https://github.com/openhatch/open-source-comes-to-campus/issues?direction=desc&sort=created&state=open)로 알려주세요. 다른 OpenHatch 이슈들은 [여기](http://openhatch.org/bugs/)에서 제보할 수 있습니다.
 
-If your project is small, you may not want or need an issue tracking system. That's fine. What's key is that contributors know how to give you feedback.
-
-> Issues with the Open Source Comes to Campus project can be reported [here](https://github.com/openhatch/open-source-comes-to-campus/issues?direction=desc&sort=created&state=open). Most other issues with OpenHatch can be reported [here](http://openhatch.org/bugs/).
-
-Tools like issue trackers are very useful for asynchronous communication. This may not be the best fit for an in person event. If you want to change things up - for instance, by having attendees ping you in IRC with links to new issue URLs, so they don't fall between the cracks - make sure to tell them that!
+이슈 관리자와 같은 도구들은 비동기적 의사소통에 매우 유용합니다. 오프라인 행사에는 최적은 아닐 수도 있습니다. 변경 사항을 잘 관리하고 싶다면 – 예를 들어, 참가자들이 IRC에서 새로운 이슈의 URL을 당신에게 보내, 그 이슈들이 스리슬쩍 묻히지 않게 할 수 있습니다 – 참가자들에게 꼭 그렇게 해달라고 요청하세요.
 
 #### 문서화 확인하기
 
-Verify that this documentation is complete/effective by testing on individuals who haven’t used or contributed to your project before. Find at least one person for each operating system to read your documentation and attempt to install, make and test changes, and contribute the changes to the project. (These can be simple, fake changes or, if your tester is willing, actual tasks.) Make sure your testers have similar skills/experience as the kinds of newcomers you expect to have at your event.
+문서화가 완전하거나 효율적인지 테스트하기 위해서는 이전에 프로젝트에 한 번도 기여한 적이 없는 사람을 대상으로 확인하세요. 각각의 운영체제별로 최소한 한 명 이상의 사람에게 당신의 문서를 읽고 설치해서, 변경사항을 만들고 테스트한 후, 프로젝트에 변경 사항을 제출하도록 해보세요. (단순하거나 가짜 변경 사항으로 할 수도 있지만, 테스터가 원한다면 실제 일감을 주셔도 됩니다.) 행사에 새롭게 올 것으로 예상되는 사람들과 비슷한 수준의 기술과 경험을 가지고 있을 법한 사람과 함께 하면 좋습니다.
 
-If you're having trouble finding people to help, try the [#openhatch IRC channel](http://openhatch.readthedocs.org/en/latest/contributor/chat_on_irc.html).
+사람을 찾는데 어려움이 있다면 [#openhatch IRC 채널](http://openhatch.readthedocs.org/en/latest/contributor/chat_on_irc.html)에도 방문해보세요.
 
-Make sure that any problems which arise during verification are added to the documentation. Once the documentation has been verified, and a line to the top of your guide which states what was verified and when.
+이렇게 진행한 확인 과정에서 발생한 문제들을 문서에 꼭 추가하세요. 문서가 한 번 확인되고 나면 언제 어떤 것들을 확인했는지 문서의 상단에 기록해두세요.
 
-> Development environment instructions tested successfully on Ubuntu 12.04 (on 2013-10-03), Mac OS X 10.8 (on 2013-10-01) and Windows XP (in Jan 2005). You can see OpenHatch’s version of this [here](http://openhatch.readthedocs.org/en/latest/getting_started/installation.html).
+> 본 개발 환경 지침은 Ubuntu 12.04 (2013-10-03), Mac OS X 10.8 (2013-10-01) 그리고 Windows XP (2005년 1월) 에서 확인되었습니다. OpenHatch 버전에 대해서는 [여기](http://openhatch.readthedocs.org/en/latest/getting_started/installation.html)에서 확인하세요.
 
-Ideally, you should verify that installing, making and testing changes, and contributing changes all work. If you only have time for one, we recommend verifying installation. In our experience, that's where the majority of problems arise.
+이상적으로는 설치하고 코드를 작성해서 테스트하고 변경사항을 제출하는 전 과정을 확인해야 합니다. 하나만 꼽는다면 설치 과정이라도 확인하세요. 저희 경험으로는 그 과정에서 대부분의 문제가 발생했습니다.
 
 ### 참가자를 위해 일감 정의하기
 
-Let’s return to the event goals we talked about in the first section. Each goal should be broken down into the discrete steps needed to reach it. These steps are the tasks you give to participants.
+자, 처음 얘기했던 행사의 목표로 돌아와 봅시다. 각각의 목표는 도달할 수 있는 상세한 단계로 나뉘어야 합니다. 이 각각의 단계가 참가자들에게 일감으로 제공됩니다.
 
-These tasks should include a “plain english” summary as well as information about where to make the changes (for instance, which files or functions to alter). We recommend including a list of needed skills (e.g. “design skills”, “basic Python”) and tools (e.g. “Mac development environment”). It’s also useful to include an estimate of how much time the task will take, to label some tasks as higher or lower priority, and to mark where one task is dependent on another.
+이 일감들은 “일상 용어”로 정리된 설명과 어디서 작업을 시작해야 하는지(예를 들어, 어떤 파일이나 함수를 바꿔야 하는지)에 대한 정보가 담겨 있어야 합니다. 작업에 필요한 기술 목록(예: “디자인 기술”, “파이썬 기초”)과 도구(“맥 개발 환경”)도 함께 있으면 좋겠습니다. 예상 시간이 얼마나 소요될 것인지, 우선순위가 높은지 낮은지, 어떤 작업에 의존성을 가졌는지도 도움이 됩니다.
 
-This may seem like a lot of work, but it should help your attendees quickly and easily find tasks that are suited for them. Since one of the main goals of in-person events is to give attendees a positive experience, we think it's worth it.
+상당히 번잡스러운 일처럼 보이지만, 이를 통해 참가자들이 자신에게 맞는 일감을 빠르고 쉽게 찾는 데 큰 도움이 됩니다. 오프라인 행사의 주목적이 참가자들에게 긍정적인 경험을 주는 것이라면, 충분히 그럴만한 가치가 있는 일입니다.
 
 #### 일감을 관리하는 시스템을 만드세요
 
-We recommend using a wiki or similar planning document to keep track of tasks. OpenHatch has [a task browser](https://github.com/openhatch/new-mini-tasks) that we use for our events - you are welcome to fork it and customize it for your project/event, although you might want to wait as we’ll be making some big improvements soon. Something as simple as an etherpad should also be just fine. (See [here](https://etherpad.mozilla.org/task-browser-template) for a template and a service you can use.)
+위키 또는 비슷한 계획 문서를 통해 일감을 관리하는 것을 추천합니다. OpenHatch는 자체 행사 진행을 위한 [태스크 브라우저](https://github.com/openhatch/new-mini-tasks)를 가지고 있습니다. 곧 크게 개선될 예정이긴 하지만, 프로젝트와 행사에 맞춰 포크해서 변경해서 써주신다면 환영입니다. Etherpad 처럼 단순한 것이라도 좋습니다. (템플릿이나 사용할 수 있는 서비스는 [여길](https://etherpad.mozilla.org/task-browser-template) 참고하세요.
 
 #### 일감 준비하기
 
-To figure out how many tasks to prepare, we recommend using the length of the event and the number of expected participants to predict how many person-hours will be spent working on your project. You can then use the time estimates you made for each task to see where you stand. We suggest finding 30% more than you think you'll need, as it's better to have too much to do than too little.
+얼마나 많은 일감을 만들어야 하는지 가늠하려면, 행사가 열리는 시간과 예상되는 참가인원을 통해 얼마나 많은 인력이 프로젝트에 소요될 지 예상해보기를 추천합니다. 각각의 작업에 필요한 예상 시간을 통해 얼마나 준비해야할 지 예상해볼 수 있습니다. 보통 생각한 것보다 30% 정도 더 준비하면 지나치게 많거나 적지 않고 적당합니다.
 
-  * Base goal: Go through tracker and label issues by what type of “cleaning” they need. Does a bug need to be verified? Does a patch need to be tested? Does the feature request need to be attached to a milestone?
-    * Task 1: Label issues
-      * Skills/tools needed: Moderate English language skills, familiarity with concepts of verification, testing, milestones.
-      * Estimated time: ~20 minutes per issue
-      * Get started: Familiarize yourself with the issue tracker and how it displays information. (See this documentation.) Request administrative access so you can add labels to the tracker.
-      * For each issue: Read the thread for each issue and identify where in the process of addressing the issue the community is. If there is an unverified bug, add the label "Unverified". If there is an untested patch, add the label "Untested patch". If there's a feature request with no associated milestone, add the label "Needs milestone".
-  * Stretch goal: Use the labels as a guide to "clean" each issue. Verify bugs, test patches, etc.
-    * Task 1: Verify Bugs
-      * Skills/tools needed: Moderate English language skills, ideally familiarity with virtual machines to test on multiple OSs.
-      * Estimated time: ~15 minutes set up, ~20 minutes per bug (high variance)
-      * Get started: Download the development environment and make sure you can run the project. Make sure you have an account on <the issue tracker> and are familiar with how to add comments or change labels.
-      * For each bug: Try to reproduce the bug. Record the results in a comment, including your operating system type and version #. If possible, test on multiple browsers. If there are recent comments covering all three major OSs, add label to bug “ready_for_maintainer_review”.
+>  * 기본 목표: 일감 목록을 돌아보며 각각의 이슈에 어떤 종류의 “정리”가 필요한지 라벨을 붙입니다. 확인이 필요한 문제인지, 변경 사항을 테스트해야 하는지, 아니면 마일스톤에 포함될 기능 요청인지 확인합니다.
+>    * 일감 1: 이슈에 라벨링하기
+>      * 요구되는 기술/도구: 일반적인 영어 능력, 확인과 테스트, 마일스톤 등의 개념에 친숙해야 함.
+>      * 예상 소요 시간: 이슈 당 20분 이내
+>      * 시작하기: 일감 관리도구와 표시되는 정보에 익숙해지기 (이 문서를 보세요.) 라벨을 추가하는 권한을 관리자에게 요청해주세요.
+>      * 개별 이슈에 대해: 각 이슈의 글 타래를 읽고 커뮤니티가 이슈를 어느 정도까지 다뤘는지 확인합니다. 확인되지 않은 버그라면, “확인되지 않음“ 라벨을 붙입니다. 테스트가 필요한 패치에는 “테스트되지 않음”을, 마일스톤에 연결되지 않은 기능 추가에 대해서는 “마일스톤 필요” 라벨을 붙이세요.
+>  * 확장 목표: 라벨에 따라 각 일감을 “정리” 합니다. 문제를 확인하고, 변경 사항을 테스트하는 것 등.
+>    * 일감 1: 버그 확인하기
+>      * 요구되는 기술/도구: 일반적인 영어 능력, 가상 머신에서 다양한 운영체제를 테스트하는 것에 익숙해야 함.
+>      * 예상 소요 시간: 설정하는데 15분 내외, 한 버그 당 20분 이내 (많이 달라질 수 있음)
+>      * 시작하기: 개발 환경을 받아 프로젝트를 실행할 수 있도록 하세요. 이슈 관리 도구에 계정을 생성하고 의견을 달거나 라벨을 바꾸는 일이 익숙해지도록 하세요.
+>      * 개별 버그에 대해: 버그를 재현해봅니다. 실행 결과를 실행했던 운영체제의 종류와 버전을 포함해 댓글로 기록합니다. 가능하다면 여러 브라우저에서 테스트해보세요. 대중적인 운영체제 모두에서 통과된 이력이 있다면, “리뷰 받을 준비됨” 라벨을 붙여주세요.
 
+어쨌든 참가자들은 기술과 흥미에 맞는 일감을 원할 것입니다. 이 사전 준비를 통해 참가자들이 적절한 일감을 제안받느라 기다리지 않고 바로 작업에 참여할 수 있게 됩니다. 행사 운영자가 사전에 참가자들의 기술과 관심사를 수집해서 적절한 일감 목록을 만들어 두는 것이 이상적입니다.
 
+각 작업의 단계를 명확하게 하는 것을 통해 참가자들이 서로에게 도움이 될 수 있도록 합니다.
 
-No matter what, attendees will need to be matched to a task that fits their skills and interests. Doing this prep work will let participants get started immediately, instead of making them wait for you to suggest an appropriate task. Ideally, event organizers will have collected information on participants' skills and interests ahead of time, so you can tailor the task list to your group of contributors.
+### 계속해서,
 
-Making the steps of each task explicit also helps participants mentor each other. By clearly identifying which skills and concepts are needed, you make it easier for individuals to say, "Oh, I understand how to do that! Let me show you."
+기여자들이 행사 기간 동안 하고 있던 작업을 마무리하지 못하거나, 행사 후에도 프로젝트의 다른 작업에 계속해서 참여하기를 원할 수도 있습니다. 행사가 끝난 뒤에 어떻게 할지 미리 생각해두면, 참가자들과 정보를 교환하고 프로젝트의 방향을 계획하기가 쉬워집니다.
 
-### 그 다음엔,
+참가자들에게 작업했던 일감에 대한 다음 내용을 묻고 답을 받기를 추천합니다. 행사를 시작할 때에 미리 이 목록을 전달하면 작업하면서 무엇을 기록해야 할 지 도움이 됩니다. 프린트하거나 이메일로 보내도 좋고, 웹을 통한 설문 조사도 – 선호하는 무엇이든 좋습니다.
 
-Contributors may not be able to finish the tasks they are working on during the event, or they may want to continue participating in the project by working on other tasks. Thinking ahead about how you will follow up on the event makes it easier to exchange information with participants and plan the direction of your project.
+>  * 작업했던 개별 작업에 대해 아래 사항을 답해주세요:
+>    * 어떤 작업을 수행했습니까?
+>    * 작업 흐름을 개괄적으로 설명해주세요. 어떤 단계를 어떤 순서로, 왜 하셨나요?
+>    * 행사에서 하셨던 작업을 어디서 확인할 수 있나요? 코드, 문서, 목업과 나머지 것들이 포함되어야 합니다.
+>    * 프로젝트를 위해 계정을 생성하셨다면, 사이트 목록과 계정명을 알려주세요. 비밀번호를 선호하는 비밀번호 관리자에 저장해두시거나, 최소한 제가(또는 다른 관리자가) 알 수 있도록 해주세요.
+>    * 작업을 수행하면서 어떤 어려움을 겪으셨나요? 앞으로 참가할 기여자들을 위해 이 프로세스 개선에 대한 의견을 주실 수 있으실까요?
+>    * 앞으로도 이 프로젝트에 계속해서 기여하고 싶으신가요? 그렇다면 어느 정도로 가능할까요?
 
-We recommend asking each participant to answer the following questions about the tasks they worked on. Giving them this list at the start of the event will help them document what they’re doing as they go along. You can print out the list, email it to attendees, make a web form - whatever suits you.
+계속해서 열정적으로 작업을 이어가고 싶으시다면, 그들에게 계속해서 연락할 필요가 있습니다! 관심 있는 참가자들에게 이메일을 수집해서 행사 종료 후 48시간 이내에 다시 연락하는 것을 추천해 드립니다. 이메일을 그들의 도움에 대해 감사를 표시하고 어떻게 커뮤니티에 계속해서 참여할 수 있는지에 대한 정보(예를 들어 IRC나 메일링 리스트)를 담아 보내세요.
 
-  * For each task you worked on, please answer:
-    * What task did you work on?
-    * Please briefly document your workflow. What steps did you take, in what order, and why?
-    * Where can I find the work you did at the event? This includes code, documentation, mock ups, and other materials.
-    * If you created any accounts for the project, please list the site and account name. Make sure to store the password in your favorite password manager, or make sure I (or another maintainer) knows it.
-    * What obstacles did you encounter when working on this task? Do you have any feedback for me to make the process better for future contributors?
-    * Would you like to stay involved in this project? If so, in what capacity?
-
-
-
-If there is enthusiasm for continuing the work, make sure you stay in touch! We suggest gathering emails from interested attendees and contacting them within 48 hours of the event. In the email, thank them for their help and include information on how to stay part of the community via, for instance, IRC or mailing lists.
-
-We also recommend planning a follow up meeting at the event. If you’re all local, try setting a date after the event for you and your team to meet at a local coffee shop, coworking space, or project night. If you’re remote, set a date to meet on IRC or a google hangout. 2-3 weeks is a good time frame, though it will depend on how busy you and your new contributors are.
+행사 중에 다음 미팅을 계획하는 것도 추천합니다. 같은 지역에 있는 사람들끼리 모인다면, 행사가 끝난 다음에 당신 또는 당신의 팀과 함께 만나는 자리를 커피숍이나 코워킹 스페이스, 또는 프로젝트 나이트 등에서 언제 만날지 정해보세요. 원격으로는 IRC나 구글 행아웃 날짜를 잡아볼 수도 있습니다. 당신과 새로운 기여자들이 얼마나 바쁜지에 따라 다르겠지만, 2~3주 이내에 할 수 있다면 좋겠습니다.
 
 ### 체크리스트
 
-That’s a lot of advice! To help you keep track of each step, we’ve created two checklists for you. The detailed version includes all of the advice above. The quick and dirty checklist includes the elements of the above document which we think are most important. We recommend starting with the quick and dirty checklist. Once you've completed that successfully, you can go back and do the extra steps if you have the time and energy.
+이것 저것 아주 많았네요! 각 단계를 계속해서 밟아나가기 위해서 저희가 두 개의 체크리스트를 준비했습니다. 상세한 버전은 위의 모든 조언을 담고 있습니다. 짧은 체크리스트에는 위 내용들 중에서 가장 중요하다고 생각하는 요소만 넣어두었습니다. 짧은 체크리스트부터 시작하기를 권합니다. 일단 성공적으로 한 번 수행한 다음에, 시간과 에너지가 있을 때 처음부터 되짚어서 추가적인 단계를 수행하면 좋겠습니다.
 
-To view and/or print the checklists, go [here](https://github.com/openhatch/in-person-event-handbook/blob/master/checklists.pdf).
+[여기](https://github.com/openhatch/in-person-event-handbook/blob/master/checklists.pdf)에서 체크리스트를 보고 인쇄하실 수 있습니다.
 
 ### 알림
 
-Thank you to everyone who has contributed to, or helped inspire, this project.
+이 프로젝트에 기여해주신, 도움 주신 분들 모두에게 감사드립니다.
 
 #### 기여자
 
-  * Shauna Gordon-McKeon: maintainer, content
-  * Ni Mu: design
-  * Sheila Miguez: content feedback
-  * Asheesh Laroia: content feedback
+  * Shauna Gordon-McKeon: 관리자, 콘텐츠
+  * Ni Mu: 디자인
+  * Sheila Miguez: 콘텐츠 피드백
+  * Asheesh Laroia: 콘텐츠 피드백
 
 #### 더 알아보기
 
