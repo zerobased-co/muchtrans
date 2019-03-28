@@ -29,14 +29,12 @@ It’s useful to phrase these in terms of “Base” and “Stretch” goals. Ha
 
 In general, it’s better to have too many goals than too few, but make sure you prioritize them. When you get to the task-breakdown part of this guide, focus on doing a thorough job with each individual goal before moving on to the next one.
 
-  * Make a new training mission
-    * Base goal: Pick a skill to create a new training mission around, and design what the mission will look like. Create a mock-up of the mission.
-    * Stretch goal: Implement the mock-up, and user test it on volunteers from the event.
-  * Clean out issue tracker
-    * Base goal: Go through tracker and label issues by what type of “cleaning” they need. Does a bug need to be verified? Does a patch need to be tested? Does the feature request need to be attached to a milestone?
-    * Stretch goal: Use the labels as a guide to "clean" each issue. Verify bugs, test patches, etc.
-
-
+>  * Make a new training mission
+>    * Base goal: Pick a skill to create a new training mission around, and design what the mission will look like. Create a mock-up of the mission.
+>    * Stretch goal: Implement the mock-up, and user test it on volunteers from the event.
+>  * Clean out issue tracker
+>    * Base goal: Go through tracker and label issues by what type of “cleaning” they need. Does a bug need to be verified? Does a patch need to be tested? Does the feature request need to be attached to a milestone?
+>    * Stretch goal: Use the labels as a guide to "clean" each issue. Verify bugs, test patches, etc.
 
 ### Project setup
 
@@ -54,8 +52,6 @@ Contact information should be displayed prominently, as you may have remote cont
   * Your IRC channel name and server (including link to IRC installation guide and link to webchat version).
   * Social media accounts such as Identica, Twitter, Facebook, if your project has them.
   * Maintainers’ personal contact information, if you feel comfortable giving it out.
-
-
 
 If you have a preferred mode of contact, do specify.
 
@@ -84,8 +80,6 @@ Here are common elements of setting up a development environment you’ll want y
     * If there are multiple versions of the project, make clear which version they should download.
   * How to view/test changes
     * Give instructions on how to view and test the changes they’ve made. This may vary depending on what they’ve changed, but do your best to cover common changes. This can be as simple as viewing an html document in a browser, but may be more complicated.
-
-
 
 Installation will often differ depending on the operating system of the contributor. You will probably need to create separate instructions in various parts of your guide for Windows, Mac and Linux users. If you only want to support development on a single operating system, make sure that is clear to users, ideally in the top-level documentation.
 
@@ -133,20 +127,18 @@ We recommend using a wiki or similar planning document to keep track of tasks. O
 
 To figure out how many tasks to prepare, we recommend using the length of the event and the number of expected participants to predict how many person-hours will be spent working on your project. You can then use the time estimates you made for each task to see where you stand. We suggest finding 30% more than you think you'll need, as it's better to have too much to do than too little.
 
-  * Base goal: Go through tracker and label issues by what type of “cleaning” they need. Does a bug need to be verified? Does a patch need to be tested? Does the feature request need to be attached to a milestone?
-    * Task 1: Label issues
-      * Skills/tools needed: Moderate English language skills, familiarity with concepts of verification, testing, milestones.
-      * Estimated time: ~20 minutes per issue
-      * Get started: Familiarize yourself with the issue tracker and how it displays information. (See this documentation.) Request administrative access so you can add labels to the tracker.
-      * For each issue: Read the thread for each issue and identify where in the process of addressing the issue the community is. If there is an unverified bug, add the label "Unverified". If there is an untested patch, add the label "Untested patch". If there's a feature request with no associated milestone, add the label "Needs milestone".
-  * Stretch goal: Use the labels as a guide to "clean" each issue. Verify bugs, test patches, etc.
-    * Task 1: Verify Bugs
-      * Skills/tools needed: Moderate English language skills, ideally familiarity with virtual machines to test on multiple OSs.
-      * Estimated time: ~15 minutes set up, ~20 minutes per bug (high variance)
-      * Get started: Download the development environment and make sure you can run the project. Make sure you have an account on <the issue tracker> and are familiar with how to add comments or change labels.
-      * For each bug: Try to reproduce the bug. Record the results in a comment, including your operating system type and version #. If possible, test on multiple browsers. If there are recent comments covering all three major OSs, add label to bug “ready_for_maintainer_review”.
-
-
+>  * Base goal: Go through tracker and label issues by what type of “cleaning” they need. Does a bug need to be verified? Does a patch need to be tested? Does the feature request need to be attached to a milestone?
+>    * Task 1: Label issues
+>      * Skills/tools needed: Moderate English language skills, familiarity with concepts of verification, testing, milestones.
+>      * Estimated time: ~20 minutes per issue
+>      * Get started: Familiarize yourself with the issue tracker and how it displays information. (See this documentation.) Request administrative access so you can add labels to the tracker.
+>      * For each issue: Read the thread for each issue and identify where in the process of addressing the issue the community is. If there is an unverified bug, add the label "Unverified". If there is an untested patch, add the label "Untested patch". If there's a feature request with no associated milestone, add the label "Needs milestone".
+>  * Stretch goal: Use the labels as a guide to "clean" each issue. Verify bugs, test patches, etc.
+>    * Task 1: Verify Bugs
+>      * Skills/tools needed: Moderate English language skills, ideally familiarity with virtual machines to test on multiple OSs.
+>      * Estimated time: ~15 minutes set up, ~20 minutes per bug (high variance)
+>      * Get started: Download the development environment and make sure you can run the project. Make sure you have an account on the issue tracker and are familiar with how to add comments or change labels.
+>      * For each bug: Try to reproduce the bug. Record the results in a comment, including your operating system type and version #. If possible, test on multiple browsers. If there are recent comments covering all three major OSs, add label to bug “ready_for_maintainer_review”.
 
 No matter what, attendees will need to be matched to a task that fits their skills and interests. Doing this prep work will let participants get started immediately, instead of making them wait for you to suggest an appropriate task. Ideally, event organizers will have collected information on participants' skills and interests ahead of time, so you can tailor the task list to your group of contributors.
 
@@ -158,15 +150,13 @@ Contributors may not be able to finish the tasks they are working on during the 
 
 We recommend asking each participant to answer the following questions about the tasks they worked on. Giving them this list at the start of the event will help them document what they’re doing as they go along. You can print out the list, email it to attendees, make a web form - whatever suits you.
 
-  * For each task you worked on, please answer:
-    * What task did you work on?
-    * Please briefly document your workflow. What steps did you take, in what order, and why?
-    * Where can I find the work you did at the event? This includes code, documentation, mock ups, and other materials.
-    * If you created any accounts for the project, please list the site and account name. Make sure to store the password in your favorite password manager, or make sure I (or another maintainer) knows it.
-    * What obstacles did you encounter when working on this task? Do you have any feedback for me to make the process better for future contributors?
-    * Would you like to stay involved in this project? If so, in what capacity?
-
-
+>  * For each task you worked on, please answer:
+>    * What task did you work on?
+>    * Please briefly document your workflow. What steps did you take, in what order, and why?
+>    * Where can I find the work you did at the event? This includes code, documentation, mock ups, and other materials.
+>    * If you created any accounts for the project, please list the site and account name. Make sure to store the password in your favorite password manager, or make sure I (or another maintainer) knows it.
+>    * What obstacles did you encounter when working on this task? Do you have any feedback for me to make the process better for future contributors?
+>    * Would you like to stay involved in this project? If so, in what capacity?
 
 If there is enthusiasm for continuing the work, make sure you stay in touch! We suggest gathering emails from interested attendees and contacting them within 48 hours of the event. In the email, thank them for their help and include information on how to stay part of the community via, for instance, IRC or mailing lists.
 
