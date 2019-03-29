@@ -72,8 +72,8 @@ source: https://opensourceevents.github.io/
 개발 환경을 설정하는 안내문에서 공통으로 다뤄야 하는 내용은 다음과 같습니다:
 
   * 각자의 컴퓨터를 준비
-    * 터미널이나 커맨드 프롬프트 등의 운영체제의 도구에 익숙해지도록 합니다. 튜토리얼을 알려주고 참가자에게 숙지할 수 있도록 부탁하세요. 대게 좋은 튜토리얼이 이미 세상에 많이 있습니다. OpenHatch의 커맨드라인 튜토리얼은 [여기](https://openhatch.org/wiki/Open_Source_Comes_to_Campus/Curriculum/Laptop_setup#Goal_.232:_practice_navigating_from_the_command_line)에서 찾아보세요.
-    * 참가자들이 가상 환경을 설정하고 접속하는 일이나 특정 개발 킷이 필요하다면, 미리 어떻게 해야하는 지 알려주세요.
+    * 터미널이나 명령 프롬프트 등의 운영체제의 도구에 익숙해지도록 합니다. 튜토리얼을 알려주고 참가자에게 숙지할 수 있도록 부탁하세요. 대게 좋은 튜토리얼이 이미 세상에 많이 있습니다. OpenHatch의 커맨드라인 튜토리얼은 [여기](https://openhatch.org/wiki/Open_Source_Comes_to_Campus/Curriculum/Laptop_setup#Goal_.232:_practice_navigating_from_the_command_line)에서 찾아보세요.
+    * 참가자들이 가상 환경을 설정하고 접속하는 일이나 특정 개발 키트가 필요하다면, 미리 어떻게 해야하는 지 알려주세요.
     * 프로젝트 구동을 위해 필요한 의존성들과 어떻게 설치해야 하는지 정리해 주세요. 좋은 설치 가이드가 있으면 링크해두세요.
   * 소스 코드를 다운로드
     * 프로젝트의 소스를 어떻게 다운로드 할 수 있는지, 흔히 하는 실수와 어려운 점들을 포함해서 상세하게 알려주세요.
