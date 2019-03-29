@@ -203,7 +203,7 @@ for key, article in articles.items():
 
             # Add to the index
             created_month = get_time_from_commit(commits[-1]).strftime('%Y-%m')
-            translated_articles_in_month[created_month].append({
+            translated_articles_in_month[created_month].insert(0, {
                 'title': article['metadata']['title'],
                 'url': translation_html_filename,
             })
