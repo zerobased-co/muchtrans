@@ -7,6 +7,10 @@ blockquote:before {
   line-height: 2em;
 }
 
+.translation blockquote:before {
+  content: '예제';
+}
+
 blockquote {
   background-color: #F3F3F3;
   border-left: 3px solid #D5D5D5;
