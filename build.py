@@ -181,8 +181,6 @@ for key, article in articles.items():
         if sbuf:
             rows.append((sbuf, dbuf))
 
-        commits = get_commits(repo, filename)
-
         # Render and save translated article
         context = {
             'css': css,
@@ -196,9 +194,12 @@ for key, article in articles.items():
             'utterances': os.environ.get('PRODUCTION', False),
         }
 
+        # Get commits from the repository
+        commits = get_commits(repo, filename)
+
         if commits:
             # Add translation info into context
-            context['translators'] = get_authors_from_commits(commits),
+            context['translators'] = get_authors_from_commits(commits)
             context['latest_update'] = get_UTC(get_time_from_commit(commits[0]))
 
             # Add to the index
@@ -212,12 +213,11 @@ for key, article in articles.items():
             translated_articles_by_language[language].append({
                 'datetime': get_UTC(get_time_from_commit(commits[-1])),
                 'pubDate': get_RFC822(get_time_from_commit(commits[-1])),
-                'translators':  get_authors_from_commits(commits),
+                'translators':  context['translators'],
                 'title': article['metadata']['title'],
                 'url': translation_html_filename,
                 'description': translation_html,
             })
-
 
         # Let's render the final file
         rendered = article_template.render(context)
