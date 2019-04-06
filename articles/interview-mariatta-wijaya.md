@@ -1,4 +1,5 @@
 title: Python Community Interview With Mariatta Wijaya
+author: Ricky White
 source: https://realpython.com/interview-mariatta-wijaya/
 
 # Python Community Interview With Mariatta Wijaya

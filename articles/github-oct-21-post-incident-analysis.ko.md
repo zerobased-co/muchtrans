@@ -1,4 +1,5 @@
 title: 깃헙의 10월 21일 장애 사후 분석
+author: Jason Warner
 source: https://blog.github.com/2018-10-30-oct21-post-incident-analysis/
 
 #  10월 21일 장애 사후 분석

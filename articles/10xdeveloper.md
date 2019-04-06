@@ -1,4 +1,5 @@
 title: Becoming a 10x Developer
+author: Kate Heddleston
 source: https://kateheddleston.com/blog/becoming-a-10x-developer
 
 # Becoming a 10x Developer

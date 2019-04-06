@@ -1,4 +1,5 @@
 title: Why not join the sprints this year at PyCon
+author: Naomi Ceder
 source: https://pycon.blogspot.com/2016/03/why-not-join-sprints-this-year-at-pycon.html 
 
 #  Why not join the sprints this year at PyCon? 

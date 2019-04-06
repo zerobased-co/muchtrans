@@ -1,4 +1,5 @@
 title: Notes on structured concurrency, or: Go statement considered harmful
+author: Nathaniel J. Smith
 source: https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/
 
 # Notes on structured concurrency, or: Go statement considered harmful
