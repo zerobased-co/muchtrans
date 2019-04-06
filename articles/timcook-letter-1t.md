@@ -1,4 +1,5 @@
 title: Tim Cook's memo at AAPL hits $1 trillion market cap
+author: Tim Cook
 source: https://9to5mac.com/2018/08/02/apple-tim-cook-email-1-trillion/
 source_title: Tim Cook thanks employees in memo following record-setting $1 trillion market cap
 

@@ -4,8 +4,6 @@
 <div class="header">
   <p>
     <a href="/">← index</a>
-    /
-    <a href="{{ original.source }}" target="_blank">Visit original ↗</a>
     <span class="pull-right">
       <input type="checkbox" id="hide-original"/><label for="hide-original">Hide original</label>
     </span>
@@ -42,6 +40,17 @@
 <div class="info">
   <div class="row">
     <div class="column original">
+      {% if original.author %}
+      <h3 id="author">Author</h3>
+      <p>{{ original.author }}</p>
+      {% else %}
+      <h3 id="origin">Original</h3>
+      {% endif %}
+      {% if original.source %}
+      <p>From <a href="{{ original.source }}" target="_blank">
+        {% if original.source_title %}{{ original.source_title }}{% else %}{{ original.source }}{% endif %}</a>
+      </p>
+      {% endif %}
     </div>
     <div class="column translation">
       <h3 id="translators">Translators</h3>
@@ -77,11 +86,6 @@
 {% endblock %}
 {% block footer %}
 <div class="footer">
-  <p>
-    Original contents:
-      <a href="{{ original.source }}" target="_blank">
-        {% if original.source_title %}{{ original.source_title }}{% else %}{{ original.source }}{% endif %}</a>
-  </p>
   <p>Let's translate together on GitHub: <a href="https://github.com/zerobased-co/muchtrans">zerobased-co/muchtrans</a></p>
 </div>
 {% endblock %}

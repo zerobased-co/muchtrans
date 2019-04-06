@@ -1,4 +1,5 @@
 title: 올해는 파이콘 스프린트에 참여해보시지 않겠습니까?
+author: Naomi Ceder
 source: https://pycon.blogspot.com/2016/03/why-not-join-sprints-this-year-at-pycon.html 
 
 # 올해는 파이콘 스프린트에 참여해보시지 않겠습니까?

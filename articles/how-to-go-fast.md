@@ -1,4 +1,5 @@
 title: How to go fast
+author: Chris James
 source: https://quii.dev/How_to_go_fast
 
 #  How to go fast 

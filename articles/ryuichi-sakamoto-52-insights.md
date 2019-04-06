@@ -1,4 +1,5 @@
 title: Ryuichi Sakamoto – “We are destroying the world.”
+author: 52 Insights
 source: https://www.52-insights.com/ryuichi-sakamoto-we-are-destroying-the-world-interview-music/
 
 # Ryuichi Sakamoto – "We are destroying the world."

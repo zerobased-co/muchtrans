@@ -1,4 +1,5 @@
 title: 오프라인 행사 안내서
+author: Shauna Gordon-McKeon
 source: https://opensourceevents.github.io/ 
 
 # 오프라인 행사 안내서
