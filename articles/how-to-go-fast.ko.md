@@ -1,4 +1,5 @@
 title: 어떻게 빨리 갈 수 있을까
+author: Chris James
 source: https://quii.dev/How_to_go_fast
 
 #  어떻게 빨리 갈 수 있을까

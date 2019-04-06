@@ -1,4 +1,5 @@
 title: The In-Person Event Handbook
+author: Shauna Gordon-McKeon
 source: https://opensourceevents.github.io/ 
 
 # The In-Person Event Handbook

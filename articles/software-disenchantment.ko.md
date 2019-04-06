@@ -3,7 +3,7 @@ source: http://tonsky.me/blog/disenchantment/
 
 # 소프트웨어에 환멸을 느낀다
 
-저는 15년간 프로그래밍을 해왔죠. 근데 요즘 이 세계에서는 효율과 간결함에 대한 추구, 그리고 제대로 만들려는 노오력이 거의 없는 것 같습니다? 이제까지 쌓아온 제 경력이나 IT 전반에 대해 우울해질 지경이에요.
+저는 15년간 프로그래밍을 해왔죠. 근데 요즘 이 세계에서는 효율과 간결함에 대한 추구, 그리고 제대로 만들려는 노오력이 거의 없는 것 같습니다. 이제까지 쌓아온 제 경력이나 IT 전반에 대해 우울해질 지경이에요.
 
 Modern cars work, let’s say for the sake of argument, at 98% of what’s physically possible with the current engine design. Modern buildings use just enough material to fulfill their function and stay safe under the given conditions. All planes converged to the optimal size/form/load and basically look the same.
 

@@ -1,4 +1,5 @@
 title: October 21 post-incident analysis
+author: Jason Warner
 source: https://blog.github.com/2018-10-30-oct21-post-incident-analysis/
 
 #  October 21 post-incident analysis 

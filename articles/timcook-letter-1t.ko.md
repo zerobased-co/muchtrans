@@ -1,4 +1,5 @@
 title: 애플 시가 총액 1조 달러 도달에 팀 쿡이 사내에 전한 감사 메세지
+author: Tim Cook
 source: https://9to5mac.com/2018/08/02/apple-tim-cook-email-1-trillion/
 source_title: Tim Cook thanks employees in memo following record-setting $1 trillion market cap
 
