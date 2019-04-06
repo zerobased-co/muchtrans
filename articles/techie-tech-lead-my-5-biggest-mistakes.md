@@ -1,4 +1,5 @@
 title: Techie to tech lead: My five biggest mistakes
+author: Peter Gillard-Moss
 source: https://www.thoughtworks.com/insights/blog/techie-tech-lead-my-5-biggest-mistakes 
 
 # Techie to tech lead: My five biggest mistakes

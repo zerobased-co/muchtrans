@@ -1,4 +1,5 @@
 title: 개발자에서 개발팀장이 되기까지 겪은 다섯가지 큰 실수
+author: Peter Gillard-Moss
 source: https://www.thoughtworks.com/insights/blog/techie-tech-lead-my-5-biggest-mistakes 
 
 # 개발자에서 개발팀장이 되기까지 겪은 다섯가지 큰 실수

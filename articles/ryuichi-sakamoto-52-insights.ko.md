@@ -1,4 +1,5 @@
 title: 류이치 사카모토 – “우리는 세상을 파괴하고 있다.”
+author: 52 Insights
 source: https://www.52-insights.com/ryuichi-sakamoto-we-are-destroying-the-world-interview-music/
 
 # 류이치 사카모토 – "우리는 세상을 파괴하고 있다."
