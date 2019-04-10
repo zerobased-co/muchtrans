@@ -236,6 +236,7 @@ for language, articles in translated_articles_by_language.items():
         reverse=True
     )[:10]
     rendered = rss_template.render({
+        'hostname': 'https://muchtrans.com', # TODO: Should be loaded from ENV
         'pubDate': get_RFC822(datetime.utcnow()),
         'language': language,
         'articles': article_list,
