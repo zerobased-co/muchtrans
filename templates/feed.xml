@@ -9,7 +9,7 @@
   {% for article in articles %}
   <item>
     <title>{{ article.title }}</title>
-    <link>https://muchtrans.com/{{ article.url }}</link>
+    <link>{{ hostname }}{{ article.url }}</link>
     <description><![CDATA[{{ article.description }}]]></description>
     <pubDate>{{ article.pubDate }}</pubDate>
     {% for translator in article.translators %}
