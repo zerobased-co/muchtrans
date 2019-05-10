@@ -1,6 +1,6 @@
 title: 파이썬 코어 개발자가 되기까지
 author: Emily Morehouse
-source: http://emilyemorehouse.com/blog/015-my-path-to-becoming-a-python-core-developer/
+source: https://emilyemorehouse.com/blog/015-my-path-to-becoming-a-python-core-developer/
 
 ## 파이썬 코어 개발자가 되기까지
 

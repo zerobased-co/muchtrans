@@ -1,6 +1,6 @@
 title: My Path to Becoming a Python Core Developer
 author: Emily Morehouse
-source: http://emilyemorehouse.com/blog/015-my-path-to-becoming-a-python-core-developer/
+source: https://emilyemorehouse.com/blog/015-my-path-to-becoming-a-python-core-developer/
 
 ## My Path to Becoming a Python Core Developer
 
