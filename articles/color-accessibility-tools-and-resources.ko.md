@@ -4,7 +4,7 @@ source: https://stephaniewalter.design/blog/color-accessibility-tools-resources-
 
 # 색 접근성: 포용적인 제품 디자인에 도움이 되는 도구와 정보
 
-저는 [기본적인 접근성과 색상에 대해 학생들에게 가르치는 것에 대한 짧은 트윗](https://twitter.com/WalterStephanie/status/1111960235491639296)을 썼는데 꽤 많은 관심을 받았습니다. 이로 인해 색 접근성에 대해 흥미로운 토론을 하게 되었습니다 (의도하진 않았던 이모지에 대한 토론도요 ^^). 그래서 제가 평소에 제품 제작과 검토에 사용하는 색 접근성에 대한 모든 정보와 팁, 그리고 도구들을 한 번 정리해보았습니다. 함께 보시죠.
+[기본적인 접근성과 색상에 대해 학생들에게 가르치는 것에 대한 짧은 트윗](https://twitter.com/WalterStephanie/status/1111960235491639296)을 남겼는데, 꽤 많은 관심을 받았습니다. 이로 인해 색 접근성에 대해 흥미로운 토론을 하게 되었습니다 (의도하진 않았던 이모지에 대한 토론도요 ^^). 그래서 제가 평소에 제품 제작과 검토에 사용하는 색 접근성에 대한 모든 정보와 팁, 그리고 도구들을 한 번 정리해보았습니다. 함께 보시죠.
 
 ## 대비와 접근성: 색에 대한 몇 가지 기본 사항
 
@@ -34,7 +34,7 @@ source: https://stephaniewalter.design/blog/color-accessibility-tools-resources-
 
 ## 색맹 시뮬레이션 도구
 
-첫 번째 기준은 **정보가 오직 색상만으로도 전달되지 않게 하는 것**입니다. 만들고 있는 목업부터 시작해서 그 어떤 것이라도 이 기준이 적용되는 곳이라면 알아볼 수 있습니다. 입력 양식, 인포그래픽, 그래프, 태그, 상태 표시 등이 시작하기 좋은 곳입니다. 전자 상거래 웹사이트라면 제품의 색상 선택란도 알아보세요 (다음 장에서 더 알아봅시다). 그리고, 색맹 시뮬레이터를 통해 당신이 선택한 색들을 여러 색맹 유형에 관해 확인할 수 있습니다.
+첫 번째 기준은 **정보가 오직 색상만으로 전달되지 않게 하는 것**입니다. 만들고 있는 목업부터 시작해서 그 어떤 것이라도 이 기준이 적용되는 곳이라면 알아볼 수 있습니다. 입력 양식, 인포그래픽, 그래프, 태그, 상태 표시 등이 시작하기 좋은 곳입니다. 전자 상거래 웹사이트라면 제품의 색상 선택란도 알아보세요 (다음 장에서 더 알아봅시다). 그리고, 색맹 시뮬레이터를 통해 당신이 선택한 색이 여러 색맹 유형에 따라 어떻게 보여질 지 확인할 수 있습니다.
 
 **[Color Oracle](https://colororacle.org/)**은 윈도, 맥, 리눅스에서 실행되는 무료 색맹 시뮬레이터입니다.
 
@@ -52,7 +52,7 @@ source: https://stephaniewalter.design/blog/color-accessibility-tools-resources-
 
 ## 명암비 확인을 위한 도구
 
-두 번째 기준은 **문자열(전경 요소 포함)과 배경 사이의 명암비**입니다. 도움이 되는 여러 도구가 있기 때문에 앞서 말했듯 직접 계산할 필요가 없습니다.
+두 번째 기준은 **문자열(전경 요소 포함)과 배경 사이의 명암비**입니다. 앞서 말했듯, 도움이 되는 여러 도구가 있어 직접 계산할 필요가 없습니다.
 
 ### 온라인 도구
 
@@ -72,7 +72,7 @@ source: https://stephaniewalter.design/blog/color-accessibility-tools-resources-
 
 ![](https://stephaniewalter.design/wp-content/uploads/2019/04/colorable.jpg)
 
-사이트 전체를 확인하고 싶으면 [Checkmycolours.com](http://www.checkmycolours.com/)에서 URL을 입력해 사이트에 존재하는 모든 명암비 문제에 대한 결과를 얻을 수 있습니다. 가끔 정확한 배경을 얻어오지 못하는 경우가 있으니 사용에 주의해주세요.
+사이트 전체를 확인하고 싶으면 [Checkmycolours.com](http://www.checkmycolours.com/)에 URL을 입력해 사이트에 존재하는 모든 명암비 문제에 대한 결과를 얻을 수 있습니다. 가끔 정확한 배경을 얻어오지 못하는 경우가 있으니 사용에 주의해주세요.
 
 ### 설치해서 사용할 수 있는 오프라인 도구
 
@@ -100,11 +100,11 @@ source: https://stephaniewalter.design/blog/color-accessibility-tools-resources-
 
 6가지 색상보다 더 많은 색상으로 구성된 복잡한 행렬을 원한다면 [이 도구도 확인해보세요](http://jxnblk.com/colorable/demos/matrix/).
 
-**[Contrast Grid](http://contrast-grid.eightshapes.com/?background-colors=%23FFFFFF%2C%20White%0D%0A%23FEDC2A%2C%20Yellow%0D%0A%235A3B5D%2C%20Dark%20Purple%0D%0A%238B538F%2C%20Light%20Purple%0D%0A%23C3A3C9%2C%20Lightst%20purple%0D%0A%23777777%2C%20Gray%0D%0A%23555555%2C%20Darker%20Gray%0D%0A%0D%0A&foreground-colors=%23FFFFFF%2C%20White%0D%0A%23FEDC2A%2C%20Yellow%0D%0A%235A3B5D%2C%20Dark%20Purple%0D%0A%238B538F%2C%20Light%20Purple%0D%0A%23C3A3C9%2C%20Lightst%20purple%0D%0A%23777777%2C%20Gray%0D%0A%23555555%2C%20Darker%20Gray%0D%0A%23444444%2C%20Darker%20%20Darker%20Gray%0D%0A%23333333%2C%20Fifty%20Shades%20of%20darker%20gray%0D%0A%23222222%2C%20Dorian%20Gray%3F&es-color-form__tile-size=regular)**는 전경색과 배경색의 조합을 격자로 표현하는 컨셉을 받아들여 한 단계 더 발전시켰습니다. 이 도구를 이용해서 행과 열에 원하는 색상을 선택하여 자신만의 격자를 만들 수 있습니다. ([Mickaël G.](https://twitter.com/StrapTrooper)가 알려주었습니다)
+**[Contrast Grid](http://contrast-grid.eightshapes.com/?background-colors=%23FFFFFF%2C%20White%0D%0A%23FEDC2A%2C%20Yellow%0D%0A%235A3B5D%2C%20Dark%20Purple%0D%0A%238B538F%2C%20Light%20Purple%0D%0A%23C3A3C9%2C%20Lightst%20purple%0D%0A%23777777%2C%20Gray%0D%0A%23555555%2C%20Darker%20Gray%0D%0A%0D%0A&foreground-colors=%23FFFFFF%2C%20White%0D%0A%23FEDC2A%2C%20Yellow%0D%0A%235A3B5D%2C%20Dark%20Purple%0D%0A%238B538F%2C%20Light%20Purple%0D%0A%23C3A3C9%2C%20Lightst%20purple%0D%0A%23777777%2C%20Gray%0D%0A%23555555%2C%20Darker%20Gray%0D%0A%23444444%2C%20Darker%20%20Darker%20Gray%0D%0A%23333333%2C%20Fifty%20Shades%20of%20darker%20gray%0D%0A%23222222%2C%20Dorian%20Gray%3F&es-color-form__tile-size=regular)**는 전경색과 배경색의 조합을 격자로 표현하는 방식을 받아들여 한 단계 더 발전시켰습니다. 이 도구를 이용해서 행과 열에 원하는 색상을 선택하여 자신만의 격자를 만들 수 있습니다. ([Mickaël G.](https://twitter.com/StrapTrooper)가 알려주었습니다)
 
 ![](https://stephaniewalter.design/wp-content/uploads/2019/04/contrast-grid.jpg)
 
-**[Cloudflare color tool](https://cloudflare.design/color/)** 음, 이건 정말 비직관적인 도구지만 강력하긴 합니다. 화면의 상단에서 URL, 이미지를 통해 색상을 불러오거나, 색상 상자에서 직접 선택할 수도 있습니다. 색을 네 가지 분류(부모, 주 색상, 배경, 테두리)로 이리저리 움직여 확인해 보거나, “접근성 높은 조합(view accessible combinations” 링크를 사용해 접근성을 고려한 색의 조합을 확인할 수도 있습니다.
+**[Cloudflare color tool](https://cloudflare.design/color/)** 음, 이건 정말 비직관적인 도구지만 강력하긴 합니다. 화면의 상단에서 URL을 입력하거나 이미지를 지정해 색상을 불러오거나, 색상 상자에서 직접 선택할 수도 있습니다. 색을 네 가지 분류(부모, 주 색상, 배경, 테두리)로 이리저리 움직여 확인해 보거나, “접근성 높은 조합(view accessible combinations” 링크를 사용해 접근성을 고려한 색의 조합을 확인할 수도 있습니다.
 
 ![](https://stephaniewalter.design/wp-content/uploads/2019/04/cloudfour-contrast-tool.jpg)
 
@@ -142,7 +142,7 @@ Geri Coady는 뛰어난 디자이너로 도움이 될만한 여러 글을 잘 �
 
 ### 요청 받은 브랜딩을 진행하는 데 어려움이 있습니다. 도와주세요.
 
-종종 클라이언트로부터 의뢰받은 브랜딩 작업을 할 때가 있을겁니다. 그들 중 몇몇은 웹사이트의 명암비 문제로 기업의 색상을 바꾸자는 의견을 좋아하지 않을 수도 있습니다. 이런 경우에는 **[스타일 변환기를 사용해서 적합한 대안 버전을 제공하는 것](https://www.w3.org/TR/WCAG-TECHS/C29.html)**이 마지막 방법일 수 있습니다.
+종종 클라이언트로부터 의뢰받은 브랜딩 작업을 할 때가 있을겁니다. 그들 중 몇몇은 웹사이트의 명암비 문제로 기업의 대표 색상을 바꾸자는 의견을 좋아하지 않을 수도 있습니다. 이런 경우에는 **[스타일 변환기를 사용해서 적합한 대안 버전을 제공하는 것](https://www.w3.org/TR/WCAG-TECHS/C29.html)**이 마지막 방법일 수 있습니다.
 
  *글을 검토하고 도구를 추천해준 [Geoffrey Crofte](https://twitter.com/geoffreycrofte)에게 감사드립니다.* 🙂
 
