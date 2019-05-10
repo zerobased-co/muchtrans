@@ -2,57 +2,57 @@ title: Great developers are raised, not hired
 author: Eduards Sizovs
 source: https://sizovs.net/2019/04/10/the-best-developers-are-raised-not-hired/
 
-# Great developers are raised, not hired
+# 뛰어난 개발자는 뽑히는 게 아니라 길러집니다.
 
 * * *
 
-Every company on the market is **looking for the best talent**. Companies are waiting when “the talent” will appear from nowhere as if there were some secret talent factory. The ideal candidate will have all necessary technical skills, will be a good “culture fit” and will perform well with little or no supervision.
+시장의 모든 기업이 **최고의 인재를 찾고 있습니다**. 숨겨진 재능 공장이 있는 것도 아닌데 늘 어디선가 “능력자”가 짠! 하고 나타나기를 기다립니다. 요구되는 모든 기술적 능력을 갖추고 있을 뿐 아니라, “문화적 적합성”도 좋고 관리자가 없이도 항상 업무를 잘 수행하는 그런 이상적인 지원자 말이죠.
 
 * * *
 
-But there is a problem:
+하지만 문제가 있습니다.
 
-The best developers I hired were far from ideal candidates. They lacked technical skills, didn’t know how to test software and work in an agile team. They didn’t believe in themselves and their ability. They didn’t think they can be good leaders. They didn’t sound convincing during the job interview. **Some of them were suffering from impostor syndrome, doubting their actual ability:**
+제가 고용했던 최고의 개발자는 이상적인 지원자와는 거리가 멀었습니다. 기술적인 능력이 부족했고, 어떻게 소프트웨어를 테스트하는지 몰랐으며, 애자일 팀에서 일해본 적도 없었죠. 그들은 그들 자신의 능력을 믿지 않았습니다. 좋은 리더가 되리라고도 생각하지 않았죠. 면접에서도 설득력 있게 대답하지 못했습니다. **그들 중 몇몇은 자신의 실제 능력을 의심하는 가면 증후군에 괴로워했습니다**.
 
-![Impostor Syndrome](https://sizovs.net/images/impostor.png) Image from [It's Dangerous to Go Alone: Battling the Invisible Monsters in Tech](https://www.youtube.com/watch?v=1i8ylq4j_EY)
+![가면 증후군](https://sizovs.net/images/impostor.png "이미지 출처: <a href='https://www.youtube.com/watch?v=1i8ylq4j_EY'>It's Dangerous to Go Alone: Battling the Invisible Monsters in Tech</a>")
 
-Today, companies create ridiculously complicated multi-step interview processes that [filter out](https://rejected.us) candidates that are “not good enough.” We rarely give an opportunity to candidates spoiled by shitty companies and bad influence. We forget that some candidates weren’t lucky enough to meet an inspiring mentor or work in a supportive team. Broken toys are not welcome:
+오늘날의 기업은 이상하고 복잡한 다단계 면접 과정을 통해 “충분히 뛰어나지 않은” 지원자를 [걸러내는](https://rejected.us) 작업을 하고 있습니다. 거지 같은 기업과 나쁜 영향으로 망가져 버린 구직자에게는 기회가 거의 주어지지 않습니다. 그저 운이 없어서 영감 넘치는 멘토나 지원 조직과 함께 일할 수 없었던 지원자도 있음을 종종 잊곤 합니다. 망가진 장난감은 어디서도 환영받지 못합니다.
 
-![A broken toy](https://sizovs.net/images/broken_toy.jpg) A broken toy
+![망가진 장난감](https://sizovs.net/images/broken_toy.jpg "망가진 장난감")
 
-We prefer hiring self-confident rockstars with a solid track record. The reason is simple – we fail to create environment and work conditions in which people can grow professionally, develop good habits and become rock-stars. Skilled developers do not have time for mentoring, because they are busy with coding and architecture. Mentoring is not part of our hiring and delivery processes. Mentoring is not a buzzword, you can’t learn it on Coursera, and it’s not visible on a [tech radar](https://www.thoughtworks.com/radar).
+기업은 탄탄한 실적을 가진 자신감으로 가득한 락스타를 고용하길 선호합니다. 이유는 간단하죠 – 왜냐면 전문적으로 성장하고 좋은 습관을 발전시켜 락스타가 될만한 환경과 근무 조건을 만들어내는 데 실패했으니까요. 능력 있는 개발자들은 코딩하고 아키텍처를 구상하느라 바빠 멘토링을 할 시간이 없습니다. 멘토링은 채용 과정이 일부도 아니고, 힙하지도 않아 코세라(Coursera)에서 배울 수도 없으며, [기술 레이더](https://www.thoughtworks.com/radar)에 나오지도 않죠.
 
-Companies spend millions on TA departments, recruiters, promo websites and videos, struggling to find the best talent. We have this crazy talent search problem because companies are searching for the best engineers, instead of raising them. Everyone is fishing, but there is not much fish left. Recruiting more fishers and paying them high commission does not help. **The pond is empty.**
+기업은 최고의 인재를 확보하기 위해 채용 부서(TA), 헤드헌터, 홍보 웹사이트와 영상에 돈을 쏟아붓습니다. 인재를 길러낼 생각은 하지 않고 최고의 엔지니어를 찾아 헤매느라 어려움을 겪고 있습니다. 모두가 낚시하고는 있지만 물고기가 얼마 남지 않은 것과 같죠. 채용을 위해 더 많은 낚시꾼을 고용하고 더 많은 수당을 지불해도 도움이 되지 않습니다. **연못이 비어있어요.**
 
-![Fishing](https://sizovs.net/images/fishing.png) Nowaday's recruiting
+![낚시](https://sizovs.net/images/fishing.png "오늘날의 채용 상황")
 
-In the current market situation, every company needs to build a mentoring capacity. The most experienced developers should find time to grow less experienced colleagues through pair programming, continuous feedback, career advice. We must suggest [books](https://sizovs.net/2019/03/17/the-best-books-all-software-developers-must-read/), blogs, [videos](https://dev.tube), encourage colleagues to attend meetups, [conferences](https://sizovs.net/2019/03/21/the-best-developer-conferences/), and workshops.
+이런 시장 상황에서는, 모든 기업이 멘토링 역량을 키울 필요가 있습니다. 가장 경험 많은 개발자가 시간을 내서 짝 프로그래밍, 지속적인 피드백과 경력 조언 등을 통해 경험이 부족한 동료를 성장시켜야 합니다. [도서](https://sizovs.net/2019/03/17/the-best-books-all-software-developers-must-read/), 블로그, [영상](https://dev.tube), 모임 출석 독려하기, [컨퍼런스](https://sizovs.net/2019/03/21/the-best-developer-conferences/), 워크샵 등을 제안합니다.
 
-Mentoring is not easy; it requires a significant time commitment and excellent communication skills. We must encourage developers to [build](https://principal.dev) mentoring skills. If you are in doubt whether you should invest time in mentoring, I can assure you that mentoring is the best way to get followers and boost your authority and reputation. **Your mentees will support you and promote you for the rest of your life.**
+멘토링은 쉽지 않죠. 상당한 시간과 뛰어난 커뮤니케이션 능력이 요구됩니다. 개발자들이 멘토링 기술을 [키우기](https://principal.dev)를 권장합니다. 멘토링에 시간을 쓰는 것이 꺼려진다면, 저는 멘토링이야말로 추종자를 얻고 권위와 평판을 높이는 가장 좋은 방법이라고 말하고 싶습니다. **당신의 멘티가 평생 당신을 돕고 응원한다고 생각해보세요.**
 
-![](https://sizovs.net/images/funclub.jpg) Your mentees are your fan club.
+![](https://sizovs.net/images/funclub.jpg "멘티는 당신의 팬클럽입니다.")
 
-By building mentoring capacity at work, you can hire newcomers, broken toys, impostors and turn them into the loyal, high-quality workforce. Shifting focus from assessing to mentoring can simplify your interviewing process. Instead of trying to predict future performance by asking tough questions and sending candidate through nine circles of hell, you can hire candidates with a growth mindset and grow them.
+업무에서의 멘토링 역량을 키울 수 있다면, 신입도, 망가진 장난감도, 가면 증후군에 빠진 사람도 채용해서 충직하고 우수한 인력 집단으로 탈바꿈시킬 수 있습니다. 평가에서 멘토링 하는 것으로 초점을 옮겨 면접 과정을 단순화할 수 있습니다. 지원자에게 까다로운 질문을 던지고, 지옥의 9단계를 통과하게 하는 것으로 미래의 성과를 예측하려고 하지 말고, 성장하려는 사고방식을 가진 지원자를 뽑아 성장시킬 수 있습니다.
 
-Would you send this stone to a trash can?
+이 돌을 쓰레기통에 던져버릴 건가요?
 
-![Raw](https://sizovs.net/images/raw_diamond.jpg) A stone that doesn't look like a diamond
+![날 것](https://sizovs.net/images/raw_diamond.jpg "다이아몬드로는 보이지 않는 돌덩어리")
 
-The same stone after careful cutting and polishing:
+같은 돌을 섬세하게 깎고 다듬으면 이렇게 됩니다.
 
-![Polished](https://sizovs.net/images/diamond.gif) Now it's a beautiful diamond.
+![가공됨](https://sizovs.net/images/diamond.gif "짠! 이제 아름다운 다이아몬드가 되었네요.")
 
-Someone has to take a raw diamond that looks like a regular stone, cut it, polish it and voila – you have a beautiful shiny diamond. Companies are looking for polished diamonds and create hiring processes that throw raw diamonds in a trash bin.
+누군가는 돌멩이로 보이는 다이아몬드 원석을 챙겨, 깎고, 다듬어서 – 짠! 아름답게 빛나는 다이아몬드로 만들어내야 합니다. 기업은 가공된 다이아몬드만 찾느라 다이아몬드 원석을 쓰레기통에 던져버리는 채용 과정을 만들고 있죠.
 
-Instead of throwing diamonds away, we can learn to polish them. **We can create environments where people with eagerness and capacity to learn can become great developers.**
+다이아몬드 원석을 던져버리지 말고, 어떻게 다듬어야 할 지 배워야 합니다. **열의와 배움의 의지가 있는 사람들을 훌륭한 개발자로 만들어내는 환경을 만들 수 있습니다.**
 
-How?
+어떻게요?
 
-  * Take some money, energy, time that you spend on recruiting and invest it in [teaching](https://principal.dev) your best developers mentoring skills. Give your best developers time for mentoring and free them up from routine tasks. They will build a workforce that will exceed your expectations.
-  * Adjust your interview process and give a chance to candidates that are not good enough yet, but are eager to learn and have a growth mindset. They are raw diamonds.
-  * Relax “hard requirements” in your job ads to avoid filtering out impostors. Remember that most women apply to positions only where they completely fit the requirements.
-  * If you work in a large company and care about our profession, consider creating a Bootcamp for complete beginners.
+  * 채용에 소비되는 돈과 시간과 에너지를 써서 개발자 멘토링 기술을 [가르치는 데](https://principal.dev) 투자하세요. 최고의 개발자들에게 일상 업무에서 벗어나 멘토링만을 위한 시간을 제공해주세요. 기대를 초과하는 개발 조직을 만들어낼 것입니다.
+  * 지원자가 얼마나 충분하지 않은가를 검증하기보다는 배우고자 하는 열의와 성장에 대한 마음가짐을 알아보는 쪽으로 채용 과정을 조정하세요. 그들은 다이아몬드 원석이니까요.
+  * 구인 설명란의 “어려운 필수 조건”을 완화해 가면 증후군을 가진 사람이 걸러지지 않도록 해보세요. 많은 여성 지원자들은 최소 요건이 완전히 충족되는 경우에만 지원하는 경향이 있다는 것도 기억하세요.
+  * 대기업에서 일하고 있으면서 채용 과정에 관심이 있다면, 완전 입문자를 위한 부트캠프를 개최하는 것을 고려해보세요.
 
-You can escape this crazy hiring race by creating an environment, where experienced developers mentor less experienced developers. Hire for attitude, and teach technical skills. Great developers are raised, not hired.
+숙련된 개발자가 경험이 부족한 개발자를 멘토링 하는 환경을 만들어, 이 미친 채용의 경쟁에서 탈출할 수 있습니다. 태도를 보고 고용하고, 기술을 가질 수 있도록 가르쳐주세요. 뛰어난 개발자는 뽑히는 게 아니라 길러집니다.
 
-Be the company that says: we are ~~hiring~~ **mentoring**.
+이렇게 말할 수 있는 기업이 되어보세요: 저희 회사는 ~~채용중입니다~~ **멘토링 중입니다**.
