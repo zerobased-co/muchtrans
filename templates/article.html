@@ -50,10 +50,10 @@
   </div>
 {% endfor %}
 </article>
-{% if translators|length > 0  %}
 <div class="info">
   <div class="row">
-    <div class="column original">
+    {% if original.source %}
+    <div class="column author">
       {% if original.author %}
       <h3 id="author">Author</h3>
       <p>{{ original.author }}</p>
@@ -66,6 +66,8 @@
       </p>
       {% endif %}
     </div>
+    {% endif %}
+    {% if translators|length > 0 %}
     <div class="column translation">
       <h3 id="translators">Translators</h3>
       {% if latest_update %}
@@ -87,9 +89,9 @@
         {% endfor %}
       </div>
     </div>
+    {% endif %}
   </div>
 </div>
-{% endif %}
 {% if utterances %}
 <div>
   <div class="row">
