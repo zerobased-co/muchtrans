@@ -155,6 +155,18 @@ window.addEventListener('load', function () {
     node.appendChild(anchor);
   };
 
+  const images = document.querySelectorAll('img[title]');
+  for(var i = 0; i < images.length; i++) {
+    const node = images[i];
+    const figure = document.createElement("figure");
+    const figcaption = document.createElement("figcaption");
+    figcaption.innerHTML = node.getAttribute("title");
+
+    node.parentNode.insertBefore(figure, node);
+    figure.appendChild(node);
+    figure.appendChild(figcaption);
+  };
+
   if (typeof URLSearchParams !== 'undefined') {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('hide-original') == 'true') {
