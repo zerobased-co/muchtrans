@@ -51,7 +51,7 @@ body, html {
     font-style: normal;
   }
 
-  .header, .footer, .info {
+  .header, .footer, .info, .comment {
     display: none;
   }
 }
@@ -172,6 +172,10 @@ article {
 .info {
   background: #EAEAEA;
   padding: 0.5em 3%;
+}
+
+.comment {
+  background: #E6E6E6;
 }
 
 .footer {
