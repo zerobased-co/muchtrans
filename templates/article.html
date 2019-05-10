@@ -1,5 +1,19 @@
 {% extends "templates/base.html" %}
 {% block title %}{{ translation.title }}{% endblock %}
+{% block head %}
+  {% if original.source %}
+  <link rel="alternate" href="{{ original.source }}"
+    {% if original.link_hreflang %}
+        hreflang="{{ original.link_hreflang }}"
+    {% else %}
+        hreflang="en"
+    {% endif %}
+    {% if original.link_title %}
+        title="{{ original.link_title }}"
+    {% endif %}
+  />
+  {% endif %}
+{% endblock %}
 {% block header %}
 <div class="header">
   <p>
