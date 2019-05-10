@@ -1,6 +1,8 @@
 title: Color accessibility: tools and resources to help you design inclusive products
 author: Stéphanie Walter
 source: https://stephaniewalter.design/blog/color-accessibility-tools-resources-to-design-inclusive-products/
+link_hreflang: en
+link_title: en_GB
 
 # Color accessibility: tools and resources to help you design inclusive products
 
