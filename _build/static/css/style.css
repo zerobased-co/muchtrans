@@ -164,10 +164,21 @@ article {
   visibility: hidden;
 }
 
-.header, .footer {
+.header {
   background: #EAEAEA;
   padding: 1em 3%;
 }
+
+.info {
+  background: #EAEAEA;
+  padding: 0.5em 3%;
+}
+
+.footer {
+  background: #E0E0E0;
+  padding: 1em 3%;
+}
+
 
 .notification {
   background: #CDCDCD;
