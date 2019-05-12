@@ -41,32 +41,17 @@
 <article>
   {% for src, dst in rows %}
   <div class="row">
-    <div class="column original">
-      {{ src }}
-    </div>
     <div class="column translation">
       {{ dst }}
+    </div>
+    <div class="column original">
+      {{ src }}
     </div>
   </div>
 {% endfor %}
 </article>
 <div class="info">
   <div class="row">
-    {% if original.source %}
-    <div class="column author">
-      {% if original.author %}
-      <h3 id="author">Author</h3>
-      <p>{{ original.author }}</p>
-      {% else %}
-      <h3 id="origin">Original</h3>
-      {% endif %}
-      {% if original.source %}
-      <p>From <a href="{{ original.source }}" target="_blank">
-        {% if original.source_title %}{{ original.source_title }}{% else %}{{ original.source }}{% endif %}</a>
-      </p>
-      {% endif %}
-    </div>
-    {% endif %}
     {% if translators|length > 0 %}
     <div class="column translation">
       <h3 id="translators">Translators</h3>
@@ -88,6 +73,21 @@
         </span>
         {% endfor %}
       </div>
+    </div>
+    {% endif %}
+    {% if original.source %}
+    <div class="column author">
+      {% if original.author %}
+      <h3 id="author">Author</h3>
+      <p>{{ original.author }}</p>
+      {% else %}
+      <h3 id="origin">Original</h3>
+      {% endif %}
+      {% if original.source %}
+      <p>From <a href="{{ original.source }}" target="_blank">
+        {% if original.source_title %}{{ original.source_title }}{% else %}{{ original.source }}{% endif %}</a>
+      </p>
+      {% endif %}
     </div>
     {% endif %}
   </div>
