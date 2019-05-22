@@ -42,7 +42,9 @@
   {% for src, dst in rows %}
   <div class="row">
     <div class="column original">
+    {% if not original.hide_original %}
       {{ src }}
+    {% endif %}
     </div>
     <div class="column translation">
       {{ dst }}
@@ -64,6 +66,9 @@
       <p>From <a href="{{ original.source }}" target="_blank">
         {% if original.source_title %}{{ original.source_title }}{% else %}{{ original.source }}{% endif %}</a>
       </p>
+      {% endif %}
+      {% if original.hide_original %}
+        <p>The original content has been removed at the request of the author.</p>
       {% endif %}
     </div>
     {% endif %}
@@ -171,10 +176,16 @@ window.addEventListener('load', function () {
 
   if (typeof URLSearchParams !== 'undefined') {
     const urlParams = new URLSearchParams(window.location.search);
+    {% if original.hide_original %}
+    checkbox.checked = true;
+    checkbox.disabled = true;
+    toggleOriginal(true);
+    {% else %}
     if (urlParams.get('hide-original') == 'true') {
       checkbox.checked = true;
       toggleOriginal(true);
     }
+    {% endif %}
   }
 
   if (window.location.hash) {
