@@ -6,24 +6,26 @@
 {% endblock %}
 {% block header %}
 <div class="header">
-  <h1>muchtrans.com</h1>
+  <h1>Muchtrans</h1>
   <p>There are too much cool text to be translated in this world.</p>
 </div>
 {% endblock %}
 {% block content %}
-<div class="row">
-  <div class="column">
-    <h1>List of translations</h1>
-  </div>
-  <div class="column">
-  {% for month, articles in article_list %}
-    <h3>{{ month }}</h3>
-    <ul>
-    {% for article in articles %}
-      <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+<div class="index">
+  <div class="row">
+    <div class="column">
+      <h1>List of translations</h1>
+    </div>
+    <div class="column">
+    {% for month, articles in article_list %}
+      <h3>{{ month }}</h3>
+      <ul>
+      {% for article in articles %}
+        <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+      {% endfor %}
+      </ul>
     {% endfor %}
-    </ul>
-  {% endfor %}
+    </div>
   </div>
 </div>
 {% endblock %}
@@ -38,4 +40,13 @@
   <p>Fork me on <a href="https://github.com/zerobased-co/muchtrans/">GitHub</a></p>
   <p>Brought to you by <a href="http://zerobased.co/">zerobased.co</a> via <a href="https://www.netlify.com/">netlify</a></p>
 </div>
+{% endblock %}
+{% block script %}
+<script>
+window.addEventListener('load', function () {
+  if (localStorage.getItem('darkmode') == 'true') {
+    toggleDarkmode(true);
+  }
+});
+</script>
 {% endblock %}
