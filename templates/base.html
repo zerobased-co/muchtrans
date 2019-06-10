@@ -18,5 +18,15 @@
   {% block footer %}{% endblock %}
   {% include "templates/gtag.html" %}
 </body>
+<script>
+function toggleDarkmode(dark) {
+  var body = document.body;
+  if (dark) {
+    body.classList.add('dark');
+  } else {
+    body.classList.remove('dark');
+  }
+}
+</script>
 {% block script %}{% endblock %}
 </html>

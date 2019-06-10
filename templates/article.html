@@ -24,6 +24,9 @@
     <span class="pull-right">
       <input type="checkbox" id="hide-original"/><label for="hide-original">Hide original</label>
     </span>
+    <span class="pull-right">
+      <input type="checkbox" id="darkmode"/><label for="darkmode">Dark mode</label>
+    </span>
   </p>
   <p>
   </p>
@@ -53,7 +56,7 @@
       {{ dst }}
     </div>
   </div>
-{% endfor %}
+  {% endfor %}
 </article>
 <div class="info">
   <div class="row">
@@ -149,10 +152,16 @@ window.addEventListener('load', function () {
     };
   }
 
-  const checkbox = document.getElementById('hide-original');
-  checkbox.onclick = function () {
-    toggleOriginal(checkbox.checked);
-    toggleQueryParameter('hide-original', checkbox.checked);
+  const hide_checkbox = document.getElementById('hide-original');
+  hide_checkbox.onclick = function () {
+    toggleOriginal(hide_checkbox.checked);
+    toggleQueryParameter('hide-original', hide_checkbox.checked);
+  }
+
+  const dark_checkbox = document.getElementById('darkmode');
+  dark_checkbox.onclick = function () {
+    toggleDarkmode(dark_checkbox.checked);
+    localStorage.setItem('darkmode', dark_checkbox.checked);
   }
 
   const headers = document.querySelectorAll('h2[id], h3[id]');
@@ -180,15 +189,20 @@ window.addEventListener('load', function () {
   if (typeof URLSearchParams !== 'undefined') {
     const urlParams = new URLSearchParams(window.location.search);
     {% if original.hide_original %}
-    checkbox.checked = true;
-    checkbox.disabled = true;
+    hide_checkbox.checked = true;
+    hide_checkbox.disabled = true;
     toggleOriginal(true);
     {% else %}
     if (urlParams.get('hide-original') == 'true') {
-      checkbox.checked = true;
+      hide_checkbox.checked = true;
       toggleOriginal(true);
     }
     {% endif %}
+  }
+
+  if (localStorage.getItem('darkmode') == 'true') {
+    dark_checkbox.checked = true;
+    toggleDarkmode(true);
   }
 
   if (window.location.hash) {
