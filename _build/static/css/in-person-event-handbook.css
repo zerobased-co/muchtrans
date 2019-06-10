@@ -12,7 +12,7 @@ blockquote:before {
 }
 
 blockquote {
-  background-color: #F3F3F3;
+  background-color: rgba(128, 128, 128, 0.15);
   border-left: 3px solid #D5D5D5;
   margin: 1em 0;
   padding: .7em 1.5em 1em;
