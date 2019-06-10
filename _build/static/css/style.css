@@ -95,9 +95,14 @@ a.pilcrow {
   margin-left: 10px
 }
 
-a:link, a:visited {
+a:link {
   text-decoration: none;
-  border-bottom: 1px solid #B8B8FF;
+  border-bottom: 1px solid #6f6aff;
+}
+
+a:visited {
+  text-decoration: none;
+  border-bottom: 1px solid #9657d1;
 }
 
 a:hover {
@@ -165,21 +170,21 @@ article {
 }
 
 .header {
-  background: #EAEAEA;
+  background: #333;
   padding: 1em 3%;
 }
 
 .info {
-  background: #EAEAEA;
+  background: #e6e6e6;
   padding: 0.5em 3%;
 }
 
 .comment {
-  background: #E6E6E6;
+  background: #222;
 }
 
 .footer {
-  background: #E0E0E0;
+  background: #111;
   padding: 1em 3%;
 }
 
@@ -194,6 +199,36 @@ article {
   text-align: center;
   z-index: 1000;
   position: absolute;
+}
+
+.header h1 {
+  color: #fff;
+  background: #161616;
+  display: inline-block;
+  padding: 0.24em 0.38em;
+}
+
+.header p, .footer p {
+  color: #777;
+}
+
+.header label, .footer label,
+.header a, .footer a {
+  color: #eee;
+}
+
+.header h1 a:link, .header h1 a:visited {
+  border-bottom-color: transparent;
+}
+
+.header a:link, .header a:visited,
+.footer a:link, .footer a:visited {
+  border-bottom-color: #666;
+}
+
+.header a:hover,
+.footer a:hover {
+  border-bottom-color: #fff !important;
 }
 
 .header p, .footer p, .notification p {
