@@ -45,7 +45,7 @@ body, html {
     color: #000;
   }
 
-  a:after {
+  a::after {
     content: " (" attr(href) ") ";
     font-size: 0.8em;
     font-weight: normal;
