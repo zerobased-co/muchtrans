@@ -31,7 +31,7 @@
 {% endblock %}
 {% block footer %}
 <div class="footer">
-  <p class="feed">RSS feed: 
+  <p class="feed">RSS feed:
     {% for language, feed in feed_list %}
     <span><a href="{{ feed }}">{{ language }}</a></span>
     {% endfor %}
@@ -40,13 +40,4 @@
   <p>Fork me on <a href="https://github.com/zerobased-co/muchtrans/">GitHub</a></p>
   <p>Brought to you by <a href="http://zerobased.co/">zerobased.co</a> via <a href="https://www.netlify.com/">netlify</a></p>
 </div>
-{% endblock %}
-{% block script %}
-<script>
-window.addEventListener('load', function () {
-  if (localStorage.getItem('darkmode') == 'true') {
-    toggleDarkmode(true);
-  }
-});
-</script>
 {% endblock %}

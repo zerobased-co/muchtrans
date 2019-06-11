@@ -34,7 +34,7 @@
 {% if not finished %}
 <div class="notification">
   <p>
-    This document needs to be translated. Let's do it together on 
+    This document needs to be translated. Let's do it together on
     <a href="https://github.com/zerobased-co/muchtrans/blob/master/{{ filename }}">GitHub</a>.
   </p>
 </div>
@@ -159,6 +159,7 @@ window.addEventListener('load', function () {
   }
 
   const dark_checkbox = document.getElementById('darkmode');
+  dark_checkbox.checked = is_dark_mode
   dark_checkbox.onclick = function () {
     toggleDarkmode(dark_checkbox.checked);
     localStorage.setItem('darkmode', dark_checkbox.checked);
@@ -198,11 +199,6 @@ window.addEventListener('load', function () {
       toggleOriginal(true);
     }
     {% endif %}
-  }
-
-  if (localStorage.getItem('darkmode') == 'true') {
-    dark_checkbox.checked = true;
-    toggleDarkmode(true);
   }
 
   if (window.location.hash) {
