@@ -9,7 +9,7 @@
 body, html {
   margin: 0;
   padding: 0;
-  background: #666;
+  background: #F8F8F8;
   font-family: "Roboto", "Noto Sans KR", sans-serif;
   font-size: 1.028em;
   color: #303030;
@@ -45,7 +45,7 @@ body, html {
     color: #000;
   }
 
-  a:after {
+  a::after {
     content: " (" attr(href) ") ";
     font-size: 0.8em;
     font-weight: normal;
@@ -306,11 +306,15 @@ hr {
 }
 
 .dark {
-  background: #444;
+  background: #222;
 }
 
 .dark .index {
   background: #222;
+}
+
+.dark .loading {
+  color: #c1c2c4;
 }
 
 .dark article {
