@@ -122,7 +122,7 @@ ol, ul {
   margin: 0.5em 0;
 }
 
-img, object {
+img, object, embed {
   max-width: 100%;
 }
 
@@ -286,7 +286,7 @@ article {
   padding: 0.25em;
 }
 
-figure img {
+figure .image {
   display: block;
 }
 
@@ -332,7 +332,7 @@ hr {
   color: #c1c2c4;
 }
 
-.dark .row img {
+.dark .row .image {
   opacity: 0.7;
 }
 

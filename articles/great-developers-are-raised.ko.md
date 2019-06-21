@@ -14,7 +14,7 @@ source: https://sizovs.net/2019/04/10/the-best-developers-are-raised-not-hired/
 
 제가 고용했던 최고의 개발자는 이상적인 지원자와는 거리가 멀었습니다. 기술적인 능력이 부족했고, 어떻게 소프트웨어를 테스트하는지 몰랐으며, 애자일 팀에서 일해본 적도 없었죠. 그들은 그들 자신의 능력을 믿지 않았습니다. 좋은 리더가 되리라고도 생각하지 않았죠. 면접에서도 설득력 있게 대답하지 못했습니다. **그들 중 몇몇은 자신의 실제 능력을 의심하는 가면 증후군에 괴로워했습니다**.
 
-![가면 증후군](https://sizovs.net/images/impostor.png "이미지 출처: <a href='https://www.youtube.com/watch?v=1i8ylq4j_EY'>It's Dangerous to Go Alone: Battling the Invisible Monsters in Tech</a>")
+![가면 증후군](/static/articles/great-developers-are-raised/imposter.svg "이미지 출처: <a href='https://www.youtube.com/watch?v=1i8ylq4j_EY'>It's Dangerous to Go Alone: Battling the Invisible Monsters in Tech</a>")
 
 오늘날의 기업은 이상하고 복잡한 다단계 면접 과정을 통해 “충분히 뛰어나지 않은” 지원자를 [걸러내는](https://rejected.us) 작업을 하고 있습니다. 거지 같은 기업과 나쁜 영향으로 망가져 버린 구직자에게는 기회가 거의 주어지지 않습니다. 그저 운이 없어서 영감 넘치는 멘토나 지원 조직과 함께 일할 수 없었던 지원자도 있음을 종종 잊곤 합니다. 망가진 장난감은 어디서도 환영받지 못합니다.
 
@@ -24,7 +24,7 @@ source: https://sizovs.net/2019/04/10/the-best-developers-are-raised-not-hired/
 
 기업은 최고의 인재를 확보하기 위해 채용 부서(TA), 헤드헌터, 홍보 웹사이트와 영상에 돈을 쏟아붓습니다. 인재를 길러낼 생각은 하지 않고 최고의 엔지니어를 찾아 헤매느라 어려움을 겪고 있습니다. 모두가 낚시하고는 있지만 물고기가 얼마 남지 않은 것과 같죠. 채용을 위해 더 많은 낚시꾼을 고용하고 더 많은 수당을 지불해도 도움이 되지 않습니다. **연못이 비어있어요.**
 
-![낚시](https://sizovs.net/images/fishing.png "오늘날의 채용 상황")
+![낚시](/static/articles/great-developers-are-raised/fishing.svg "오늘날의 채용 상황")
 
 이런 시장 상황에서는, 모든 기업이 멘토링 역량을 키울 필요가 있습니다. 가장 경험 많은 개발자가 시간을 내서 짝 프로그래밍, 지속적인 피드백과 경력 조언 등을 통해 경험이 부족한 동료를 성장시켜야 합니다. [도서](https://sizovs.net/2019/03/17/the-best-books-all-software-developers-must-read/), 블로그, [영상](https://dev.tube), 모임 출석 독려하기, [컨퍼런스](https://sizovs.net/2019/03/21/the-best-developer-conferences/), 워크샵 등을 제안합니다.
 
