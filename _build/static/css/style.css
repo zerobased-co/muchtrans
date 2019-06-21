@@ -175,6 +175,7 @@ h1 code, h2 code, h3 code, p code, li code {
 article {
   visibility: hidden;
   background: #F8F8F8;
+  padding-bottom: 1em;
 }
 
 .header {
