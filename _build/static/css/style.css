@@ -354,3 +354,7 @@ hr {
 .dark .row a:hover {
   border-color: #eee;
 }
+
+.dark .highlighted {
+  background: #ca0070;
+}
