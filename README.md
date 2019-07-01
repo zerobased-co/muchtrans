@@ -32,11 +32,10 @@ On your Python environments,
 ```shell
 $ pip install -r requirements.txt
 $ python build.py
-$ cd _build
-$ python -m http.server
+$ python dev.py
 ```
-And connect to `http://localhost:8000` in your favour web browser.
-<br>그리고 좋아하는 웹 브라우저에서 `http://localhost:8000`으로 접속하시면 됩니다.
+And connect to `http://localhost:4000` in your favour web browser.
+<br>그리고 좋아하는 웹 브라우저에서 `http://localhost:4000`으로 접속하시면 됩니다.
 
 ## License
 
