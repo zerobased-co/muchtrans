@@ -11,3 +11,4 @@ requests
 smmap2
 urllib3
 pytz
+watchdog
