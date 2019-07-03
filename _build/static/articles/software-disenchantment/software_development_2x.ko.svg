@@ -1,0 +1,13 @@
+<svg width="698" height="880" viewBox="0 0 698 880" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <image id="svg_1" height="880" width="698" xlink:href="https://tonsky.me/blog/disenchantment/software_development_2x.gif"/>
+  <rect id="svg_2" height="48" width="546" y="829" x="76.5" stroke-width="0" stroke="#000" fill="#fff"/>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="28" id="svg_3" y="861" x="167.78906" stroke-width="0" stroke="#000" fill="#000000">소프트웨어 개발이 이뤄지는 방법</text>
+  <rect id="svg_4" height="177" width="632" y="26" x="32.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#fff"/>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="28" id="svg_7" y="71" x="35.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000">벽에 구멍을 500개 내야 해서 이 전자동 드릴을 만들었죠.</text>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="28" id="svg_8" y="115" x="35.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000">우아하고 정교한 기어를 사용해서 토크와 속도를 필요한</text>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="28" id="svg_9" y="160" x="35.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000">만큼 계속적으로 조절할 수 있습니다.</text>
+  <rect id="svg_10" height="169" width="464" y="203" x="189.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#fff"/>
+  <text style="cursor: move;" font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="28" id="svg_12" y="252" x="238.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000">대단해요, 완벽한 무게를 가졌네요!</text>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="28" id="svg_13" y="295" x="237.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000">우리가 만든 대포에 이걸 500개 넣고</text>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="28" id="svg_14" y="339" x="239.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000">벽에 쏴서 구멍을 뚫어야겠어요.</text>
+</svg>

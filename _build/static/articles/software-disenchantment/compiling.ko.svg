@@ -1,0 +1,14 @@
+<svg width="413" height="360" viewBox="0 0 413 360" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <image xlink:href="https://tonsky.me/blog/disenchantment/compiling.gif" height="360" width="413" id="svg_1" y="0" x="0"/>
+  <rect id="svg_2" height="98" width="349" y="10.4375" x="26" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#fff"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="20" id="svg_3" y="42.4375" x="71.1875" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000">프로그래머가 합법적으로 게으름을</text>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="20" id="svg_4" y="67.4375" x="71.1875" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000">피울 수 있는 최고의 변명:</text>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_5" y="105.4375" x="70.32031" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000">“제 코드가 컴파일 중인데요”</text>
+  <ellipse stroke="#000" ry="27" rx="73.5" id="svg_7" cy="155.4375" cx="96.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#fff"/>
+  <text stroke="#000" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="16" id="svg_8" y="152.4375" x="45" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#000000">저기, 이제 돌아와</text>
+  <text stroke="#000" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="16" id="svg_10" y="170.4375" x="45" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#000000">일 좀 합시다!</text>
+  <ellipse stroke="#000" ry="17.5" rx="51" id="svg_11" cy="231.9375" cx="181" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#fff"/>
+  <text stroke="#000" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="16" id="svg_12" y="238.4375" x="128" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#000000">컴파일중이에요!</text>
+  <ellipse stroke="#000" ry="20" rx="66.5" id="svg_13" cy="317.4375" cx="92.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#fff"/>
+  <text stroke="#000" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="16" id="svg_14" y="324.4375" x="49" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#000000">아, 일 보세요.</text>
+</svg>
