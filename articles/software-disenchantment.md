@@ -189,3 +189,5 @@ What we have today is not progress. We barely meet business goals with poor tool
 So I want to call it out: where we are today is bullshit. As engineers, we can, and should, and will do better. We can have better tools, we can build better apps, faster, more predictable, more reliable, using fewer resources (orders of magnitude fewer!). We need to understand deeply what are we doing and why. We need to deliver: reliably, predictably, with topmost quality. We can—and should–take pride in our work. Not just “given what we had…”—no buts!
 
 I hope I’m not alone at this. I hope there are people out there who want to do the same. I’d appreciate if we at least start talking about how absurdly bad our current situation in the software industry is. And then we maybe figure out how to get out.
+
+September 17, 2018 · Discuss on [HackerNews](https://news.ycombinator.com/item?id=18012334) [Reddit](https://www.reddit.com/r/programming/comments/9go8ul/software_disenchantment/)
