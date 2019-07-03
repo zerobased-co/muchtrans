@@ -24,6 +24,8 @@ Look around: our portable computers are thousands of times more powerful than th
 
 Google Inbox, a web app written by Google, running in Chrome browser also by Google, [takes 13 seconds to open moderately-sized emails](https://twitter.com/nikitonsky/statuses/968882438024941568):
 
+<video autostart="no" muted="yes" loop="no" preload="auto" playsinline="" controls=""><source src="https://tonsky.me/blog/disenchantment/inbox.mp4" type="video/mp4"></video>
+
 It also animates empty white boxes instead of showing their content because it’s the only way anything can be animated on a webpage with decent performance. No, decent doesn’t mean 60fps, it’s rather “as fast as this web page could possibly go”. I’m dying to see web community answer when 120Hz displays become mainstream. Shit barely hits 60Hz already.
 
 Windows 10 [takes 30 minutes to update](https://grumpy.website/post/0PeXr1S7N). What could it possibly be doing for that long? That much time is enough to fully format my SSD drive, download a fresh build and install it like 5 times in a row.
