@@ -4,8 +4,6 @@ source: https://quii.dev/How_to_go_fast
 
 #  어떻게 빨리 갈 수 있을까
 
-[ ![quii profile image](https://res.cloudinary.com/practicaldev/image/fetch/s--I4Bh1XF---/c_fill,f_auto,fl_progressive,h_50,q_auto,w_50/https://thepracticaldev.s3.amazonaws.com/uploads/user/profile_image/61881/0c870cae-d5c4-4603-ac34-8d6eb02ab1fa.png) 크리스 제임스 ](https://dev.to/quii)
-
 이 문서는 소프트웨어를 만들며, 단순하고 스트레스 없는 삶을 추구함과 동시에 동료들을 행복하게 하고 싶은 분들을 위해 작성했습니다. 선택을 단순화하고 잘 알려지고 증명된 원리 원칙에 기대어 번아웃에 빠지지 않고 소프트웨어를 출시하는 방법을 알아봅시다.
 
 사업부가 당신의 팀에 *웹 사이트 같은 것*을 만드는 데 임의로 1년이라는 시간을 줬을 뿐인데, 그들이 가진 아이디어는 장황하게 많다고 칩시다. 이 모든 야망을 둘러싼 거대한 구조와 일감을 상상해서 계획하는 일에 빠져들지 마세요. 이건 실패, 섣부른 최적화, 그리고 망가진 약속으로 이르는 길에 불과합니다.

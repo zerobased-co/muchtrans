@@ -4,8 +4,6 @@ source: https://quii.dev/How_to_go_fast
 
 #  How to go fast 
 
-[ ![quii profile image](https://res.cloudinary.com/practicaldev/image/fetch/s--I4Bh1XF---/c_fill,f_auto,fl_progressive,h_50,q_auto,w_50/https://thepracticaldev.s3.amazonaws.com/uploads/user/profile_image/61881/0c870cae-d5c4-4603-ac34-8d6eb02ab1fa.png) Chris James ](https://dev.to/quii)
-
 This article is for anyone who works in software and wants to keep life simple, less stressful but still keep their employer happy. You'll see how by making simple choices and sticking to well-understood, proven principles you can ship software and not burn everyone out along the way.
 
 The business have arbitrarily given your team a year to make _a website thing_ and they've got many grandiose ideas. Don't be tempted to spend lots of time planning up front imagining big architectures and backlogs around all this ambition. This is the path to failure, premature optimisation and broken promises. 
