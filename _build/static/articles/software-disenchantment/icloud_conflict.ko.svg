@@ -1,0 +1,17 @@
+<svg viewBox="0 0 750 585" width="750" height="585" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <image fill="#4c4c4c" xlink:href="https://tonsky.me/blog/disenchantment/icloud_conflict.jpg" width="750" height="585" id="svg_1"/>
+  <rect id="svg_2" height="43" width="242" y="33.9375" x="255.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#fff"/>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="30" id="svg_3" y="68.9375" x="292.98438" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000">충돌 해결하기</text>
+  <rect id="svg_4" height="71" width="422" y="104.9375" x="170.5" stroke-width="0" fill="#f0f0f0"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="20" id="svg_5" y="128.9375" x="236.91406" stroke-width="0" fill="#4c4c4c">변경사항이 동기화되지 않았습니다.</text>
+  <text style="cursor: move;" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="20" id="svg_6" y="158.9375" x="234.14063" stroke-width="0" fill="#4c4c4c">어떤 문서를 보존할지 선택하십시오.</text>
+  <rect id="svg_7" height="33" width="200" y="226.9375" x="188.5" stroke-width="0" fill="#ffffff"/>
+  <rect id="svg_8" height="33" width="200" y="226.9375" x="188.5" stroke-width="0" fill="#ffffff"/>
+  <rect stroke="null" id="svg_10" height="33" width="306.99999" y="367.9375" x="191.5" stroke-width="0" fill="#ffffff"/>
+  <text font-weight="bold" transform="matrix(1,0,0,1,0,0) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="20" id="svg_11" y="249.9375" x="200.5" stroke-opacity="null" stroke-width="0" stroke="null" fill="#4c4c4c">iCloud에서 변경됨</text>
+  <text font-weight="bold" style="cursor: move;" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="20" id="svg_13" y="393.9375" x="200.5" stroke-opacity="null" stroke-width="0" stroke="null" fill="#4c4c4c">Rolys의 MacBook Pro에서 변경됨</text>
+  <rect id="svg_14" height="43" width="76" y="499.9375" x="462.5" stroke-opacity="null" stroke-width="0" stroke="null" fill="#ffffff"/>
+  <rect id="svg_15" height="43" width="129" y="501.9375" x="576.5" stroke-opacity="null" stroke-width="0" stroke="null" fill="#ffffff"/>
+  <text transform="matrix(1,0,0,1,0,0) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_16" y="530.9375" x="483.5" stroke-opacity="null" stroke-width="0" stroke="null" fill="#ec9d3d">닫기</text>
+  <text transform="matrix(1,0,0,1,0,0) " font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_17" y="530.9375" x="590.5" stroke-opacity="null" stroke-width="0" stroke="null" fill="#ec9d3d">하나만 보존</text>
+</svg>
