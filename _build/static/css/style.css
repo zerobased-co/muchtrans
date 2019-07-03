@@ -361,3 +361,10 @@ hr {
 .dark .highlighted {
   background: #ca0070;
 }
+
+/* Fix SVG resizing issue on IE */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  img[src*=".svg"], embed[src*=".svg"] {
+    width: 100%;
+  }
+}
