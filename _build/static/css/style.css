@@ -29,34 +29,6 @@ body, html {
   margin: 0 3%;
 }
 
-@media screen and (max-width: 720px) {
-  .row {
-    display: block;
-  }
-  .column {
-    width: 94%;
-  }
-}
-
-@media print {
-  body, html {
-    background: #FFF;
-    font-size: 1.0em;
-    color: #000;
-  }
-
-  a::after {
-    content: " (" attr(href) ") ";
-    font-size: 0.8em;
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  .header, .footer, .info, .comment {
-    display: none;
-  }
-}
-
 h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto Slab", "Noto Serif KR", serif;
   word-break: keep-all;
@@ -379,5 +351,37 @@ hr {
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   img[src*=".svg"], embed[src*=".svg"] {
     width: 100%;
+  }
+}
+
+/* for smaller screens */
+@media screen and (max-width: 720px) {
+  .row {
+    flex-direction: column;
+  }
+  article.swap .row {
+    flex-direction: column-reverse;
+  }
+  .column {
+    width: 94%;
+  }
+}
+
+@media print {
+  body, html {
+    background: #FFF;
+    font-size: 1.0em;
+    color: #000;
+  }
+
+  a::after {
+    content: " (" attr(href) ") ";
+    font-size: 0.8em;
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .header, .footer, .info, .comment {
+    display: none;
   }
 }
