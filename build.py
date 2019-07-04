@@ -66,22 +66,22 @@ class MuchtransRenderer(HLabelMixin, CustomImageMixin, mistune.Renderer):
 
 
 _github_users = {}
-def get_github_user(email):
+def get_github_user(commit):
     if not os.environ.get('PRODUCTION', False):
         return {}
 
+    email = commit.author.email
     if email in _github_users:
         return _github_users[email]
 
     headers = {
         'Authorization': 'token {}'.format(os.environ['GITHUB_ACCESS_TOKEN']),
     }
-    r = requests.get('https://api.github.com/search/users?q={}+in:email'.format(email), headers=headers).json()
+    r = requests.get('https://api.github.com/repos/zerobased-co/muchtrans/commits/{}'.format(commit.hexsha), headers=headers).json()
 
     try:
-        if r['total_count'] >= 1:
-            _github_users[email] = r['items'][0]
-            return r['items'][0]
+        _github_users[email] = r['author']
+        return r['author']
     except KeyError:
         pass
 
@@ -99,7 +99,7 @@ def get_authors_from_commits(commits):
             authors[email] = {
                 'name': commit.author.name,
                 'email': email,
-                'github': get_github_user(email),
+                'github': get_github_user(commit),
                 'count': 1,
             }
 
