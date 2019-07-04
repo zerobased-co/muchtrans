@@ -181,13 +181,33 @@ article {
   padding-bottom: 1em;
 }
 
+article.hide-original .original {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+  visibility: hidden;
+}
+
+article.swap .row {
+  flex-direction: row-reverse;
+}
+
 .header {
   background: #333;
   padding: 1em 3%;
+  display: flex;
 }
 
-.header span {
+.settings {
+  flex-grow: 1;
+  align-self: flex-end;
+  text-align: right;
+}
+
+.settings span {
   margin: 0 5px;
+  font-size: 0.9em;
+  white-space: nowrap;
 }
 
 .info {
@@ -276,13 +296,6 @@ article {
   height: auto;
   border-radius: 50%;
   margin: 5px 10px;
-}
-
-.hidden {
-  position: absolute !important;
-  top: -9999px !important;
-  left: -9999px !important;
-  visibility: hidden;
 }
 
 .highlighted {
