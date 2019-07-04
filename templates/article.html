@@ -169,13 +169,6 @@ window.addEventListener('load', function () {
     toggleQueryParameter('hide-original', hide_checkbox.checked);
   }
 
-  const dark_checkbox = document.getElementById('darkmode');
-  dark_checkbox.checked = is_dark_mode;
-  dark_checkbox.onclick = function () {
-    toggleDarkmode(dark_checkbox.checked);
-    localStorage.setItem('darkmode', dark_checkbox.checked);
-  }
-
   const swap_checkbox = document.getElementById('swap');
   swap_checkbox.checked = localStorage.getItem('swap') === 'true';
   toggleSwap(swap_checkbox.checked);

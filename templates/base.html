@@ -21,10 +21,6 @@
 <script>
 const is_dark_mode = localStorage.getItem('darkmode') === 'true';
 
-document.addEventListener('DOMContentLoaded', function () {
-  toggleDarkmode(is_dark_mode);
-});
-
 function toggleDarkmode(dark) {
   var body = document.body;
   if (dark) {
@@ -33,6 +29,16 @@ function toggleDarkmode(dark) {
     body.classList.remove('dark');
   }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  const dark_checkbox = document.getElementById('darkmode');
+  dark_checkbox.checked = is_dark_mode;
+  toggleDarkmode(is_dark_mode);
+  dark_checkbox.onclick = function () {
+    toggleDarkmode(dark_checkbox.checked);
+    localStorage.setItem('darkmode', dark_checkbox.checked);
+  }
+});
 </script>
 {% block script %}{% endblock %}
 </html>
