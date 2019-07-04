@@ -32,6 +32,7 @@ if __name__ == '__main__':
         handler = Handler()
         observer = Observer()
         observer.schedule(handler, 'articles', recursive=True)
+        observer.schedule(handler, 'templates', recursive=True)
         observer.start()
         try:
             while True:
