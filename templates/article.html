@@ -16,20 +16,25 @@
 {% endblock %}
 {% block header %}
 <div class="header">
-  <h1>
-    <a href="/">Mt</a>
-  </h1>
-  <p>
-    <a href="/">← index</a>
-    <span class="pull-right">
-      <input type="checkbox" id="hide-original"/><label for="hide-original">Hide original</label>
+  <div>
+    <h1>
+      <a href="/">Mt</a>
+    </h1>
+    <p>
+      <a href="/">← index</a>
+    </p>
+  </div>
+  <div class="settings">
+    <span>
+      <input type="checkbox" id="swap"/><label for="swap">Swap column</label>
     </span>
-    <span class="pull-right">
+    <span>
       <input type="checkbox" id="darkmode"/><label for="darkmode">Dark mode</label>
     </span>
-  </p>
-  <p>
-  </p>
+    <span>
+      <input type="checkbox" id="hide-original"/><label for="hide-original">Hide original</label>
+    </span>
+  </div>
 </div>
 {% if not finished %}
 <div class="notification">
@@ -141,15 +146,21 @@ window.addEventListener('load', function () {
   }
 
   function toggleOriginal(hide) {
-    var originals = document.querySelectorAll('.original');
-    for(var i = 0; i < originals.length; i++) {
-      const node = originals[i];
-      if (hide) {
-        node.classList.add('hidden');
-      } else {
-        node.classList.remove('hidden');
-      }
-    };
+    var article = document.getElementsByTagName('article')[0];
+    if (hide) {
+      article.classList.add('hide-original');
+    } else {
+      article.classList.remove('hide-original');
+    }
+  }
+
+  function toggleSwap(swap) {
+    var article = document.getElementsByTagName('article')[0];
+    if (swap) {
+      article.classList.add('swap');
+    } else {
+      article.classList.remove('swap');
+    }
   }
 
   const hide_checkbox = document.getElementById('hide-original');
@@ -159,10 +170,18 @@ window.addEventListener('load', function () {
   }
 
   const dark_checkbox = document.getElementById('darkmode');
-  dark_checkbox.checked = is_dark_mode
+  dark_checkbox.checked = is_dark_mode;
   dark_checkbox.onclick = function () {
     toggleDarkmode(dark_checkbox.checked);
     localStorage.setItem('darkmode', dark_checkbox.checked);
+  }
+
+  const swap_checkbox = document.getElementById('swap');
+  swap_checkbox.checked = localStorage.getItem('swap') === 'true';
+  toggleSwap(swap_checkbox.checked);
+  swap_checkbox.onclick = function () {
+    toggleSwap(swap_checkbox.checked);
+    localStorage.setItem('swap', swap_checkbox.checked);
   }
 
   const headers = document.querySelectorAll('h2[id], h3[id]');
