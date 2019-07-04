@@ -149,8 +149,10 @@ window.addEventListener('load', function () {
     var article = document.getElementsByTagName('article')[0];
     if (hide) {
       article.classList.add('hide-original');
+      swap_checkbox.disabled = true;
     } else {
       article.classList.remove('hide-original');
+      swap_checkbox.disabled = false;
     }
   }
 
@@ -204,6 +206,8 @@ window.addEventListener('load', function () {
     {% if original.hide_original %}
     hide_checkbox.checked = true;
     hide_checkbox.disabled = true;
+    swap_checkbox.checked = false;
+    swap_checkbox.disabled = true;
     toggleOriginal(true);
     {% else %}
     if (urlParams.get('hide-original') == 'true') {
