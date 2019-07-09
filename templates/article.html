@@ -1,5 +1,9 @@
 {% extends "templates/base.html" %}
+
 {% block title %}{{ translation.title }}{% endblock %}
+{% block og_title %}{{ translation.title }}{% endblock %}
+{% block og_url %}{{ url }}{% endblock %}
+
 {% block head %}
   {% if original.source %}
   <link rel="alternate" href="{{ original.source }}"
@@ -14,6 +18,7 @@
   />
   {% endif %}
 {% endblock %}
+
 {% block header %}
 <div class="header">
   <div>
@@ -48,6 +53,7 @@
   <h1>Loading contents...</h1>
 </div>
 {% endblock %}
+
 {% block content %}
 <article>
   {% for src, dst in rows %}
@@ -116,11 +122,13 @@
 </div>
 {% endif %}
 {% endblock %}
+
 {% block footer %}
 <div class="footer">
   <p>Let's translate together on GitHub: <a href="https://github.com/zerobased-co/muchtrans">zerobased-co/muchtrans</a></p>
 </div>
 {% endblock %}
+
 {% block script %}
 <script>
 window.addEventListener('load', function () {

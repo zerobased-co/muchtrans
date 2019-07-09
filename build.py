@@ -205,6 +205,7 @@ for key, article in articles.items():
         # Render and save translated article
         context = {
             'hostname': HOSTNAME,
+            'url': translation_html_filename,
 
             'css': css,
             'rows': rows,
