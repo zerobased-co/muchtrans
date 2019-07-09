@@ -11,6 +11,7 @@ import re
 import requests
 import time
 
+HOSTNAME = 'https://muchtrans.com' # TODO: Should be loaded from ENV
 OUTPUT = '_build'
 
 SINGLE = ['blockquote', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', ]
@@ -203,6 +204,8 @@ for key, article in articles.items():
 
         # Render and save translated article
         context = {
+            'hostname': HOSTNAME,
+
             'css': css,
             'rows': rows,
 
@@ -256,7 +259,7 @@ for language, articles in translated_articles_by_language.items():
         reverse=True
     )[:10]
     rendered = rss_template.render({
-        'hostname': 'https://muchtrans.com', # TODO: Should be loaded from ENV
+        'hostname': HOSTNAME,
         'pubDate': get_RFC822(datetime.utcnow()),
         'language': language,
         'articles': article_list,
@@ -277,6 +280,7 @@ article_list = sorted(
     reverse=True
 )
 rendered = index_template.render({
+    'hostname': HOSTNAME,
     'article_list': article_list,
     'feed_list': feed_list,
 })

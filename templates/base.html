@@ -5,7 +5,7 @@
   <title>{% block title %}Very first of muchtrans{% endblock %}</title>
   <link rel="stylesheet" type="text/css" href="/static/css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:image" content="{% block og_image %}/static/images/muchtrans.png{% endblock %}"/>
+  <meta property="og:image" content="{% block og_image %}{{ hostname }}/static/images/muchtrans.png{% endblock %}"/>
   <link rel="icon" type="image/png" href="/static/images/favicon.png" sizes="32x32" />
   {% if css %}
   <link rel="stylesheet" type="text/css" href="{{ css }}">
