@@ -2,24 +2,24 @@ title: Notes on structured concurrency, or: Go statement considered harmful
 author: Nathaniel J. Smith
 source: https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/
 
-# 구조적 동시성에 대한 소고, 또는 Go 문의 해로움 
+# 구조적 동시성에 대한 소고, 또는 Go 문의 해로움
 
 
 모든 동시성 API는 코드를 동시에 실행할 방법을 필요로 하죠. 서로 다른 API 들이 어떻게 생겼는지 한 번 볼까요.
-    
-    
+
+
     go myfunc();                                // Golang
     pthread_create(&thread_id, NULL, &myfunc);  /* C with POSIX threads */
     spawn(modulename, myfuncname, [])           % Erlang
     threading.Thread(target=myfunc).start()     # Python with threads
     asyncio.create_task(myfunc())               # Python with asyncio
-    
+
 
 다양한 표기법과 서로 다른 용어가 있겠지만, 문법적으로는 모두 같습니다. 모두 `myfunc`를 프로그램의 나머지 부분과 동시에 실행하려는 것이며, 즉시 돌아와 부모가 나머지 부분을 실행할 수 있도록 하는 것이죠.
 
 다른 방법으로는 콜백을 사용하는 것도 있겠습니다.
-    
-    
+
+
     QObject::connect(&emitter, SIGNAL(event()),        // C++ with Qt
                      &receiver, SLOT(myfunc()))
     g_signal_connect(emitter, "event", myfunc, NULL)   /* C with GObject */
@@ -27,23 +27,23 @@ source: https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-
     promise.then(myfunc, errorhandler)                 // Javascript with Promises
     deferred.addCallback(myfunc)                       # Python with Twisted
     future.add_done_callback(myfunc)                   # Python with asyncio
-    
+
 
 다시 한번, 표현만 다를 뿐 같은 일을 수행합니다. 지금부터 어떤 이벤트가 발생하면 `myfunc`를 실행하라는 것입니다. 한 번 설정되고 나면 즉시 되돌아와 부른 쪽에서 다른 일을 할 수 있게 되죠. (콜백이 [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) [combinators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race), 또는 [Twisted-style protocols/transports](https://twistedmatrix.com/documents/current/core/howto/servers.html)와 같이 그럴싸해 보이는 형태로도 제공됩니다만, 결국 근간은 같습니다.)
 
 그리고... 그렇죠. 실제로 사용되는 일반적인 그 어떤 동시성 API를 가져다 놓더라도 아마 둘 중 한쪽에 속할 겁니다 (가끔 asyncio와 같이 양쪽에 속하는 경우도 있죠).
 
 하지만 제가 만든 새로운 라이브러리인 [Trio](https://trio.readthedocs.io)는 좀 다릅니다. 어느 쪽에도 해당하지 않죠. 대신, `myfunc`와 `anotherfunc`를 동시에 실행하고 싶다면, 아래와 같이 하면 됩니다.
-    
-    
+
+
     async with trio.open_nursery() as nursery:
         nursery.start_soon(myfunc)
         nursery.start_soon(anotherfunc)
-    
+
 
 "nursery" 구조를 처음 본 사람이라면 이게 뭔가 싶을 겁니다. 웬 들여쓰기가 있나? `nursery` 객체는 또 뭐고, 태스크를 실행하기 위해 왜 이런 걸 하나? 싶으실 겁니다. 그리고 나서는 다른 프레임워크에서 익숙하게 썼던 패턴을 사용하지 못해 짜증이 나겠죠. 기본 요소라기엔 기이하고 특이하며 너무 고급(high-level)처럼 느껴질 겁니다. 뭐 예상되는 반응입니다! 하지만 좀 참아보세요.
 
-**이 포스트를 통해, 저는 nursery가 이상하거나 특별하지 않으며, 반복문이나 함수 호출과 같이 근본적으로 새로운 흐름 제어 방식임을 알리고자 합니다. 그리고, 위에서 봤던 기존의 방법 – 쓰레드 복제나 콜백 등록 – 들은 nursery로 완전히 대체되어야 한다고 봅니다.** 
+**이 포스트를 통해, 저는 nursery가 이상하거나 특별하지 않으며, 반복문이나 함수 호출과 같이 근본적으로 새로운 흐름 제어 방식임을 알리고자 합니다. 그리고, 위에서 봤던 기존의 방법 – 쓰레드 복제나 콜백 등록 – 들은 nursery로 완전히 대체되어야 한다고 봅니다.**
 
 이상하게 들리나요? 비슷한 일이 예전에도 있었습니다: 바로 `goto`가 흐름 제어의 시작과 끝이던 시절이 있었지만, 이젠 [다 흘러간 얘기](https://xkcd.com/292/)가 된 것처럼요. 몇몇 언어들이 아직 `goto`라 불리는 것을 가지고 있지만 예전에 `goto`라 불리던 것과 비교하면 다르고 기능이 제한되어 있습니다. 게다가 대부분의 언어에는 아예 없고요. 무슨 일이 있었냐고요? 옛날 옛적 일이라 아는 사람이 별로 없는 이야기지만 놀랄 정도로 유사한 이야기임을 알게 되실 겁니다. 그럼 이제 `goto`가 어떤 것이었는지 알아보는 걸로 시작해서 그 이야기가 왜 동시성 API에 대한 얘기로 이어지는지 알아봅시다.
 
@@ -63,7 +63,7 @@ FLOW-MATIC은 당시로썬 상당히 비범했습니다. 컴퓨터보다는 인�
 
 <object data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/flow-matic-2.svg" style="width: 440px;" type="image/svg+xml"> </object>
 
-제가 만든 동시성 기초 요소(역주: nursery)와 마찬가지로, 이 "단방향 점프"를 무엇으로 불러야 하는지 논란이 있었습니다. 여기서는 `JUMP TO`라고 했지만, 그 이름은 `goto`로 굳어지게 됩니다. ("go to" 같은 거죠) 여기서는 이렇게 부르겠습니다.
+제가 만든 동시성 기초 요소<sup>(역주: nursery)</sup>와 마찬가지로, 이 "단방향 점프"를 무엇으로 불러야 하는지 논란이 있었습니다. 여기서는 `JUMP TO`라고 했지만, 그 이름은 `goto`로 굳어지게 됩니다. ("go to" 같은 거죠) 여기서는 이렇게 부르겠습니다.
 
 자, 이제 이 작은 프로그램의 완전한 `goto` 점프 구성을 봅시다.
 
@@ -76,11 +76,11 @@ FLOW-MATIC은 당시로썬 상당히 비범했습니다. 컴퓨터보다는 인�
 ## `go` 문은?
 
 하지만 잠깐, 모두가 `goto`가 나쁘다고 외치는 역사의 한순간에 멈춰볼까요? 이 얘기가 동시성과 관련이 있냐고요? 뭐, Golang의 유명한 `go` 문을 생각해봅시다. 새로운 "goroutine"(경량 쓰레드)을 만들어 보죠.
-    
-    
+
+
     // Golang
     go myfunc();
-    
+
 
 이 흐름을 다이어그램으로 그려볼까요? 음, 위에서 봤던 것과 좀 다릅니다. 흐름이 갈라지니까요. 그림으로 그려보면요,
 
@@ -115,10 +115,10 @@ FLOW-MATIC은 당시로썬 상당히 비범했습니다. 컴퓨터보다는 인�
 ![Testing can be used to show the presence of bugs, but never to show their absence!](https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/testing.png)
 
 이건 *구조적 프로그래밍에 대한 소고*에서 발췌한 것입니다. 하지만 그는 주로 _추상화_ 에 대해 신경을 썼습니다. 그는 머릿속에 다 담을 수 없을 정도로 거대한 프로그램을 만들고 싶어 했습니다. 이를 위해 프로그램의 각 부분을 블랙박스처럼 다룰 필요가 있죠. 파이썬 프로그램을 예로 들어보겠습니다.
-    
-    
+
+
      print("Hello world!")
-    
+
 
 문자열 포매팅, 버퍼 관리, 크로스플랫폼 이슈 등... `print`가 어떻게 구현되어 있는지 알 필요는 없습니다. 그저 당신이 입력한 문자열이 표시될 것이라는 것만 알면 코드의 다른 부분을 작성하는 데 전념할 수 있습니다.  데이크스트라는 이러한 추상화가 프로그래밍 언어 수준에서 제공되길 원했습니다.
 
@@ -133,10 +133,10 @@ FLOW-MATIC은 당시로썬 상당히 비범했습니다. 컴퓨터보다는 인�
 <object class="align-center" data="https://vorpus.org/blog/notes-on-structured-concurrency-or-go-statement-considered-harmful/control-schematics.svg" style="width: 500px;" type="image/svg+xml"> Diagrams with arrows showing the flow control for if statements, loops, and function calls.</object>
 
 이 고급 기능을 `goto`로 만들 수도 있고, 초창기 사람들은 실제로 편리한 줄여 쓰기 정도로 여겼습니다. 하지만 데이크스트라는 이러한 다이어그램을 봤을 떄, `goto`와 다른 것들 사이에는 차이가 있다고 지적했습니다. `goto` 말고 나머지는 위에서 시작해서 → [뭔가 하고] 나서 → 아래로 내려가는 식으로 흘러갑니다. 이렇게 생겨 내부에서 뭘 하는지 신경 쓸 필요가 없는 모습을 "블랙박스 룰"이라고 불러보죠. [뭔가 하고] 부분을 무시하고 나면 전체적으로 봤을 때 그저 차례대로 흘러가는 것으로 볼 수 있습니다. 그리고 이런식으로 구성된 그 어떤 코드들에 대해서도 똑같이 여길 수 있으니까 좋죠. 이 코드를 다시 볼까요.
-    
-    
+
+
      print("Hello world!")
-    
+
 
 `print`의 정의나 그것의 전이적 의존성(transitive dependencies)을 찾아보지 않더래도 일이 어떻게 돌아가는지 알 수 있습니다. `print` 안에 반복문이 있을 수도 있고, 그 반복문 안에 비교문이 있고, 또 그 안에 다른 함수 호출이 있고... 뭐 이것저것 있을 수 있죠. 하지만 뭔 상관이에요. `print` 내부로 흘러갔다가 그 안에서 뭔가 하고, 결국엔 제가 읽고 있는 코드로 돌아올 게 뻔하니까요.
 
@@ -161,12 +161,12 @@ FLOW-MATIC은 당시로썬 상당히 비범했습니다. 컴퓨터보다는 인�
 `goto`가 없어지고 나니, 흥미로운 일이 일어났습니다. 언어 설계자들이 구조화된 흐름 제어에 의존하는 새로운 기능을 추가할 수 있게 되었습니다.
 
 예를 들면, 파이썬은 자원을 정리하기 위한 `with`라는 멋진 문법을 가지고 있습니다. 이렇게 쓸 수 있죠.
-    
-    
+
+
     # Python
     with open("my-file") as file_handle:
         ...
-    
+
 
 이는 `...` 코드가 실행되는 동안 파일이 열려 있다가, 종료되는 대로 바로 닫히는 것을 보장합니다. 대부분의 현대 언어들은 RAII, `using`, try-with-resource, `defer` 와 같은 비슷한 기능을 가지고 있습니다. 그리고 다들 질서 정연하고 체계적으로 코드가 실행될 것을 가정합니다. 우리가 `with` 블록 내에서 갑자기 `goto`를 쓰면 ... 어떻게 될까요? 파일은 열려있을까요 닫혀있을까요? 정상적으로 종료하는 대신에 그냥 점프해서 나가버린다면요? 파일은 닫힐까요? 이 기능은 언어에 `goto`가 있는 한 일관되게 동작할 수 없습니다.
 
@@ -185,12 +185,12 @@ FLOW-MATIC은 당시로썬 상당히 비범했습니다. 컴퓨터보다는 인�
 **Go 문은 추상화를 깨버립니다.** `goto`가 가능한 언어에서 어떤 기능들이 `goto`의 다른 형태로 나타나는지 기억나시나요? 대부분의 동시성 프레임워크에서 `go` 문은 같은 문제를 일으킵니다. 함수를 호출할 때마다 백그라운드 작업이 생성되거나 생성되지 않을 수 있습니다. 함수는 돌아온 것 같지만 백그라운드에서 아직 실행 중일까요? 소스 코드를 다 읽기 전까지는 알 도리가 없죠. 작업은 언제 종료될까요? 답하기가 어렵군요. `go` 문이 있는 한, 함수는 흐름 제어와 관련해서 더 이상 블랙박스가 될 수 없습니다. 제가 썼던 [첫 번째 동시성 API에 대한 글](https://vorpus.org/blog/some-thoughts-on-asynchronous-api-design-in-a-post-asyncawait-world/)에서 "인과율 위반"이라 칭한 이것이, 다양한 실제적인 문제들의 근본적인 원인임을 찾아냈습니다. asyncio와 Twisted에서의 배압 문제, 제대로 종료되지 않는 문제 등이요.
 
 **Go 문은 자동 자원 정리를 불가능하게 합니다.** `with`를 예로 들어 보겠습니다.
-    
-    
+
+
     # Python
     with open("my-file") as file_handle:
         ...
-    
+
 
 앞서, 우리는 `...` 코드가 실행되는 동안 파일이 열려 있을 것을 "보장"받고, 끝나면 닫힌다고 얘기했었죠. 하지만 `...` 코드에서 백그라운드 작업을 생성한다면 어떻게 될까요? 더 이상 보장할 수 없게 됩니다. `with` 블록 안에 있는 것처럼 보였던 동작이 실제로는 `with` 블록이 끝나도 계속 동작하고 있을 수 있고, 그러다가 파일이 닫히면 사용하고 있던 쪽에서는 오류가 발생할 수 있습니다. 다시 한 번 얘기하지만, 이런 식으로는 부분만 봐서 알 수 없게 됩니다. `...` 코드에서 호출되는 함수의 모든 소스 코드를 살펴봐야만 합니다.
 
@@ -242,21 +242,21 @@ nursery 블록을 엶과 동시에 이 nursery를 나타내는 객체가 생성�
 ### Nursery는 동적 작업 복제를 지원합니다.
 
 위의 흐름 제어 다이어그램을 충족시키는 더 단순한 형태가 있습니다. 썽크(thunk) 목록을 받아 모두 동시에 실행합니다.
-    
-    
+
+
     run_concurrently([myfunc, anotherfunc])
-    
+
 
 이런 부류의 문제점은 실행하기 전에 모든 작업의 목록을 알아야 한다는 데 있습니다. 늘 그럴 순 없죠. 예를 들어, 일반적인 서버 프로그램들이 가지고 있는 `accept` 루프는 들어오는 연결을 받아 개별적인 처리를 위해 새로운 작업을 시작합니다. Trio로 구현된 최소한의 `accept` 루프를 보시죠.
-    
-    
+
+
     async with trio.open_nursery() as nursery:
         while True:
             incoming_connection = await server_socket.accept()
             nursery.start_soon(connection_handler, incoming_connection)
-    
 
-Nursery에서는 굉장히 쉬운 일이지만, `run_concurrently` 같은 것으로 구현하려면 _훨씬_ 버거울 겁니다. 원한다면 nursery 상에서도 `run_concurrently` 를 구현할 수 있겠지만, 그 정도로 단순한 경우에는 Nursery 표기법이 훨씬 읽기 쉬우니 그럴 필요가 없습니다. 
+
+Nursery에서는 굉장히 쉬운 일이지만, `run_concurrently` 같은 것으로 구현하려면 _훨씬_ 버거울 겁니다. 원한다면 nursery 상에서도 `run_concurrently` 를 구현할 수 있겠지만, 그 정도로 단순한 경우에는 Nursery 표기법이 훨씬 읽기 쉬우니 그럴 필요가 없습니다.
 
 ### 탈출구가 있습니다.
 
@@ -275,11 +275,11 @@ Nursery 객체는 탈출구도 제공합니다. 백그라운드 작업이 그 �
 ### Nursery처럼 동작하는 새로운 타입을 정의할 수 있습니다.
 
 기본 nursery 문법으로도 충분한 토대를 제공할 수 있지만, 때로는 특별한 것을 원하는 경우도 있습니다. Erlang의 supervisors가 부러워 nursery 유사 클래스에서 자식 작업을 재시작하는 식으로 예외를 다루고 싶은 경우에도 사용될 수 있습니다. 일반적인 nursery와 비슷합니다.
-    
-    
+
+
     async with my_supervisor_library.open_supervisor() as nursery_alike:
         nursery_alike.start_soon(...)
-    
+
 
 Nursery를 인자로 받는 함수가 있을 때, 생성된 작업을 위해 오류 처리를 위한 정책을 제어하는 대신 nursery를 인자로 전달할 수 있습니다. 멋지네요. Trio를 asyncio나 다른 라이브러리들과 구별되게 하는 미묘한 부분이 있습니다. 바로 `start_soon`이 coroutine 객체나 `Future`가 아닌 함수를 받는다는 점입니다. (함수는 여러 번 실행될 수 있지만, coroutine 객체나 `Future`는 그럴 수 없으니까요.) 이게 여러 가지 이유에서(특히 Trio는 `Future` 같은 게 필요 없으니까) 더 나은 문법이라고 생각하지만, 언급할 필요는 있겠죠
 
@@ -324,7 +324,7 @@ Trio에서는 모든 작업이 nursery 안에서 이뤄지는데, 모든 nursery
 
 물론 그게 핵심이죠. 커누스는 이렇게([Knuth, 1974](https://scholar.google.com/scholar?cluster=17147143327681396418&hl=en&as_sdt=0,5), p. 275) 말했습니다.
 
-> 아마도 `go to`문과 관련하여 저지를 수 있는 가장 큰 실수는 늘 하던 대로 프로그램을 작성한 다음에 **go to**만 싹 제거한 다음에 "구조적 프로그래밍"이라고 부르는 것일 겁니다. 대부분의 **go to**는 애초에 있어야 하지 않을 곳에 있는 겁니다. 우리가 정말로 원하는 것은 애초에 **go to**문을 _생각조차_ 하지 않고 프로그램을 구상하는 것이기 때문입니다. 그게 반드시 필요한 곳은 사실상 거의 없기 때문입니다. 우리가 언어를 통해 아이디어를 구현하는 것은 우리의 사고 과정에 강한 영향을 받습니다. 그런 연유로 데이크스트라는 복잡성에 대한 **go to**의 유혹을 피할 수 있는 언어의 새로운 기능들, 즉 명확한 사고를 장려하는 구조를 요구했던 것입니다. 
+> 아마도 `go to`문과 관련하여 저지를 수 있는 가장 큰 실수는 늘 하던 대로 프로그램을 작성한 다음에 **go to**만 싹 제거한 다음에 "구조적 프로그래밍"이라고 부르는 것일 겁니다. 대부분의 **go to**는 애초에 있어야 하지 않을 곳에 있는 겁니다. 우리가 정말로 원하는 것은 애초에 **go to**문을 _생각조차_ 하지 않고 프로그램을 구상하는 것이기 때문입니다. 그게 반드시 필요한 곳은 사실상 거의 없기 때문입니다. 우리가 언어를 통해 아이디어를 구현하는 것은 우리의 사고 과정에 강한 영향을 받습니다. 그런 연유로 데이크스트라는 복잡성에 대한 **go to**의 유혹을 피할 수 있는 언어의 새로운 기능들, 즉 명확한 사고를 장려하는 구조를 요구했던 것입니다.
 
 이것이 바로 제가 이제까지 nursery를 사용했던 경험과 같습니다. 이는 저를 명확한 사고로 이끌었습니다. 더 견고하고, 사용하기 쉬우며, 전체적으로 나은 디자인으로 이어집니다. 제약 사항들 덕에 불필요한 복잡도를 다루는 일에서 벗어나 문제를 더 쉽게 해결할 수 있게 됩니다. Trio를 사용하는 것은, 실질적인 의미에서 제가 더 나은 프로그래머가 되도록 이끌어 주었습니다.
 
@@ -346,7 +346,7 @@ Nursery는 언어의 기능을 해치지 않으며 안전하고 편리한 대안
 
 ## 각주
 
-[^1]: 최소한 특정 부류의 인간에게는.  
-[^2]: WebAssembly는 `goto` 없이도 충분히 저수준 언어로 사용될 수 있음을 보여주었다: [reference](https://www.w3.org/TR/wasm-core-1/#control-instructions%E2%91%A0), [rationale](https://github.com/WebAssembly/design/blob/master/Rationale.md#control-flow)  
-[^3]: 제가 관심을 기울이고 있는 논문이 어떤 것인지 모르고는 도저히 집중할 수 없는 분들을 위해 알려드리자면, 이 리뷰에 포함된 논문 목록은 다음과 같습니다: the "parallel composition" operator in Cooperating/Communicating Sequential Processes and Occam, the fork/join model, Erlang supervisors, Martin Sústrik's article on [Structured concurrency](http://250bpm.com/blog:71) and work on [libdill](https://github.com/sustrik/libdill), and [crossbeam::scope](https://docs.rs/crossbeam/0.3.2/crossbeam/struct.Scope.html) / [rayon::scope](https://docs.rs/rayon/1.0.1/rayon/fn.scope.html) in Rust. Edit: I've also been pointed to the highly relevant [golang.org/x/sync/errgroup](https://godoc.org/golang.org/x/sync/errgroup) and [github.com/oklog/run](https://godoc.org/github.com/oklog/run) in Golang. 제가 빼먹은 중요한게 있다면 [알려주세요](mailto:njs@pobox.com).  
+[^1]: 최소한 특정 부류의 인간에게는.
+[^2]: WebAssembly는 `goto` 없이도 충분히 저수준 언어로 사용될 수 있음을 보여주었다: [reference](https://www.w3.org/TR/wasm-core-1/#control-instructions%E2%91%A0), [rationale](https://github.com/WebAssembly/design/blob/master/Rationale.md#control-flow)
+[^3]: 제가 관심을 기울이고 있는 논문이 어떤 것인지 모르고는 도저히 집중할 수 없는 분들을 위해 알려드리자면, 이 리뷰에 포함된 논문 목록은 다음과 같습니다: the "parallel composition" operator in Cooperating/Communicating Sequential Processes and Occam, the fork/join model, Erlang supervisors, Martin Sústrik's article on [Structured concurrency](http://250bpm.com/blog:71) and work on [libdill](https://github.com/sustrik/libdill), and [crossbeam::scope](https://docs.rs/crossbeam/0.3.2/crossbeam/struct.Scope.html) / [rayon::scope](https://docs.rs/rayon/1.0.1/rayon/fn.scope.html) in Rust. Edit: I've also been pointed to the highly relevant [golang.org/x/sync/errgroup](https://godoc.org/golang.org/x/sync/errgroup) and [github.com/oklog/run](https://godoc.org/github.com/oklog/run) in Golang. 제가 빼먹은 중요한게 있다면 [알려주세요](mailto:njs@pobox.com).
 [^4]: Nursery 블록이 종료된 _후에_ `start_soon`을 호출하면 `start_soon`은 오류를 발생시키고, 만약 오류가 발생하지 않는다면, nursery 블록은 남은 작업이 끝날 때까지 열린 상태로 유지될 것입니다. 직접 nursery 시스템을 구현하는 경우에 이 부분의 동기화를 신중하게 다뤄야 합니다.
