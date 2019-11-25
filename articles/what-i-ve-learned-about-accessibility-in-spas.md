@@ -114,6 +114,7 @@ In the case of Pinafore, consider a post. There are two links that lead to the u
 These two links lead to exactly the same page; they are strictly redundant. So I chose to add `tabindex="-1"` to the profile picture, giving keyboard users one less link to have to `Tab` through. Especially on a KaiOS device with a tiny d-pad, this is a nice feature!
 
 
+<video autostart="no" muted="yes" loop="no" preload="auto" playsinline="" controls=""><source src="https://videos.files.wordpress.com/6Ve9dla5/kazam_screencast_00005_dvd.mp4" type="video/mp4"></video>
 
 
 In the above video, note that the profile picture and timestamp are skipped in the tab order because they are redundant - clicking the profile picture does the same thing as clicking the user name, and clicking the timestamp does the same thing as clicking on the entire post. (Users can also disable the "click the entire post" feature, as [it may be problematic for those with motor impairments](https://github.com/nolanlawson/pinafore/issues/163). In that case, the timestamp is re-added to the tab order.)
@@ -125,6 +126,7 @@ Interestingly, an element with `tabindex="-1"` can still become focused if you c
 After implementing several accessible widgets from scratch, including the feed pattern and an image carousel (which I described [in a previous post](https://nolanlawson.com/2019/02/10/building-a-modern-carousel-with-css-scroll-snap-smooth-scrolling-and-pinch-zoom/)), I found that the single most complicated widget to implement correctly was autocompletion.
 
 
+<video autostart="no" muted="yes" loop="no" preload="auto" playsinline="" controls=""><source src="https://videos.files.wordpress.com/VjC1fOLq/kazam_screencast_00002_dvd.mp4" type="video/mp4"></video>
 
 
 Originally, [I had implemented this widget](https://github.com/nolanlawson/pinafore/issues/129) by following [this design](https://haltersweb.github.io/Accessibility/autocomplete.html), which relies largely on creating an element with `aria-live="assertive"` which explicitly speaks every change in the widget state (e.g. "the current selected item is number 2 of 3"). This is kind of a heavy-handed solution, though, and it led to [several bugs](https://github.com/nolanlawson/pinafore/issues/1512).
@@ -172,6 +174,8 @@ Explaining this pattern probably deserves a blog post in and of itself, but in b
 
 After extensive testing, this was more-or-less the best solution I could come up with. It works perfectly in NVDA on the latest version of Firefox, although sadly [it has some minor issues in VoiceOver on Safari and NVDA on Chrome](https://github.com/nolanlawson/pinafore/pull/1513#issue-320087960). However, since this is the standards-based solution (and doesn't rely on `aria-live="assertive"` hacks), my hope is that browsers and screen readers will catch up with this implementation.
 
+**Update**: I managed to get this widget working in Chrome+NVDA and Safari+VoiceOver. The fixes needed are described [in this comment](https://github.com/nolanlawson/pinafore/pull/1632#issuecomment-552154682).
+
 ## Manual and automated accessibility testing
 
 There are a lot of automated tools that can give you good tips on improving accessibility in your web app. Some of the ones I've used include [Lighthouse](https://developers.google.com/web/tools/lighthouse/) (which uses [Axe](https://www.deque.com/axe/) under the hood), the [Chrome accessibility tools](https://developers.google.com/web/tools/chrome-devtools/accessibility/reference), and the [Firefox accessibility tools](https://hacks.mozilla.org/2019/10/auditing-for-accessibility-problems-with-firefox-developer-tools/). (These tools can give you slightly different results, so I like to use multiple so that I can get second opinions!)
@@ -207,4 +211,4 @@ Thank you, Marco, and thanks for all your help! Hopefully this blog post will se
 
 _Thanks to Sorin Davidoi, Thomas Wilburn, and Marco Zehe for feedback on a draft of this post._
 
-[^1] In the course of writing this article, I was surprised to learn that, for server-rendered pages, pressing the back button restores focus to the previously-clicked element in Firefox, Safari, and Edge (EdgeHTML), but _not_ Chrome. I found [a webcompat.com bug](https://webcompat.com/issues/28121) describing the browser difference, I've gone ahead and filed [a bug on Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=1020915).
+[^1]: In the course of writing this article, I was surprised to learn that, for server-rendered pages, pressing the back button restores focus to the previously-clicked element in Firefox, Safari, and Edge (EdgeHTML), but _not_ Chrome. I found [a webcompat.com bug](https://webcompat.com/issues/28121) describing the browser difference, I've gone ahead and filed [a bug on Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=1020915).
