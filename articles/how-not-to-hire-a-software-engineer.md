@@ -6,6 +6,8 @@ link_title: en_US
 
 # How NOT to hire a software engineer
 
+![](https://tonsky.me/blog/hiring/cover@2x.png 'Illustrations by <a href="https://www.instagram.com/yuliaprokopova/" target="_blank">Yulia Prokopova</a>')
+
 I’m not an expert in hiring for big companies, but I have extensive experience for small ones and a bit of common sense.
 
 Back in 2013, I ran a highly successful hiring campaign for [AboutEcho.com](https://web.archive.org/web/20140101000655/http://aboutecho.com/) that led to the hiring of nine senior-level engineers. My Russian-speaking readers could [read about it here](https://tonsky.livejournal.com/288899.html).
@@ -32,7 +34,7 @@ Those puzzles are fun to talk about and solutions to them can be very insightful
 
 However, no matter how fun they are, they are merely anecdotes. The property of a puzzle is that you either know the answer to it or you don’t. It doesn’t tell you anything else. It has nothing to do with future performance, being smart, capable or anything else whatsoever. Knowing a particular answer does not mean you have an apparatus to solve real problems in a generic and predictable way. The only thing it tells you is that the person has been in a situation when someone shared a solution with him. Nothing more, nothing less. Just stop already.
 
-![](https://tonsky.me/blog/hiring/puzzle@2x.png) How do you save yourself before candle burns the rope?
+![](https://tonsky.me/blog/hiring/puzzle@2x.png 'How do you save yourself before candle burns the rope?')
 
 ## Be open for alternatives
 
@@ -57,8 +59,6 @@ So mistakes are actually good because you get to learn how that person mitigates
   * asserts,
   * compiling and running,
   * testing.
-
-
 
 Oh, sorry about the last two. I forgot you don’t let them run their programs. Well, what did you expect then?
 
@@ -108,8 +108,7 @@ You might think it doesn’t matter. Well, it depends. There was an episode of T
 
 Yes, I believe anyone can do better.
 
-![](https://tonsky.me/blog/hiring/recruiters.png)
-How many recruiters does an IT campus fit?
+![](https://tonsky.me/blog/hiring/recruiters.png 'How many recruiters does an IT campus fit?')
 
 ## In closing
 

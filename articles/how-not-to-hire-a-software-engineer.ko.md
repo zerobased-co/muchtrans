@@ -4,114 +4,113 @@ source: https://tonsky.me/blog/hiring/
 
 # 소프트웨어 엔지니어를 고용하지 않으려면
 
-I’m not an expert in hiring for big companies, but I have extensive experience for small ones and a bit of common sense.
+![](https://tonsky.me/blog/hiring/cover@2x.png '<a href="https://www.instagram.com/yuliaprokopova/" target="_blank">Yulia Prokopova</a>의 일러스트레이션')
 
-Back in 2013, I ran a highly successful hiring campaign for [AboutEcho.com](https://web.archive.org/web/20140101000655/http://aboutecho.com/) that led to the hiring of nine senior-level engineers. My Russian-speaking readers could [read about it here](https://tonsky.livejournal.com/288899.html).
+저는 대기업의 채용 전문가는 아니지만, 작은 기업에 대해서라면 광범위한 경험과 약간의 상식이 있습니다.
 
-All that gives me the confidence to criticize practices Internet Giants use to hire engineers to this day.
+2013년에는 [AboutEcho.com](https://web.archive.org/web/20140101000655/http://aboutecho.com/)에서 채용 캠페인을 주도하여 시니어 수준의 엔지니어를 아홉 명 채용하는 데 성공하기도 했습니다. 러시아어가 가능한 독자라면 [이쪽에서 보실 수 있습니다](https://tonsky.livejournal.com/288899.html).
 
-## Don’t aim for the best solution
+이런 경험을 통해 오늘날 거대 인터넷 기업이 엔지니어를 고용하는 방법에 대해 비판할 수 있다는 자신이 생겼습니다.
 
-When you arrive at the interview, the interviewer gives you a problem and expects a solution in zero to two minutes. If you spend longer they really start to worry and ask to go with at least something.
+## 정답에 집착하지 마세요
 
-I can understand that—after all, they only have 45 minutes and there are lots of things they want to go through with you.
+면접 자리에서 면접관들은 문제를 주고 2분 내외로 답을 내기를 기대합니다. 그보다 오래 걸리면 의심의 눈길을 보내며 어쨌든 뭐라도 답을 하길 기대하죠.
 
-What I can’t understand is that you’re judged by the quality of the solution you came up within two minutes. Because that’s not how human creativity works. It’s easy to come up with many ideas, but strange to expect that best one will always be first. Even geniuses can’t predictably generate world-best answers on a clock.
+45분밖에 안되는 면접 시간 동안 면접자에게 최대한 많이 알아내려면 그럴 수밖에 없다는 것은 이해합니다.
 
-What creativity is is the ability to evaluate and filter the stream of ideas that you come up with. If you are really interested in that, why don’t you ask the interviewee to compare and evaluate multiple ideas? Check if the person can assess the properties of the proposed solution? If she clearly sees all the pros and cons?
+이해할 수 없는 것은, 고작 2분 남짓한 시간에 나온 답변의 수준만으로 면접자가 평가받아야 한다는 것입니다. 사람은 이런 식으로 창의성을 발휘할 수 없습니다. 여러 아이디어를 떠올리기는 쉽지만, 최고의 답이 가장 첫 번째에 나오리라는 법은 없습니다. 천재들조차 제한된 시간 안에 세계 최고의 답을 내지는 못하겠죠.
 
-And if you are asking to come up with the best possible solution in two minutes, what you are testing for is luck, nothing more. Are you in a business of hiring lucky employees? Or capable ones?
+제가 생각하는 창의성이란 생각해낸 아이디어의 흐름을 타고 평가하고 필터링하는 능력입니다. 관심이 가나요? 그렇다면 면접자에게 여러 아이디어를 비교하고 평가하게끔 해보면 어떨까요? 면접자가 얘기한 방법에 대해서 올바르게 평가할 수 있는 사람인지 검증하고, 장단점을 명확하게 구분해내는지도 보고요.
 
-## Don’t ask puzzles
+2분 안에 최고의 답을 내라고 요구하는 건, 그 사람이 얼마나 운이 좋은가를 평가하는 것에 불과합니다. 운이 좋은 사람을 뽑고 싶은가요? 아니면 정말 능력 있는 사람을 원하나요?
 
-How to check if a linked list has a loop? Does one N-dimensional box fit into another N-dimensional box? Can you swap two variables without a third one? How to find the shortest distance between two moving ships? Find all permutations of N elements doing only N-1 swaps?
+## 수수께끼를 물어보지 마세요
 
-Those puzzles are fun to talk about and solutions to them can be very insightful. I used to enjoy lots of them reading [Mathematical Recreations and Essays](http://www.gutenberg.org/ebooks/26839) as a kid. Don’t take me wrong, they _are_ fun.
+연결 리스트가 순환(loop)을 가졌는지 어떻게 확인하나요? 다차원 상자가 다른 다차원 상자에 맞는지 알아내려면요? 3개가 아닌 2개의 변수만을 이용해서 값을 서로 바꾸려면요? 움직이고 있는 두 배의 최단 거리를 찾으려면? N개의 요소를 N-1번만 바꿔 만들 수 있는 모든 순열을 찾아볼까요?
 
-However, no matter how fun they are, they are merely anecdotes. The property of a puzzle is that you either know the answer to it or you don’t. It doesn’t tell you anything else. It has nothing to do with future performance, being smart, capable or anything else whatsoever. Knowing a particular answer does not mean you have an apparatus to solve real problems in a generic and predictable way. The only thing it tells you is that the person has been in a situation when someone shared a solution with him. Nothing more, nothing less. Just stop already.
+이런 퍼즐은 즐거운 이야깃거리며 통찰력 있는 해결 방법을 볼 수 있기도 합니다. 어린 시절에 [Mathematical Recreations and Essays](http://www.gutenberg.org/ebooks/26839) 같은 책을 즐겨 읽기도 했습니다. 이런 것들은 재미있는 _것_ 이니, 오해하진 마세요.
 
-![](https://tonsky.me/blog/hiring/puzzle@2x.png) How do you save yourself before candle burns the rope?
+하지만, 얼마나 재미있든 간에 결국 어떤 일화일 뿐이라고 생각합니다. 퍼즐은 상대가 답을 알고 있는가 아닌가를 판단할 수 있을 뿐 그 이상을 얘기해주진 않습니다. 앞으로의 성과나 똑똑함, 능력의 여부와는 관련이 없습니다. 특정한 답을 안다고 해서 실제 문제를 풀어낼 수 있는 일반적이거나 예측 가능한 기능이 있다고는 볼 수 없습니다. 누군가 이 퍼즐의 답을 얘기해주는 상황을 경험했음을 알려주긴 하겠죠. 그 이상도, 그 이하도 아닙니다. 이제 그만했으면 합니다.
 
-## Be open for alternatives
+![](https://tonsky.me/blog/hiring/puzzle@2x.png '촛불이 밧줄을 끊기 전에 어떻게 살아남을 수 있을까요?')
 
-This is kind of expected, but big companies seem to still fail at this. If the interviewee proposes an alternative solution, it’s a chance for you as an interviewer to learn something. It’s also a good chance for an in-depth discussion if the proposed solution turned out to be impossible or bad somehow.
+## 대안에 열린 마음으로
 
-Still, I’ve been dismissed for proposing an alternative solution of the same complexity once (and burdened with a lecture on a “one true way to approach that problem”) and strictly led to a particular solution another time. In the latter the interviewer was very eager to ignore all my concerns and only wanted to discuss what he saw as a solution for a problem, later leaving “not impressed” feedback about me.
+이건 예상에 불과하지만, 대기업들은 아직 이걸 제대로 하지 못하고 있다고 보입니다. 면접자가 대안을 제시했을 때, 면접관 입장에서는 뭔가 배울 수 있는 기회라고 볼 수 있습니다. 그리고 그 방법이 불가능하거나 어떤 쪽으로든 나쁜지 깊게 토론해볼 수 있는 기회이기도 하고요.
 
-Nobody knows everything. Be open. Listen. Think. Yes, even if you are interviewing someone.
+아직까지는, 같은 복잡도를 가진 대안을 제시했다가 묵살당한 적도 있고(그리고 “어떤 문제에 대한 정답은 오직 하나뿐”이라는 잔소리에 파묻혔고) 특정한 방법을 강요받기도 했습니다. 후자의 경우는 제 의견을 완전히 무시하고 자신의 관점에서 문제를 해결하는 방법으로 토론하기에만 열중했으며, 나중에 저에게 “인상적이지 않음”이란 평가를 주었습니다.
 
-## Be tolerant for imperfections
+모든 것을 다 아는 사람은 없습니다. 열린 자세로 경청하고 생각하세요. 누군가를 면접하는 경우라도 네, 마찬가지입니다.
 
-Off-by-one errors are widely-accepted as one of the hardest problems in CS for a reason—everyone makes them. Errors are part of programmer’s life, not something you can get rid of. Good programmer simply knows what to do about it. Quality of a programmer is NOT defined by how few errors she makes.
+## 불완전함을 받아들이기
 
-Now, if you only select people who made no mistakes during the interview you won’t magically get a squad of programmers who always write perfect code. You just don’t know how they will behave when they will—inevitably—make their mistakes.
+경계값 오류(off-by-one error)는 컴퓨터과학계에서 가장 어려운 — 모두가 겪는 — 문제로 널리 받아들여져 왔습니다. 오류는 프로그래머의 삶의 일부로 완전히 제거할 수는 없습니다. 오류에 대해 어떻게 할지 알고 있다면 좋은 프로그래머라 할 수 있겠습니다. 얼마나 오류를 적게 만드는가로는 프로그래머의 수준을 정의할 수 없습니다.
 
-So mistakes are actually good because you get to learn how that person mitigates them. Don’t judge the errors, judge how interviewee handles them:
+면접에서 실수하지 않는 프로그래머만 뽑는다고 해도 완벽한 코드를 작성하는 마법 같은 프로그래밍 팀을 구축할 수는 없습니다. 팀이 언젠가 – 반드시 – 실수할 때 어떻게 행동할지 모르는 것에 불과합니다.
 
-  * simple code,
-  * divide and conquer,
-  * self-checks,
-  * invariants,
-  * asserts,
-  * compiling and running,
-  * testing.
+그러니까, 실수는 그 사람이 어떻게 문제를 다루는지 알 수 있기에 좋다고 볼 수 있습니다. 면접자를 오류로만 판단하지 말고, 다음 항목들을 어떻게 다루는지 보세요.
 
+  * 간단한 코드를,
+  * 분할하고 정복해서,
+  * 스스로 검증하고,
+  * 불변하는 것들과,
+  * 입력값을 검사하고,
+  * 컴파일하고 실행하여,
+  * 테스트하는지.
 
+아, 마지막 두 개는 잊어주세요. 프로그램을 실행할 수 없는 환경이라는 것을 잠시 잊었네요. 흠, 그렇다면 뭘 기대했나요?
 
-Oh, sorry about the last two. I forgot you don’t let them run their programs. Well, what did you expect then?
+## 테스트하게 해줘!
 
-## Let me test!
+진짜 궁금한데, 칠판에 프로그램을 쓰게 해서 뭘 알아볼 수 있나요?
 
-Seriously, what’s the thing with writing program on a whiteboard?
+그러니까, 알고리즘에 대한, 추상적인 것들을 토론하는 게 더 효율적이지 않을까요.
 
-I mean, I’m happy to discuss algorithms there—discussing abstract things is more efficient that way.
+프로그램을, 실제 동작하는 프로그램을 노트패드 앱에서 작성하라고요? 실행해보지도 않고요? 요점이 뭔가요? 갓 작성한 코드는 전체 과정의 10분의 1도 안되고, 컴파일하고 검증하고 개선하고 테스트하고 리뷰 같은 걸 해야 할 텐데요. 농담으로 들리나요? 이건 모든 코드 작성자의 기본적인 업무 흐름인데요. 이 과정을 다 거쳐야 비로소 볼만한 코드가 됩니다.
 
-But writing programs, actual programs, in a notepad? Without even running them? What’s the point? Getting the first draft of the code is barely one-tenth of the whole process, followed by compiling, checking, tuning, testing, reviewing etc. Who are we kidding? Those are the essential parts of any coder’s workflow. A code is only good to look at when it’s past all those, not before.
-
-It’s like asking a painter to do a painting of a horse, then stop her halfway during the very first sketch just when you can see four vertical lines for legs and judge that. How much will you learn about her?
+화가에게 말 그림을 그려달라고 한 다음, 다리라고 할 수 있는 수직선 4개가 그려졌을 때 즈음 멈추라고 하고 평가해보세요. 얼마나 잘 평가할 수 있을까요?
 
 ![](https://tonsky.me/blog/hiring/horse.png)
 
-## Get deep
+## 깊이 들어가라
 
-Five short interviews? Or two long ones?
+다섯 번의 짧은 면접이 좋을까요? 아니면 두 번 길게 보는 게 좋을까요?
 
-With five you get five independent opinions, which is better than two. But how deep can you get in 45 minutes? Practice shows it’s barely enough to write 20-30 lines of code and ask a couple of really simple questions (what’s the complexity? how you test it?).
+다섯 가지의 다른 의견을 얻는다면, 두 개보다는 낫겠지요. 하지만 45분 동안 얼마나 깊이 알아볼 수 있을까요? 일반적으로는 20~30줄의 코드를 작성하기에도 벅차고 몇 개의 간단한 질문을 하기에도 힘들겠죠. (복잡도에 대해서는? 어떻게 테스트하죠?)
 
-The next interviewer simply repeats the same process, getting as far as the previous one. Which is not far. Not far at all.
+다음 면접관도 아마도 비슷한 과정을 거치게 되고, 앞선 의견과 크게 다르지 않은 결론을 얻겠죠. 아마 대동소이할 겁니다.
 
-Why not make it two, but make them really thorough? E.g. one before lunch and one after? Three hours is not much either, but at least you get the chance to see how person tests the code, how she changes it, how she works with requirements—all within an already established context, not resetting and starting from scratch every 45 minutes.
+두 번으로 줄이고 대신 더 깊게 알아보면 어떨까요? 예를 들어, 점심 식사 전후로 한 번씩 하면요? 세 시간 정도도 충분하진 않겠지만 최소한 요구사항을 충족시키며 코드를 어떻게 테스트하고 개선하는지 과정을 볼 수는 있겠죠. 45분 마다 리셋하고 새로 시작하진 않으니까요.
 
-With that much time you can even ask her to write the code as if it is a part of a system, not just an abstract algorithmic task in a vacuum—and learn another thing or two about her real-world performance.
+그 정도 시간이면 독립적으로 실행되는 추상적인 알고리즘을 다루는 수준이 아니라, 시스템의 일부로 동작할 코드에 대해 작성해달라고 할 수도 있을 겁니다. 이를 통해 실제로 업무를 할 때 어떻게 대응할 지 한 두 가지 정도 더 알아볼 수 있겠죠.
 
-And if you want more opinions? Put multiple interviewers in the room and let them argue afterward.
+더 많은 의견을 구하고 싶다면 같은 시간에 더 많은 면접관을 참여 시켜 이후에 토론하도록 하면 좋겠네요.
 
-## Learn the background
+## 이력을 알아보세요
 
-I mean, I have [fourteen years of experience](https://tonsky.me/projects/). I’d be happy to talk about functional programming, distributed systems, consensus, replication, collaborative text editing, CRDTs, parallel architectures, UI frameworks, team processes, product design, user experience. I have practical and research experience in all those areas. All of them are in direct interest for more or less any internet giants I’ve been interviewed at.
+이를테면, 저는 [14년간의 경험](https://tonsky.me/projects/)이 있습니다. 함수형 프로그래밍, 분산 시스템, 컨센서스, 복제, 공동 문서 편집, CRDT류, 병렬 설계, UI 프레임워크, 협업 프로세스, 제품 디자인, 사용자 경험 등에 대해 이야기하길 좋아합니다. 언급한 모든 분야에 대해서 실제로 다뤄봤고 연구 경험도 있습니다. 제가 면접을 봤던 인터넷의 거대 기업들도 모두 관심 있어 하는 분야들이죠.
 
-Was I ever asked about any of those? No.
+이런 것들에 대해 질문받아본 적이 있을까요? 아니요.
 
-What I get is “imagine you have a function that takes a list…” five times in a row. Five school-level problems are supposed to give you an adequate impression of what? How thorough was I reading Cormen et al? To be fair, you are rarely asked about those either.
+다섯 번 연속으로 “목록을 인자로 받는 함수가 있다고 합시다…” 같은 얘기를 들어본 적은 있군요. 학부생 수준의 다섯 가지 문제로 적절한 인상 같은 걸 받을 수 있나요? 알고리즘 책을 얼마나 닳도록 읽었나 알아볼 수 있나요? 솔직히, 그런 질문을 받아본 적도 거의 없을 텐데요.
 
-Instead, fine-tune the interview for a candidate’s experience. Talk about what she is good at. You’ll get a chance to ask deep questions and learn a lot more about the experience level and the benefits she would bring to your company.
+후보자의 경험에 근거한 면접을 진행해보면 어떨까요? 잘 하는 분야에 대해 얘기해봅시다. 더 수준 높은 질문을 할 기회를 통해 얼마나 많은 경험을 했는지 알아보고, 추후 함께하게 될 때 어떤 이득이 있을지 알아볼 수 있을 겁니다.
 
-## Make the process seamless
+## 원활히 진행되도록
 
-Wrong directions? Delayed tickets? A questionnaire that requires installing the original Adobe Reader specifically? Cheap ultrabook with unfamiliar keyboard layout and poor web-based editor with no shortcuts whatsoever that lags even on a local machine? Excuse me, I am in the office of the most capable IT-company in the world, am I not?
+잘못되어가고 있나요? 일정이 밀리고요? 질문지 작성하려 했을 뿐인데 Adobe Reader를 설치해야 한다고요? 익숙하지 않은 자판 배열의 싸구려 울트라북에 단축키도 없고 로컬 컴퓨터에서조차 랙이 생기는 빈약한 기능의 웹 기반 에디터라고요? 잠깐만요, 제가 세상에서 가장 유능한 IT 회사의 사무실에 있는 게 아니었나요?
 
-In my case, the single recruiter was arranging five interviews a day. Five people every day. Times number of recruiters in that company. Imagine all of those candidates slightly frustrated by the process. Every day. Year after year.
+제 경우에는 한 명의 채용 담당자는 하루에 다섯번의 면접을 잡았습니다. 매일 다섯 명씩이요. 거기에 회사의 채용 담당자 수를 곱해보세요. 자, 이제 채용 과정에서 실망한 지원자들을 상상해보세요. 매일 같이, 매년 그렇다고요.
 
-You might think it doesn’t matter. Well, it depends. There was an episode of TV show Louie, where a comic’s name was misspelled on his door. So he argued: yes, it’s an easy mistake to make, but it’s also an easy mistake to fix. It doesn’t matter it’s just for one day, if you bothered at all, please do it right.
+별일 아니라고 생각할 수도 있습니다. 뭐 그럴 수도 있죠. Louie의 TV쇼에서 한 코미디언의 이름이 잘못 적힌 에피소드가 있었습니다. 그래서 항의했죠. 네, 실수하기도 쉬우니까 그걸 고치기도 쉽지 않겠습니까. 하루라도 상관없으니까, 거슬린다면 꼭 고쳐주세요.
 
-Yes, I believe anyone can do better.
+그럼요, 누구나 더 잘 할 수 있다고 믿습니다.
 
-![](https://tonsky.me/blog/hiring/recruiters.png)
-How many recruiters does an IT campus fit?
+![](https://tonsky.me/blog/hiring/recruiters.png 'IT 캠퍼스에는 몇 명의 채용 담당자가 있어야 할까요?')
 
-## In closing
+## 맺으며
 
-If you are in a business of hiring software engineers, big companies’ practices are not your friends. Common sense, fairness, tolerance, real interest, and open-mindedness are.
+소프트웨어 엔지니어를 고용하는 입장이라면, 대기업의 교훈은 그다지 들어맞지 않을겁니다. 상식, 공평함, 관용, 실제 관심사, 열린 마음가짐 같은 것들이 더 중요하죠.
 
-Good hiring!
+좋은 구인되세요!
 
