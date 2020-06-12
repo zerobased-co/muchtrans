@@ -1,5 +1,5 @@
 title: Most tech content is bullshit
-author: Aleksandra
+author: Aleksandra Sikora
 source: https://www.aleksandra.codes/tech-content-consumer
 
 # Most tech content is bullshit

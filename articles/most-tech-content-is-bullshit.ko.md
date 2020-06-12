@@ -1,5 +1,5 @@
 title: Most tech content is bullshit
-author: Aleksandra
+author: Aleksandra Sikora
 source: https://www.aleksandra.codes/tech-content-consumer
 
 # 기술 콘텐츠는 대체로 헛소리다
