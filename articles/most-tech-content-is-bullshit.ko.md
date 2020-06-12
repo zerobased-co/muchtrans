@@ -2,55 +2,54 @@ title: Most tech content is bullshit
 author: Aleksandra
 source: https://www.aleksandra.codes/tech-content-consumer
 
-# Most tech content is bullshit
+# 기술 콘텐츠는 대체로 헛소리다
 
-Over the past few years, as I've been working and talking with many developers, I noticed a repetitive pattern. It's been troubling me a lot, and I keep thinking and talking about, trying to understand, or even excuse.
+지난 몇 년간, 많은 개발자와 일하고 이야기하면서 한 가지 반복되는 패턴을 알아냈다. 나를 괴롭게 했던 그것에 대해서, 계속해서 생각하고 얘기했고, 이해하려고 노력했으며, 심지어는 변명하려고 했다.
 
-> Why are you taking this approach?
+> 왜 이런 방법을 택했습니까?
 >
->   * I don't know. It was in some article.
->   * I don't know. I copy-pasted it from X.
->   * I don't know. I was doing it in my previous project.
->   * I don't know. Someone told me so.
+>   * 모르겠는데요. 그냥 어떤 글에서 봤어요.
+>   * 모르겠는데요. 그냥 어디에선가 복붙했어요.
+>   * 모르겠는데요. 예전 프로젝트에서 하던 대로 했어요.
+>   * 모르겠는데요. 아는 사람이 이렇게 하라고 했어요.
 >
 
+이 패턴은 *소비적*이다 – 생산적이 아니라. 의문조차 가지지 않는 *소비*. 권위 아래 숨어 소비만 한다.
 
-This pattern is _consuming_ — instead of creating. _Consuming_ — without questioning. Consuming and hiding behind an authority.
+다른 사람의 해결책을 당연한 것으로 받아들이는 개발자들이 있다. 그 방법에 대해 다시 한번 생각해보거나 분석하려고도 하지 않는다. 아, 이게 댄 아브라모프(역주: 리액트 개발자)가 어떻게 리액트를 쓰는지 알려주는 내용이거나, 그 API를 사용하는 유일한 방법에 대해 적은 문서라면 그럴 수도 있다. 뭐, 눈곱만한 의심도 없이 기술 콘텐츠를 가져다 쓰더라도 연차는 쌓이겠지만, 결국엔 그 일이 당신을 발목 잡을지도 모른다.
 
-I saw developers taking other people's solutions for granted. Not thinking twice about the approach, not bothering about analyzing it. Ok, when this is Dan Abramov telling you how to use React or documentation saying that this is the only way to use its API, then yes, you probably should agree with it. Yet, when you're using some tech content without at least a bit of skepticism, then well, you still might go far in your career, but it also may hold you back.
+## 사방 천지에 헛소리다
 
-## There's bullshit everywhere
+일을 처음 시작했을 때, 나는 죽어도, 절대로 인터넷에 기술 관련된 것을 적지 않으려고 했다. 블로그 포스팅을 남기거나 기술 토론에 참여할 정도로 용감한 사람들은 자신이 하는 일을 항상 잘 알고 있다고 여겼다. 이딴 생각을 했다니!
 
-At the beginning of my career, I would never, ever, post anything technical on the internet. I thought that if someone was brave enough to post a blog post or take part in a tech discussion, they always know what they are doing. I couldn't be more wrong!
+언젠가부터, 인터넷에 올라온 기술 콘텐츠의 대부분이 헛소리임을 깨달았다 (이 블로그도 마찬가지로 헛소리일 수 있다). 튜토리얼은 끔찍한 패턴들을 담고 있다. 개념조차 이해 못 한 글들이 넘쳐난다. 그리고 사람들도 완벽하지 않다! 시니어 개발자라고 항상 좋은 개발자일 리 없다. 기술 책임자의 해결방법은 완벽과는 거리가 멀 수 있다. 잘 팔리고 잘 작동하는 것처럼 보이는 앱의 아키텍처도 완전 쓰레기인 경우도 있다. 프로그래밍의 프자도 모르는 이가 시니어라고 앉아있기도 했다. 그런 인간이 인터넷에 글을 써재낀다. 그리고 누군가가 *X 회사의 시니어가 제안한 방법을 사용했다*는 얘기가 들린다. 물론, 거기엔 그럴 만한 이유가 있을 테다. 하지만 [권위에의 호소](https://ko.wikipedia.org/wiki/%EA%B6%8C%EC%9C%84%EC%97%90_%ED%98%B8%EC%86%8C%ED%95%98%EB%8A%94_%EB%85%BC%EC%A6%9D)는 잘못되어도 한참 잘못된 것이다.
 
-At some point, I realized that most of the technical content on the internet is bullshit (this blog may be bullshit as well). Tutorials show harmful patterns. Articles have plenty of conceptual mistakes. And people are not perfect, either! Senior developers are not always good developers. Tech leads' solutions may be far from perfect. Well-selling, correctly working app's architecture may be entirely fucked up. I saw people in senior positions who don't know shit about programming! And yet they write on the internet about it! And then someone comes and be like _I used solution suggested by this person, they're a senior at company X_. There is, of course, some reasoning to it. However, [appeal to authority](https://en.wikipedia.org/wiki/Argument_from_authority) is deeply flawed.
-
-> One of the great commandments of science is, "Mistrust arguments from authority." ... Too many such arguments have proved too painfully wrong. Authorities must prove their contentions like everybody else.
+> 과학의 위대한 계명 중 하나는 “권위에 근거한 주장 불신하기”이다. … 권위에 기댄 너무 많은 주장이 뼈아프게 잘못된 것으로 판명되었다. 권위자들도 다른 이들과 마찬가지로 그들의 주장을 입증해야 한다.
 >
-> _~ Carl Sagan_
+> _~ 칼 세이건_
 
-The sooner you realize that there's bullshit everywhere, the better. We all try to do our best, yet are all humans who make mistakes and years of experience, the number of blog posts or salary doesn't account for the person's knowledge. After all, we can all post on the internet whatever we want.
+사방에 헛소리가 있음을 빨리 깨닫는 것이 좋다. 우리 모두가 최선을 다하려고 하지만, 사람은 결국 실수할 수밖에 없고, 연차나 작성한 글의 개수, 연봉이 사람의 지식을 반영하는 것은 아니다. 결국, 우리는 우리가 원하는 것만을 인터넷에 쓰고 있을 뿐이다.
 
-## Why does it happen?
+## 왜 이렇게 되었나?
 
-**We are lazy.** We're mostly not stupid, but just lazy. If someone's giving us a solution to the problem and it works, then why think about it? Why not copy-paste it and let it be shipped in the production code?
+**게을러서.** 멍청해서가 아니라 게을러서 그런 것이다. 누군가가 제안한 해결책을 문제에 적용했는데 효과가 있다면, 왜 고민하고 앉아있나? 그냥 복붙하고 프로덕션 코드로 보내버리지 않는 이유는 뭘까?
 
-**We don't have time.** Coming up with logical arguments may cost someone reading source code for a couple of hours, writing plenty of code to prove their point or spending a significant amount of time on research! Though, we all have deadlines, don't we?
+**시간이 없어서.** 논리적인 주장을 내놓기 위해서는 몇 시간 동안 코드를 읽고 요점을 증명하기 위한 코드를 작성하거나, 연구를 위해 상당한 시간이 필요할지도 모른다. 근데, 마감일은 지켜야 하지 않나?
 
-**It's comfortable.** Logical reasoning often requires coming out of your comfort zone, as you need to get some new knowledge, think harder than usual to understand some concepts, or do some extra work. Whereas staying in the comfort zone is something we tend to (unconsciously) embrace.
+**편해서.** 논리적인 추론을 하기 위해서는 아무래도 도전 의식이 필요한데, 새로운 지식을 쌓거나, 개념을 이해하기 위해 평소보다 더 깊게 생각하고, 추가 업무를 해야 할 수도 있다. 어쨌거나 안전지대(comfort zone)에 머무르게 되면 (의심하지 않고) 쉽게 받아들이게 된다.
 
-**We don't believe in ourselves.** People, especially in the beginning of their careers, tend to think that their solutions won't ever be good enough. Thus they rely on the mentioned earlier authorities and never question them.
+**스스로를 믿지 못해서.** 특히 이제 막 업계에 들어온 사람들일수록 자신의 해결책이 충분치 못하다고 여기는 경우가 있다. 그래서 선임자들이 언급한 것들에 의존하며 결코 의문을 품지 않게 된다.
 
-## How to stop being a tech consumer?
+## 기술 소비자로 머무르지 않으려면?
 
-Realize that there's tons of misconception in the world. People and their solutions aren't flawless.
+세상에는 수 많은 오해가 있음을 깨달아야 한다. 사람들과 그들의 방법에 한치의 오점도 없을 리 없다.
 
-Adapt solutions to your particular use case. There's no one-size-fits-all solution for everything. Compare different approaches, analyze them. Tutorials or articles show an idea, but may not present production-ready code. Always analyze it before you decide to use it.
+특정한 용례에 맞춰 솔루션을 적용해야 한다. 하나로 다 해결되는 그런 해결책은 없다. 다양한 접근 방법을 비교하고, 분석하자. 튜토리얼이나 블로그 글들은 제품에 실제로 적용하기엔 부족한 아이디어에 그칠 경우가 많다. 사용하기로 결정하기 전에 항상 분석하는 습관을 들이자.
 
-Believe in yourself. Your solutions are not any worse than the ones on the internet.
+자기 자신을 믿어야 한다. 여러분의 해결책이 인터넷에 돌아다니는 것보다 나쁘리라는 법은 없으니까.
 
-Keep learning, and be curious. Being a developer is about constant learning. Be sure you understand the library or framework you're using. This is the way to make the most out of it. People sometimes use libraries without a more profound understanding. It leads to misusing the core concepts and writing more complicated or less performant code that they could have.
+계속해서 배우고, 호기심을 가져라. 개발자가 되는데 지속적인 학습이 빠질 수 없다. 사용하고 있는 라이브러리나 프레임워크를 이해해야 한다. 그래야 최대한 활용할 수 있다. 라이브러리를 충분히 이해하지 않고 사용하게 되면, 결국 핵심 개념을 잘못 사용하여 더 복잡하거나 성능이 떨어지는 코드를 작성하게 된다.
 
 * * *
 
-Don't consume. Create. Ask questions. Stay curious.
+소비하지 말고. 만들어라. 물어봐라. 호기심을 잃지 말아라.
