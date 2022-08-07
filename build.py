@@ -27,30 +27,33 @@ repo = Repo('.')
 
 env = Environment(loader=FileSystemLoader('.'))
 
-class HLabelMixin(object):
+class MuchtransRenderer(mistune.HTMLRenderer):
+    def __init__(self, escape=True, allow_harmful_protocols=None, heading_prefix=''):
+        super().__init__(escape, allow_harmful_protocols)
+        self._escape = escape
+        self._allow_harmful_protocols = allow_harmful_protocols
+        self._heading_prefix = heading_prefix
+
     """
-    Mixin for adding id for each heading tag
+    - Adding id for each heading tag
     """
     id_count = 0
 
-    def header(self, text, level, raw=None):
+    def heading(self, text, level):
         self.id_count += 1
-        prefix = self.options.get('heading_prefix', '')
+        prefix = self._heading_prefix
 
         html = '<h{} id="{}{}">{}</h{}>\n'.format(
             level, prefix, self.id_count, text, level
         )
         return html 
 
-
-class CustomImageMixin(object):
     """
-    Mixin for 
-        - Rendering embed tag for SVG images
-        - Adding a custom class '.image' for images
+    - Rendering embed tag for SVG images
+    - Adding a custom class '.image' for images
     """
-    def image(self, src, title, text):
-        html = super().image(src, title, text)
+    def image(self, src, alt="", title=None):
+        html = super().image(src, alt, title)
         
         # Add custom class
         html = html.replace('<img', '<img class="image"')
@@ -60,10 +63,6 @@ class CustomImageMixin(object):
             html = html.replace('<img', '<embed')
 
         return html
-
-
-class MuchtransRenderer(HLabelMixin, CustomImageMixin, mistune.Renderer):
-    pass
 
 
 _github_users = {}
@@ -152,7 +151,7 @@ for key, article in articles.items():
 
     original_metadata, original = md_parse(original)
     article['metadata'] = original_metadata
-    original_html = mistune.Markdown(renderer=MuchtransRenderer(escape=False, hard_wrap=True))(original).replace('<br>', '</p><p>')
+    original_html = mistune.create_markdown(renderer=MuchtransRenderer(escape=False), hard_wrap=True)(original).replace('<br>', '</p><p>')
     print('Building: {}'.format(article['metadata'].get('title', key)))
 
     # Find dedicated css file
@@ -168,7 +167,7 @@ for key, article in articles.items():
 
         translation_metadata, translation = md_parse(translation)
         translation_html_filename = '/translations/' + os.path.splitext(os.path.basename(filename))[0] + '.html'
-        translation_html = mistune.Markdown(renderer=MuchtransRenderer(escape=False, hard_wrap=True, heading_prefix='t_'))(translation).replace('<br>', '</p><p>')
+        translation_html = mistune.create_markdown(renderer=MuchtransRenderer(escape=False, heading_prefix='t_'), hard_wrap=True)(translation).replace('<br>', '</p><p>')
 
         # TBD: Fix for duplicated footnote (will be fixed in renderer level, future)
         translation_html = translation_html.replace('fn-', 'tfn-').replace('fnref-', 'tfnref-')
