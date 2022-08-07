@@ -43,6 +43,8 @@ coverage.xml
 
 # Virtual environments, e.g. virtualenv
 venv
+.direnv
+.envrc
 
 # PyCharm
 .idea/*
