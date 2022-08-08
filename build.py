@@ -79,10 +79,12 @@ def get_github_user(commit):
     }
     r = requests.get('https://api.github.com/repos/zerobased-co/muchtrans/commits/{}'.format(commit.hexsha), headers=headers).json()
 
+
     try:
         _github_users[email] = r['author']
         return r['author']
     except KeyError:
+        print(r)  # print the response to find out why
         pass
 
     return None
