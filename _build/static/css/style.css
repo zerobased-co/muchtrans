@@ -251,6 +251,11 @@ article.swap .row {
   float: right;
 }
 
+.translation > span {
+  color: #666;
+  font-size: 0.8em;
+}
+
 .translators {
   display: flex;
   margin-bottom: 25px;
@@ -273,6 +278,10 @@ article.swap .row {
 .highlighted {
   background: #00ffe1;
   padding: 0.25em;
+}
+
+figure {
+  margin: 0;
 }
 
 figure .image {

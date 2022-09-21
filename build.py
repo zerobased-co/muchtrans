@@ -224,7 +224,7 @@ for key, article in articles.items():
 
         if commits:
             # Add translation info into context
-            context['translators'] = get_authors_from_commits(commits)
+            context['translators'] = sorted(get_authors_from_commits(commits), key=lambda x: x['name'].lower())
             context['latest_update'] = get_UTC(get_time_from_commit(commits[0]))
 
             # Add to the index
