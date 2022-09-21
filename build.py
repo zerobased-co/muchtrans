@@ -9,6 +9,7 @@ import os
 import pytz
 import re
 import requests
+import sys
 import time
 
 HOSTNAME = 'https://muchtrans.com' # TODO: Should be loaded from ENV
@@ -147,7 +148,14 @@ article_template = env.get_template('templates/article.html')
 translated_articles_by_language = defaultdict(list)
 translated_articles_in_month = defaultdict(list)
 
+# Check argument list
+files = sys.argv[1:]
+
 for key, article in articles.items():
+    if files:
+        if key not in files:
+            continue
+
     with open(article['original']) as file:
         original = file.read()
 
@@ -250,42 +258,43 @@ for key, article in articles.items():
         with open(OUTPUT + translation_html_filename, "w") as file:
             file.write(rendered)
 
-# RSS Feed
-print('Building RSS feeds')
-rss_template = env.get_template('templates/feed.xml')
-feed_list = []
-for language, articles in translated_articles_by_language.items():
+if not files:
+    # RSS Feed
+    print('Building RSS feeds')
+    rss_template = env.get_template('templates/feed.xml')
+    feed_list = []
+    for language, articles in translated_articles_by_language.items():
+        article_list = sorted(
+            articles,
+            key=lambda x: x['datetime'],
+            reverse=True
+        )[:10]
+        rendered = rss_template.render({
+            'hostname': HOSTNAME,
+            'pubDate': get_RFC822(datetime.utcnow()),
+            'language': language,
+            'articles': article_list,
+        })
+
+        print('\t RSS feed in {}'.format(language))
+        filename = '/feeds/{}.xml'.format(language)
+        with open(OUTPUT + filename, "w") as file:
+            file.write(rendered)
+
+        feed_list.append((language, filename))
+
+    # Render and save index
+    index_template = env.get_template('templates/index.html')
     article_list = sorted(
-        articles,
-        key=lambda x: x['datetime'],
+        translated_articles_in_month.items(),
+        key=lambda x: x[0],
         reverse=True
-    )[:10]
-    rendered = rss_template.render({
+    )
+    rendered = index_template.render({
         'hostname': HOSTNAME,
-        'pubDate': get_RFC822(datetime.utcnow()),
-        'language': language,
-        'articles': article_list,
+        'article_list': article_list,
+        'feed_list': feed_list,
     })
 
-    print('\t RSS feed in {}'.format(language))
-    filename = '/feeds/{}.xml'.format(language)
-    with open(OUTPUT + filename, "w") as file:
+    with open(OUTPUT + '/index.html', "w") as file:
         file.write(rendered)
-
-    feed_list.append((language, filename))
-
-# Render and save index
-index_template = env.get_template('templates/index.html')
-article_list = sorted(
-    translated_articles_in_month.items(),
-    key=lambda x: x[0],
-    reverse=True
-)
-rendered = index_template.render({
-    'hostname': HOSTNAME,
-    'article_list': article_list,
-    'feed_list': feed_list,
-})
-
-with open(OUTPUT + '/index.html', "w") as file:
-    file.write(rendered)

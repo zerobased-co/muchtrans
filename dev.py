@@ -1,9 +1,10 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler 
+import os
+import pathlib
 import subprocess
 import time
-import os
 
 HOST = '0.0.0.0'
 PORT = 4000
@@ -20,20 +21,28 @@ if __name__ == '__main__':
     pid = os.fork()
 
     if pid == 0:
-        # Child process run watchdog
-        class Handler(FileSystemEventHandler):
-            def rebuild(self):
-                # TBD: rebuild minimal files in future
-                subprocess.run(["python", "build.py"])
-
+        class TemplateHandler(FileSystemEventHandler):
             def on_modified(self, event):
-                self.rebuild()
+                suffix = pathlib.Path(event.src_path).suffix
+                if suffix != '.html':
+                    return
+
+                subprocess.run(["python", "build.py"])
                 
-        handler = Handler()
+        class ArticleHandler(FileSystemEventHandler):
+            def on_modified(self, event):
+                path = pathlib.Path(event.src_path)
+
+                if path.suffix != '.md':
+                    return
+
+                subprocess.run(["python", "build.py", path.name.split('.')[0]])
+                
         observer = Observer()
-        observer.schedule(handler, 'articles', recursive=True)
-        observer.schedule(handler, 'templates', recursive=True)
+        observer.schedule(TemplateHandler(), 'templates', recursive=True)
+        observer.schedule(ArticleHandler(), 'articles', recursive=True)
         observer.start()
+
         try:
             while True:
                 time.sleep(1)
