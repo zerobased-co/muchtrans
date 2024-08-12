@@ -53,14 +53,14 @@ class MuchtransRenderer(mistune.HTMLRenderer):
     - Rendering embed tag for SVG images
     - Adding a custom class '.image' for images
     """
-    def image(self, src, alt="", title=None):
-        html = super().image(src, alt, title)
+    def image(self, text, url, title=None):
+        html = super().image(text, url, title)
         
         # Add custom class
         html = html.replace('<img', '<img class="image"')
 
         # Change tag for SVG
-        if src.lower()[-4:] == '.svg':
+        if url.lower()[-4:] == '.svg':
             html = html.replace('<img', '<embed')
 
         return html
@@ -151,6 +151,16 @@ translated_articles_in_month = defaultdict(list)
 # Check argument list
 files = sys.argv[1:]
 
+# Create markdown renderers
+renderer1 = mistune.create_markdown(
+    renderer=MuchtransRenderer(escape=False),
+    hard_wrap=True
+)
+renderer2 = mistune.create_markdown(
+    renderer=MuchtransRenderer(escape=False,heading_prefix='t_'),
+    hard_wrap=True
+)
+
 for key, article in articles.items():
     if files:
         if key not in files:
@@ -161,7 +171,9 @@ for key, article in articles.items():
 
     original_metadata, original = md_parse(original)
     article['metadata'] = original_metadata
-    original_html = mistune.create_markdown(renderer=MuchtransRenderer(escape=False), hard_wrap=True)(original).replace('<br>', '</p><p>')
+    
+    original_html = renderer1(original).replace('<br>', '</p><p>')
+
     print('Building: {}'.format(article['metadata'].get('title', key)))
 
     # Find dedicated css file
@@ -177,7 +189,7 @@ for key, article in articles.items():
 
         translation_metadata, translation = md_parse(translation)
         translation_html_filename = '/translations/' + os.path.splitext(os.path.basename(filename))[0] + '.html'
-        translation_html = mistune.create_markdown(renderer=MuchtransRenderer(escape=False, heading_prefix='t_'), hard_wrap=True)(translation).replace('<br>', '</p><p>')
+        translation_html = renderer2(translation).replace('<br>', '</p><p>')
 
         # TBD: Fix for duplicated footnote (will be fixed in renderer level, future)
         translation_html = translation_html.replace('fn-', 'tfn-').replace('fnref-', 'tfnref-')
