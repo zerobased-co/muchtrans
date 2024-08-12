@@ -46,10 +46,12 @@ venv
 .direnv
 .envrc
 
-# PyCharm
+# IDEs
 .idea/*
+.vscode/*
 
 .DS_Store
+.tool-versions
 
 # Build result
 _build/translations
