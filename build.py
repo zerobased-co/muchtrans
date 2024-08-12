@@ -154,10 +154,12 @@ files = sys.argv[1:]
 # Create markdown renderers
 renderer1 = mistune.create_markdown(
     renderer=MuchtransRenderer(escape=False),
+    plugins=['footnotes'],
     hard_wrap=True
 )
 renderer2 = mistune.create_markdown(
-    renderer=MuchtransRenderer(escape=False,heading_prefix='t_'),
+    renderer=MuchtransRenderer(escape=False, heading_prefix='t_'),
+    plugins=['footnotes'],
     hard_wrap=True
 )
 
