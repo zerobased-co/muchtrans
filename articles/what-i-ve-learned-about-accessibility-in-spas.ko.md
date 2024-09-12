@@ -44,8 +44,6 @@ button {
   * 스크린 리더가 `<button>`을 버튼으로 알려줄 수 있습니다.
   * 등등.
 
-
-
 이 모든 걸 직접 JavaScript로 구현하는 것도 *가능*은 하지만, 어딘가에서 실수하거나 추가로 유지 보수해야 하는 코드가 늘어날 겁니다. 그러니까 기본으로 제공되는 의미 있는 HTML 요소를 쓰는 것이 좋겠습니다.
 
 ### SPA는 포커스와 스크롤 위치를 반드시 수동으로 다뤄야 한다
@@ -54,8 +52,6 @@ button {
 
   * 포커스를 직접 관리해야 합니다.
   * 스크롤 위치를 직접 관리해야 합니다.
-
-
 
 제 타임라인에서 타임스탬프를 클릭해서 해당 포스트의 전체 타래를 보고자 하는 경우를 예로 들어봅시다.
 
@@ -97,8 +93,6 @@ button {
   * 숨겨진 요소에 대해서 `aria-hidden`으로 확인했습니다.
   * 등등.
 
-
-
 그러므로, 접근성 향상을 테스팅의 전략으로 삼아보세요! 스크린 리더가 해석하기에 쉽다면, 아마 자동화된 테스트가 해석하기에도 쉬울 것입니다. 스크린 리더 사용자가 색상을 볼 수 없는 것처럼, 헤드리스 브라우저(headless browser) 테스트도 마찬가지일테니까요.
 
 ## 포커스 관리의 미묘함
@@ -113,9 +107,7 @@ Pinafore의 경우에는 각 포스트에 사용자 프로필 페이지로 이�
 
 두 링크는 같은 페이지로 연결되어 있으므로 꼭 둘 다 있을 필요는 없습니다. 그래서 프로필 사진에 `tabindex="-1"`을 적용해서 키보드 사용자가 `Tab`을 한 번 덜 누를 수 있도록 했습니다. [KaiOS](https://en.wikipedia.org/wiki/KaiOS) 장치와 같이 작은 다이얼 패드를 가진 경우에 특히 좋을 겁니다!
 
-
 <video autostart="no" muted="yes" loop="no" preload="auto" playsinline="" controls=""><source src="https://videos.files.wordpress.com/6Ve9dla5/kazam_screencast_00005_dvd.mp4" type="video/mp4"></video>
-
 
 위 영상을 통해 프로필 사진과 타임스탬프는 탭 순서에서 제외되어 있음을 확인할 수 있습니다. 프로필 사진을 누르는 것은 사용자 이름을 누르는 것과 같고, 타임스탬프는 전체 포스트를 누르는 것과 같아 불필요하기 때문입니다. ([운동 장애가 있는 사람에게는 문제가 될 수 있으므로](https://videos.files.wordpress.com/6Ve9dla5/kazam_screencast_00005_dvd.mp4) “전체 포스트 클릭하기”도 비활성화할 수 있습니다. 이 경우에는 타임스탬프가 탭 순서에 다시 포함됩니다.)
 
@@ -125,9 +117,7 @@ Pinafore의 경우에는 각 포스트에 사용자 프로필 페이지로 이�
 
 피드 패턴이나 이미지 캐러셀 등 ([이전 포스트](https://nolanlawson.com/2019/02/10/building-a-modern-carousel-with-css-scroll-snap-smooth-scrolling-and-pinch-zoom/)에서 설명했던) 몇몇 접근성 위젯을 바닥부터 만들어가며, 올바르게 구현하기 가장 어려운 요소 중 하나가 자동완성임을 알게 되었습니다.
 
-
 <video autostart="no" muted="yes" loop="no" preload="auto" playsinline="" controls=""><source src="https://videos.files.wordpress.com/VjC1fOLq/kazam_screencast_00002_dvd.mp4" type="video/mp4"></video>
-
 
 처음에는 모든 상태 변경에 대해 – “현재 선택된 아이템은 세 가지 중 두 번째입니다”와 같이 — 말하는 `aria-live="assertive"` 속성을 가진 요소를 만드는 것에 상당히 의존하는 [이 디자인](https://haltersweb.github.io/Accessibility/autocomplete.html)을 따라 [이런 위젯을 구현](https://github.com/nolanlawson/pinafore/issues/129)했었습니다. 한 땀 한 땀 수작업으로 해결하는 방법이라 결국 [다양한 버그](https://github.com/nolanlawson/pinafore/issues/1512)가 나올 수밖에 없었습니다.
 
@@ -170,8 +160,6 @@ Pinafore의 경우에는 각 포스트에 사용자 프로필 페이지로 이�
   * `aria-activedescendant`는 목록에서 어떤 옵션을 골랐는지 알려줍니다.
   * 옵션에 있는 `aria-label`을 통해 스크린 리더가 정보를 말하지 않을 경우, “두 개중 첫 번째”와 같이 명확하게 스크린 리더가 어떤 문자열을 포함해서 읽어야 하는지 제어할 수 있습니다.
 
-
-
 광범위한 테스팅 끝에, 이게 덜하지도 더하지도 않는, 제가 할 수 있는 최선의 방법임을 알았습니다. 최신 버전의 파이어폭스의 [NVDA](https://en.wikipedia.org/wiki/NonVisual_Desktop_Access) 하에서 완벽하게 동작합니다. 비록 [사파리의 보이스오버(VoiceOver)와 크롬의 NVDA에서는 문제]((https://github.com/nolanlawson/pinafore/pull/1513#issue-320087960)가 있지만요. 이 방법이 `aria-live="assertive"` 핵에 의존하지 않는 표준에 기반판 방법이므로, 브라우저와 스크린 리더가 이 구현을 제대로 할 날을 기다립니다.
 
 **수정**: 크롬+NVDA와 사파리+보이스오버에서도 이 위젯이 동작하도록 했습니다. 변경사항은 [이 댓글](https://github.com/nolanlawson/pinafore/pull/1632#issuecomment-552154682)에서 확인해보세요.
@@ -185,7 +173,6 @@ Pinafore의 경우에는 각 포스트에 사용자 프로필 페이지로 이�
 그런데, 특히 스크린 리더 접근성에 대해서는 스크린 리더로는 실제 브라우저에서의 테스트를 대체할 수 없다는 것을 알았습니다. 스크린 리더 사용자가 가질만한 경험을 정확하게 제공할 뿐 아니라 어떤 디자인 패턴이 음성 내비게이션과 잘 동작하며 어떤 것은 그렇지 않을 지에 대한 공감을 이끌어내는데 도움을 줍니다. 스크린 리더는 버그가 있어 종종 다른 행동을 하기도 하는데, 이런 것들은 접근성 감사 도구에서는 확인할 수 없는 부분입니다.
 
 갓 시작한 분이라면, [Rob Dodson의 “A11ycasts” 시리즈](https://www.youtube.com/playlist?list=PLNYkxOF6rcICWx0C9LVWWVqvHlYJyqw7g) 중 [VoiceOver for macOS](https://youtu.be/5R-6WvAihms)과 [NVDA for Windows](https://youtu.be/Jao3s_CwdRU)에 대한 튜토리얼 시청을 추천합니다. (NVDA는 파이어폭스에, 보이스오버는 사파리에 더 최적화돼있음을 유의하세요. 다른 조합으로도 사용할 수는 있지만, 이 조합이 [실제로 가장 많이 사용](https://webaim.org/projects/screenreadersurvey8/)되고 있습니다.)
-
 
 개인적으로 개발자의 입장에서 사용하기 가장 편리했던 도구는 말하는 내용을 도움 문자열(assistive text)로 보여주는 보이스오버였습니다.
 

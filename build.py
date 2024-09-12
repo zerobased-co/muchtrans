@@ -14,15 +14,15 @@ import time
 
 HOSTNAME = 'https://muchtrans.com' # TODO: Should be loaded from ENV
 OUTPUT = '_build'
+PLUGINS = ['footnotes', 'table']
 
-SINGLE = ['blockquote', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', ]
-SINGLE_RE = '^({})'.format('|'.join(['\<{} '.format(_) for _ in SINGLE]))
+SINGLE_TAGS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr']
+BLOCK_TAGS = ['pre', 'blockquote', 'ol', 'ul']
+SPLITTER_TAGS = ['p', 'div', 'img', 'object']
+MATCH_RE = '({})'.format('|'.join(['^<{}[ >]|<\/{}>'.format(_, _) for _ in SINGLE_TAGS + BLOCK_TAGS + SPLITTER_TAGS]))
 
-SPLITTER = ['p', 'ol', 'ul', 'div', 'img', 'object']
-SPLITTER_RE = '^({})'.format('|'.join(['\<{}'.format(_) for _ in SPLITTER]))
-
-IGNORE = ['div', ]
-IGNORE_RE = '^({})'.format('|'.join(['\<{} |\</{}>'.format(_, _) for _ in IGNORE]))
+IGNORE_TAGS = ['div', ]
+IGNORE_RE = '({})'.format('|'.join(['^<{}|<\/{}>'.format(_, _) for _ in IGNORE_TAGS]))
 
 repo = Repo('.')
 
@@ -154,12 +154,12 @@ files = sys.argv[1:]
 # Create markdown renderers
 renderer1 = mistune.create_markdown(
     renderer=MuchtransRenderer(escape=False),
-    plugins=['footnotes'],
+    plugins=PLUGINS,
     hard_wrap=True
 )
 renderer2 = mistune.create_markdown(
     renderer=MuchtransRenderer(escape=False, heading_prefix='t_'),
-    plugins=['footnotes'],
+    plugins=PLUGINS,
     hard_wrap=True
 )
 
@@ -199,26 +199,37 @@ for key, article in articles.items():
         # Match original and translated articles in html level
         rows = []
         sbuf = dbuf = ''
+        block = None
 
         # Mark for untranslated
         untranslated = False
 
         for s, d in zip(original_html.split('\n'), translation_html.split('\n')):
-#            if len(s) > 40 and s == d:  # TBD: Too naive approache
-#                untranslated = True
+            if m := re.search(MATCH_RE, s):
+                tag = re.sub('[ /<>]', '', m.group(0))
 
-            if re.search(SINGLE_RE, s):
-                if sbuf:
-                    rows.append((sbuf, dbuf))
-                    sbuf = dbuf = ''
-                rows.append((s, d))
-            elif re.search(IGNORE_RE, s):
-                continue
-            else:
-                if re.search(SPLITTER_RE, s):
+                if block:
+                    sbuf += s + '\n'
+                    dbuf += d + '\n'
+
+                    if tag == block:
+                        block = None
+                        rows.append((sbuf, dbuf))
+                        sbuf = dbuf = ''
+                else:
                     if sbuf:
                         rows.append((sbuf, dbuf))
                         sbuf = dbuf = ''
+
+                    sbuf += s + '\n'
+                    dbuf += d + '\n'
+
+                    if tag in BLOCK_TAGS:
+                        block = tag
+                    elif tag in SINGLE_TAGS:
+                        rows.append((sbuf, dbuf))
+                        sbuf = dbuf = ''
+            else:
                 sbuf += s + '\n'
                 dbuf += d + '\n'
 

@@ -26,14 +26,14 @@ This is a real problem! People really do try to build entire interfaces out of `
 
 I believe the reason people are tempted to use `<div>`s and `<span>`s is that they have minimal user agent styles, i.e. there is less you have to override in CSS. However, resetting the style on a `<button>` is actually pretty easy:
 
-
-    button {
-      margin: 0;
-      padding: 0;
-      border: none;
-      background: none;
-    }
-
+```css
+button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+}
+```
 
 99% of the time, I've found that this was all I needed to reset a `<button>` to have essentially the same style as a `<div>` or a `<span>`. For more advanced use cases, you can explore [this CSS Tricks article](https://css-tricks.com/overriding-default-button-styles/).
 
@@ -44,8 +44,6 @@ In any case, the whole reason you want to use a real `<button>` over a `<span>` 
   * Screen readers announce the `<button>` as a button.
   * Etc.
 
-
-
 You _could_ build all this yourself in JavaScript, but you 'll probably mess something up, and you'll also have a bunch of extra code to maintain. So it's best just to use the native semantic HTML elements.
 
 ### SPAs must manually handle focus and scroll position
@@ -54,8 +52,6 @@ There is another case where the "JavaScript is anti-accessibility" mantra has a 
 
   * You need to manage focus yourself.
   * You need to manage scroll position yourself.
-
-
 
 For instance, let's say I'm in my timeline, and I want to click this timestamp to see the full thread of a post:
 
@@ -79,14 +75,14 @@ A [toggle button](https://www.w3.org/TR/wai-aria-practices-1.1/#button) is a but
 
 Visually, there are plenty of styles you can use to signal the pressed/unpressed state - for instance, I've opted to make the colors darker when pressed. But for the benefit of screen reader users, you'll typically want to use a pattern like the following:
 
-
-    <button type="button" aria-pressed="false">
-      Unpressed
-    </button>
-    <button type="button" aria-pressed="true">
-      Pressed
-    </button>
-
+```html
+<button type="button" aria-pressed="false">
+  Unpressed
+</button>
+<button type="button" aria-pressed="true">
+  Pressed
+</button>
+```
 
 Incidentally, this makes it easier to write integration tests (e.g. using [TestCafe](https://devexpress.github.io/testcafe/) or [Cypress](https://www.cypress.io/)). Why rely on classes and styles, which might change if you redesign your app, when you can instead rely on the semantic attributes, which are guaranteed to stay the same?
 
@@ -96,8 +92,6 @@ I observed this pattern again and again: the more I improved accessibility, the 
   * For buttons without text, I could test the `aria-label` rather than the background image or something that might change if the design changed.
   * For hidden elements, I could use `aria-hidden` to identify them.
   * Etc.
-
-
 
 So make accessibility a part of your testing strategy! If something is easy for screen readers to interpret, then it'll probably be easier for your automated tests to interpret, too. After all, screen reader users might not be able to see colors, but neither can your headless browser tests!
 
@@ -113,9 +107,7 @@ In the case of Pinafore, consider a post. There are two links that lead to the u
 
 These two links lead to exactly the same page; they are strictly redundant. So I chose to add `tabindex="-1"` to the profile picture, giving keyboard users one less link to have to `Tab` through. Especially on a KaiOS device with a tiny d-pad, this is a nice feature!
 
-
 <video autostart="no" muted="yes" loop="no" preload="auto" playsinline="" controls=""><source src="https://videos.files.wordpress.com/6Ve9dla5/kazam_screencast_00005_dvd.mp4" type="video/mp4"></video>
-
 
 In the above video, note that the profile picture and timestamp are skipped in the tab order because they are redundant - clicking the profile picture does the same thing as clicking the user name, and clicking the timestamp does the same thing as clicking on the entire post. (Users can also disable the "click the entire post" feature, as [it may be problematic for those with motor impairments](https://github.com/nolanlawson/pinafore/issues/163). In that case, the timestamp is re-added to the tab order.)
 
@@ -125,43 +117,41 @@ Interestingly, an element with `tabindex="-1"` can still become focused if you c
 
 After implementing several accessible widgets from scratch, including the feed pattern and an image carousel (which I described [in a previous post](https://nolanlawson.com/2019/02/10/building-a-modern-carousel-with-css-scroll-snap-smooth-scrolling-and-pinch-zoom/)), I found that the single most complicated widget to implement correctly was autocompletion.
 
-
 <video autostart="no" muted="yes" loop="no" preload="auto" playsinline="" controls=""><source src="https://videos.files.wordpress.com/VjC1fOLq/kazam_screencast_00002_dvd.mp4" type="video/mp4"></video>
-
 
 Originally, [I had implemented this widget](https://github.com/nolanlawson/pinafore/issues/129) by following [this design](https://haltersweb.github.io/Accessibility/autocomplete.html), which relies largely on creating an element with `aria-live="assertive"` which explicitly speaks every change in the widget state (e.g. "the current selected item is number 2 of 3"). This is kind of a heavy-handed solution, though, and it led to [several bugs](https://github.com/nolanlawson/pinafore/issues/1512).
 
 After toying around with a few patterns, I eventually settled on a more standard design using [aria-activedescendant](https://www.w3.org/TR/wai-aria-1.1/#aria-activedescendant). Roughly, the HTML looks like this:
 
-
-    <textarea
-      id="the-textarea"
-      aria-describedby="the-description"
-      aria-owns="the-list"
-      aria-expanded="false"
-      aria-autocomplete="both"
-      aria-activedescendant="option-1">
-    </textarea>
-    <ul id="the-list" role="listbox">
-      <li
-        id="option-1"
-        role="option"
-        aria-label="First option (1 of 2)">
-      </li>
-      <li
-        id="option-2"
-        role="option"
-        aria-label="Second option (2 of 2)">
-      </li>
-    </ul>
-    <label for="the-textarea" class="sr-only">
-      What's on your mind?
-    </label>
-    <span id="the-description" class="sr-only">
-      When autocomplete results are available, press up or down
-      arrows and enter to select.
-    </span>
-
+```html
+<textarea
+  id="the-textarea"
+  aria-describedby="the-description"
+  aria-owns="the-list"
+  aria-expanded="false"
+  aria-autocomplete="both"
+  aria-activedescendant="option-1">
+</textarea>
+<ul id="the-list" role="listbox">
+  <li
+    id="option-1"
+    role="option"
+    aria-label="First option (1 of 2)">
+  </li>
+  <li
+    id="option-2"
+    role="option"
+    aria-label="Second option (2 of 2)">
+  </li>
+</ul>
+<label for="the-textarea" class="sr-only">
+  What's on your mind?
+</label>
+<span id="the-description" class="sr-only">
+  When autocomplete results are available, press up or down
+  arrows and enter to select.
+</span>
+```
 
 Explaining this pattern probably deserves a blog post in and of itself, but in broad strokes, what's happening is:
 
@@ -169,8 +159,6 @@ Explaining this pattern probably deserves a blog post in and of itself, but in b
   * `aria-expanded` indicates whether there are autocomplete results or not.
   * `aria-activedescendant` indicates which option in the list is selected.
   * `aria-label`s on the options allow me to control how it's spoken to a screen reader, and to explicitly include text like "1 of 2" in case the screen reader doesn't speak this information.
-
-
 
 After extensive testing, this was more-or-less the best solution I could come up with. It works perfectly in NVDA on the latest version of Firefox, although sadly [it has some minor issues in VoiceOver on Safari and NVDA on Chrome](https://github.com/nolanlawson/pinafore/pull/1513#issue-320087960). However, since this is the standards-based solution (and doesn't rely on `aria-live="assertive"` hacks), my hope is that browsers and screen readers will catch up with this implementation.
 
